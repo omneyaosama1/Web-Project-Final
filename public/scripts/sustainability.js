@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Navigation for the "Discover" button
     const discoverButton = document.querySelector(".discover-button");
     discoverButton.addEventListener("click", function() {
-      window.location.href = "sourcing.html";
+      window.location.href = "/sourcing";
     });
   
     // Slider navigation
