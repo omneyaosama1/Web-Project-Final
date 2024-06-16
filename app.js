@@ -5,7 +5,8 @@ const hiwRoute = require('./routes/how-it-works-route');
 const ourPlansRoute = require('./routes/our-plans-route');
 const sustainabilityRoute = require('./routes/sustainability-route');
 const sourcingRoute = require('./routes/sourcing-route');
-const port = process.env.PORT || 8080;
+const menuRoute=require('./routes/menu');
+const port = process.env.PORT || 3000;
 
 const app = express();
 
@@ -21,7 +22,9 @@ app.use('/about-us', aboutUsPageRoute)
 app.use('/how-it-works', hiwRoute);
 app.use('/our-plans', ourPlansRoute);
 app.use('/sustainability', sustainabilityRoute);
+app.use('/menu',menuRoute);
 app.use('/sourcing', sourcingRoute);
+
 
 
 app.listen(port, () => console.log(`Sever is running on port ${port}`));
