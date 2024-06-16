@@ -1,26 +1,24 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+
 .nav-bar {
     position: fixed;
     width: 100%;
-    color: rgb(90, 108, 65);
+    margin: auto;
+    height: 10%;
+    color: #167592;
     display: flex;
-    top: 0;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
-    /* background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), */
-        /* url(../images/background.jpg); */
-    /* background-size: cover; */
-    /* background-position: center; */
+    z-index: 9999;
+    padding: 20px;
+    transition: background-color 0.3s ease;
+    top: 0px;
     background-color: white;
-    z-index: 1;
-    top: 0;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .left-section {
     display: flex;
     align-items: center;
-    margin-left: 30px;
 }
 
 .logo {
@@ -30,13 +28,16 @@
 .name {
     margin-left: 15px;
     font-size: 27px;
-    color: rgb(32, 188, 193);
     font-family: Pacifico;
+}
+
+.name:hover {
+    cursor: pointer;
 }
 
 a {
     text-decoration: none;
-    color: rgb(32, 188, 193);
+    color: #167592;
     font-family: Roboto;
 }
 
@@ -49,7 +50,7 @@ a {
 
 .nav-bar ul li a {
     text-decoration: none;
-    color: rgb(32, 188, 193);
+    color: #167592;
     text-transform: uppercase;
 }
 
@@ -57,7 +58,7 @@ a {
     content: "";
     height: 3px;
     width: 0;
-    background: rgb(32, 188, 193);
+    background: #167592;
     position: absolute;
     left: 0;
     bottom: -1px;
@@ -91,4 +92,65 @@ a {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+
+/* Responsive Adjustments */
+
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #81d0e8;
+    min-width: 120px;
+    z-index: 1000;
+    list-style: none;
+    padding: 0;
+    
+}
+.dropdown-user-dropdown{
+    display: none;
+    position: absolute;
+    background-color: #81d0e8;
+    min-width: 120px;
+    z-index: 1000;
+    list-style: none;
+    padding-right: 20px;
+    left: -100%; /* Position dropdown to the left of the parent li */
+    top: 100%; /* Align dropdown below the parent li */
+}
+
+
+
+/* Adjust only for user icon dropdown */
+.dropdown.user-dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #81d0e8;
+    min-width: 120px;
+    z-index: 1000;
+    list-style: none;
+    padding: 0;
+    left: -100%; /* Position dropdown to the left of the parent li */
+    top: 100%; /* Align dropdown below the parent li */
+}
+
+.dropdown.user-dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown-content li {
+    padding: 10px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.fas.fa-user-circle {
+    font-size: 1.5rem;
+    margin-right: 30px;
 }
