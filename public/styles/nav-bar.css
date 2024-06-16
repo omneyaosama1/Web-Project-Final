@@ -1,3 +1,4 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
 
 .nav-bar {
     position: fixed;
@@ -96,20 +97,6 @@ a {
 
 /* Responsive Adjustments */
 
-.banner ul li::after {
-    content: "";
-    height: 3px;
-    width: 0;
-    background: #167592;
-    position: absolute;
-    left: 0;
-    bottom: -10px;
-    transition: 0.5s;
-}
-
-.banner ul li:hover::after {
-    width: 100%;
-}
 
 .dropdown {
     position: relative;
@@ -133,7 +120,7 @@ a {
     min-width: 120px;
     z-index: 1000;
     list-style: none;
-    padding: 0;
+    padding-right: 20px;
     left: -100%; /* Position dropdown to the left of the parent li */
     top: 100%; /* Align dropdown below the parent li */
 }
@@ -162,4 +149,9 @@ a {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+.fas.fa-user-circle {
+    font-size: 1.5rem;
+    margin-right: 30px;
 }
