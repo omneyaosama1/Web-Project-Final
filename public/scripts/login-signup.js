@@ -1,3 +1,9 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('container');
+    container.classList.add('active'); // Add "active" class by default
+});
+
+
 const container = document.getElementById('container');
 const registerBtn = document.getElementById('register');
 const loginBtn = document.getElementById('login');
