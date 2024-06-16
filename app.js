@@ -5,6 +5,7 @@ const hiwRoute = require('./routes/how-it-works-route');
 const ourPlansRoute = require('./routes/our-plans-route');
 const sustainabilityRoute = require('./routes/sustainability-route');
 const sourcingRoute = require('./routes/sourcing-route');
+const loginSignupRoute = require('./routes/login-signup-route');
 const port = process.env.PORT || 8080;
 
 const app = express();
@@ -22,6 +23,7 @@ app.use('/how-it-works', hiwRoute);
 app.use('/our-plans', ourPlansRoute);
 app.use('/sustainability', sustainabilityRoute);
 app.use('/sourcing', sourcingRoute);
+app.use('/login-signup', loginSignupRoute);
 
 
 app.listen(port, () => console.log(`Sever is running on port ${port}`));
