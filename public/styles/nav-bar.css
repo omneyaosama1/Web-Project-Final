@@ -103,7 +103,6 @@ a {
 }
 
 .dropdown-content {
-    margin-top: 10px;
     display: none;
     position: absolute;
     background-color: #81d0e8;
