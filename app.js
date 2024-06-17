@@ -32,11 +32,12 @@ app.use('/sourcing', sourcingRoute);
 app.use('/login-signup', loginSignupRoute);
 app.use('/user', userRoute);
 app.use('/admin', adminRoute);
+app.use("/cookbook", cookbookRoute);
 
 
 mongoose
   .connect(
-    "mongodb+srv://omneya:Sys7MEKG0CDnuSYB@cookbook.zf4ymqm.mongodb.net/WebProject?retryWrites=true&w=majority&appName=Cookbook"
+    "mongodb+srv://omneya:KA37rzgOS2iyj5X1@freshbites.wagcbow.mongodb.net/?retryWrites=true&w=majority&appName=freshbites"
   )
   .then(() => {
     console.log("Connected to database successfully!");
@@ -46,11 +47,3 @@ mongoose
     console.log("Failed to connect to the database!");
     console.error(error);
   });
-
-app.use("/", homePageRoute);
-app.use("/about-us", aboutUsPageRoute);
-app.use("/how-it-works", hiwRoute);
-app.use("/our-plans", ourPlansRoute);
-app.use("/sustainability", sustainabilityRoute);
-app.use("/sourcing", sourcingRoute);
-app.use("/cookbook", cookbookRoute);

@@ -9,12 +9,11 @@
     
     <link rel="stylesheet" href="../styles/slider.css" />
     <link rel="stylesheet" href="../styles/cookbook.css" />
-    <link rel="stylesheet" href="../styles/nav-bar.css"/>
     <script src="../scripts/cookbook.js" defer></script>
     <script src="../scripts/slider.js" defer></script>
   </head>
   <body>
-    <div class="banner">
+    <!-- <div class="banner">
       <div class="nav-bar">
         <div class="left-section">
           <img src="/images/logo1.png" alt="Your Logo" class="logo" />
@@ -43,7 +42,13 @@
           <li><a href="favoriteMeals.html">Favorite Meals</a></li>
         </ul>
       </div>
+    </div> -->
+    
+    <div class="banner">
+      <%- include("./partial/nav-bar.ejs") %>
     </div>
+    
+    
     <div id="background">
       <div id="notification" class="notification">Added to Favorites</div>
       <form name="searchForm" onsubmit="return checkInput(this)" method="post">

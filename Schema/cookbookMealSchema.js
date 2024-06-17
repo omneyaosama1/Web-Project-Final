@@ -77,11 +77,12 @@ const mealSchema = mongoose.Schema(
       type: [String],
       required: [true, "Please enter the utensils needed"],
     },
-    image:{
-        type:String,
-        required:true,
+    image: {
+      type: String,
+      required: true,
     },
-  }
+  },
+  { timestamps: true }
 );
 const Meal = mongoose.model("Meal", mealSchema);
 module.exports = Meal;

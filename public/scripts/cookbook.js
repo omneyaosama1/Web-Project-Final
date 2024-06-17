@@ -148,14 +148,3 @@ function showNotification() {
     notification.classList.remove("show");
   }, 2000);
 }
-
-function addToFavorites(event, dishId) {
-  var dishElement = document.getElementById(dishId);
-  var clonedCard = dishElement.cloneNode(true);
-  var clonedCardHTML = clonedCard.outerHTML;
-  var favoriteMeals = JSON.parse(localStorage.getItem("favoriteMeals")) || [];
-  favoriteMeals.push(clonedCardHTML);
-  localStorage.setItem("favoriteMeals", JSON.stringify(favoriteMeals));
-  showNotification();
-  event.target.classList.add("favorited");
-}

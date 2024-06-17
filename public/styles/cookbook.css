@@ -6,6 +6,11 @@ body {
   margin: 0;
 }
 
+
+.banner {
+  height: 10vh;
+}
+
 /* Background */
 #background {
     margin-top: 70px;
@@ -19,7 +24,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px 0px 0px 0px;
-  }
+  } 
   
   .search-form {
     display: flex;
