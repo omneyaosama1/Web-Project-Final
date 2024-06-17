@@ -11,6 +11,7 @@ const sourcingRoute = require('./routes/sourcing-route');
 const loginSignupRoute = require('./routes/login-signup-route');
 const userRoute = require('./routes/user-route');
 const adminRoute = require('./routes/admin-route');
+
 const port = process.env.PORT || 8080;
 
 const app = express();
@@ -32,6 +33,7 @@ app.use('/login-signup', loginSignupRoute);
 app.use('/user', userRoute);
 app.use('/admin', adminRoute);
 
+
 mongoose
   .connect(
     "mongodb+srv://omneya:Sys7MEKG0CDnuSYB@cookbook.zf4ymqm.mongodb.net/WebProject?retryWrites=true&w=majority&appName=Cookbook"
@@ -44,6 +46,7 @@ mongoose
     console.log("Failed to connect to the database!");
     console.error(error);
   });
+
 
 app.use("/", homePageRoute);
 app.use("/about-us", aboutUsPageRoute);
