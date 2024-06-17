@@ -479,22 +479,49 @@ li {
     margin-bottom: 10px;
 }
 
-td,
-th {
-    padding-right: 19px;
-    padding-bottom: 19px;
-    padding-left: 19px;
-    text-align: left;
+
+/* TABLE */
+table {
     width: 80%;
-}
+    max-width: 700px;
+    table-layout: fixed;
+    margin: auto;
+    text-align: left;
+    margin-top: 50px;
+    border-collapse: collapse;
+    box-shadow: 0px 0px 10px 1px rgb(0 0 0 / 15%);
+    border-radius: 10px;
+    overflow: hidden; 
+    line-height: 2.5rem;
+  }
 
-tr:nth-child(even) {
-    background-color: #a1c9d5;
-}
+  th {
+    background-color: AliceBlue;
+    padding: 10px;
+  }
 
-td {
-    color: #020000;
-}
+  th,
+  td {
+    padding: 10px;
+  }
+
+  .indicator-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+  }
+
+  .indicator-text {
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
 
 /* Rating */
 .rate {
@@ -749,3 +776,70 @@ h3 {
         transform: rotate(360deg);
     }
 }
+
+
+
+
+/* Accordion */
+
+.accordion-content {
+    margin-bottom: 10px;
+  }
+  
+  .accordion-header {
+    background-color:lightgrey ;
+    color: #264269;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50px;
+    height: 40px;
+    align-items: center;
+    padding-top: 5%;
+    width:97%;
+    
+  }
+  
+  .accordion-i{
+    padding-left: 70%;
+  }
+  
+  .content-description {
+    max-height: 0;
+    background-color:#a1c9d5;
+    overflow: hidden;
+    border-radius: 50px;
+    transition: max-height 0.2s ease-out;
+  }
+
+
+  
+/* Accordion */
+
+.accordion-content {
+    margin-bottom: 10px;
+  }
+  
+  .accordion-header {
+    background-color:lightgrey ;
+    color: #264269;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50px;
+    height: 40px;
+    align-items: center;
+    padding-top: 5%;
+    width:97%;
+    
+  }
+  
+  .accordion-i{
+    padding-left: 70%;
+  }
+  
+  .content-description {
+    max-height: 0;
+    background-color:#a1c9d5;
+    overflow: hidden;
+    border-radius: 50px;
+    transition: max-height 0.2s ease-out;
+  }

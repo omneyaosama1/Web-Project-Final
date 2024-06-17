@@ -1431,144 +1431,151 @@
 
 
   <!-- MODALSS -->
-  <!-- ITEM 1 W1 MODAL -->
-  <div id="detailsModal1week1" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('detailsModal1week1')">&times;</span>
-      <img src="/images/our-menu-images/Tuna-Tomato-Salad.jpg">
-      <h3 id="itemName">Tomato and Tuna pasta salad</h3>
-      <p id="itemDescription"> </p>
-      <hr>
-      <h3>Ingredients:</h3>
-      <div class="ingredients">
+<!-- ITEM 1 W1 MODAL -->
+<div id="detailsModal1week1" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('detailsModal1week1')">&times;</span>
+    <img src="/images/our-menu-images/Tuna-Tomato-Salad.jpg">
+    <h3 id="itemName">Tomato and Tuna pasta salad</h3>
+    <p id="itemDescription"></p>
+    <hr>
 
-        <span class="ing">
-          <img id="Ingredientimg" src="/images/our-menu-images/tomato.jpeg">
-          <p>Tomato</p>
-        </span>
+    <!-- Ingredients Accordion -->
 
-        <span class="ing">
-          <img id="Ingredientimg" src="/images/our-menu-images/tuna.jpeg">
-          <p>Tuna</p>
-        </span>
-
-        <span class="ing">
-          <img id="Ingredientimg" src="/images/our-menu-images/pasta.jpeg">
-          <p>Pasta</p>
-        </span>
-
-        <span class="ing">
-          <img id="Ingredientimg" src="/images/our-menu-images/parsely.jpeg">
-          <p>Parsely</p>
-        </span>
-
-        <span class="ing">
-          <img id="Ingredientimg" src="/images/our-menu-images/olive oil.jpeg">
-          <p>Olive Oil</p>
-        </span>
-
-        <span class="ing">
-          <img id="Ingredientimg" src="/images/our-menu-images/olives.jpeg">
-          <p>Olives</p>
-        </span>
-
-        <span class="ing">
-          <img id="Ingredientimg" src="/images/our-menu-images/garlic.jpeg">
-          <p>Garlic</p>
-        </span>
-
-        <span class="ing">
-          <img id="Ingredientimg" src="/images/our-menu-images/chili flakes.jpeg">
-          <p>Chili Flakes</p>
-        </span>
-
-
-        <span class="ing">
-          <img id="Ingredientimg" src="/images/our-menu-images/lemon zest.jpeg">
-          <p>Lemon Zest</p>
-        </span>
-
-        <span class="ing">
-          <img id="Ingredientimg" src="/images/our-menu-images/salt.jpeg">
-          <p>Salt</p>
-        </span>
-
-        <span class="ing">
-          <img id="Ingredientimg" src="/images/our-menu-images/pepper.jpeg">
-          <p>Pepper</p>
-        </span>
-
-      </div>
-
-      <hr>
-
-      <div>
-        <h3>Allergens:</h3>
-        <p>
-        <ul class="List">
+    <div class="accordion-content">
+      <header class="accordion-header">Ingredients<i class="accordion-i fa-solid fa-plus fa-lg"
+        style="color: #7c7e82;"></i></header>
+      <div class="content-description">
+        <ul>
+          <li>Tomato</li>
           <li>Tuna</li>
-          <li>Wheat (in pasta)</li>
+          <li>Pasta</li>
+          <li>Parsely</li>
+          <li>Olive Oil</li>
+          <li>Olives</li>
+          <li>Garlic</li>
+          <li>Chili Flakes</li>
+          <li>Salt</li>
+          <li>pepper</li>
         </ul>
-        </p>
       </div>
-      <hr>
+    </div>
 
-      <div>
-        <h3>Utensils:</h3>
+    <!-- Accordion Section allergens -->
+    <div class="accordion-content">
+      <header class="accordion-header">Allergens<i class="accordion-i fa-solid fa-plus fa-lg"
+        style="color: #7c7e82;"></i></header>
+      <div class="content-description">
+        <ul>
+          <li>Tuna</li>
+        </ul>
+      </div>
+    </div>
 
-        <ul class="List">
-          <li>Large pot</li>
+
+
+     <!-- Accordion Section utensils -->
+     <div class="accordion-content">
+      <header class="accordion-header">Utensils<i class="accordion-i fa-solid fa-plus fa-lg"
+        style="color: #7c7e82;"></i></header>
+      <div class="content-description">
+        <ul>
+          <li>Large Pot</li>
+          <li>Zester</li>
           <li>Mixing Bowl</li>
           <li>Can Opener</li>
-          <li>Zester</li>
-          <li>Cutting Board</li>
-          <li>Measuring Spoons and Cups</li>
-
+          <li>Measuring Cups & Spoons</li>
         </ul>
       </div>
-      <hr>
-      <div>
-        <h3>Nutrition Values:</h3>
-        <table>
-          <tr>
-            <th>Nutrient</th>
-            <th>Value</th>
-          </tr>
+    </div>
+      <!-- Accordion Section nutrition -->
+      <div class="accordion-content">
+        <header class="accordion-header">Nutrition   <i class="accordion-i fa-solid fa-plus fa-lg"
+          style="color: #7c7e82;"></i></header>
+        <div class="content-description">
+          
+<table id="nutritionTable">
 
-          <tr>
-            <td>Calories</td>
-            <td>250-300kcal</td>
-          </tr>
-
-          <tr>
-            <td>Protien</td>
-            <td>15-20 g</td>
-          </tr>
-
-          <tr>
-            <td>Fat</td>
-            <td>10-15 g</td>
-          </tr>
-
-          <tr>
-            <td>Carbohydrates</td>
-            <td>25-35 g</td>
-          </tr>
-
-          <tr>
-            <td>Cholesterol</td>
-            <td>120 mg</td>
-          </tr>
-
-          <tr>
-            <td> Sodium</td>
-            <td>300-500 mg</td>
-          </tr>
-        </table>
+  <tbody>
+    <tr>
+      <td>Calories</td>
+      <td id="caloriesAmount">275 kcal</td>
+      <td>
+        <div class="indicator-container">
+          <div class="indicator" id="caloriesIndicator"></div>
+          <span class="indicator-text" id="caloriesIndicatorText"></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Protein</td>
+      <td id="proteinAmount">18 g</td>
+      <td>
+        <div class="indicator-container">
+          <div class="indicator" id="proteinIndicator"></div>
+          <span class="indicator-text" id="proteinIndicatorText"></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Fat</td>
+      <td id="fatAmount">12 g</td>
+      <td>
+        <div class="indicator-container">
+          <div class="indicator" id="fatIndicator"></div>
+          <span class="indicator-text" id="fatIndicatorText"></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Carbohydrates</td>
+      <td id="carbsAmount">30 g</td>
+      <td>
+        <div class="indicator-container">
+          <div class="indicator" id="carbsIndicator"></div>
+          <span class="indicator-text" id="carbsIndicatorText"></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Cholesterol</td>
+      <td id="cholesterolAmount">100 mg</td>
+      <td>
+        <div class="indicator-container">
+          <div class="indicator" id="cholesterolIndicator"></div>
+          <span class="indicator-text" id="cholesterolIndicatorText"></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Sodium</td>
+      <td id="sodiumAmount">400 mg</td>
+      <td>
+        <div class="indicator-container">
+          <div class="indicator" id="sodiumIndicator"></div>
+          <span class="indicator-text" id="sodiumIndicatorText"></span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+        </div>
       </div>
-      <hr>
+      <!-- Accordion Section recommendations -->
+  <div class="accordion-content">
+    <header class="accordion-header">Who Can Eat<i class="accordion-i fa-solid fa-plus fa-lg"
+      style="color: #7c7e82;"></i></header>
+    <div class="content-description">
+      <ul>
+        <li>Generally Healthy Adults: Tuna and pasta salad can be a nutritious choice for most healthy adults, providing protein, healthy fats, and complex carbohydrates.</li>
+        <li>Athletes and Active Individuals: It's beneficial for those needing protein for muscle repair and carbohydrates for energy replenishment.</li>
+        <li>Pregnant Women: Tuna provides essential nutrients like omega-3 fatty acids and protein, important for fetal development.</li>
+        <li>People Watching Weight: It can be part of a balanced meal plan if portion sizes are controlled, especially when using whole grain pasta and adding plenty of vegetables.</li>
+      </ul>
     </div>
   </div>
+  </div>
+</div>
 
 
   <!-- ITEM 2 W1 MODAL -->

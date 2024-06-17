@@ -304,3 +304,86 @@ function openWindow(iconToOpen) {
 function closeWindow(iconToClose) {
     document.getElementById(iconToClose).style.display = "none";
 }
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+  
+    accordionHeaders.forEach(header => {
+      header.addEventListener('click', function() {
+        const accordionContent = header.nextElementSibling;
+        const icon = header.querySelector("i");
+  
+
+        header.classList.toggle('active');
+  
+        if (header.classList.contains('active')) {
+          accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
+          icon.classList.replace("fa-plus", "fa-minus");
+        } else {
+          accordionContent.style.maxHeight = '0';
+          icon.classList.replace("fa-minus", "fa-plus");
+        }
+  
+        accordionHeaders.forEach(otherHeader => {
+          if (otherHeader !== header) {
+            otherHeader.classList.remove('active');
+            otherHeader.nextElementSibling.style.maxHeight = '0';
+            otherHeader.querySelector("i").classList.replace("fa-minus", "fa-plus");
+          }
+        });
+      });
+    });
+  });
+  
+
+//   Table indicator
+document.addEventListener('DOMContentLoaded', function() {
+    const nutritionTable = document.getElementById('nutritionTable');
+    const rows = nutritionTable.querySelectorAll('tbody tr');
+
+    rows.forEach(row => {
+      const nutrient = row.querySelector('td:first-child').textContent.trim();
+      const amountString = row.querySelector('td:nth-child(2)').textContent.trim();
+
+      const amountMatch = amountString.match(/(\d+(?:\.\d+)?)\s*(?:-\s*(\d+(?:\.\d+)?))?/);
+      let amount = 0;
+      if (amountMatch) {
+        amount = parseFloat(amountMatch[1]);
+      }
+
+      const dailyIntake = {
+        'Calories': 2000,
+        'Protein': 50,
+        'Fat': 70,
+        'Carbohydrates': 310,
+        'Cholesterol': 300,
+        'Sodium': 2300
+      };
+
+      // Calculate %
+      const dvPercentage = calculateDV(amount, dailyIntake[nutrient]);
+
+       const indicatorDiv = row.querySelector('td:nth-child(3) .indicator');
+      const indicatorText = row.querySelector('td:nth-child(3) .indicator-text');
+      setIndicator(indicatorDiv, indicatorText, dvPercentage);
+    });
+
+    function calculateDV(amount, dailyIntake) {
+      if (dailyIntake === 0) return 0; 
+      return Math.round((amount / dailyIntake) * 100);
+    }
+
+    function setIndicator(indicator, indicatorText, percentage) {
+      if (percentage <= 25) {
+        indicator.style.backgroundColor = 'green';
+        indicatorText.textContent = 'Low';
+      } else if (percentage <= 75) {
+        indicator.style.backgroundColor = 'orange';
+        indicatorText.textContent = 'Moderate';
+      } else {
+        indicator.style.backgroundColor = 'red';
+        indicatorText.textContent = 'High';
+      }
+    }
+  });
