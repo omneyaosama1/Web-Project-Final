@@ -323,22 +323,35 @@ document.addEventListener("DOMContentLoaded", function() {
         header.textContent = 'Products';
         header.classList.add('customer-header'); 
         document.querySelector('main').appendChild(header);
-
-        let products = ['Cheese Toast', 'Lentil Soup', 'Mac N Cheese', 'Chicken Burger', 'Chicken Ranch Pizza'];
-
+    
+        // Array of products with their respective names and image URLs
+        let products = [
+            { name: 'Cheese Toast', imageUrl: '/images/admin-images/cheese-toast.jpg' },
+            { name: 'Lentil Soup', imageUrl: '/images/admin-images/Easy_lentil_soup-2.jpg' },
+            { name: 'Mac N Cheese', imageUrl: '/images' },
+            { name: 'Chicken Burger', imageUrl: '/images/admin-images/to/chicken-burger-image.jpg' },
+            { name: 'Chicken Ranch Pizza', imageUrl: '/images/admin-images/chicken-ranch-pizza-image.jpg' }
+        ];
+    
         for (let i = 0; i < products.length; i++) {
             let row = document.createElement('div');
             row.classList.add('customer-row');
-
+    
             let card = document.createElement('div');
             card.classList.add('card');
             card.classList.add('selectable'); 
             card.dataset.index = i; 
-
+    
+            // Create and append the image element
+            let img = document.createElement('img');
+            img.src = products[i].imageUrl; // Use the image URL from the products array
+            img.classList.add('card-img'); // Apply CSS class for styling
+            card.appendChild(img);
+    
             let productName = document.createElement('p');
-            productName.textContent = products[i];
+            productName.textContent = products[i].name; // Use the product name from the products array
             card.appendChild(productName);
-
+    
             let removeButton = document.createElement('button');
             removeButton.textContent = 'Remove';
             removeButton.classList.add('remove-button');
@@ -346,7 +359,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 removeProductCard(row);
             });
             card.appendChild(removeButton);
-
+    
             let editButton = document.createElement('button');
             editButton.textContent = 'Edit';
             editButton.classList.add('edit-button');
@@ -354,11 +367,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 editProductCard(productName, card);
             });
             card.appendChild(editButton);
-
+    
             row.appendChild(card);
             document.querySelector('main').appendChild(row);
         }
     }
+    
 
     function removeProductCard(row) {
         row.remove();
@@ -394,15 +408,22 @@ document.addEventListener("DOMContentLoaded", function() {
     function addNewCard(content) {
         let row = document.createElement('div');
         row.classList.add('customer-row');
-
+    
         let card = document.createElement('div');
         card.classList.add('card');
         card.classList.add('selectable'); 
         card.classList.add('newly-added'); 
+    
+        // Create and append the image element
+        let img = document.createElement('img');
+        img.src = 'path/to/circle-image.jpg'; // Replace with your image path
+        img.classList.add('card-img'); // Apply CSS class for styling
+        card.appendChild(img);
+    
         let cardContent = document.createElement('p');
         cardContent.textContent = content;
         card.appendChild(cardContent);
-
+    
         let removeButton = document.createElement('button');
         removeButton.textContent = 'Remove';
         removeButton.classList.add('remove-button');
@@ -410,7 +431,7 @@ document.addEventListener("DOMContentLoaded", function() {
             removeProductCard(row);
         });
         card.appendChild(removeButton);
-
+    
         let editButton = document.createElement('button');
         editButton.textContent = 'Edit';
         editButton.classList.add('edit-button');
@@ -418,12 +439,12 @@ document.addEventListener("DOMContentLoaded", function() {
             editProductCard(cardContent, card);
         });
         card.appendChild(editButton);
-
+    
         row.appendChild(card);
-
+    
         document.querySelector('main').appendChild(row);
     }
-
+    
     document.querySelector('.add-button').addEventListener("click", function(event) {
         event.preventDefault(); 
         document.getElementById('myModal').style.display = "block";
@@ -638,7 +659,7 @@ profileLink.addEventListener('click', () => {
     const circleDiv = document.createElement('div');
     circleDiv.classList.add('profile-circle');
     // Set background image for the circle
-    circleDiv.style.backgroundImage = 'url(../images/admin-images/avatar.png)';
+    circleDiv.style.backgroundImage = 'url(avatar.png)';
 
     // Append the circle div to the main section
     mainSection.appendChild(circleDiv);
@@ -755,3 +776,67 @@ if (inputType === "password") {
 
 return container;
 }
+document.addEventListener("DOMContentLoaded", () => {
+    const reviewsLink = document.querySelector('.sidebar a#reviews');
+    const reviewsContainer = document.getElementById('reviewsContainer');
+    const cardsContainer = reviewsContainer.querySelector('.cards3');
+
+    if (reviewsLink) {
+        reviewsLink.addEventListener("click", (event) => {
+            event.preventDefault();
+            console.log("Reviews link clicked");
+
+            // Hide all other sections
+            document.querySelectorAll('.dashboard-section').forEach(section => section.style.display = 'none');
+            console.log("All other sections hidden");
+
+            // Show the reviews container
+            reviewsContainer.style.display = 'block';
+            console.log("Reviews container displayed");
+
+            // Clear existing cards
+            cardsContainer.innerHTML = '';
+
+            // Example data for reviews with star ratings
+            const reviews = [
+                { image: 'ok-Creamy-Garlic-Butter-Chicken-with-Spinach-and-Bacon-5-1460x1825.jpg', stars: 4, content: 'Delicious creamy chicken dish.' },
+                { image: 'creamy-ground-beef-pasta-6.jpg', stars: 5, content: 'Amazing ground beef pasta.' },
+                { image: 'easy-shrimp-recipe.jpg', stars: 3, content: 'Quick and easy shrimp recipe.' },
+                { image: 'Vegetable-Jambalaya.jpg', stars: 2, content: 'Vegetable jambalaya recipe.' },
+                { image: '8068c2dc79f5e168439061a6cfb41da3.jpg', stars: 4, content: 'Tasty and flavorful dish.' },
+                { image: 'Ground-beef-meal-prep-with-pantry-frozen-vegetables-I-Heart-Umami-3-1024x1536.webp', stars: 5, content: 'Healthy ground beef meal prep.' },
+                { image: 'Whole30-Vegetarian-Power-Bowl-easy-recipe.jpg', stars: 3, content: 'Nutritious vegetarian power bowl.' },
+                { image: 'easy-Chicken-Casserole-Recipe.jpg', stars: 4, content: 'Easy chicken casserole recipe.' },
+                { image: 'img.webp', stars: 5, content: 'Beautiful and delicious.' },
+                // Add more reviews as needed
+            ];
+
+            // Generate cards for each review
+            reviews.forEach(review => {
+                const card = document.createElement('div');
+                card.className = 'card4';
+                
+                // Generate stars HTML based on stars rating
+                let starsHtml = '';
+                for (let i = 1; i <= 5; i++) {
+                    if (i <= review.stars) {
+                        starsHtml += '<i class="fas fa-star"></i>';
+                    } else {
+                        starsHtml += '<i class="far fa-star"></i>';
+                    }
+                }
+
+                card.innerHTML = `
+                    <img src="${review.image}" alt="Review Image">
+                    <h3>${review.content}</h3>
+                    <div class="stars">${starsHtml}</div>
+                `;
+                cardsContainer.appendChild(card);
+            });
+
+            console.log("Cards added");
+        });
+    } else {
+        console.error("Reviews link not found");
+    }
+});

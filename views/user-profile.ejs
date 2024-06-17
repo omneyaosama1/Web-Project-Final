@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fresh Bites</title>
-    <link rel="icon" href="logo1.png" type="image/x-icon" />
+    <link rel="icon" href="/images/logo1.png" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet"/>
@@ -12,8 +12,6 @@
     <script src="../scripts/user-profile.js" defer></script>
 </head>
 <body>
-
-    
     <%- include("./partial/nav-bar.ejs") %>
 
 
@@ -23,7 +21,8 @@
     
     <div class="card-container">
         <div class="buttons-container">
-            <button class="transparent-button" onclick="UserAccount()"><i class="fas fa-user-circle"></i> Account Info</button>
+            <img src="/images/user-profile-images/user_5323382.png" class="user-icon" alt="User Icon">
+            <button class="transparent-button" onclick="UserAccount()"><i class="fas fa-user"></i> Account Info</button>
             <button class="transparent-button" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>       
             <button class="transparent-button"><i class="fas fa-trash-alt"></i> Delete Account</button>
 
@@ -151,27 +150,46 @@
                     <div class="content">
                         <div class="row">
                             <label>Card Number</label>
-                            <input type="text" class="card-number" placeholder="1234 1234 1234 1234">
+                            <input type="text" class="card-number" id="cardNumber" placeholder="1234 1234 1234 1234" maxlength="19">
                         </div>
         
                         <div class="row card-expire">
                             <div class="row card-expire-month">
                                 <label>Month</label>
-                                <input type="text" placeholder="April">
+                                <select id="cardMonth">
+                                    <option value="01">January</option>
+                                    <option value="02">February</option>
+                                    <option value="03">March</option>
+                                    <option value="04">April</option>
+                                    <option value="05">May</option>
+                                    <option value="06">June</option>
+                                    <option value="07">July</option>
+                                    <option value="08">August</option>
+                                    <option value="09">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
                             </div>
                             <div class="row card-expire-year">
                                 <label>Year</label>
-                                <input type="text" placeholder="2022">
+                                <input type="text" id="cardYear" placeholder="2024">
                             </div>
                         </div>
+                        
+                        
         
-                        <div class="row card-cvv">
+                        <div class="card-cvv">
                             <label>CVV</label>
-                            <input type="text" placeholder="248">
+                            <input type="text" placeholder="248" id="cvv" maxlength="3" inputmode="numeric">
                         </div>
+                        
+                        
         
                     </div>
         
+
+
                 </div>
             </div>
 

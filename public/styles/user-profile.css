@@ -12,6 +12,168 @@ body {
     overflow-x: hidden; /* Prevent horizontal scrollbar */
 }
 
+.fas.fa-user-circle {
+    font-size: 2.5rem; /* Adjust the font-size to your desired size */
+}
+
+.banner {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.nav-bar {
+    position: fixed;
+    width: 100%;
+    margin: auto;
+    height: 10%;
+    color: #167592;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-bar.scrolled {
+    backdrop-filter: blur(5px);
+    background-color: #81d0e888; /* Change background color to a darker shade */
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 55px;
+}
+
+.name {
+    margin-left: 15px;
+    font-size: 27px;
+    font-family: Pacifico;
+}
+
+a {
+    text-decoration: none;
+    color: #167592;
+    font-family: Roboto;
+}
+
+.banner ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 30px;
+    position: relative;
+}
+
+.banner ul li a {
+    text-decoration: none;
+    color: #167592;
+    text-transform: uppercase;
+}
+
+.banner ul li::after {
+    content: "";
+    height: 3px;
+    width: 0;
+    background: #81d0e8;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+
+.banner ul li:hover::after {
+    width: 100%;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content li {
+    padding: 10px;
+}
+.dropdown-user-dropdown li {
+    padding: 10px;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown:hover .dropdown-user-dropdown {
+    display: block;
+}
+
+/* Responsive Adjustments */
+
+.banner ul li::after {
+    content: "";
+    height: 3px;
+    width: 0;
+    background: #167592;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+
+.banner ul li:hover::after {
+    width: 100%;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    margin-top: 10px;
+    display: none;
+    position: absolute;
+    background-color: #81d0e8;
+    min-width: 120px;
+    z-index: 1000;
+    list-style: none;
+    padding: 0;
+}
+.dropdown-user-dropdown {
+    display: none;
+    position: absolute;
+    background-color: #81d0e8;
+    min-width: 120px;
+    z-index: 1000;
+    list-style: none;
+    padding: 0;
+    left: -100%; /* Position dropdown to the left of the parent li */
+    top: 100%; /* Align dropdown below the parent li */
+}
+
+/* Adjust only for user icon dropdown */
+.dropdown.user-dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #81d0e8;
+    min-width: 120px;
+    z-index: 1000;
+    list-style: none;
+    padding: 0;
+    left: -100%; /* Position dropdown to the left of the parent li */
+    top: 100%; /* Align dropdown below the parent li */
+}
+
+.dropdown.user-dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown-content li {
+    padding: 10px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 /* Account info header */
 .header1 {
     position: absolute;
@@ -41,14 +203,13 @@ body {
 /* Card styles */
 .card {
     background-color: #ffffff;
-    width: 700PX; /* Full width */
+    width: 700px; /* Full width */
     height: 300px; /* Adjust card height */
     margin: 10px 0; /* Space between cards */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     border-radius: 0; /* Sharp edges */
     border: 1px solid #ccc; /* Grey border */
-
 }
 .card h2 {
     font-size: 1.25rem; /* Adjust font size as needed */
@@ -58,24 +219,23 @@ body {
 }
 .cardd {
     background-color: #ffffff;
-    width: 700PX; /* Full width */
+    width: 700px; /* Full width */
     height: 200px; /* Adjust card height */
     margin: 10px 0; /* Space between cards */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     border-radius: 0; /* Sharp edges */
     border: 1px solid #ccc; /* Grey border */
-
 }
-.cardd h2{
+.cardd h2 {
     font-size: 1.25rem; /* Adjust font size as needed */
     font-weight: bold;
     color: #167592; /* Adjust color as needed */
     margin-bottom: 10px; /* Space below header */
 }
-.cardPayment{
+.cardPayment {
     background-color: #ffffff;
-    width: 700PX; /* Full width */
+    width: 700px; /* Full width */
     height: 400px; /* Adjust card height */
     margin: 10px 0; /* Space between cards */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -83,7 +243,7 @@ body {
     border-radius: 0; /* Sharp edges */
     border: 1px solid #ccc; /* Grey border */
 }
-.cardPayment h2{
+.cardPayment h2 {
     font-size: 1.25rem; /* Adjust font size as needed */
     font-weight: bold;
     color: #167592; /* Adjust color as needed */
@@ -92,8 +252,8 @@ body {
 /* Transparent buttons */
 .buttons-container {
     position: absolute;
-    top: 1%; /* Adjust top position as needed */
-    left: -250px; /* Adjust left position */
+    top: 9%; /* Adjust top position as needed */
+    left: -220px; /* Adjust left position */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -111,7 +271,6 @@ body {
     height: 40px; /* Adjust height */
     white-space: nowrap; /* Prevent text from wrapping */
 }
-
 
 .transparent-button:hover {
     text-decoration: underline;
@@ -245,13 +404,13 @@ body {
     margin-bottom: 30px; /* Space between each personal info item */
 }
 /*Payment Details content */
-.containerr{
+.containerr {
     margin: 0 auto;
     max-width: 34rem;
     width: 90%;
 }
 
-input{
+input {
     background-color: transparent;
     border: none;
     color: #fff;
@@ -259,76 +418,73 @@ input{
     width: auto;
 }
 
-input::placeholder{
-    color: #000;
-}
-
-.cardPayment input::placeholder {
+input::placeholder {
     color: #fff;
 }
 
-label{
+label {
     display: block;
 }
 
-.cardVisa{
+.cardVisa {
     background-color: #171a1c;
     border-radius: 14px;
     color: #bebebe;
     padding: 32px;
 }
 
-.header{
+.header {
     margin-bottom: 7rem;
 }
 
-.title{
+.title {
     color: #fff;
     float: left;
     font-size: 1.5rem;
 }
 
-.logo{
+.logo {
     float: right;
 }
 
-.row{
+.row {
     margin-bottom: 1.5rem;
 }
 
-.content{
+.content {
     margin-bottom: 5rem;
 }
 
-.content input{
+.content input {
     outline: none;
 }
 
-.card-number{
+.card-number {
     font-size: 32px;
 }
 
-.card-expire{
+.card-expire {
     float: left;
 }
 
-.card-expire input{
+.card-expire input {
     font-size: 0.9rem;
 }
 
-.card-expire-month{
+.card-expire-month {
     width: 22%;
 }
 
-.card-expire-month, .card-expire-year{
+.card-expire-month,
+.card-expire-year {
     float: left;
 }
 
-.card-cvv{
+.card-cvv {
     float: right;
 }
 
-.card-cvv input{
+.card-cvv input {
     width: 2rem;
     text-align: center;
     font-size: 0.9rem;
@@ -413,25 +569,25 @@ label{
 }
 /*Password modal edit */
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1000; 
+    display: none;
+    position: fixed;
+    z-index: 1000;
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
     padding-top: 60px;
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto; 
+    margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; 
+    width: 80%;
 }
 
 .close {
@@ -504,8 +660,9 @@ label{
 }
 
 /* Style confirm button */
-#confirmDelete, #cancelDelete {
-    background-color: #4CAF50; /* Green background */
+#confirmDelete,
+#cancelDelete {
+    background-color: #4caf50; /* Green background */
     color: white;
     padding: 10px 20px;
     text-align: center;
@@ -519,7 +676,8 @@ label{
 }
 
 /* Hover effect for buttons */
-#confirmDelete:hover, #cancelDelete:hover {
+#confirmDelete:hover,
+#cancelDelete:hover {
     opacity: 0.8;
 }
 /* Common styles for modal buttons */
@@ -536,13 +694,19 @@ label{
 }
 
 /* Styles for confirm and cancel buttons */
-#confirmDelete, #cancelDelete, #ConfirmSub, #CancelSub {
-    background-color: #4CAF50; /* Green background */
+#confirmDelete,
+#cancelDelete,
+#ConfirmSub,
+#CancelSub {
+    background-color: #4caf50; /* Green background */
     color: white;
 }
 
 /* Hover effect for buttons */
-#confirmDelete:hover, #cancelDelete:hover, #ConfirmSub:hover, #CancelSub:hover {
+#confirmDelete:hover,
+#cancelDelete:hover,
+#ConfirmSub:hover,
+#CancelSub:hover {
     opacity: 0.8;
 }
 /* Dropdown Styling */
@@ -577,4 +741,51 @@ label{
 /* Options Styling */
 .subscription-status-dropdown option {
     padding: 10px;
+}
+/* General style for the select dropdown */
+#cardMonth {
+    background-color: #171a1c;
+    color: white;
+    width: 100px; /* Adjust the width as needed */
+    padding: px;
+    border: none;
+    border-radius: 4px;
+    appearance: none;
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+}
+
+/* Style for the dropdown options */
+#cardMonth option {
+    background-color: #171a1c;
+    color: white;
+}
+
+/* Optional: Add some styling to indicate focus */
+#cardMonth:focus {
+    outline: none;
+    border-color: #555;
+}
+/* Adjust input color inside edit modal */
+#editModal input[type="text"],
+#editModal input[type="email"],
+#editModal input[type="tel"],
+#editModal textarea {
+    color: #000000; /* Black color */
+}
+/* Adjust input color inside edit password modal */
+#editPasswordModal input[type="password"] {
+    color: #000000; /* Black color */
+}
+/* Adjust input color inside edit subscription modal */
+#editSubscriptionModal select {
+    color: #000000; /* Black color */
+}
+.user-icon {
+    width: 170px; /* Adjust the width as needed */
+    height: 170px; /* Adjust the height as needed */
+    position: absolute;
+    top: -180px; /* Adjust the pixel value to move it higher */
+    left: -20px; /* Adjust as per your design */
+    z-index: 1; /* Ensure the icon is above other elements */
 }
