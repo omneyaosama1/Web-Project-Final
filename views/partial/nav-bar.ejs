@@ -8,25 +8,34 @@
 
     <div class="nav-bar">
         <div class="left-section">
-            <img src="/images/logo1.png" alt="Your Logo" class="logo" />
+            <a href="/">
+                <img
+                    src="/images/logo1.png"
+                    alt="Your Logo"
+                    class="logo"
+                />
+            </a>
+            
             <span class="name" onclick="window.location.href = '/'"
                 >Fresh Bites</span
             >
         </div>
         <ul>
             <li class="dropdown">
-                <a href="/about-us">About Us</a>
+                <a href="/about-us"> About Us </a>
                 <ul class="dropdown-content">
-                    <li><a href="/about-us">About Us</a></li>
-                    <li><a href="/how-it-works">How it Works</a></li>
+                    <li><a href="about-us">About Us</a></li>
+                    <li>
+                        <a href="/how-it-works">How it Works</a>
+                    </li>
                 </ul>
             </li>
             <li><a href="/our-plans">Our Plans</a></li>
             <li class="dropdown">
-                <a href="/menu">Our Menu</a>
+                <a href="/menu"> Our Menu </a>
                 <ul class="dropdown-content">
                     <li><a href="/menu">Our Menu</a></li>
-                    <li><a href="/Cookbook">Cook Book</a></li>
+                    <li><a href="/cookbook">Cook Book</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -38,8 +47,27 @@
                     <li><a href="/sourcing">Sourcing</a></li>
                 </ul>
             </li>
-            <li><a href="/favoriteMeals">Favorite Meals</a></li>
-            <li><a href="/User">User Profile</a></li>
+
+            <li class="dropdown user-dropdown">
+                <!-- Added user-dropdown class -->
+                <a href="/user"><i class="fas fa-user-circle"></i></a>
+                <ul class="dropdown-content">
+                    <li><a href="/user">Account Info</a></li>
+                    <li>
+                        <a href="/user/favoriteMeals">Favorite Meals</a>
+                    </li>
+                    <li><a href="/user/history">Orders History</a></li>
+                    <li>
+                        <a
+                            href="/login-signup"
+                            id="logoutButton"
+                            onclick="logout()"
+                            >Logout</a
+                        >
+                    </li>
+                </ul>
+            </li>
         </ul>
+        <!-- Closed ul tag -->
     </div>
 </html>
