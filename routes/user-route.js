@@ -9,4 +9,9 @@ router.get('/favoriteMeals', (req, res) => {
     res.render('fav-meals');
 });
 
+
+router.get('/history', (req, res) => {
+    res.render('user-history');
+});
+
 module.exports = router;

@@ -25,6 +25,10 @@
     height: 55px;
 }
 
+.logo:hover {
+    cursor: pointer;
+}
+
 .name {
     margin-left: 15px;
     font-size: 27px;
