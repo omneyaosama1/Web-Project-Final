@@ -1,4 +1,6 @@
 const express = require('express');
+const mongoose = require('mongoose')
+
 const homePageRoute = require("./routes/index-route");
 const aboutUsPageRoute = require('./routes/about-us-route');
 const hiwRoute = require('./routes/how-it-works-route');
@@ -30,4 +32,4 @@ app.use('/user', userRoute);
 app.use('/admin', adminRoute);
 
 
-app.listen(port, () => console.log(`Sever is running on port ${port}`));
+app.listen(port, () => console.log(`Server is running on port ${port}`));
