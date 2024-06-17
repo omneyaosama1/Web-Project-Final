@@ -54,4 +54,3 @@ app.use("/our-plans", ourPlansRoute);
 app.use("/sustainability", sustainabilityRoute);
 app.use("/sourcing", sourcingRoute);
 app.use("/cookbook", cookbookRoute);
-app.listen(port, () => console.log(`Server is running on port ${port}`));
