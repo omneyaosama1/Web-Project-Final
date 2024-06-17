@@ -32,6 +32,7 @@ app.use('/sourcing', sourcingRoute);
 app.use('/login-signup', loginSignupRoute);
 app.use('/user', userRoute);
 app.use('/admin', adminRoute);
+app.use("/cookbook", cookbookRoute);
 
 
 mongoose
@@ -46,12 +47,3 @@ mongoose
     console.log("Failed to connect to the database!");
     console.error(error);
   });
-
-
-app.use("/", homePageRoute);
-app.use("/about-us", aboutUsPageRoute);
-app.use("/how-it-works", hiwRoute);
-app.use("/our-plans", ourPlansRoute);
-app.use("/sustainability", sustainabilityRoute);
-app.use("/sourcing", sourcingRoute);
-app.use("/cookbook", cookbookRoute);
