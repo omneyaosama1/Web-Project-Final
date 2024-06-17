@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cookbook</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    
+    <link rel="stylesheet" href="../styles/slider.css" />
+    <link rel="stylesheet" href="../styles/cookbook.css" />
+    <link rel="stylesheet" href="../styles/nav-bar.css"/>
+    <script src="../scripts/cookbook.js" defer></script>
+    <script src="../scripts/slider.js" defer></script>
+  </head>
+  <body>
+    <div class="banner">
+      <div class="nav-bar">
+        <div class="left-section">
+          <img src="/images/logo1.png" alt="Your Logo" class="logo" />
+          <span class="name">Fresh Bites</span>
+        </div>
+        <ul>
+          <li class="dropdown">
+            <a href="#"> About Us </a>
+            <ul class="dropdown-content">
+              <li><a href="#">Our Story</a></li>
+              <li><a href="#">How it Works</a></li>
+            </ul>
+          </li>
+
+          <li><a href="#">Our Plans</a></li>
+
+          <li class="dropdown">
+            <a href="#"> Our Menu </a>
+            <ul class="dropdown-content">
+              <li><a href="#">Our Menu</a></li>
+              <li><a href="Cookbook.html">Cook Book</a></li>
+            </ul>
+          </li>
+
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="favoriteMeals.html">Favorite Meals</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="background">
+      <div id="notification" class="notification">Added to Favorites</div>
+      <form name="searchForm" onsubmit="return checkInput(this)" method="post">
+        <div id="search-div">
+          <input type="text" name="search" id="search-bar" />
+          <button type="submit" id="search-btn">Search</button>
+        </div>
+        <div class="error" id="searchErr"></div>
+      </form>
+      <h1 class="title">Global Cuisines</h1>
+      <div class="cuisines">
+        <div class="icon">
+          <i id="left-cuisine" class="fa-solid fa-angle-left"></i>
+        </div>
+        <ul class="tabs-bar">
+          <li class="tab">American Recipes</li>
+          <li class="tab">Italian Recipes</li>
+          <li class="tab">Asian Recipes</li>
+          <li class="tab">Mediterranean Recipes</li>
+          <li class="tab">Mexican Recipes</li>
+          <li class="tab">Korean Recipes</li>
+          <li class="tab">Indian Recipes</li>
+          <li class="tab">Middle Eastern Recipes</li>
+          <li class="tab">Chinese Recipes</li>
+          <li class="tab">Spanish Recipes</li>
+          <li class="tab">French Recipes</li>
+          <li class="tab">Japanese Recipes</li>
+          <li class="tab">Cuban Recipes</li>
+        </ul>
+        <div class="icon">
+          <i id="right-cuisine" class="fa-solid fa-angle-right"></i>
+        </div>
+      </div>
+      <h1 class="title">Dishes</h1>
+      <div class="dishes">
+        <div class="icon">
+          <i id="left-dishes" class="fa-solid fa-angle-left"></i>
+        </div>
+        <ul class="tabs-bar">
+          <li class="tab">Tacos Recipes</li>
+          <li class="tab">Burger Recipes</li>
+          <li class="tab">Pasta Recipes</li>
+          <li class="tab">Bowl Recipes</li>
+          <li class="tab">Noodle Recipes</li>
+          <li class="tab">Soup Recipes</li>
+          <li class="tab">Burrito Recipes</li>
+          <li class="tab">Sandwich Recipes</li>
+          <li class="tab">Casserole Recipes</li>
+          <li class="tab">Stir-Fry Recipes</li>
+        </ul>
+        <div class="icon">
+          <i id="right-dishes" class="fa-solid fa-angle-right"></i>
+        </div>
+      </div>
+      <div id="overlay"></div>
+      <div id="feedbackIcon" onclick="showBox()">
+        <img src="/images/Feedback.jpg" width="35" height="100" />
+      </div>
+      <div id="feedbackContent">
+        <button class="exit" onclick="exitFeedback()">x</button>
+        <h2>Rate our Website</h2>
+        <div class="button-row">
+          <button class="choice" onclick="showTextArea(event)">
+            <span></span>Hate
+          </button>
+          <button class="choice" onclick="showTextArea(event)">
+            <span></span>Dislike
+          </button>
+          <button class="choice" onclick="showTextArea(event)">
+            <span></span>Neutral
+          </button>
+        </div>
+        <div class="button-row">
+          <button class="choice" onclick="showTextArea(event)">
+            <span></span>Like
+          </button>
+          <button class="choice" onclick="showTextArea(event)">
+            <span></span>Love
+          </button>
+        </div>
+        <form name="feedbackForm" onsubmit="return feedbackInput(this)">
+          <div id="feedback">
+            <h4>Please share any suggestions for enhancements</h4>
+            <textarea
+              id="textArea"
+              name="review"
+              placeholder="Enter your message here..."
+            ></textarea>
+            <div id="reviewErr" class="error"></div>
+            <button id="submit-btn" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+      <h1 class="heading">A Global Selection of Savory Dinner Recipes</h1>
+      <h2 class="sub-heading">
+        Discover the ideal effortless meal that will leave you feeling
+        satisfied,<br />
+        Explore our extensive recipe collection filled with delicious dinner
+        options.
+      </h2>
+      <div class="meals-container">
+        <% meals.forEach((meal, index) => { %>
+          <div class="menu-item" id="dish<%= index + 1 %>">
+            <img src="<%= meal.image %>" alt="<%= meal.name %>" />
+            <h4 onclick="displayDescription('overlayMeal<%= index + 1 %>', '<%= meal.name %>', '<%= meal.description %>')">
+              <%= meal.name.split(' ')[0] %><br />
+              <%= meal.name.split(' ').slice(1).join(' ') %>
+            </h4>
+            <button class="heart-button" onclick="addToFavorites(event, 'dish<%= index + 1 %>')">
+              <i class="fa-solid fa-heart"></i>
+            </button>
+          </div>
+        <% }); %>
+      </div>
+
+    <!-- Overlay descriptions for each meal -->
+    <% meals.forEach((meal, index) => { %>
+      <div id="overlayMeal<%= index + 1 %>" class="description">
+        <div class="overlay-container">
+          <span class="close" onclick="closeWindow('overlayMeal<%= index + 1 %>')">&times;</span>
+          <img src="<%= meal.image %>" width="500px" alt="<%= meal.name %>" />
+          <h3 class="dishName"><%= meal.name %></h3>
+          <p class="extension"><%= meal.description %></p>
+          <p><b>Total Time: <%= meal.duration %> minutes</b></p>
+          <p><b>Difficulty: <%= meal.difficulty %></b></p>
+          <hr />
+          <div class="description-content">
+            <header>
+              <span class="title">Ingredients</span>
+              <span class="servings">/per 2 servings</span>
+            </header>
+            <div class="content-description">
+              <% meal.ingPer2.forEach(ingredient => { %>
+                <li><%= ingredient %></li>
+              <% }); %>
+            </div>
+          </div>
+          <div class="description-content">
+            <header>
+              <span class="title">Ingredients</span>
+              <span class="servings">/per 4 servings</span>
+            </header>
+            <div class="content-description">
+              <% meal.ingPer4.forEach(ingredient => { %>
+                <li><%= ingredient %></li>
+              <% }); %>
+            </div>
+          </div>
+          <div class="description-content">
+            <header>
+              <span class="title">Instructions</span>
+            </header>
+            <div class="content-description">
+              <div class="steps">
+                <% meal.instructions.forEach((step, stepIndex) => { %>
+                  <li><%= step %></li>
+                  <% if (stepIndex < meal.instructions.length - 1) { %>
+                    <hr />
+                  <% } %>
+                <% }); %>
+              </div>
+            </div>
+          </div>
+          <div class="description-content">
+            <header>
+              <span class="title">Nutrition Values</span>
+              <span class="servings">/per serving</span>
+            </header>
+            <div class="content-description">
+              <table>
+                <tr>
+                  <td>Energy (kJ)</td>
+                  <td><%= meal.nutrition.energy %> kJ</td>
+                </tr>
+                <tr>
+                  <td>Calories</td>
+                  <td><%= meal.nutrition.calories %> kcal</td>
+                </tr>
+                <tr>
+                  <td>Fat</td>
+                  <td><%= meal.nutrition.fat %> g</td>
+                </tr>
+                <tr>
+                  <td>Saturated Fat</td>
+                  <td><%= meal.nutrition.satFat %> g</td>
+                </tr>
+                <tr>
+                  <td>Carbohydrate</td>
+                  <td><%= meal.nutrition.carbs %> g</td>
+                </tr>
+                <tr>
+                  <td>Sugar</td>
+                  <td><%= meal.nutrition.sugar %> g</td>
+                </tr>
+                <tr>
+                  <td>Dietary Fiber</td>
+                  <td><%= meal.nutrition.fiber %> g</td>
+                </tr>
+                <tr>
+                  <td>Protein</td>
+                  <td><%= meal.nutrition.protein %> g</td>
+                </tr>
+                <tr>
+                  <td>Cholesterol</td>
+                  <td><%= meal.nutrition.cholesterol %> mg</td>
+                </tr>
+                <tr>
+                  <td>Sodium</td>
+                  <td><%= meal.nutrition.sodium %> mg</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="description-content">
+            <header>
+              <span class="title">Utensils</span>
+            </header>
+            <div class="content-description">
+              <% meal.utensils.forEach(utensil => { %>
+                <li><%= utensil %></li>
+              <% }); %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+  </body>
+</html>

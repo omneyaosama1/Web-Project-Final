@@ -14,7 +14,7 @@ function checkInput(form) {
       return false;
     } else {
       printWarning("searchErr", "");
-      return false; //This should return true, it's set to false to prevent it from throwing an error.
+      return true; // Return true when input is valid
     }
   }
 }
@@ -74,52 +74,72 @@ function feedbackInput(form) {
   }
 }
 
-//meal description functions
+// Meal description functions
 
-const accordionContent = document.querySelectorAll(".description-content");
+document.addEventListener("DOMContentLoaded", function() {
+  const accordionContent = document.querySelectorAll(".description-content");
 
-accordionContent.forEach((item, index) => {
-  let header = item.querySelector("header");
-  header.addEventListener("click", () => {
-    item.classList.toggle("open");
+  accordionContent.forEach((item, index) => {
+    let header = item.querySelector("header");
+    header.addEventListener("click", () => {
+      item.classList.toggle("open");
 
-    let description = item.querySelector(".content-description"); // Updated selector
-    if (item.classList.contains("open")) {
-      description.style.height = `${description.scrollHeight}px`;
-    } else {
-      description.style.height = "0px";
-    }
-    removeOpen(index);
+      let description = item.querySelector(".content-description");
+      if (item.classList.contains("open")) {
+        description.style.height = `${description.scrollHeight}px`;
+      } else {
+        description.style.height = "0px";
+      }
+      removeOpen(index);
+    });
   });
 });
 
 function removeOpen(index1) {
+  const accordionContent = document.querySelectorAll(".description-content");
   accordionContent.forEach((item2, index2) => {
-    if (index1 != index2) {
+    if (index1 !== index2) {
       item2.classList.remove("open");
-
-      let des = item2.querySelector(".content-description"); // Updated selector
+      let des = item2.querySelector(".content-description");
       des.style.height = "0px";
     }
   });
 }
-
-function displayDescritpion(overlayID, mealName, mealSides) {
-  var id = document.getElementById(overlayID);
-  var name = id.querySelector("#dishName");
-  var extension = id.querySelector("#extension");
-
-  name.textContent = mealName;
-  extension.textContent = mealSides;
-
-  id.style.display = "block";
-}
-
-function closeWindow(ID) {
-  var window = document.getElementById(ID);
-  window.style.display = "none";
-}
-
+window.displayDescription = function(overlayID, mealName, mealDescription) {
+    var id = document.getElementById(overlayID);
+    if (!id) {
+      console.error("Element with ID " + overlayID + " not found");
+      return;
+    }
+  
+    var name = id.querySelector(".dishName");
+    var description = id.querySelector(".extension");
+  
+    if (!name) {
+      console.error("Element with class 'dishName' not found inside " + overlayID);
+      return;
+    }
+  
+    if (!description) {
+      console.error("Element with class 'extension' not found inside " + overlayID);
+      return;
+    }
+  
+    name.textContent = mealName;
+    description.textContent = mealDescription;
+  
+    id.style.display = "block";
+  };
+  
+  window.closeWindow = function(ID) {
+    var window = document.getElementById(ID);
+    if (!window) {
+      console.error("Element with ID " + ID + " not found");
+      return;
+    }
+    window.style.display = "none";
+  };
+  
 // Add to favorites function and notification
 function showNotification() {
   var notification = document.getElementById("notification");
@@ -128,7 +148,6 @@ function showNotification() {
     notification.classList.remove("show");
   }, 2000);
 }
-
 
 function addToFavorites(event, dishId) {
   var dishElement = document.getElementById(dishId);
