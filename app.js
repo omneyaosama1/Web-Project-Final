@@ -11,7 +11,6 @@ const sourcingRoute = require('./routes/sourcing-route');
 const loginSignupRoute = require('./routes/login-signup-route');
 const userRoute = require('./routes/user-route');
 const adminRoute = require('./routes/admin-route');
-
 const port = process.env.PORT || 8080;
 
 const app = express();
@@ -32,7 +31,6 @@ app.use('/sourcing', sourcingRoute);
 app.use('/login-signup', loginSignupRoute);
 app.use('/user', userRoute);
 app.use('/admin', adminRoute);
-
 
 mongoose
   .connect(
