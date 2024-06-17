@@ -376,10 +376,10 @@ img {
     height: auto;
 }
 
-.items,
-h3 {
-    color: #020000;
+#itemName {
+    color: rgb(48, 111, 147);
     cursor: pointer;
+    font-size: 20px;
 }
 
 .duration {
@@ -780,66 +780,90 @@ h3 {
 
 
 
-/* Accordion */
+
+
+  
+/*Nutrition Accordion  */
 
 .accordion-content {
     margin-bottom: 10px;
+    
   }
   
   .accordion-header {
-    background-color:lightgrey ;
-    color: #264269;
+    background-color:#f7f7f7 ;
+    color: #000000;
     cursor: pointer;
     padding: 10px;
-    border-radius: 50px;
-    height: 40px;
+    border-radius: 8px;
+    height: 30px;
     align-items: center;
-    padding-top: 5%;
-    width:97%;
-    
+    padding-top: 2%;
+    border:1px #000000 solid;
+    width:88%;
+    margin-left: 20px;
+    font-size: 30px;
+    color:rgb(77, 149, 191);
+  }
+
+  .accordion-header:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border: 3px solid var(--secondary-color);
   }
   
   .accordion-i{
     padding-left: 70%;
+    font-size: 25px;
   }
   
   .content-description {
     max-height: 0;
-    background-color:#a1c9d5;
+    background-color:#7cd6f177;
     overflow: hidden;
-    border-radius: 50px;
+    width:92%;
+    margin-left: 20px;
+    border-radius: 8px;
     transition: max-height 0.2s ease-out;
   }
 
+  /*cards inside modal*/
+  :root {
+    --secondary-color:orange;
+  }
+  .card {
 
-  
-/* Accordion */
+  border: 1px solid #000000;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  padding: 15px;
+  transition: all 0.6s;
+}
 
-.accordion-content {
-    margin-bottom: 10px;
-  }
-  
-  .accordion-header {
-    background-color:lightgrey ;
-    color: #264269;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 50px;
-    height: 40px;
-    align-items: center;
-    padding-top: 5%;
-    width:97%;
-    
-  }
-  
-  .accordion-i{
-    padding-left: 70%;
-  }
-  
-  .content-description {
-    max-height: 0;
-    background-color:#a1c9d5;
-    overflow: hidden;
-    border-radius: 50px;
-    transition: max-height 0.2s ease-out;
-  }
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border: 3px solid var(--secondary-color);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30px;
+  color:rgb(77, 149, 191);
+}
+
+.card-content {
+  margin-top: 15px;
+}
+
+.card-content ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding-left: 20px;
+}
+
+.card-content li {
+  margin-bottom: 10px;
+}
