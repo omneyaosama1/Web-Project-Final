@@ -2,103 +2,11 @@
         margin: 0;
     }
 
-    .nav-bar {
-        position: fixed;
-        width: 100%;
-        color: rgb(90, 108, 65);
-        display: flex;
-        top: 0;
-        justify-content: space-between;
-        align-items: center;
-        padding: px 0;
-        /* background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), */
-        /* url(../images/background.jpg); */
-        /* background-size: cover; */
-        /* background-position: center; */
-        background-color: white;
-        z-index: 1;
-        top: 0;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
-    }
-
-    .left-section {
-        display: flex;
-        align-items: center;
-        margin-left: 30px;
-    }
-
     .logo {
         height: 3.5rem;
         width: 3.5rem;
     }
 
-    .name {
-        margin-left: 15px;
-        font-size: 27px;
-        color: rgb(32, 188, 193);
-        font-family: Pacifico;
-    }
-
-    a {
-        text-decoration: none;
-        color: rgb(32, 188, 193);
-        font-family: Roboto;
-    }
-
-    .nav-bar ul li {
-        list-style: none;
-        display: inline-block;
-        margin: 0 20px;
-        position: relative;
-    }
-
-    .nav-bar ul li a {
-        text-decoration: none;
-        color: rgb(32, 188, 193);
-        text-transform: uppercase;
-    }
-
-    .nav-bar ul li::after {
-        content: "";
-        height: 3px;
-        width: 0;
-        background: rgb(32, 188, 193);
-        position: absolute;
-        left: 0;
-        bottom: -1px;
-        transition: 0.5s;
-        color: white;
-    }
-
-    .nav-bar ul li:hover::after {
-        width: 100%;
-    }
-
-    .dropdown {
-        position: relative;
-    }
-
-    .dropdown-content {
-        margin-top: 5px;
-        display: none;
-        position: absolute;
-        background-color: #333;
-        min-width: 120px;
-        z-index: 1000;
-        list-style: none;
-        padding: 0;
-        color: white;
-    }
-
-    .dropdown-content li {
-        padding: 10px;
-    }
-
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
-
-    /* menu */
 
     /* Feedback Icon */
     #feedbackIcon {
@@ -154,7 +62,7 @@
         margin-top: 20px;
     }
 
-    /* Exit Button */
+    /* EXIT BUTTON */
     .exit {
         position: absolute;
         top: 10px;
@@ -238,12 +146,15 @@
         background-color: #31d42b;
     }
 
+    
+
+    /* MENU */
+
     .menu {
         align-items: center;
         display: flex;
         width: 208vh;
         min-height: 100vh;
-        /* background-color: #f7f7f7; */
         background-position: right right;
         background-attachment: fixed;
         background-size: cover;
@@ -251,7 +162,7 @@
         text-align: center;
     }
 
-    /* Search */
+    /* SEARCH */
     .searchPart {
         display: flex;
         justify-content: center;
@@ -287,7 +198,7 @@
         position: absolute;
     }
 
-    /* Page Title */
+    /*PAGE TITLE*/
     #titleM {
         color: #136b85;
         font-size: 2em;
@@ -334,7 +245,7 @@
         background-color: #f6e1bf;
     }
 
-    /* Items */
+    /* ITEMS(RECIPES) */
     .items-container {
         display: flex;
         flex-wrap: wrap;
@@ -344,7 +255,7 @@
     }
 
     .items {
-        background-color: #a4d1df;
+        background-color: #b0dae7;
         border: 5px solid transparent;
         width: 15em;
         box-shadow: 0 5px 25px black;
@@ -367,7 +278,8 @@
 
     .items:hover {
         transform: scale(1.1);
-        background-color: #f19f13;
+        background-color: #eeb655;
+      
     }
 
     .item,
@@ -394,7 +306,7 @@
         justify-content: space-evenly;
     }
 
-    /* Modals */
+    /* MODALS */
     .modal {
         display: none;
         position: fixed;
@@ -418,7 +330,7 @@
         position: relative;
     }
 
-    /* close of modals */
+    /* cCLOSING OF MODAL */
     .close {
         position: absolute;
         top: 10px;
@@ -433,12 +345,8 @@
         color: #aaa;
     }
 
-    /* inside modal */
-    #Ingredientimg {
-        width: 45px;
-        height: 45px;
-        justify-content: space-evenly;
-    }
+    /* MODAL'S CONTENT */
+   
 
     .modal-content.ingredients {
         display: flex;
@@ -479,8 +387,93 @@
         margin-bottom: 10px;
     }
 
+     
+    /*NUTRITION ACCORDION */
 
-    /* TABLE */
+    .accordion-content {
+        margin-bottom: 10px;
+        
+    }
+    
+    .accordion-header {
+        background-color:#f7f7f7 ;
+        color: #000000;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 8px;
+        height: 30px;
+        align-items: center;
+        padding-top: 2%;
+        border:1px #000000 solid;
+        width:88%;
+        margin-left: 20px;
+        font-size: 30px;
+        color:rgb(77, 149, 191);
+    }
+
+    .accordion-header:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        border: 3px solid var(--secondary-color);
+    }
+    
+    .accordion-i{
+        padding-left: 70%;
+        font-size: 25px;
+    }
+    
+    .content-description {
+        max-height: 0;
+        background-color:#7cd6f177;
+        overflow: hidden;
+        width:92%;
+        margin-left: 20px;
+        border-radius: 8px;
+        transition: max-height 0.2s ease-out;
+    }
+
+    /*CARDS INSIDE MODAL*/
+    :root {
+        --secondary-color:orange;
+    }
+    .card {
+
+    border: 1px solid #000000;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 15px;
+    transition: all 0.6s;
+    }
+
+    .card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border: 3px solid var(--secondary-color);
+    }
+
+    .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 30px;
+    color:rgb(77, 149, 191);
+    }
+
+    .card-content {
+    margin-top: 15px;
+    }
+
+    .card-content ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-left: 20px;
+    }
+
+    .card-content li {
+    margin-bottom: 10px;
+    }
+
+    /* NUTRITION TABLE */
     table {
         width: 80%;
         max-width: 700px;
@@ -693,7 +686,8 @@
         box-shadow: inset 90px 0 0 0 #e6be79;
     }
 
-    /* rotating plates */
+    
+   /*Rotating Plates Images*/
     .rotate-container1 {
         width: 200px;
         height: 200px;
@@ -768,6 +762,8 @@
         overflow: hidden;
     }
 
+
+    
     @keyframes rotate {
         form {
             transform: rotate(0deg);
@@ -782,88 +778,4 @@
 
 
 
-    
-    /*Nutrition Accordion  */
-
-    .accordion-content {
-        margin-bottom: 10px;
-        
-    }
-    
-    .accordion-header {
-        background-color:#f7f7f7 ;
-        color: #000000;
-        cursor: pointer;
-        padding: 10px;
-        border-radius: 8px;
-        height: 30px;
-        align-items: center;
-        padding-top: 2%;
-        border:1px #000000 solid;
-        width:88%;
-        margin-left: 20px;
-        font-size: 30px;
-        color:rgb(77, 149, 191);
-    }
-
-    .accordion-header:hover {
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        border: 3px solid var(--secondary-color);
-    }
-    
-    .accordion-i{
-        padding-left: 70%;
-        font-size: 25px;
-    }
-    
-    .content-description {
-        max-height: 0;
-        background-color:#7cd6f177;
-        overflow: hidden;
-        width:92%;
-        margin-left: 20px;
-        border-radius: 8px;
-        transition: max-height 0.2s ease-out;
-    }
-
-    /*cards inside modal*/
-    :root {
-        --secondary-color:orange;
-    }
-    .card {
-
-    border: 1px solid #000000;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-    padding: 15px;
-    transition: all 0.6s;
-    }
-
-    .card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    border: 3px solid var(--secondary-color);
-    }
-
-    .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 30px;
-    color:rgb(77, 149, 191);
-    }
-
-    .card-content {
-    margin-top: 15px;
-    }
-
-    .card-content ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    padding-left: 20px;
-    }
-
-    .card-content li {
-    margin-bottom: 10px;
-    }
+   

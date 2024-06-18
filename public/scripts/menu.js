@@ -336,54 +336,56 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-
 //   Table indicator
 document.addEventListener('DOMContentLoaded', function() {
-    const nutritionTable = document.querySelector('.nutritionTable');
-    const rows = nutritionTable.querySelectorAll('tbody tr');
+    const nutritionTables = document.querySelectorAll('.nutritionTable'); // Changed to querySelectorAll with class
 
-    rows.forEach(row => {
-      const nutrient = row.querySelector('td:first-child').textContent.trim();
-      const amountString = row.querySelector('td:nth-child(2)').textContent.trim();
+    nutritionTables.forEach(nutritionTable => {
+        const rows = nutritionTable.querySelectorAll('tbody tr');
 
-      const amountMatch = amountString.match(/(\d+(?:\.\d+)?)\s*(?:-\s*(\d+(?:\.\d+)?))?/);
-      let amount = 0;
-      if (amountMatch) {
-        amount = parseFloat(amountMatch[1]);
-      }
+        rows.forEach(row => {
+            const nutrient = row.querySelector('td:first-child').textContent.trim();
+            const amountString = row.querySelector('td:nth-child(2)').textContent.trim();
 
-      const dailyIntake = {
-        'Calories': 2000,
-        'Protein': 50,
-        'Fat': 70,
-        'Carbohydrates': 310,
-        'Cholesterol': 300,
-        'Sodium': 2300
-      };
+            const amountMatch = amountString.match(/(\d+(?:\.\d+)?)\s*(?:-\s*(\d+(?:\.\d+)?))?/);
+            let amount = 0;
+            if (amountMatch) {
+                amount = parseFloat(amountMatch[1]);
+            }
 
-      // Calculate percentage
-      const dvPercentage = calculateDV(amount, dailyIntake[nutrient]);
+            const dailyIntake = {
+                'Calories': 2000,
+                'Protein': 50,
+                'Fat': 70,
+                'Carbohydrates': 310,
+                'Cholesterol': 300,
+                'Sodium': 2300
+            };
 
-       const indicatorDiv = row.querySelector('td:nth-child(3) .indicator');
-      const indicatorText = row.querySelector('td:nth-child(3) .indicator-text');
-      setIndicator(indicatorDiv, indicatorText, dvPercentage);
+            // Calculate percenatge
+            const dvPercentage = calculateDV(amount, dailyIntake[nutrient]);
+
+            const indicatorDiv = row.querySelector('td:nth-child(3) .indicator');
+            const indicatorText = row.querySelector('td:nth-child(3) .indicator-text');
+            setIndicator(indicatorDiv, indicatorText, dvPercentage);
+        });
     });
 
     function calculateDV(amount, dailyIntake) {
-      if (dailyIntake === 0) return 0; 
-      return Math.round((amount / dailyIntake) * 100);
+        if (dailyIntake === 0) return 0; 
+        return Math.round((amount / dailyIntake) * 100);
     }
 
     function setIndicator(indicator, indicatorText, percentage) {
-      if (percentage <= 25) {
-        indicator.style.backgroundColor = 'lawngreen';
-        indicatorText.textContent = 'Low';
-      } else if (percentage <= 75) {
-        indicator.style.backgroundColor = 'orange';
-        indicatorText.textContent = 'Moderate';
-      } else {
-        indicator.style.backgroundColor = 'red';
-        indicatorText.textContent = 'High';
-      }
+        if (percentage <= 25) {
+            indicator.style.backgroundColor = 'rgb(111, 213, 8)';
+            indicatorText.textContent = 'Low';
+        } else if (percentage <= 75) {
+            indicator.style.backgroundColor = 'orange';
+            indicatorText.textContent = 'Moderate';
+        } else {
+            indicator.style.backgroundColor = 'rgb(233, 45, 45)';
+            indicatorText.textContent = 'High';
+        }
     }
-  });
+});
