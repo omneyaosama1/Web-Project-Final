@@ -16,7 +16,7 @@ const port = process.env.PORT || 8080;
 const dbUserName = process.env.dbUserName;
 const dbPassword = process.env.dbPassword;
 
-const dbURL = `mongodb+srv://${dbUserName}:${dbPassword}@freshbites.wagcbow.mongodb.net/?retryWrites=true&w=majority&appName=freshbites`;
+const dbURL = `mongodb+srv://${dbUserName}:${dbPassword}@freshbites.wagcbow.mongodb.net/FreshBites?retryWrites=true&w=majority&appName=freshbites`;
 
 const app = express();
 
