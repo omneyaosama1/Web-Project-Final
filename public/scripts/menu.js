@@ -289,7 +289,7 @@ function feedbackInput(form) {
 
 
 
-// cart/favourites window
+// cart window
 function openWindow(iconToOpen) {
     document.getElementById(iconToOpen).style.display = "flex";
     if (iconToOpen === 'overlayFav') {
@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //   Table indicator
 document.addEventListener('DOMContentLoaded', function() {
-    const nutritionTable = document.getElementById('nutritionTable');
+    const nutritionTable = document.querySelector('.nutritionTable');
     const rows = nutritionTable.querySelectorAll('tbody tr');
 
     rows.forEach(row => {
@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'Sodium': 2300
       };
 
-      // Calculate %
+      // Calculate percentage
       const dvPercentage = calculateDV(amount, dailyIntake[nutrient]);
 
        const indicatorDiv = row.querySelector('td:nth-child(3) .indicator');
@@ -376,7 +376,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function setIndicator(indicator, indicatorText, percentage) {
       if (percentage <= 25) {
-        indicator.style.backgroundColor = 'green';
+        indicator.style.backgroundColor = 'lawngreen';
         indicatorText.textContent = 'Low';
       } else if (percentage <= 75) {
         indicator.style.backgroundColor = 'orange';
