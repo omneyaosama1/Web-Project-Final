@@ -21,7 +21,6 @@ const handleLoginorSignup = async (req, res) => {
 
 const handleSignup = async (req, res) => {
     const { username_inp, email_inp, pass_inp, birthdate_inp } = req.body;
-    console.log(req.body);
     try {
         const existingUser = await User.findOne({ email_inp });
         if (existingUser) {
@@ -63,16 +62,20 @@ const handleLogin = async (req, res) => {
                 message: "Can't find user with this email",
             });
         }
-        
+
         if (existingUser.password === pass_inp) {
-            return res.json({ success: true, statusType: "success", redirectUrl: "/" , existingUser});
+            return res.json({
+                success: true,
+                statusType: "success",
+                user: existingUser,
+                userType: existingUser.userType
+            });
         } else {
             return res.json({
                 success: false,
                 message: "Wrong Password",
             });
         }
-
     } catch (error) {
         res.status(500).json({
             success: false,

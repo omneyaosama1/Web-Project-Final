@@ -94,7 +94,11 @@ function login(email, password) {
         },
         success: function (response) {
             if (response.success) {
-                window.location.href = response.redirectUrl; 
+                if (response.userType === "Admin"){
+                    window.location.href = '/admin';
+                } else{
+                    window.location.href = '/'; 
+                }
             } else {
                 showModal("Wrong password");
             }
