@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     container.classList.add('active'); // Add "active" class by default
 });
 
-
 const container = document.getElementById('container');
 const registerBtn = document.getElementById('register');
 const loginBtn = document.getElementById('login');
@@ -44,18 +43,17 @@ signUpForm.addEventListener('submit', (event) => {
     }
 });
 
+// Removed event.preventDefault() and showModal call here to allow form to submit naturally
 signInForm.addEventListener('submit', (event) => {
-    event.preventDefault();
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
     
     if (email === '' || password === '') {
+        event.preventDefault();
         showModal('All fields are required');
     } else if (!validateEmail(email)) {
+        event.preventDefault();
         showModal('Please enter a valid email');
-    } else {
-        showModal('Login successful');
-        // Submit the form or perform further actions
     }
 });
 
