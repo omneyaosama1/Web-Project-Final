@@ -54,10 +54,14 @@ function signup(username, email, password, birthdate) {
             form_type_inp: formType
         },
         success: function (response) {
-            alert("kolo tmam"); // This will alert only if the request is successful
+            if (response.success) {
+                window.location.href = response.redirectUrl; 
+            } else {
+                showModal("Signup failed");
+            }
         },
         error: function (xhr, status, error) {
-            alert("din omak"); // This will alert only if the request fails
+            showModal("Signup Failed");
         },
     });
 }
