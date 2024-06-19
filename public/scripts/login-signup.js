@@ -122,3 +122,27 @@ document.getElementById('confirm-button').addEventListener('click', () => {
 function closeModal() {
     modal.style.display = 'none';
 }
+
+document.getElementById('sign-in-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+  
+    fetch('/login-signup/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    }).then(response => {
+      if (response.ok) {
+        window.location.href = '/admin'; // Redirect to the admin page if login is successful
+      } else {
+        response.text().then(text => {
+          alert(text); // Display an error message if login fails
+        });
+      }
+    }).catch(error => {
+      console.error('Error:', error);
+    });
+  });

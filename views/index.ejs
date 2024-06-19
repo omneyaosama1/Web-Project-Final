@@ -1,50 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fresh Bites</title>
+    <link rel="icon" href="images/logo1.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../styles/index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap"
+        rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap"
+        rel="stylesheet"
+    />
+</head>
+<body>
+    <div class="banner">
+        <%- include("./partial/nav-bar.ejs") %>
+    </div>
 
-        <title>Fresh Bites</title>
-        <link rel="icon" href="images/logo1.png" type="image/x-icon" />
-        <link rel="stylesheet" href="../styles/index.css" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-            rel="stylesheet"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-            rel="stylesheet"
-        />
-    </head>
-    <body>
-        <div class="banner">
-
-            <%- include("./partial/nav-bar.ejs") %>
+    <div class="left-content">
+        <div class="header-left">
+            <h2>
+                Discover<br />
+                Freshness.
+            </h2>
+            <h3>Life Is So Endlessly Delicious.</h3>
+            <p>
+                Indulge in our handpicked recipes crafted with the finest ingredients.
+            </p>
         </div>
-
-        <div class="left-content">
-            <div class="header-left">
-                <h2>
-                    Discover<br />
-                    Freshness.
-                </h2>
-                <h3>Life Is So Endlessly Delecious.</h3>
-                <p>
-                    Indulge in our handpicked recipes crafted with the finest
-                    ingredients.
-                </p>
-            </div>
-            <div class="button-container">
+        <div class="button-container">
+            <% if (!loggedIn) { %>
                 <button
                     class="signup-btn"
                     type="button"
@@ -62,145 +60,148 @@
                     <span class="cover"></span>
                     LOG IN
                 </button>
-            </div>
+            <% } %>
         </div>
+    </div>
 
-        <div class="container">
+    <div class="container">
+        <img
+            src="/images/index-images/bkk.png"
+            id="dish1"
+            alt="Dish"
+            width="600px"
+            class="dish"
+        />
+        <img
+            src="/images/index-images/ketchup-7152.png"
+            alt="ket"
+            width="300px"
+            class="dish"
+            id="ket"
+        />
+    </div>
+
+    <img
+        src="/images/index-images/tomato.png"
+        class="spoonandtomato"
+        width="200px"
+        id="spoon"
+    />
+    <img
+        src="/images/index-images/spoon.png"
+        class="spoonandtomato"
+        width="200px"
+        id="tomato"
+    />
+
+    <img
+        src="/images/index-images/blackpepper.png"
+        class="shrimpandpepper"
+        width="200px"
+        id="pepper"
+    />
+    <img
+        src="/images/index-images/shrimp.png"
+        class="shrimpandpepper"
+        width="200px"
+        id="shrimp"
+    />
+
+    <div class="header">
+        <h1>Why Choose Our Plates?</h1>
+        <p>Serve Yourself Without Hesitate.</p>
+    </div>
+
+    <div class="row">
+        <div class="dish-container">
             <img
-                src="/images/index-images/bkk.png"
-                id="dish1"
-                alt="Dish"
-                width="600px"
-                class="dish"
+                src="/images/index-images/Healthy.png"
+                class="dishes"
+                alt="Healthy Dish"
             />
+            <h2>Healthy Dish</h2>
+            <p>
+                Healthy dishes are meals designed to provide essential nutrients while minimizing unhealthy ingredients.
+            </p>
+        </div>
+        <div class="dish-container">
             <img
-                src="/images/index-images/ketchup-7152.png"
-                alt="ket"
-                width="300px"
-                class="dish"
-                id="ket"
+                src="/images/index-images/vegan2.webp"
+                class="dishes"
+                alt="Vegan Dish"
             />
+            <h2 style="margin-top: 19px">Vegan Dish</h2>
+            <p>
+                Vegan dishes are plant-based meals that exclude all animal products, including meat, dairy, eggs, and honey.
+            </p>
         </div>
-
-        <img
-            src="/images/index-images/tomato.png"
-            class="spoonandtomato"
-            width="200px"
-            id="spoon"
-        />
-        <img
-            src="/images/index-images/spoon.png"
-            class="spoonandtomato"
-            width="200px"
-            id="tomato"
-        />
-
-        <img
-            src="/images/index-images/blackpepper.png"
-            class="shrimpandpepper"
-            width="200px"
-            id="pepper"
-        />
-        <img
-            src="/images/index-images/shrimp.png"
-            class="shrimpandpepper"
-            width="200px"
-            id="shrimp"
-        />
-
-        <div class="header">
-            <h1>Why Choose Our Plates?</h1>
-            <p>Serve Yourself Without hesitate.</p>
+        <div class="dish-container">
+            <img
+                src="/images/index-images/family.png"
+                class="dishes"
+                alt="Family Dish"
+            />
+            <h2 style="margin-top: -5px">Family Dish</h2>
+            <p>
+                Family dishes are meals that bring loved ones together around the table, fostering connection and shared experiences.
+            </p>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="dish-container">
+    <div class="background-section">
+        <div class="theheader">
+            <h1>Why Choose Us?</h1>
+        </div>
+        <div class="images">
+            <div class="Outline">
                 <img
-                    src="/images/index-images/Healthy.png"
-                    class="dishes"
-                    alt="Healthy Dish"
+                    src="/images/index-images/Outline 1.webp"
+                    alt="Image 1"
                 />
-                <h2>Healthy Dish</h2>
+                <h2>No skimpin’ on the chicken!</h2>
                 <p>
-                    Healthy dishes are meals <br> designed to provide essential <br>nutrients while minimizing unhealthy ingredients.<br>
+                    When it comes to our chicken dishes, we believe in no skimping on quality, flavor, or portion size.
                 </p>
             </div>
-            <div class="dish-container">
-                <img
-                    src="/images/index-images/vegan2.webp"
-                    class="dishes"
-                    alt="Vegan Dish"
-                />
-                <h2 style="margin-top: 19px">Vegan Dish</h2>
+            <div class="Outline">
+                <img src="/images/index-images/sale.webp" alt="Image 2" />
+                <h2>Offer and sales</h2>
                 <p>
-                    Vegan dishes are plant-based meals <br> that exclude all animal products,<br> including meat, dairy, eggs, and honey.
+                    At our restaurant, we love to treat our valued customers to special offers and sales that make dining with us even more enjoyable.
                 </p>
             </div>
-            <div class="dish-container">
+            <div class="Outline">
                 <img
-                    src="/images/index-images/family.png"
-                    class="dishes"
-                    alt="Family Dish"
+                    src="/images/index-images/calendar.png.crdownload"
+                    alt="Image 3"
                 />
-                <h2 style="margin-top: -5px">Family Dish</h2>
+                <h2>No commitment whatsoever</h2>
                 <p>
-                    Family dishes are meals that bring <br> loved ones together around the table, <br>
-                    fostering connection and shared experiences
+                    We understand that flexibility is key, which is why our offers and promotions come with no strings attached.
+                </p>
+            </div>
+            <div class="Outline">
+                <img
+                    src="/images/index-images/freshfood.webp"
+                    alt="Image 3"
+                />
+                <h2>Fresh Food</h2>
+                <p>
+                    At our restaurant, we pride ourselves on serving fresh, high-quality food that delights your taste buds and nourishes your body.
                 </p>
             </div>
         </div>
+    </div>
 
-        <div class="background-section">
-            <div class="theheader">
-                <h1>Why Choose Us?</h1>
-                <!-- Add any additional content you want for the header -->
-            </div>
-            <div class="images">
-                <div class="Outline">
-                    <img
-                        src="/images/index-images/Outline 1.webp"
-                        alt="Image 1"
-                    />
-                    <h2>No skimpin’ on the chicken!</h2>
-                    <p>When it comes to our chicken dishes, we believe in no skimping on quality,<br>
-                         flavor, or portion size.</p>
-                </div>
-                <div class="Outline">
-                    <img src="/images/index-images/sale.webp" alt="Image 2" />
-                    <h2>Offer and sales</h2>
-                    <p>At our restaurant, we love to treat our valued customers to special offers and sales<br>
-                         that make dining with us even more enjoyable</p>
-                </div>
-                <div class="Outline">
-                    <img
-                        src="/images/index-images/calendar.png.crdownload"
-                        alt="Image 3"
-                    />
-                    <h2>No commitment whatsoever</h2>
-                    <p>We understand that flexibility is key, <br>which is why our offers and promotions come with no strings attached. </p>
-                </div>
-                <div class="Outline">
-                    <img
-                        src="/images/index-images/freshfood.webp"
-                        alt="Image 3"
-                    />
-                    <h2>Fresh Food</h2>
-                    <p>At our restaurant, we pride ourselves on serving fresh,<br>
-                         high-quality food that delights your taste buds and nourishes your body.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="oval-background">
-            <!-- Image in the center -->
-            <img
-                src="/images/index-images/chef.png"
-                alt="Your Image"
-                class="center-image"
-                id="ii"
-            />
-        </div>
-        <div class="content-left">
+    <div class="oval-background">
+        <img
+            src="/images/index-images/chef.png"
+            alt="Your Image"
+            class="center-image"
+            id="ii"
+        />
+    </div>
+    <div class="content-left">
             <h1>
                 Cooked By the <br />
                 Best Chefs
@@ -246,25 +247,6 @@
                     <p>Address: 123 Street Name, City, Country</p>
                 </div>
                 <div class="icon">
-                    <i class="fa-brands fa-facebook"></i>
-                    <p>Opening Hours: Mon-Fri 9am-5pm</p>
-                </div>
-            </div>
-
-            <div class="icons1">
-                <div class="icon1">
-                    <i class="fa-brands fa-twitter"></i>
-                    <p>Phone: 123-456-7890</p>
-                </div>
-                <div class="icon1">
-                    <i class="fa-brands fa-instagram"></i>
-                    <p>Email: example@example.com</p>
-                </div>
-                <div class="icon1">
-                    <i class="fa-regular fa-address-book"></i>
-                    <p>Address: 123 Street Name, City, Country</p>
-                </div>
-                <div class="icon1">
                     <i class="fa-brands fa-facebook"></i>
                     <p>Opening Hours: Mon-Fri 9am-5pm</p>
                 </div>
