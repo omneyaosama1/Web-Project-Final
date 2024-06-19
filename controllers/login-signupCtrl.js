@@ -4,6 +4,20 @@ const renderPage = async (req, res) => {
     res.render("login-signup");
 };
 
+const handleLoginorSignup = async (req, res) => {
+    const formType = req.body.form_type_inp;
+    if (formType === "Login") {
+        handleLogin(req, res);
+    } else if (formType === "Signup") {
+        handleSignup(req, res);
+    } else {
+        res.status(400).json({
+            success: false,
+            message: "Invalid form type provided",
+        });
+    }
+};
+
 const handleSignup = async (req, res) => {
     const { username_inp, email_inp, pass_inp, birthdate_inp } = req.body;
     console.log(req.body);
@@ -38,7 +52,37 @@ const handleSignup = async (req, res) => {
     }
 };
 
+const handleLogin = async (req, res) => {
+    const { email_inp, pass_inp } = req.body;
+    try {
+        const existingUser = await User.findOne({ email: email_inp });
+        if (!existingUser) {
+            console.log("didn't find user");
+            return res.json({
+                success: false,
+                message: "Can't find user with this email",
+            });
+        }
+        
+        if (existingUser.password === pass_inp) {
+            return res.json({ success: true, statusType: "success", redirectUrl: "/" , existingUser});
+        } else {
+            console.log("password doesn't match in db");
+            return res.json({
+                success: false,
+                message: "Wrong Password",
+            });
+        }
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Server error during login",
+        });
+    }
+};
+
 module.exports = {
     renderPage,
-    handleSignup,
+    handleLoginorSignup,
 };

@@ -11,8 +11,6 @@ const signInForm = document.getElementById("sign-in-form");
 const modal = document.getElementById("modal");
 const modalMessage = document.getElementById("modal-message");
 const closeButton = document.querySelector(".close-button");
-const favoriteColor = document.getElementById("favorite-color");
-const favoriteColorLabel = document.getElementById("favorite-color-label");
 const forgotPasswordLink = document.getElementById("forgot-password");
 
 signUpForm.addEventListener("submit", (event) => {
@@ -42,45 +40,63 @@ signUpForm.addEventListener("submit", (event) => {
     }
 });
 
-
 function signup(username, email, password, birthdate) {
-    // fetch("/signup", {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ username, email, password, birthdate })
-    // })
-    // .then((response) => response.json())
-    // .then((data) => {
-    //     if (data.success) {
-    //         showModal("Signup successful");
-    //     } else {
-    //         showModal(data.message);
-    //     }
-    // })
-    // .catch((error) => {
-    //     showModal("Error signing up");
-    //     console.error("Error:", error);
-    // });
+    const formType = "Signup";
 
     $.ajax({
-        url: '/login-signup',
-        type: 'POST',
+        url: "/login-signup",
+        type: "POST",
         data: {
-            username_inp: username, 
-            pass_inp: password, 
-            email_inp: email, 
-            birthdate_inp: birthdate
+            username_inp: username,
+            pass_inp: password,
+            email_inp: email,
+            birthdate_inp: birthdate,
+            form_type_inp: formType
         },
-        success: function(response) {
+        success: function (response) {
             alert("kolo tmam"); // This will alert only if the request is successful
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             alert("din omak"); // This will alert only if the request fails
-        }
+        },
     });
+}
+
+signInForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const email = document.getElementById("login-email").value;
+    const password = document.getElementById("login-password").value;
     
+    if (email === "" || password === "") {
+        showModal("All fields are required");
+    } else if (!validateEmail(email)) {
+        showModal("Please enter a valid email");
+    } else {
+        login(email, password);
+    }
+});
+
+function login(email, password) {
+    const formType = "Login";
+    $.ajax({
+        url: "/login-signup",
+        type: "POST",
+        data: {
+            email_inp: email,
+            pass_inp: password,
+            form_type_inp: formType
+        },
+        success: function (response) {
+            if (response.success) {
+                window.location.href = response.redirectUrl; 
+            } else {
+                showModal("Wrong password");
+            }
+        },
+        error: function (xhr, status, error) {
+            showModal("Login failed");
+        },
+    });
 }
 
 registerBtn.addEventListener("click", () => {
@@ -159,26 +175,3 @@ document.getElementById("confirm-button").addEventListener("click", () => {
 function closeModal() {
     modal.style.display = "none";
 }
-
-function login(email, password) {
-    fetch("/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.success) {
-                showModal("Login successful");
-            } else {
-                showModal(data.message);
-            }
-        })
-        .catch((error) => {
-            showModal("Error logging in");
-            console.error("Error:", error);
-        });
-}
-
