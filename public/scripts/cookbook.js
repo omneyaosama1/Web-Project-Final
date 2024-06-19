@@ -140,11 +140,19 @@ window.displayDescription = function(overlayID, mealName, mealDescription) {
     window.style.display = "none";
   };
   
-// Add to favorites function and notification
+// "Add to favorites function"
+function addToFavorites(event, itemName) {
+  console.log(itemName + " added to favorites");
+  showNotification();
+   event.stopPropagation();
+}
+
+// Notification function
 function showNotification() {
   var notification = document.getElementById("notification");
   notification.classList.add("show");
+
   setTimeout(function () {
     notification.classList.remove("show");
-  }, 2000);
+  }, 2000); // Remove the "show" class after 2 seconds
 }

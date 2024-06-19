@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {addUser,updateUser,deleteUser}=require('../controllers/userCtrl');
+const {getAllUsers, getUserById, addUser, updateUser, deleteUser}=require('../controllers/userCtrl');
 router.get('/', (req, res) => {
     res.render('user-profile');
 });
@@ -15,9 +15,16 @@ router.get('/history', (req, res) => {
 });
 
 
-//Add, Update, Delete users
-router.post('/add',addUser);
-router.put('/update/:id',updateUser);
-router.delete('/delete/:id',deleteUser);
+//get all users
+router.get('/allUsers', getAllUsers);
+//get one user by id
+router.get('/:id', getUserById);
+//add user
+router.post('/add', addUser);
+//update info
+router.put('/update/:id', updateUser);
+//delete user
+router.delete('/delete/:id', deleteUser);
+
 
 module.exports = router;
