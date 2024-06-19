@@ -1,5 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const port = process.env.PORT || 8080;
+const dbUsername = process.env.dbUsername;
+const dbPassword = process.env.dbPassword;
+
+const dbUrl = `mongodb+srv://${dbUsername}:${dbPassword}@freshbites.wagcbow.mongodb.net/FreshBites?retryWrites=true&w=majority&appName=freshbites`;
 
 const homePageRoute = require("./routes/index-route");
 const aboutUsPageRoute = require("./routes/about-us-route");
@@ -11,8 +17,7 @@ const sourcingRoute = require("./routes/sourcing-route");
 const loginSignupRoute = require("./routes/login-signup-route");
 const userRoute = require("./routes/user-route");
 const adminRoute = require("./routes/admin-route");
-
-const port = process.env.PORT || 8080;
+const orderRoute = require("./routes/orderRoute");
 
 const app = express();
 
@@ -32,16 +37,17 @@ app.use("/login-signup", loginSignupRoute);
 app.use("/user", userRoute);
 app.use("/admin", adminRoute);
 app.use("/cookbook", cookbookRoute);
+app.use("/orders", orderRoute);
 
 mongoose
-  .connect(
-    "mongodb+srv://omneya:KA37rzgOS2iyj5X1@freshbites.wagcbow.mongodb.net/FreshBites?retryWrites=true&w=majority&appName=freshbites"
-  )
+  .connect(dbUrl)
   .then(() => {
     console.log("Connected to database successfully!");
     app.listen(port, () => console.log(`Sever is running on port ${port}`));
   })
   .catch((error) => {
     console.log("Failed to connect to the database!");
+
+
     console.error(error);
   });
