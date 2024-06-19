@@ -88,16 +88,19 @@
             <hr>
             <h3>Order Summary</h3>
             <br>
+            
             <p id="cartContent">
               <i class="fa-solid fa-cart-shopping fa-xl" style="color: #147186;"></i>
               Your Cart Is Empty,<br> Please Add Items.
+
+              
             </p>
             <div id="headerC">
               <h3><i>Items:</i></h3>
               <br>
             </div>
             <div id="orderSumm"></div>
-            <hr>
+           
             <button id="CloseCart" onclick="closeWindow('overlayCart')">Finish</button>
             <button class="closeB" onclick="closeWindow('overlayCart')">
               <i class="fa-solid fa-xmark fa-xl" style="color: #2d523a;"></i>
@@ -118,7 +121,7 @@
 
             <% week1Recipes.forEach(function(recipe, index) { %>
               <div class="items week1" id="item<%= index + 1 %>W1">
-                <img src="<%= recipe.imageUrl %>" alt="<%= recipe.name %>">
+                <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
                 <h3
                   onclick="Details('detailsModal<%= index %>week1', '<%= recipe.name %>', '<%= recipe.description %>')">
                   <%= recipe.name %>
@@ -129,7 +132,7 @@
                   <button class="Fbtn" onclick="changeFavouriteC(1,'W1')">
                     <i id="icon1W1" class="fa-solid fa-heart fa-lg" style="color: #7c7e82;"></i>
                   </button>
-                  <button class="addBtn" onclick="addToCart('<%= recipe.id %>','week1')">
+                  <button class="addBtn" onclick="addToCart('<%= index %>','week1')">
                     <i id="plus1W1" class="fa-solid fa-plus fa-lg" style="color: #7c7e82;"></i>
                   </button>
                 </span>
@@ -141,7 +144,7 @@
 
                   <% week2Recipes.forEach(function(recipe, index) { %>
                     <div class="items week2" id="item<%= index + 1 %>W2">
-                      <img src="<%= recipe.imageUrl %>" alt="<%= recipe.name %>">
+                      <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
                       <h3
                         onclick="Details('detailsModal<%= index %>week2', '<%= recipe.name %>', '<%= recipe.description %>')">
                         <%= recipe.name %>
@@ -152,7 +155,7 @@
                         <button class="Fbtn" onclick="changeFavouriteC(1,'W2')">
                           <i id="icon1W1" class="fa-solid fa-heart fa-lg" style="color: #7c7e82;"></i>
                         </button>
-                        <button class="addBtn" onclick="addToCart('<%= recipe.id %>','week2')">
+                        <button class="addBtn" onclick="addToCart('<%= index %>','week2')">
                           <i id="plus1W1" class="fa-solid fa-plus fa-lg" style="color: #7c7e82;"></i>
                         </button>
                       </span>
@@ -160,11 +163,11 @@
                     <% }); %>
 
                       <!-- ITEMS OF WEEK 3 -->
-                      <% const week3Recipes=menuData.slice(1,2 ); %> <!-- Slice the  recipes for week 3 -->
+                      <% const week3Recipes=menuData.slice(2,3 ); %> <!-- Slice the  recipes for week 3 -->
 
                         <% week3Recipes.forEach(function(recipe, index) { %>
                           <div class="items week3" id="item<%= index + 1 %>W2">
-                            <img src="<%= recipe.imageUrl %>" alt="<%= recipe.name %>">
+                            <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
                             <h3
                               onclick="Details('detailsModal<%= index %>week3', '<%= recipe.name %>', '<%= recipe.description %>')">
                               <%= recipe.name %>
@@ -175,7 +178,7 @@
                               <button class="Fbtn" onclick="changeFavouriteC(1,'W3')">
                                 <i id="icon1W1" class="fa-solid fa-heart fa-lg" style="color: #7c7e82;"></i>
                               </button>
-                              <button class="addBtn" onclick="addToCart('<%= recipe.id %>','week3')">
+                              <button class="addBtn" onclick="addToCart('<%= index %>','week3')">
                                 <i id="plus1W1" class="fa-solid fa-plus fa-lg" style="color: #7c7e82;"></i>
                               </button>
                             </span>
@@ -184,11 +187,11 @@
 
 
                             <!-- ITEMS OF WEEK 4 -->
-                            <% const week4Recipes=menuData.slice(1,2 ); %> <!-- Slice the  recipes for week 4 -->
+                            <% const week4Recipes=menuData.slice(3,4 ); %> <!-- Slice the  recipes for week 4 -->
 
                               <% week4Recipes.forEach(function(recipe, index) { %>
                                 <div class="items week4" id="item<%= index + 1 %>W4">
-                                  <img src="<%= recipe.imageUrl %>" alt="<%= recipe.name %>">
+                                  <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
                                   <h3
                                     onclick="Details('detailsModal<%= index %>week4', '<%= recipe.name %>', '<%= recipe.description %>')">
                                     <%= recipe.name %>
@@ -199,7 +202,7 @@
                                     <button class="Fbtn" onclick="changeFavouriteC(1,'W4')">
                                       <i id="icon1W1" class="fa-solid fa-heart fa-lg" style="color: #7c7e82;"></i>
                                     </button>
-                                    <button class="addBtn" onclick="addToCart('<%= recipe.id %>','week4')">
+                                    <button class="addBtn" onclick="addToCart('<%= index %>','week4')">
                                       <i id="plus1W1" class="fa-solid fa-plus fa-lg" style="color: #7c7e82;"></i>
                                     </button>
                                   </span>
@@ -217,7 +220,7 @@
           <div id="detailsModal<%= index %>week1" class="modal">
             <div class="modal-content">
               <span class="close" onclick="closeModal('detailsModal<%= index %>week1')">&times;</span>
-              <img src="<%= recipe.imageUrl %>" alt="<%= recipe.name %>">
+              <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
               <h3 id="itemName">
                 <%= recipe.name %>
               </h3>
@@ -230,7 +233,7 @@
                   </header>
                   <div class="card-content">
                     <ul>
-                      <% recipe.ingredients.forEach(function(ingredient) { %>
+                      <% recipe.ingredientsName.forEach(function(ingredient) { %>
                         <li>
                           <%= ingredient %>
                         </li>
@@ -380,7 +383,7 @@
                 <div id="detailsModal<%= index %>week2" class="modal">
                   <div class="modal-content">
                     <span class="close" onclick="closeModal('detailsModal<%= index %>week2')">&times;</span>
-                    <img src="<%= recipe.imageUrl %>" alt="<%= recipe.name %>">
+                    <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
                     <h3 id="itemName">
                       <%= recipe.name %>
                     </h3>
@@ -393,7 +396,7 @@
                         </header>
                         <div class="card-content">
                           <ul>
-                            <% recipe.ingredients.forEach(function(ingredient) { %>
+                            <% recipe.ingredientsName.forEach(function(ingredient) { %>
                               <li>
                                 <%= ingredient %>
                               </li>
@@ -541,7 +544,7 @@
                       <div id="detailsModal<%= index %>week3" class="modal">
                         <div class="modal-content">
                           <span class="close" onclick="closeModal('detailsModal<%= index %>week3')">&times;</span>
-                          <img src="<%= recipe.imageUrl %>" alt="<%= recipe.name %>">
+                          <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
                           <h3 id="itemName">
                             <%= recipe.name %>
                           </h3>
@@ -554,7 +557,7 @@
                               </header>
                               <div class="card-content">
                                 <ul>
-                                  <% recipe.ingredients.forEach(function(ingredient) { %>
+                                  <% recipe.ingredientsName.forEach(function(ingredient) { %>
                                     <li>
                                       <%= ingredient %>
                                     </li>
@@ -702,7 +705,7 @@
                             <div id="detailsModal<%= index %>week4" class="modal">
                               <div class="modal-content">
                                 <span class="close" onclick="closeModal('detailsModal<%= index %>week4')">&times;</span>
-                                <img src="<%= recipe.imageUrl %>" alt="<%= recipe.name %>">
+                                <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
                                 <h3 id="itemName">
                                   <%= recipe.name %>
                                 </h3>
@@ -715,7 +718,7 @@
                                     </header>
                                     <div class="card-content">
                                       <ul>
-                                        <% recipe.ingredients.forEach(function(ingredient) { %>
+                                        <% recipe.ingredientsName.forEach(function(ingredient) { %>
                                           <li>
                                             <%= ingredient %>
                                           </li>

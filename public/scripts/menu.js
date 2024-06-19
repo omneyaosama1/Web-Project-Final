@@ -140,87 +140,6 @@ function searchItem() {
 }
 
 
-// Cart
-function addToCart(itemID, week) {
-    var itemModal = document.getElementById('detailsModal' + itemID + week);
-    var allItems = document.querySelectorAll('.modal');
-    var cart = document.getElementById('cartContent');
-    var cList = document.getElementById('orderSumm');
-
-    if (cList.children.length === 0) {
-        cart.textContent = "";
-    }
-
-    allItems.forEach(item => {
-        if (item === itemModal) {
-            var itemName = item.querySelector('#itemName').textContent;
-            var itemImgSrc = item.querySelector('img').getAttribute('src');
-
-            var header = document.getElementById('headerC');
-            header.style.display = "flex";
-
-
-
-            var listItem = document.createElement('li');
-            listItem.style.display = "flex";
-
-
-            
-            var minusIcon=document.createElement('i');
-            minusIcon.className="fa-solid fa-minus fa-xl";
-            minusIcon.style.color="#646973";
-            minusIcon.style.marginTop="3%";
-            minusIcon.style.marginLeft="10%";
-            minusIcon.onclick=function()
-            {
-                removeFromCart(itemName);
-            }
-
-            var itemImg = document.createElement('img');
-            itemImg.src = itemImgSrc;
-
-            itemImg.style.width = "50px";
-            itemImg.style.height = "50px";
-            itemImg.style.marginRight = "40px";
-            itemImg.style.marginLeft = "40px";
-            listItem.appendChild(itemImg);
-
-
-
-
-            // Append the item name text content, not the element itself
-            listItem.appendChild(document.createTextNode(itemName));
-            listItem.appendChild(minusIcon);
-
-            cList.appendChild(listItem);
-        }
-    });
-    showMessage();
-}
-
-function removeFromCart(itemName)
-{
-   var cartList=document.querySelectorAll('#orderSumm li');
-
-   cartList.forEach(item=>{
-var name=item.querySelector('img').nextSibling.textContent;
-if(name===itemName)
-    {
-        item.remove();
-    }
-   });
-}
-
-function viewCart() {
-
-    var selectedItem = document.querySelectorAll('#itemName');
-    selectedItem.forEach(item => {
-        item.style.display = "block";
-    });
-
-}
-
-
 // after adding to cart message
 function showMessage() {
     var msg = document.querySelectorAll('.message');
@@ -293,19 +212,102 @@ function feedbackInput(form) {
 function openWindow(iconToOpen) {
     document.getElementById(iconToOpen).style.display = "flex";
     if (iconToOpen === 'overlayFav') {
-        viewFavs();
+        viewCart();
 
     }
-    else {
-        viewCart();
-    }
 }
+
+// Cart functions
+function addToCart(itemID, week) {
+    var itemModal = document.getElementById('detailsModal' + itemID + week);
+    var allItems = document.querySelectorAll('.modal');
+    var cart = document.getElementById('cartContent');
+    var cList = document.getElementById('orderSumm');
+
+    if (cList.children.length === 0) {
+        cart.textContent = "";
+    }
+
+    allItems.forEach(item => {
+        if (item === itemModal) {
+            var itemName = item.querySelector('#itemName').textContent;
+            
+            var itemImgSrc = item.querySelector('img').getAttribute('src');
+
+            var header = document.getElementById('headerC');
+            header.style.display = "flex";
+
+
+
+            var listItem = document.createElement('li');
+            listItem.style.display = "flex";
+
+
+            
+            var minusIcon=document.createElement('i');
+            minusIcon.className="fa-solid fa-circle-xmark fa-lg";
+            minusIcon.classList.add('minus-icon');
+            minusIcon.onclick=function()
+            {
+                removeFromCart(itemName);
+            }
+
+            var itemImg = document.createElement('img');
+            itemImg.src = itemImgSrc;
+            itemImg.classList.add('cart-item-img');
+         
+
+            var itemNameElement = document.createElement('span');
+            itemNameElement.textContent = itemName;
+            itemNameElement.classList.add('item-name');
+
+
+
+            listItem.appendChild(minusIcon);
+            listItem.appendChild(itemImg);
+            
+
+            // Append the item name text content, not the element itself
+            listItem.appendChild(document.createTextNode(itemName));
+       
+
+            cList.appendChild(listItem);
+        }
+    });
+    showMessage();
+}
+
+function removeFromCart(itemName)
+{
+   var cartList=document.querySelectorAll('#orderSumm li');
+
+   cartList.forEach(item=>{
+var name=item.querySelector('img').nextSibling.textContent;
+if(name===itemName)
+    {
+        item.remove();
+    }
+   });
+}
+
+function viewCart() {
+
+    var selectedItem = document.querySelectorAll('#itemName');
+    selectedItem.forEach(item => {
+        item.style.display = "block";
+    });
+
+}
+
+
 
 function closeWindow(iconToClose) {
     document.getElementById(iconToClose).style.display = "none";
 }
 
 
+
+/*Nutrition accordion */
 document.addEventListener('DOMContentLoaded', function() {
     const accordionHeaders = document.querySelectorAll('.accordion-header');
   

@@ -1,4 +1,4 @@
-const Recipe = require('../models/recipes');
+const Recipe = require('../models/Meals');
 
 
 //show all menu items
@@ -15,13 +15,18 @@ const getMenu = async (req, res) => {
 //add new recipe
 const addRecipe = async (req, res) => {
     try {
-        const { name, description, imageUrl,cookTime, ingredients, allergens, utensils, nutrition, recommendations } = req.body;
+        const { name,image, cookTime, difficulty,tags, description,ingredientsName,ingPer2,ingPer4,instructions, allergens, utensils, nutrition, recommendations } = req.body;
         const newRecipe = new Recipe({
             name,
-            imageUrl,
+            image,
             cookTime,
+            difficulty,
+            tags,
             description,
-            ingredients,
+            ingredientsName,
+            ingPer2,
+            ingPer4,
+            instructions,
             allergens,
             utensils,
             nutrition,
