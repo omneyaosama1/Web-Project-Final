@@ -32,13 +32,13 @@ app.use('/menu',menuRoute);
 
 
 // MongoDB Connection
-// const dbURI = 'mongodb+srv://alaa:En7a9CT0Y6RZQQbB@freshbites.wagcbow.mongodb.net/?retryWrites=true&w=majority&appName=freshbites';
-const dbURI ='mongodb+srv://alaawaledd:Aw827948@cluster0.vlovamp.mongodb.net/menu?retryWrites=true&w=majority&appName=cluster0';
+ const dbURI = 'mongodb+srv://alaa:QWWVnacCTE3qCf2P@freshbites.wagcbow.mongodb.net/FreshBites?retryWrites=true&w=majority&appName=freshbites';
+//const dbURI ='mongodb+srv://alaawaledd:Aw827948@cluster0.vlovamp.mongodb.net/menu?retryWrites=true&w=majority&appName=cluster0';
 mongoose.connect(dbURI)
     .then(() => {
         console.log('Connected to MongoDB');
         app.listen(port, () => {
-            console.log(`Server is running on ${port}/`);
+            console.log(`Server is running on ${port}`);
         });
     })
     .catch((err) => {

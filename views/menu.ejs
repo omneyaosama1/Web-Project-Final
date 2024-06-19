@@ -27,19 +27,19 @@
 
         <!-- Rotating Plates -->
         <div class="rotate-container1">
-          <img id="rotatingImg1" src="/images/our-menu-images/2.jpeg">
+          <img id="rotatingImg1" src="/images/Meals-images/2.jpeg">
         </div>
 
         <div class="rotate-container2">
-          <img id="rotatingImg2" src="/images/our-menu-images/Pizza.jpeg">
+          <img id="rotatingImg2" src="/images/Meals-images/Pizza.jpeg">
         </div>
 
         <div class="rotate-container3">
-          <img id="rotatingImg3" src="/images/our-menu-images/plate3.jpeg">
+          <img id="rotatingImg3" src="/images/Meals-images/plate3.jpeg">
         </div>
 
         <div class="rotate-container4">
-          <img id="rotatingImg4" src="/images/our-menu-images/plate 4.jpeg">
+          <img id="rotatingImg4" src="/images/Meals-images/plate 4.jpeg">
         </div>
 
         <h2 id="titleM">MENU</h2>
@@ -57,7 +57,7 @@
         <!-- Feedback -->
         <div id="overlay"></div>
         <div id="feedbackIcon" onclick="showBox()">
-          <img src="/images/our-menu-images/Feedback.jpg" width="35" height="100" />
+          <img src="/images/Meals-images/Feedback.jpg" width="35" height="100" />
         </div>
         <div id="feedbackContent">
           <button class="exit" onclick="exitFeedback()">x</button>
@@ -123,7 +123,7 @@
               <div class="items week1" id="item<%= index + 1 %>W1">
                 <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
                 <h3
-                  onclick="Details('detailsModal<%= index %>week1', '<%= recipe.name %>', '<%= recipe.description %>')">
+                  onclick="Details('detailsModal<%= index %>week1')">
                   <%= recipe.name %>
                 </h3>
                 <span class="Features">
@@ -146,7 +146,7 @@
                     <div class="items week2" id="item<%= index + 1 %>W2">
                       <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
                       <h3
-                        onclick="Details('detailsModal<%= index %>week2', '<%= recipe.name %>', '<%= recipe.description %>')">
+                        onclick="Details('detailsModal<%= index %>week2')">
                         <%= recipe.name %>
                       </h3>
                       <span class="Features">
@@ -224,7 +224,7 @@
               <h3 id="itemName">
                 <%= recipe.name %>
               </h3>
-              <p id="itemDescription"></p>
+              <p id="itemDescription">  <%= recipe.description %></p>
               <hr>
               <div class="container">
                 <div class="card">
@@ -387,7 +387,7 @@
                     <h3 id="itemName">
                       <%= recipe.name %>
                     </h3>
-                    <p id="itemDescription"></p>
+                    <p id="itemDescription">  <%= recipe.description %></p>
                     <hr>
                     <div class="container">
                       <div class="card">

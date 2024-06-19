@@ -145,5 +145,5 @@ const MealSchema = new mongoose.Schema({
 
 },{ timestamps: true });
 
-const recipe = mongoose.model("menu", MealSchema);
+const recipe = mongoose.model("meals", MealSchema);
 module.exports = recipe;

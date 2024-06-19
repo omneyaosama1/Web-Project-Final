@@ -12,22 +12,30 @@ function printWarning(elementID, hintMSG) {
 }
 
 // print modal
-function Details(modalID, itemName, itemDescription) {
-
-    var itemModal = document.getElementById(modalID);
-    var name = itemModal.querySelector("#itemName");
-    var description = itemModal.querySelector("#itemDescription");
-
-    name.textContent = itemName;
-    description.textContent = itemDescription;
-    itemModal.style.display = "block";
-}
-
-function closeModal(modalID) {
-    var modal = document.getElementById(modalID);
-    modal.style.display = "none";
-}
-
+function Details(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.style.display = 'block';
+    }
+  }
+  
+  function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  }
+  
+  // Add event listener to close the modal when clicking outside of it
+  window.onclick = function(event) {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  };
+  
 
 
 function SelectB(buttonID) {

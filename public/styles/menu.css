@@ -330,7 +330,7 @@
         position: relative;
     }
 
-    /* cCLOSING OF MODAL */
+    /* CLOSING OF MODAL */
     .close {
         position: absolute;
         top: 10px;
@@ -611,6 +611,7 @@
         margin-top: 20px;
         color: #286e83;
         padding-bottom: 4px;
+        cursor: pointer;
     }
 
     .noAnimation {
