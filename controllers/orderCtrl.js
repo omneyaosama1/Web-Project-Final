@@ -4,6 +4,7 @@ const moment = require("moment");
 
 const addOrder = async (req, res) => {
   const { userId, rating, totalAmount, dishes } = req.body;
+
   try {
     const user = await User.findById(userId);
     if (!user) {
@@ -27,6 +28,7 @@ const addOrder = async (req, res) => {
       },
       rating,
     });
+
     await newOrder.save();
     res.status(201).send("Order added successfully");
   } catch (error) {
@@ -81,6 +83,7 @@ const getOrderById = async (req, res) => {
     res.status(500).send("Failed to get order");
   }
 };
+
 const updateOrder = async (req, res) => {
   const { id } = req.params;
   const { user, dishes, totalAmount, rating } = req.body;

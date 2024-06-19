@@ -128,7 +128,7 @@ const deleteUser = async (req, res) => {
     console.log(error);
     res.status(500).send('Failed to delete user');
   }
-};
+};  
 
 module.exports = {
   addUser,
