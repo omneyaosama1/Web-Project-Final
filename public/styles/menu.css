@@ -146,7 +146,7 @@
         background-color: #31d42b;
     }
 
-    
+
 
     /* MENU */
 
@@ -279,7 +279,7 @@
     .items:hover {
         transform: scale(1.1);
         background-color: #eeb655;
-      
+
     }
 
     .item,
@@ -346,7 +346,7 @@
     }
 
     /* MODAL'S CONTENT */
-   
+
 
     .modal-content.ingredients {
         display: flex;
@@ -373,6 +373,7 @@
     li,
     th {
         color: #020000;
+
     }
 
     .List {
@@ -387,16 +388,16 @@
         margin-bottom: 10px;
     }
 
-     
+
     /*NUTRITION ACCORDION */
 
     .accordion-content {
         margin-bottom: 10px;
-        
+
     }
-    
+
     .accordion-header {
-        background-color:#f7f7f7 ;
+        background-color: #f7f7f7;
         color: #000000;
         cursor: pointer;
         padding: 10px;
@@ -404,28 +405,28 @@
         height: 30px;
         align-items: center;
         padding-top: 2%;
-        border:1px #000000 solid;
-        width:88%;
+        border: 1px #000000 solid;
+        width: 88%;
         margin-left: 20px;
         font-size: 30px;
-        color:rgb(77, 149, 191);
+        color: rgb(77, 149, 191);
     }
 
     .accordion-header:hover {
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         border: 3px solid var(--secondary-color);
     }
-    
-    .accordion-i{
+
+    .accordion-i {
         padding-left: 70%;
         font-size: 25px;
     }
-    
+
     .content-description {
         max-height: 0;
-        background-color:#7cd6f177;
+        background-color: #7cd6f177;
         overflow: hidden;
-        width:92%;
+        width: 92%;
         margin-left: 20px;
         border-radius: 8px;
         transition: max-height 0.2s ease-out;
@@ -433,44 +434,45 @@
 
     /*CARDS INSIDE MODAL*/
     :root {
-        --secondary-color:orange;
+        --secondary-color: orange;
     }
+
     .card {
 
-    border: 1px solid #000000;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-    padding: 15px;
-    transition: all 0.6s;
+        border: 1px solid #000000;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+        padding: 15px;
+        transition: all 0.6s;
     }
 
     .card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    border: 3px solid var(--secondary-color);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        border: 3px solid var(--secondary-color);
     }
 
     .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 30px;
-    color:rgb(77, 149, 191);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 30px;
+        color: rgb(77, 149, 191);
     }
 
     .card-content {
-    margin-top: 15px;
+        margin-top: 15px;
     }
 
     .card-content ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    padding-left: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        padding-left: 20px;
     }
 
     .card-content li {
-    margin-bottom: 10px;
+        margin-bottom: 10px;
     }
 
     /* NUTRITION TABLE */
@@ -484,7 +486,7 @@
         border-collapse: collapse;
         box-shadow: 0px 0px 10px 1px rgb(0 0 0 / 15%);
         border-radius: 10px;
-        overflow: hidden; 
+        overflow: hidden;
         line-height: 2.5rem;
     }
 
@@ -608,6 +610,7 @@
     h3 {
         margin-top: 20px;
         color: #286e83;
+        padding-bottom: 4px;
     }
 
     .noAnimation {
@@ -635,7 +638,61 @@
         align-items: center;
     }
 
+
     
+    /*List of ordered items inside cart*/
+    .list-of-items {
+        display: flex;
+        align-items: center;
+    }
+
+    .cart-item-img {
+        width: 50px;
+        height: 50px;
+        margin-right: 40px;
+        margin-left: 40px;
+        padding-top: 0%;
+        display: flex;
+
+    }
+
+    .remove-icon {
+        color: #646973;
+        margin-top: 1%;
+        margin-left: 10%;
+        cursor: pointer;
+    }
+
+    /*Quantity of meal*/
+    .quantity-cart {
+        display: flex;
+        padding-left: 12px;
+           justify-content: space-between;
+    }
+
+    .input {
+        width: 20px;
+        height: 20px;
+        margin-top: 4px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .cart-minusButton {
+        width: 30px;
+        height: 30px;
+        border-color: #f19f13;
+        
+    }
+
+    .cart-plusButton {
+
+        width: 30px;
+        height: 30px;
+        border-color: #f19f13;
+     
+    }
+
     /* after adding to cart */
     .message {
         position: fixed;
@@ -675,7 +732,7 @@
     #headerC {
         display: none;
         padding-left: 40px;
-        padding-bottom: 4px;
+        padding-bottom: 30px;
     }
 
     #CloseCart {
@@ -687,8 +744,8 @@
         box-shadow: inset 90px 0 0 0 #e6be79;
     }
 
-    
-   /*Rotating Plates Images*/
+
+    /*Rotating Plates Images*/
     .rotate-container1 {
         width: 200px;
         height: 200px;
@@ -764,11 +821,12 @@
     }
 
 
-    
+
     @keyframes rotate {
         form {
             transform: rotate(0deg);
         }
+
         to {
             transform: rotate(360deg);
         }
@@ -777,21 +835,3 @@
 
 
 
-
-.item-name{
-    margin-bottom: 50%;
-}
-    .cart-item-img {
-        width: 50px;
-        height: 50px;
-        margin-right: 40px;
-        margin-left: 40px;
-      
-    }
-
-    .minus-icon {
-        color: #646973;
-        margin-top: 5%;
-        margin-left: 10%;
-        cursor: pointer;
-    }
