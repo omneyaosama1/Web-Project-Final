@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please specify the type of user"],
         enum: ["Admin", "User"],
-        default:"User",
+        default: "User",
     },
     name: {
         type: String,
@@ -43,28 +43,45 @@ const userSchema = new mongoose.Schema({
             },
             expDate: {
                 type: Date,
-                required: [true, 'Please enter the expiration date on the card'],
-                validate: {
-                  validator: function (date) {
-                    return moment(date).isAfter(moment());
-                  },
-                  message: 'Expiration date must be in the future',
+                required: false,
+                set: function (v) {
+                    return v ? moment(v, 'MM/YYYY').toDate() : null;
                 },
-              },
+                get: function (v) {
+                    return v ? moment(v).format('MM/YYYY') : null;
+                },
+                validate: {
+                    validator: function (date) {
+                        return !date || moment(date).isAfter(moment());
+                    },
+                    message: 'Expiration date must be in the future',
+                },
+            },
         },
         validate: {
-            validator: function(v) {
-                if (v.cardNum == null && v.cvv == null && v.expDate == null) {
-                    return true; // All fields are empty
-                }
-                return v.cardNum != null && v.cvv != null && v.expDate != null;
+            validator: function (v) {
+                const cardNumPresent = v.cardNum != null;
+                const cvvPresent = v.cvv != null;
+                const expDatePresent = v.expDate != null;
+
+                const allFieldsEmpty = !cardNumPresent && !cvvPresent && !expDatePresent;
+                const allFieldsPresent = cardNumPresent && cvvPresent && expDatePresent;
+
+                return allFieldsEmpty || allFieldsPresent;
             },
             message: 'If providing visa info, all fields (cardNum, CVV, expDate) must be filled.'
-        }
+        },
+        required: false
     },
     birthdate: {
         type: Date,
         required: [true, "Please enter the birthdate"],
+        set: function (v) {
+            return moment(v, 'DD/MM/YYYY').toDate();
+        },
+        get: function (v) {
+            return moment(v).format('DD/MM/YYYY');
+        }
     },
     image: {
         type: String

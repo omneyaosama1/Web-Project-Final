@@ -1,4 +1,4 @@
-const User = require("../Schema/newUserSchema");
+const User = require("../Schema/userSchema");
 
 const renderPage = async (req, res) => {
     res.render("login-signup");
