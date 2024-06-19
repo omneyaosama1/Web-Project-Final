@@ -1,4 +1,4 @@
-const User = require("../Schema/userSchema");
+const User = require("../Schema/newUserSchema");
 
 const renderPage = async (req, res) => {
     res.render("login-signup");
@@ -6,6 +6,7 @@ const renderPage = async (req, res) => {
 
 const handleLoginorSignup = async (req, res) => {
     const formType = req.body.form_type_inp;
+    console.log(formType);
     if (formType === "Login") {
         handleLogin(req, res);
     } else if (formType === "Signup") {
@@ -57,7 +58,6 @@ const handleLogin = async (req, res) => {
     try {
         const existingUser = await User.findOne({ email: email_inp });
         if (!existingUser) {
-            console.log("didn't find user");
             return res.json({
                 success: false,
                 message: "Can't find user with this email",
@@ -67,7 +67,6 @@ const handleLogin = async (req, res) => {
         if (existingUser.password === pass_inp) {
             return res.json({ success: true, statusType: "success", redirectUrl: "/" , existingUser});
         } else {
-            console.log("password doesn't match in db");
             return res.json({
                 success: false,
                 message: "Wrong Password",

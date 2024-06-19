@@ -21,14 +21,16 @@ signUpForm.addEventListener("submit", (event) => {
     const confirmPassword = document.getElementById(
         "signup-confirm-password"
     ).value;
-    const birthdate = document.getElementById("birthdate-input").value;
 
+    const birthdate = document.getElementById("birthdate-input").value;
+    const formattedDate = moment(birthdate).format('DD/MM/YYYY');
+    
     if (
         username === "" ||
         email === "" ||
         password === "" ||
         confirmPassword === "" ||
-        birthdate === ""
+        formattedDate === ""
     ) {
         showModal("All fields are required");
     } else if (!validateEmail(email)) {
@@ -36,11 +38,11 @@ signUpForm.addEventListener("submit", (event) => {
     } else if (password !== confirmPassword) {
         showModal("Passwords do not match");
     } else {
-        signup(username, email, password, birthdate);
+        signup(username, email, password, formattedDate);
     }
 });
 
-function signup(username, email, password, birthdate) {
+function signup(username, email, password, formattedDate) {
     const formType = "Signup";
 
     $.ajax({
@@ -50,12 +52,12 @@ function signup(username, email, password, birthdate) {
             username_inp: username,
             pass_inp: password,
             email_inp: email,
-            birthdate_inp: birthdate,
+            birthdate_inp: formattedDate,
             form_type_inp: formType
         },
         success: function (response) {
             if (response.success) {
-                window.location.href = response.redirectUrl; 
+                window.location.href = '/'; 
             } else {
                 showModal("Signup failed");
             }
