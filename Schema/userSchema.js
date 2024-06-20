@@ -101,8 +101,7 @@ const userSchema = new mongoose.Schema(
     subPlan: {
       type: {
         preferences: {
-          type: String,
-          enum: ["meat", "veggies", "family", "fit", "speedy", "fish"],
+          type: [String],
         },
         numberOfPeople: {
           type: Number,

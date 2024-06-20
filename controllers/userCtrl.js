@@ -2,11 +2,11 @@ const moment = require('moment');
 const User = require('../Schema/userSchema');
 
 const addUser = async (req, res) => {
-  const { userType, name, password, address, phoneNumber, email, visaInfo, birthdate, image, subscriptionStatus, pastOrderIds, favoriteMeals } = req.body;
+  const { userType, name, password, address, phoneNumber, email, visaInfo, birthdate, image, subscriptionStatus, subPlan, pastOrderIds, favoriteMeals } = req.body;
 
   try {
     const formattedBirthdate = moment(birthdate, 'DD/MM/YYYY').toDate();
-    const formattedExpDate = moment(visaInfo.expDate, 'MM/YYYY').toDate();
+    const formattedExpDate = visaInfo?.expDate ? moment(visaInfo.expDate, 'MM/YYYY').toDate() : null;
 
     const newUser = new User({
       userType,
@@ -15,14 +15,15 @@ const addUser = async (req, res) => {
       address,
       phoneNumber,
       email,
-      visaInfo: {
+      visaInfo: visaInfo ? {
         cardNum: visaInfo.cardNum,
         cvv: visaInfo.cvv,
         expDate: formattedExpDate,
-      },
+      } : undefined,
       birthdate: formattedBirthdate,
       image,
       subscriptionStatus,
+      subPlan,
       pastOrderIds,
       favoriteMeals,
     });
@@ -40,11 +41,10 @@ const getAllUsers = async (req, res) => {
     const users = await User.find();
     const formattedUsers = users.map(user => ({
       ...user.toObject(),
-      birthdate: moment(user.birthdate).format('DD/MM/YYYY'),
-      visaInfo: {
+      visaInfo: user.visaInfo ? {
         ...user.visaInfo,
         expDate: moment(user.visaInfo.expDate).format('MM/YYYY'),
-      },
+      } : undefined,
     }));
     res.status(200).json(formattedUsers);
   } catch (error) {
@@ -63,10 +63,10 @@ const getUserById = async (req, res) => {
     const formattedUser = {
       ...userById.toObject(),
       birthdate: moment(userById.birthdate).format('DD/MM/YYYY'),
-      visaInfo: {
+      visaInfo: userById.visaInfo ? {
         ...userById.visaInfo,
         expDate: moment(userById.visaInfo.expDate).format('MM/YYYY'),
-      },
+      } : undefined,
     };
     res.status(200).json(formattedUser);
   } catch (error) {
@@ -77,11 +77,11 @@ const getUserById = async (req, res) => {
 
 const updateUser = async (req, res) => {
   const { id } = req.params;
-  const { userType, name, password, address, phoneNumber, email, visaInfo, birthdate, image, subscriptionStatus, pastOrderIds, favoriteMeals } = req.body;
+  const { userType, name, password, address, phoneNumber, email, visaInfo, birthdate, image, subscriptionStatus, subPlan, pastOrderIds, favoriteMeals } = req.body;
 
   try {
     const formattedBirthdate = moment(birthdate, 'DD/MM/YYYY').toDate();
-    const formattedExpDate = moment(visaInfo.expDate, 'MM/YYYY').toDate();
+    const formattedExpDate = visaInfo?.expDate ? moment(visaInfo.expDate, 'MM/YYYY').toDate() : null;
 
     const updatedUser = await User.findByIdAndUpdate(
       id,
@@ -92,14 +92,15 @@ const updateUser = async (req, res) => {
         address,
         phoneNumber,
         email,
-        visaInfo: {
+        visaInfo: visaInfo ? {
           cardNum: visaInfo.cardNum,
           cvv: visaInfo.cvv,
           expDate: formattedExpDate,
-        },
+        } : undefined,
         birthdate: formattedBirthdate,
         image,
         subscriptionStatus,
+        subPlan,
         pastOrderIds,
         favoriteMeals,
       },

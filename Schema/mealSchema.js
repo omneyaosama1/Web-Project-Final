@@ -33,9 +33,8 @@ const mealSchema = new mongoose.Schema(
       required: [true, "Please enter a cuisine"],
     },
     preferences: {
-      type: String,
+      type: [String],
       required: [true, "Please enter from the 6 preferences"],
-      enum: ["meat", "veggies", "family", "fit", "speedy", "fish"],
     },
     ingredientsName: {
       type: [String],

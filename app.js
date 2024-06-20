@@ -17,7 +17,7 @@ const sourcingRoute = require("./routes/sourcing-route");
 const loginSignupRoute = require("./routes/login-signup-route");
 const userRoute = require("./routes/user-route");
 const adminRoute = require("./routes/admin-route");
-const orderRoute = require("./routes/orderRoute");
+const orderRoute = require("./routes/order-route");
 
 const app = express();
 
@@ -37,7 +37,7 @@ app.use("/login-signup", loginSignupRoute);
 app.use("/user", userRoute);
 app.use("/admin", adminRoute);
 app.use("/cookbook", cookbookRoute);
-app.use("/orders", orderRoute);
+app.use("/order", orderRoute);
 
 mongoose
   .connect(dbUrl)
