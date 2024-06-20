@@ -36,9 +36,16 @@ app.use(
       mongoUrl: "mongodb+srv://omneya:KA37rzgOS2iyj5X1@freshbites.wagcbow.mongodb.net/?retryWrites=true&w=majority&appName=freshbites",
       collectionName: 'sessions'
     }),
-    cookie: { maxAge: 180 * 60 * 1000 } // 3 hours
+    cookie: { maxAge:  60 * 1000 } // 3 hours
   })
 );
+
+
+app.use((req, res, next) => {
+  res.locals.user = req.session.user;
+  next();
+});
+
 
 app.use('/', homePageRoute);
 app.use('/about-us', aboutUsPageRoute)
@@ -58,7 +65,7 @@ mongoose
   )
   .then(() => {
     console.log("Connected to database successfully!");
-    app.listen(port, () => console.log(`Sever is running on port ${port}`));
+    app.listen(port, () => console.log(`Server is running on port ${port}`));
   })
   .catch((error) => {
     console.log("Failed to connect to the database!");
