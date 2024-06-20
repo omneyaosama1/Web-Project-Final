@@ -6,10 +6,10 @@ const mealSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please enter a meal name"],
     },
-    
+
     image: {
       type: String,
-      required: true,
+      required: [true, "Please enter a meal image"],
     },
 
     cookTime: {
@@ -30,7 +30,12 @@ const mealSchema = new mongoose.Schema(
 
     tags: {
       type: String,
-      required: [true, "Please enter a tag"],
+      required: [true, "Please enter a cuisine"],
+    },
+    preferences: {
+      type: String,
+      required: [true, "Please enter from the 6 preferences"],
+      enum: ["meat", "veggies", "family", "fit", "speedy", "fish"],
     },
     ingredientsName: {
       type: [String],

@@ -127,12 +127,10 @@
       return words.length > maxWords ? words.slice(0, maxWords).join(' ') + '...' : str; 
     } %>
 
-
 <!-- Display meals -->
 <div class="meals-container">
   <% meals.forEach((meal, index) => { %>
     <div class="menu-item" id="dish<%= index + 1 %>">
-      <!-- Your meal item content here -->
       <img src="<%= meal.image %>" alt="<%= meal.name %>" />
       <h4 onclick="displayDescription('overlayMeal<%= index + 1 %>', '<%= meal.name %>', '<%= meal.description %>')">
         <%= meal.name.split(' ')[0] %>

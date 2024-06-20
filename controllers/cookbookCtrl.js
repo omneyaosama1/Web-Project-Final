@@ -1,10 +1,5 @@
-const Meal = require("../Schema/cookbookMealSchema");
+const Meal = require("../Schema/mealSchema");
 const mealsPerPage = 12;
-
-const handleServerError = (res, error) => {
-  console.error(error);
-  res.status(500).json({ error: "Server Error" });
-};
 
 const getMeals = async (req, res) => {
   try {
@@ -20,7 +15,8 @@ const getMeals = async (req, res) => {
       totalPages: totalPages,
     });
   } catch (error) {
-    handleServerError(res, error);
+    console.log(error);
+    res.status(500).send('Failed to display meals');
   }
 };
 
@@ -63,7 +59,8 @@ const addMeal = async (req, res) => {
     await newMeal.save();
     res.status(201).json({ message: "Meal added successfully", meal: newMeal });
   } catch (error) {
-    handleServerError(res, error);
+    console.log(error);
+    res.status(500).send('Failed to add a meal');
   }
 };
 
@@ -116,7 +113,8 @@ const updateMeal = async (req, res) => {
       .status(200)
       .json({ message: "Meal updated successfully", meal: updatedMeal });
   } catch (error) {
-    handleServerError(res, error);
+    console.log(error);
+    res.status(500).send('Failed to update a meal');
   }
 };
 
@@ -134,7 +132,8 @@ const deleteMeal = async (req, res) => {
       .status(200)
       .json({ message: "Meal deleted successfully", meal: deletedMeal });
   } catch (error) {
-    handleServerError(res, error);
+    console.log(error);
+    res.status(500).send('Failed to delete a meal');
   }
 };
 
