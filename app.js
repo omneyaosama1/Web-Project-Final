@@ -14,6 +14,7 @@ const sourcingRoute = require('./routes/sourcing-route');
 const loginSignupRoute = require('./routes/login-signup-route');
 const userRoute = require('./routes/user-route');
 const adminRoute = require('./routes/admin-route');
+const ourMenuRoute = require('./routes/our-menu-route');
 
 const port = process.env.PORT || 8080;
 const dbUserName = process.env.dbUserName;
@@ -32,13 +33,9 @@ app.set('view engine', 'ejs');
 
 app.use(
   session({
-    secret: 'your_secret_key', // Replace with your own secret key
+    secret: 'your_secret_key',
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl: "mongodb+srv://omneya:KA37rzgOS2iyj5X1@freshbites.wagcbow.mongodb.net/?retryWrites=true&w=majority&appName=freshbites",
-      collectionName: 'sessions'
-    }),
     cookie: { maxAge:  60 * 1000 } // 3 hours
   })
 );
@@ -59,6 +56,7 @@ app.use('/login-signup', loginSignupRoute);
 app.use('/user', userRoute);
 app.use('/admin', adminRoute);
 app.use('/cookbook', cookbookRoute);
+app.use('/menu', ourMenuRoute);
 
 
 mongoose
