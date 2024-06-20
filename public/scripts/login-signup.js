@@ -107,7 +107,7 @@ function login(email, password) {
         },
         success: function (response) {
             if (response.success) {
-                if (response.userType === "Admin"){
+                if (response.user.userType === "Admin"){
                     window.location.href = '/admin';
                 } else{
                     window.location.href = '/'; 
@@ -117,7 +117,8 @@ function login(email, password) {
             }
         },
         error: function (xhr, status, error) {
-            showModal("Login failed");
+            console.log("Error details:", xhr.responseText);
+            showModal("Login failed: " + xhr.responseText);
         },
     });
 }
@@ -130,9 +131,6 @@ loginBtn.addEventListener("click", () => {
     container.classList.remove("active");
 });
 
-favoriteColor.addEventListener("change", (event) => {
-    favoriteColorLabel.textContent = event.target.value;
-});
 
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

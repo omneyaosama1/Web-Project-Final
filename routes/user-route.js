@@ -1,16 +1,5 @@
 const express = require('express');
-const session = require('express-session');
 const router = express.Router();
-
-const app = express();
-
-// Session middleware configuration
-app.use(session({
-  secret: 'your-secret-key',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false, maxAge: 3600000 } // Example: session expires in 1 hour
-}));
 
 // Middleware to check if the user is authenticated
 const isAuthenticated = (req, res, next) => {
@@ -69,7 +58,7 @@ router.get('/logout', (req, res) => {
     if (err) {
       return res.status(500).send('Error logging out');
     }
-    res.redirect('/login-signup'); // Redirect to login/signup page after logout
+    res.redirect('/login-signup');
   });
 });
 

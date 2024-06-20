@@ -62,13 +62,21 @@ const handleLogin = async (req, res) => {
                 message: "Can't find user with this email",
             });
         }
-
+    
         if (existingUser.password === pass_inp) {
+            const userResponse = req.session.user = {
+                id: existingUser._id,
+                email: existingUser.email,
+                userType: existingUser.userType,
+                name: existingUser.name,
+            }
+             
+            req.session.save();
+
             return res.json({
                 success: true,
                 statusType: "success",
-                user: existingUser,
-                userType: existingUser.userType
+                user: userResponse,
             });
         } else {
             return res.json({
