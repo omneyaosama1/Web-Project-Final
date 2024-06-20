@@ -36,10 +36,6 @@ app.use(
     secret: 'your_secret_key',
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl: "mongodb+srv://omneya:KA37rzgOS2iyj5X1@freshbites.wagcbow.mongodb.net/?retryWrites=true&w=majority&appName=freshbites",
-      collectionName: 'sessions'
-    }),
     cookie: { maxAge:  60 * 1000 } // 3 hours
   })
 );
