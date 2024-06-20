@@ -83,5 +83,5 @@ const mealSchema = mongoose.Schema(
     },
   }
 );
-const Meal = mongoose.model("Meal", mealSchema);
+const Meal = mongoose.model("Dish", mealSchema);
 module.exports = Meal;

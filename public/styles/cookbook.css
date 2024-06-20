@@ -1,9 +1,13 @@
 body {
-  background-color:#f4faf7;
-  font-family: Roboto;
-  height: 4000px;
-  padding:0;
-  margin: 0;
+    background-color: #f4faf7;
+    font-family: Roboto;
+    height: 4000px;
+    padding: 0;
+    margin: 0;
+}
+
+.banner {
+    height: 10vh;
 }
 
 /* Background */
@@ -11,22 +15,22 @@ body {
     margin-top: 70px;
     background-color: #f7f7f7;
     height: 100vh;
-  }
-  
-  /* Search bar styling */
-  #search-div {
+}
+
+/* Search bar styling */
+#search-div {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px 0px 0px 0px;
-  }
-  
-  .search-form {
+}
+
+.search-form {
     display: flex;
     align-items: center;
-  }
-  
-  #search-bar {
+}
+
+#search-bar {
     padding: 12px;
     margin-right: -4px;
     background-color: #fff;
@@ -37,13 +41,13 @@ body {
     height: 45px;
     font-size: 16px;
     transition: border-color 0.3s ease;
-  }
-  
-  #search-bar:focus {
+}
+
+#search-bar:focus {
     border-color: #da8c10;
-  }
-  
-  #search-btn {
+}
+
+#search-btn {
     padding: 12px 30px;
     margin-left: -4px;
     background-color: #f19f13;
@@ -53,31 +57,30 @@ body {
     cursor: pointer;
     outline: none;
     transition: background-color 0.3s ease;
-  }
-  
-  #search-btn:hover {
+}
+
+#search-btn:hover {
     background-color: #da8c10;
-  }
-  
-  .error {
+}
+
+.error {
     color: red;
     font-size: 90%;
     max-width: 800px;
     text-align: end;
-  }
-  
-  
-  /* Feedback Icon */
-  #feedbackIcon {
+}
+
+/* Feedback Icon */
+#feedbackIcon {
     position: fixed;
     top: 300px;
     right: 0px;
     width: 35px;
     height: 100px;
     cursor: pointer;
-  }
-  
-  #overlay {
+}
+
+#overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -86,10 +89,10 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
     display: none;
     z-index: 999;
-  }
-  
-  /* Feedback Content */
-  #feedbackContent {
+}
+
+/* Feedback Content */
+#feedbackContent {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -102,11 +105,11 @@ body {
     width: 300px;
     max-width: 90%;
     text-align: center;
-  }
-  #feedbackContent h2{
+}
+#feedbackContent h2 {
     font-family: "Poppins", sans-serif;
-  }
-  #textArea {
+}
+#textArea {
     height: 80px;
     width: 100%;
     max-width: 100%;
@@ -115,17 +118,17 @@ body {
     border: 1px solid #ddd;
     padding: 10px;
     margin-top: 10px;
-  }
-  
-  #feedback {
+}
+
+#feedback {
     display: none;
     margin-top: 20px;
-  }
-  #feedback h4{
-  font-family: "poppins",sans-serif;
-  }
-  /* Exit Button */
-  .exit {
+}
+#feedback h4 {
+    font-family: "poppins", sans-serif;
+}
+/* Exit Button */
+.exit {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -138,20 +141,20 @@ body {
     font-weight: bold;
     color: #666;
     transition: color 0.3s ease;
-  }
-  
-  .exit:hover {
+}
+
+.exit:hover {
     color: red;
     font-weight: bold;
-  }
-  
-  .button-row {
+}
+
+.button-row {
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
-  }
-  
-  .choice {
+}
+
+.choice {
     position: relative;
     font-family: "Poppins", sans-serif;
     font-size: 1rem;
@@ -165,15 +168,15 @@ body {
     margin: 10px;
     cursor: pointer;
     transition: color 0.3s, background-color 0.3s, border-color 0.3s;
-  }
-  
-  .choice:hover {
+}
+
+.choice:hover {
     color: #ffffff;
     background-color: #f1a013a9;
     border-color: #f19f13;
-  }
-  
-  .choice span {
+}
+
+.choice span {
     position: absolute;
     top: 0;
     left: 0;
@@ -183,20 +186,20 @@ body {
     border-radius: 30px;
     opacity: 0;
     transition: transform 0.3s, opacity 0.3s;
-  }
-  
-  .choice:hover span {
+}
+
+.choice:hover span {
     transform: scale(1.1);
     opacity: 1;
-  }
-  
-  .choice.selected {
+}
+
+.choice.selected {
     background-color: #f1a013a9;
     border-color: #f19f13;
     color: #ffffff;
-  }
-  
-  #submit-btn {
+}
+
+#submit-btn {
     position: absolute;
     bottom: 10px;
     right: 10px;
@@ -209,14 +212,14 @@ body {
     padding: 8px 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
-  
-  #submit-btn:hover {
+}
+
+#submit-btn:hover {
     background-color: #31d42b;
-  }
-  
-  /* Meals headings and sub-headings */
-  .heading {
+}
+
+/* Meals headings and sub-headings */
+.heading {
     color: #f19f13;
     text-align: center;
     font-family: "Poppins", sans-serif;
@@ -224,18 +227,18 @@ body {
     font-weight: bold;
     margin-top: 50px;
     margin-bottom: 20px;
-  }
-  
-  .sub-heading {
+}
+
+.sub-heading {
     color: #000;
     text-align: center;
     font-family: "Poppins", sans-serif;
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 20px;
-  }
-  
-  .sentence {
+}
+
+.sentence {
     margin-top: 30px;
     margin-bottom: 10px;
     margin-left: 13%;
@@ -243,20 +246,19 @@ body {
     font-family: "Poppins", sans-serif;
     font-size: 18px;
     font-weight: bold;
-  }
-  
-  .sub-sentence {
+}
+
+.sub-sentence {
     color: #000;
     margin-bottom: 10px;
     font-family: "Poppins", sans-serif;
     font-size: 16px;
     font-weight: bold;
     margin-left: 14%;
-  }
-  
-  /*Meals description styling*/
-  
-  .overlay-container {
+}
+
+/*Meals description styling*/ 
+.overlay-container {
     background-color: #f7f7f7;
     margin-top: 20px;
     margin-left: 10px;
@@ -265,35 +267,35 @@ body {
     border-radius: 20px;
     max-width: 600px;
     overflow: auto;
-  }
-  
-  .overlay-container h3 {
+}
+
+.overlay-container h3 {
     font-family: sans-serif;
     color: #020000;
     max-width: 270px;
-    font-size:x-large;
+    font-size: x-large;
     padding: 5px;
     margin-bottom: 0px;
-  }
-  .overlay-container #extension{
+}
+.overlay-container #extension {
     padding: 5px 5px 5px 0px;
     max-width: fit-content;
     margin-left: 20px;
     margin-top: 0px;
     font-weight: 500;
-  }
-  .overlay-container p{
+}
+.overlay-container p {
     text-align: center;
-  }
-  .overlay-container img {
+}
+.overlay-container img {
     max-width: 100%;
     padding-top: 10px;
     height: auto;
     display: block;
     margin: 0 auto;
     border-radius: 20px;
-  }
-  .description {
+}
+.description {
     display: none;
     position: fixed;
     z-index: 1000;
@@ -305,36 +307,36 @@ body {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.8);
-  }
-  .description .description-content {
+}
+.description .description-content {
     margin: 10px 0;
     border-radius: 50px;
     border: none;
     overflow: hidden;
     transition: all 0.2s linear;
-  }
-  .description-content.open {
+}
+.description-content.open {
     padding-bottom: 10px;
     background-color: #81d0e889;
     transition: background-color 0.5s ease-in-out;
-  }
-  .description-content header {
+}
+.description-content header {
     display: flex;
     min-height: 5px;
     margin-right: 0px;
     cursor: pointer;
     border-radius: 0px;
-    background-color:  #81d0e8;
+    background-color: #81d0e8;
     max-width: 100%;
     height: 70px;
-  }
-  
-  .description-content.open header {
+}
+
+.description-content.open header {
     min-height: 35px;
     background-color: #81d0e8;
-  }
-  
-  header .title {
+}
+
+header .title {
     font-size: 24px;
     font-weight: 1000;
     padding: 5px;
@@ -343,260 +345,260 @@ body {
     margin-left: 60px;
     margin-right: 0;
     color: #f7f7f7;
-  }
-  
-  .description-content .content-description {
+}
+
+.description-content .content-description {
     height: 0;
     font-size: 12px;
     font-weight: 400;
     padding: 0 15px;
-    transition: all .3s linear;
-  }
-  
-  .content-description li {
+    transition: all 0.3s linear;
+}
+
+.content-description li {
     color: black;
     font-family: "Times New Roman", Times, serif;
     font-size: 1.2rem;
     font-weight: bold;
     text-align: center;
     list-style: none;
-  }
-  .content-description .steps li {
+}
+.content-description .steps li {
     text-align: left;
     list-style: circle;
-  }
-  
-  .servings {
-     opacity: 0.6; 
+}
+
+.servings {
+    opacity: 0.6;
     color: rgb(0, 0, 0);
     font-size: small;
     padding: 0;
     margin-bottom: 20px;
     margin-top: 25px;
-  }
-  
-  .content-description td {
+}
+
+.content-description td {
     font-weight: bold;
     font-size: large;
     padding: 6px 10px 5px 10px;
     text-align: left;
     width: 90%;
     border-radius: 40px;
-  }
-  tr:nth-child(even) {
-    background-color: rgba(0, 0, 0, 0.1)
-  }
-  td {
+}
+tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+td {
     color: rgb(0, 0, 0);
-  }
-  
-  /* Close button */
-  .close {
+}
+
+/* Close button */
+.close {
     background-color: #f7f7f7;
     color: #666;
     float: right;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+
+.close:hover,
+.close:focus {
     color: red;
     text-decoration: none;
-  }
-  /*Favorite button*/
+}
+/*Favorite button*/ 
 .heart-button {
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  font-size: medium;
-  padding: 0;
-  margin-top: 0px;
-  margin-left: 5px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: medium;
+    padding: 0;
+    margin-top: 0px;
+    margin-left: 5px;
 }
 .fa-heart {
-  color: #f7f7f7;
+    color: #f7f7f7;
 }
 
 .fa-heart.favorited {
-  color: red;
+    color: red;
 }
 .heart-button:hover .fa-heart {
-  color: red;
+    color: red;
 }
 
 /*Notification styling*/
 .notification {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 10px 20px;
-  background-color: #4caf50;
-  color: white;
-  border-radius: 5px;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-  transform: translateY(100%);
-  opacity: 0;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 5px;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform: translateY(100%);
+    opacity: 0;
 }
 
 .notification.show {
-  transform: translateY(0);
-  opacity: 1;
+    transform: translateY(0);
+    opacity: 1;
 }
 
-  /*Cookbook's responsive styling*/
-  @media screen and (max-width: 400px) {
+/*Cookbook's responsive styling*/
+@media screen and (max-width: 400px) {
     #search-div {
-      padding: 10px;
+        padding: 10px;
     }
-  
+
     .search-form {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
     }
-  
+
     #search-bar {
-      padding: 8px;
-      margin-right: 0;
-      height: 40px;
-      font-size: 14px;
+        padding: 8px;
+        margin-right: 0;
+        height: 40px;
+        font-size: 14px;
     }
-  
+
     #search-btn {
-      padding: 8px 20px;
-      margin-left: 0;
-      font-size: 14px;
+        padding: 8px 20px;
+        margin-left: 0;
+        font-size: 14px;
     }
-  
+
     .error {
-      font-size: 80%;
-      text-align: center;
-      max-width: 100%;
-      margin-top: 10px;
+        font-size: 80%;
+        text-align: center;
+        max-width: 100%;
+        margin-top: 10px;
     }
-  
+
     #feedbackIcon {
-      top: 250px;
+        top: 250px;
     }
-  
+
     #feedbackContent {
-      padding: 60px 30px;
-      width: 250px;
+        padding: 60px 30px;
+        width: 250px;
     }
-  
+
     #textArea {
-      height: 60px;
+        height: 60px;
     }
-  
+
     .nav-bar ul {
-      display: none;
+        display: none;
     }
-  
+
     .exit {
-      height: 25px;
-      width: 25px;
-      font-size: 14px;
-      top: 5px;
-      right: 5px;
+        height: 25px;
+        width: 25px;
+        font-size: 14px;
+        top: 5px;
+        right: 5px;
     }
-  
+
     .button-row {
-      margin-bottom: 5px;
+        margin-bottom: 5px;
     }
-  
+
     .choice {
-      font-size: 0.9rem;
-      padding: 8px 16px;
-      margin: 8px;
+        font-size: 0.9rem;
+        padding: 8px 16px;
+        margin: 8px;
     }
-  
+
     #submit-btn {
-      font-size: 14px;
-      padding: 6px 12px;
-      bottom: 5px;
-      right: 5px;
+        font-size: 14px;
+        padding: 6px 12px;
+        bottom: 5px;
+        right: 5px;
     }
-  
+
     .heading {
-      font-size: 20px; 
-      margin-top: 30px; 
-      margin-bottom: 15px;
+        font-size: 20px;
+        margin-top: 30px;
+        margin-bottom: 15px;
     }
-  
+
     .sub-heading {
-      font-size: 14px; 
-      margin-bottom: 15px; 
+        font-size: 14px;
+        margin-bottom: 15px;
     }
-  
+
     .sentence {
-      margin-top: 20px; 
-      margin-left: 5%; 
-      font-size: 14px; 
+        margin-top: 20px;
+        margin-left: 5%;
+        font-size: 14px;
     }
-  
+
     .sub-sentence {
-      margin-bottom: 5px; 
-      margin-left: 5%;
-      font-size: 12px;
+        margin-bottom: 5px;
+        margin-left: 5%;
+        font-size: 12px;
     }
-  
+
     .overlay-container {
-      margin-top: 10px;
-      margin-left: 5px;
-      margin-right: 40px;
-      margin-bottom: 2cm;
-      padding: 0px 10px 10px 10px;
-      border-radius: 15px;
-      max-width: 100%;
+        margin-top: 10px;
+        margin-left: 5px;
+        margin-right: 40px;
+        margin-bottom: 2cm;
+        padding: 0px 10px 10px 10px;
+        border-radius: 15px;
+        max-width: 100%;
     }
-  
+
     .overlay-container h3 {
-      font-size: large;
-      padding: 5px;
-      margin-bottom: 5px;
+        font-size: large;
+        padding: 5px;
+        margin-bottom: 5px;
     }
-  
+
     .overlay-container #extension {
-      margin-left: 10px;
-      margin-top: 0px;
-      font-size: small;
+        margin-left: 10px;
+        margin-top: 0px;
+        font-size: small;
     }
-  
+
     .overlay-container p {
-      text-align: center;
-      font-size: small;
+        text-align: center;
+        font-size: small;
     }
-  
+
     .overlay-container img {
-      padding-top: 5px;
-      border-radius: 15px;
+        padding-top: 5px;
+        border-radius: 15px;
     }
-  
+
     .description {
-      padding-left: 5%;
-      padding-top: 2%;
-      padding-bottom: 2%;
+        padding-left: 5%;
+        padding-top: 2%;
+        padding-bottom: 2%;
     }
-  
+
     .description-content {
-      margin: 5px 0;
+        margin: 5px 0;
     }
-  
+
     header .title {
-      font-size: 18px;
-      margin-left: 50px;
+        font-size: 18px;
+        margin-left: 50px;
     }
-  
+
     .servings {
-      font-size: x-small;
-      margin-bottom: 10px;
-      margin-top: 15px;
+        font-size: x-small;
+        margin-bottom: 10px;
+        margin-top: 15px;
     }
-  
+
     .content-description td {
-      font-size: medium;
-      padding: 6px 8px;
+        font-size: medium;
+        padding: 6px 8px;
     }
-  }
+}

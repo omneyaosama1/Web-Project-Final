@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const { renderPage, handleLoginorSignup} = require('../controllers/login-signupCtrl');
 
-router.get('/', (req, res) => {
-    res.render('login-signup');
-});
+router.get('/', renderPage);
+router.post('/', handleLoginorSignup);
 
 const staticEmail = 'yomna@gmail.com';
 const staticPassword = 'password123';
