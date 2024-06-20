@@ -78,13 +78,25 @@ const handleLogin = async (req, res) => {
                 name: existingUser.name,
             });
 
-            req.session.save();
+            console.log(req.session.user);
 
-            return res.json({
-                success: true,
-                statusType: "success",
-                user: userResponse,
+            req.session.save(err => {
+                if (err) {
+                    console.error('Session save error:', err);
+                    return res.status(500).json({ success: false, message: 'Failed to save session.' });
+                }
+                return res.json({
+                    success: true,
+                    statusType: "success",
+                    user: req.session.user,
+                });
             });
+
+            // return res.json({
+            //     success: true,
+            //     statusType: "success",
+            //     user: userResponse,
+            // });
         } else {
             return res.json({
                 success: false,

@@ -110,6 +110,7 @@ function login(email, password) {
                 if (response.user.userType === "Admin"){
                     window.location.href = '/admin';
                 } else{
+                    console.log(response.user.id);
                     window.location.href = '/'; 
                 }
             } else {

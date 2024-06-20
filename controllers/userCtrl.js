@@ -2,24 +2,26 @@ const User = require("../Schema/userSchema");
 const Meal = require("../Schema/cookbookMealSchema");
 
 const renderUserPage = async (req, res) => {
-    if (!req.session.loggedUser) {
-        req.session.loggedUser = await User.findById(req.session.userId);
+   
+    if (!req.session.user) {
+        req.session.user = await User.findById(req.session.userId);
     }
-    res.render("user-profile", { user: req.session.loggedUser });
+    res.render("user-profile", { user: req.session.user });
 };
 
 const renderFavMealsPage = async (req, res) => {
-    if (!req.session.loggedUser) {
-        req.session.loggedUser = await User.findById(req.session.userId);
+    if (!req.session.user) {
+        req.session.user = await User.findById(req.session.userId);
     }
-    res.render("fav-meals", { user: req.session.loggedUser });
+    console.log(req.session.user);
+    res.render("fav-meals", { user: req.session.user });
 };
 
 const renderUserHistoryPage = async (req, res) => {
-    if (!req.session.loggedUser) {
-        req.session.loggedUser = await User.findById(req.session.userId);
+    if (!req.session.user) {
+        req.session.user = await User.findById(req.session.userId);
     }
-    res.render("user-history", { user: req.session.loggedUser });
+    res.render("user-history", { user: req.session.user });
 };
 
 const handleLogout = async (req, res) => {
