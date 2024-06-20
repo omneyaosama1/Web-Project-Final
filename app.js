@@ -1,5 +1,8 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+
 
 const homePageRoute = require('./routes/index-route');
 const aboutUsPageRoute = require('./routes/about-us-route');
@@ -26,6 +29,26 @@ app.use(express.static('public'));
 
 app.set('view engine', 'ejs');
 
+
+app.use(
+  session({
+    secret: 'your_secret_key', // Replace with your own secret key
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: "mongodb+srv://omneya:KA37rzgOS2iyj5X1@freshbites.wagcbow.mongodb.net/?retryWrites=true&w=majority&appName=freshbites",
+      collectionName: 'sessions'
+    }),
+    cookie: { maxAge:  60 * 1000 } // 3 hours
+  })
+);
+
+app.use((req, res, next) => {
+  res.locals.user = req.session.user;
+  next();
+});
+
+
 app.use('/', homePageRoute);
 app.use('/about-us', aboutUsPageRoute);
 app.use('/how-it-works', hiwRoute);
@@ -36,6 +59,7 @@ app.use('/login-signup', loginSignupRoute);
 app.use('/user', userRoute);
 app.use('/admin', adminRoute);
 app.use('/cookbook', cookbookRoute);
+
 
 mongoose
     .connect(dbURL)

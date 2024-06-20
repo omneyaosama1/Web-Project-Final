@@ -3,17 +3,29 @@ document.addEventListener("DOMContentLoaded", () => {
     container.classList.add("active"); // Add "active" class by default
 });
 
-const container = document.getElementById("container");
-const registerBtn = document.getElementById("register");
-const loginBtn = document.getElementById("login");
-const signUpForm = document.getElementById("sign-up-form");
-const signInForm = document.getElementById("sign-in-form");
-const modal = document.getElementById("modal");
-const modalMessage = document.getElementById("modal-message");
-const closeButton = document.querySelector(".close-button");
-const forgotPasswordLink = document.getElementById("forgot-password");
 
-signUpForm.addEventListener("submit", (event) => {
+const container = document.getElementById('container');
+const registerBtn = document.getElementById('register');
+const loginBtn = document.getElementById('login');
+const signUpForm = document.getElementById('sign-up-form');
+const signInForm = document.getElementById('sign-in-form');
+const modal = document.getElementById('modal');
+const modalMessage = document.getElementById('modal-message');
+const closeButton = document.querySelector('.close-button');
+const favoriteColor = document.getElementById('favorite-color');
+const favoriteColorLabel = document.getElementById('favorite-color-label');
+const forgotPasswordLink = document.getElementById('forgot-password');
+
+registerBtn.addEventListener('click', () => {
+    container.classList.add("active");
+});
+
+loginBtn.addEventListener('click', () => {
+    container.classList.remove("active");
+});
+
+signUpForm.addEventListener('submit', (event) => {
+
     event.preventDefault();
     const username = document.getElementById("signup-username").value;
     const email = document.getElementById("signup-email").value;
@@ -41,6 +53,7 @@ signUpForm.addEventListener("submit", (event) => {
         signup(username, email, password, formattedDate);
     }
 });
+
 
 function signup(username, email, password, formattedDate) {
     const formType = "Signup";
@@ -185,3 +198,27 @@ document.getElementById("confirm-button").addEventListener("click", () => {
 function closeModal() {
     modal.style.display = "none";
 }
+
+document.getElementById('sign-in-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+  
+    fetch('/login-signup/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    }).then(response => {
+      if (response.ok) {
+        window.location.href = '/admin'; // Redirect to the admin page if login is successful
+      } else {
+        response.text().then(text => {
+          alert(text); // Display an error message if login fails
+        });
+      }
+    }).catch(error => {
+      console.error('Error:', error);
+    });
+  });

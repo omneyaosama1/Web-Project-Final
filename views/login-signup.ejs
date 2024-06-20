@@ -59,8 +59,9 @@
                     <button type="submit">Sign Up</button>  
                 </form>
             </div>
+            
             <div class="form-container sign-in">
-                <form id="sign-in-form">
+                <form id="sign-in-form" action="/login-signup/login" method="POST>
                     <h1>Login</h1>
                     
                     <input type="email" id="login-email" placeholder="Email" />
@@ -90,41 +91,44 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Modal for displaying warnings -->
-        <div id="modal" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <p id="modal-message"></p>
-            </div>
         </div>
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+    
+  <!-- Modal for displaying warnings -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <p id="modal-message"></p>
 
-        <!-- Modal for forgot password -->
-        <div id="forgot-password-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <p>Enter the color you chose while signing up</p>
-                <select id="chosen-color">
-                    <option value="" disabled selected>
-                        Select your favorite color
-                    </option>
-                    <option value="White">White</option>
-                    <option value="Black">Black</option>
-                    <option value="Brown">Brown</option>
-                    <option value="Grey">Grey</option>
-                    <option value="Red">Red</option>
-                    <option value="Pink">Pink</option>
-                    <option value="Violet">Violet</option>
-                    <option value="Blue">Blue</option>
-                    <option value="Green">Green</option>
-                    <option value="Orange">Orange</option>
-                    <option value="Yellow">Yellow</option>
-                </select>
-                <button id="confirm-color">Confirm</button>
-            </div>
+    </div>
+  </div>
+  
+      <div id="forgot-password-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <p>Enter the color you chose while signing up</p>
+            <select id="chosen-color">
+                <option value="" disabled selected>
+                    Select your favorite color
+                </option>
+                <option value="White">White</option>
+                <option value="Black">Black</option>
+                <option value="Brown">Brown</option>
+                <option value="Grey">Grey</option>
+                <option value="Red">Red</option>
+                <option value="Pink">Pink</option>
+                <option value="Violet">Violet</option>
+                <option value="Blue">Blue</option>
+                <option value="Green">Green</option>
+                <option value="Orange">Orange</option>
+                <option value="Yellow">Yellow</option>
+            </select>
+            <button id="confirm-color">Confirm</button>
         </div>
-
-        <script src="../scripts/login-signup.js"></script>
-    </body>
+      </div>    
+    <script src="../scripts/login-signup.js"></script>
+  </body>
 </html>
