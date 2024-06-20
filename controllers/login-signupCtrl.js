@@ -6,7 +6,6 @@ const renderPage = async (req, res) => {
 
 const handleLoginorSignup = async (req, res) => {
     const formType = req.body.form_type_inp;
-    console.log(formType);
     if (formType === "Login") {
         handleLogin(req, res);
     } else if (formType === "Signup") {
@@ -29,15 +28,20 @@ const handleSignup = async (req, res) => {
                 message: "Email already in use",
             });
         }
-        const newUser = new User({
+        const newUser = (req.session.user = new User({
             name: username_inp,
             password: pass_inp,
             email: email_inp,
             birthdate: birthdate_inp,
-        });
+        }));
+
+        req.session.save();
         newUser
             .save()
-            .then((user) => res.json({ success: true, user }))
+            .then((user) => res.json({ 
+                success: true, 
+                user: newUser 
+            }))
             .catch((error) => {
                 console.error("Save error:", error);
                 res.status(400).json({
@@ -48,7 +52,10 @@ const handleSignup = async (req, res) => {
             });
     } catch (error) {
         console.error(error); // Log the error to see what's going wrong
-        res.status(500).json({ success: false, message: "Server error" });
+        res.status(500).json({
+            success: false,
+            message: "Server error",
+        });
     }
 };
 
@@ -62,15 +69,15 @@ const handleLogin = async (req, res) => {
                 message: "Can't find user with this email",
             });
         }
-    
+
         if (existingUser.password === pass_inp) {
-            const userResponse = req.session.user = {
+            const userResponse = (req.session.user = {
                 id: existingUser._id,
                 email: existingUser.email,
                 userType: existingUser.userType,
                 name: existingUser.name,
-            }
-             
+            });
+
             req.session.save();
 
             return res.json({

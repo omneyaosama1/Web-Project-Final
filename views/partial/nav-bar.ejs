@@ -12,7 +12,9 @@
                 <a href="/">
                     <img src="/images/logo1.png" alt="Your Logo" class="logo" />
                 </a>
-                <span class="name" onclick="window.location.href = '/'">Fresh Bites</span>
+                <span class="name" onclick="window.location.href = '/'"
+                    >Fresh Bites</span
+                >
             </div>
             <ul>
                 <li class="dropdown">
@@ -22,16 +24,21 @@
                         <li><a href="/how-it-works">How it Works</a></li>
                     </ul>
                 </li>
+                <% if (user) { %>
                 <li><a href="/our-plans">Our Plans</a></li>
-                <li class="dropdown">
-                    <a href="/menu">Our Menu</a>
-                    <ul class="dropdown-content">
-                        <% if (user) { %>
-                        <li><a href="/menu">Our Menu</a></li>
-                        <% } %>
-                        <li><a href="/cookbook">Cook Book</a></li>
-                    </ul>
-                </li>
+                <%}%> 
+                <% if (user) { %>
+                    <li class="dropdown">
+                        <a href="/menu">Our Menu</a>
+                        <ul class="dropdown-content">
+                            <li><a href="/menu">Our Menu</a></li>
+                            <li><a href="/cookbook">Cook Book</a></li>
+                        </ul>
+                    </li>
+                <%} else { %>
+                    <li><a href="/cookbook">Cook Book</a></li>
+                <%}%> 
+
                 <li class="dropdown">
                     <a href="/sustainability">Sustainability</a>
                     <ul class="dropdown-content">
@@ -44,9 +51,15 @@
                     <a href="/user"><i class="fas fa-user-circle"></i></a>
                     <ul class="dropdown-content">
                         <li><a href="/user">Account Info</a></li>
-                        <li><a href="/user/favoriteMeals">Favorite Meals</a></li>
+                        <li>
+                            <a href="/user/favoriteMeals">Favorite Meals</a>
+                        </li>
                         <li><a href="/user/history">Orders History</a></li>
-                        <li><a href="/login-signup/logout" id="logoutButton">Logout</a></li>
+                        <li>
+                            <a href="/login-signup/logout" id="logoutButton"
+                                >Logout</a
+                            >
+                        </li>
                     </ul>
                 </li>
                 <% } %>

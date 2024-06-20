@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {checkAdminAuth} = require("../controllers/userAuthenticator");
+const {checkAdminAuth} = require("../middleware/userAuthenticator");
 
 // Admin route (protected)
 router.get("/", checkAdminAuth, (req, res) => {
