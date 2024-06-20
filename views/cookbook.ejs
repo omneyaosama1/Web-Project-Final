@@ -122,21 +122,44 @@
       Explore our extensive recipe collection filled with delicious dinner
       options.
     </h2>
-    <div class="meals-container">
-      <% meals.forEach((meal, index)=> { %>
-        <div class="menu-item" id="dish<%= index + 1 %>">
-          <img src="<%= meal.image %>" alt="<%= meal.name %>" />
-          <h4
-            onclick="displayDescription('overlayMeal<%= index + 1 %>', '<%= meal.name %>', '<%= meal.description %>')">
-            <%= meal.name.split(' ')[0] %><br />
-              <%= meal.name.split(' ').slice(1).join(' ') %>
-            </h4>
-            <button class="heart-button" onclick="addToFavorites(event, ' dish<%=index + 1 %>')">
-              <i class="fa-solid fa-heart"></i>
-              </button>
-        </div>
-        <% }); %>
+    <% function truncateWords(str, maxWords) { 
+      const words = str.split(' '); 
+      return words.length > maxWords ? words.slice(0, maxWords).join(' ') + '...' : str; 
+    } %>
+
+
+<!-- Display meals -->
+<div class="meals-container">
+  <% meals.forEach((meal, index) => { %>
+    <div class="menu-item" id="dish<%= index + 1 %>">
+      <!-- Your meal item content here -->
+      <img src="<%= meal.image %>" alt="<%= meal.name %>" />
+      <h4 onclick="displayDescription('overlayMeal<%= index + 1 %>', '<%= meal.name %>', '<%= meal.description %>')">
+        <%= meal.name.split(' ')[0] %>
+        <%= truncateWords(meal.name.split(' ').slice(1).join(' '), 3) %>
+      </h4>
+      <div class="card-details">
+        <div class="tags"><%= meal.tags %></div>
+        <button class="heart-button" onclick="addToFavorites(event, ' dish<%= index + 1 %>')">
+          <i class="fa-solid fa-heart"></i>
+        </button>
+      </div>
     </div>
+  <% }); %>
+</div>
+  <div class="pagination">
+    <% if (currentPage > 1) { %>
+      <a href="?page=<%= currentPage - 1 %>">Previous</a>
+    <% } %>
+
+    <% for (let i = 1; i <= totalPages; i++) { %>
+      <a href="?page=<%= i %>" class="<%= currentPage === i ? 'active' : '' %>"><%= i %></a>
+    <% } %>
+
+    <% if (currentPage < totalPages) { %>
+      <a href="?page=<%= currentPage + 1 %>">Next</a>
+    <% } %>
+  </div>
 
     <!-- Overlay descriptions for each meal -->
     <% meals.forEach((meal, index)=> { %>
