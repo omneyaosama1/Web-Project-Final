@@ -32,7 +32,7 @@ function showTextArea(event) {
   const feedbackForm = document.getElementById("feedback");
   feedbackForm.style.display = "block";
   const buttons = document.querySelectorAll(".choice");
-  buttons.forEach(button => {
+  buttons.forEach((button) => {
     button.classList.remove("selected");
   });
   event.target.classList.add("selected");
@@ -75,8 +75,7 @@ function feedbackInput(form) {
 }
 
 // Meal description functions
-
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const accordionContent = document.querySelectorAll(".description-content");
 
   accordionContent.forEach((item, index) => {
@@ -105,54 +104,56 @@ function removeOpen(index1) {
     }
   });
 }
-window.displayDescription = function(overlayID, mealName, mealDescription) {
-    var id = document.getElementById(overlayID);
-    if (!id) {
-      console.error("Element with ID " + overlayID + " not found");
-      return;
-    }
-  
-    var name = id.querySelector(".dishName");
-    var description = id.querySelector(".extension");
-  
-    if (!name) {
-      console.error("Element with class 'dishName' not found inside " + overlayID);
-      return;
-    }
-  
-    if (!description) {
-      console.error("Element with class 'extension' not found inside " + overlayID);
-      return;
-    }
-  
-    name.textContent = mealName;
-    description.textContent = mealDescription;
-  
-    id.style.display = "block";
-  };
-  
-  window.closeWindow = function(ID) {
-    var window = document.getElementById(ID);
-    if (!window) {
-      console.error("Element with ID " + ID + " not found");
-      return;
-    }
-    window.style.display = "none";
-  };
-  
-// "Add to favorites function"
+window.displayDescription = function (overlayID, mealName, mealDescription) {
+  var id = document.getElementById(overlayID);
+  if (!id) {
+    console.error("Element with ID " + overlayID + " not found");
+    return;
+  }
+
+  var name = id.querySelector(".dishName");
+  var description = id.querySelector(".extension");
+
+  if (!name) {
+    console.error(
+      "Element with class 'dishName' not found inside " + overlayID
+    );
+    return;
+  }
+
+  if (!description) {
+    console.error(
+      "Element with class 'extension' not found inside " + overlayID
+    );
+    return;
+  }
+
+  name.textContent = mealName;
+  description.textContent = mealDescription;
+
+  id.style.display = "block";
+};
+
+window.closeWindow = function (ID) {
+  var window = document.getElementById(ID);
+  if (!window) {
+    console.error("Element with ID " + ID + " not found");
+    return;
+  }
+  window.style.display = "none";
+};
+
 function addToFavorites(event, itemName) {
   console.log(itemName + " added to favorites");
   showNotification();
-   event.stopPropagation();
+  event.target.classList.add("favorited");
+  event.stopPropagation();
 }
 
-// Notification function
 function showNotification() {
   var notification = document.getElementById("notification");
   notification.classList.add("show");
-
   setTimeout(function () {
     notification.classList.remove("show");
-  }, 2000); // Remove the "show" class after 2 seconds
+  }, 2000);
 }
