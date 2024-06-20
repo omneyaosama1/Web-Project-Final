@@ -1,3 +1,4 @@
+    
     body {
         margin: 0;
     }
@@ -6,7 +7,6 @@
         height: 3.5rem;
         width: 3.5rem;
     }
-
 
     /* Feedback Icon */
     #feedbackIcon {
@@ -172,13 +172,16 @@
     }
 
     .searchDiv {
-        position: relative;
+        position: absolute;
+        padding-left: 600px;
+        display: flex;
     }
 
     #SearchW {
         height: 6vh;
-        width: 550px;
+        width: 500px;
         border-radius: 50px;
+        
     }
 
     #searchB {
@@ -200,7 +203,7 @@
 
     /*PAGE TITLE*/
     #titleM {
-        color: #136b85;
+        color: #68b4cb;
         font-size: 2em;
         font-weight: 500;
         top: 33%;
@@ -227,7 +230,7 @@
         display: inline-block;
         background-color: transparent;
         border-radius: 50px;
-        border: 2px solid #f19f13;
+        border: 2px solid #f9af30;
         font-style: oblique;
         height: 40px;
         width: 90px;
@@ -278,7 +281,7 @@
 
     .items:hover {
         transform: scale(1.1);
-        background-color: #eeb655;
+        background-color: #e8ab42;
 
     }
 
@@ -289,7 +292,7 @@
     }
 
     #itemName {
-        color: rgb(48, 111, 147);
+        color: rgb(60, 120, 154);
         cursor: pointer;
         font-size: 20px;
     }
@@ -519,7 +522,7 @@
     }
 
     /* Rating */
-    .rate {
+    /* .rate {
         margin-top: 10px;
     }
 
@@ -532,7 +535,7 @@
     .star.selected {
         color: gold;
         border: none;
-    }
+    } */
 
     /* Favourite part */
 
@@ -836,3 +839,36 @@
 
 
 
+@media screen and (max-width:400px) {
+
+    .menu{
+        width: 50%;
+    }
+    #rotatingImg1{
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        top:6%;
+        right: 0%;
+    
+    }
+
+    #searchW{
+        padding:10px;
+
+        width: 200px;
+    }
+    .searchPart{
+padding: 10px;
+
+    }
+
+   .searchDiv{
+width: 200;
+}
+
+    
+    #titleM {
+       padding-left: 50%;
+    }
+}

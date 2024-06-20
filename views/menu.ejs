@@ -20,7 +20,7 @@
         <form class="searchPart" onsubmit="return searchValidate(this)">
           <div class="searchDiv">
             <input type="text" id="SearchW" placeholder="Search...">
-            <button id="SearchB"><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #439362;"></i></button>
+            <button id="SearchB"><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #7acde3;"></i></button>
           </div>
           <div id="errorMsg" class="errorMsg"></div>
         </form>
@@ -57,7 +57,7 @@
         <!-- Feedback -->
         <div id="overlay"></div>
         <div id="feedbackIcon" onclick="showBox()">
-          <img src="/images/Meals-images/Feedback.jpg" width="35" height="100" />
+          <img src="/images/Feedback.jpg" width="35" height="100" />
         </div>
         <div id="feedbackContent">
           <button class="exit" onclick="exitFeedback()">x</button>
@@ -117,7 +117,7 @@
         <div class="items-container">
           <!-- ITEMS OF WEEK 1 -->
 
-          <% const week1Recipes=menuData.slice(0, 1); %> <!-- Slice the  recipes for week 1 -->
+          <% const week1Recipes=menuData.slice(0, 12); %> <!-- Slice the  recipes for week 1 -->
 
             <% week1Recipes.forEach(function(recipe, index) { %>
               <div class="items week1" id="item<%= index + 1 %>W1">
@@ -127,7 +127,7 @@
                   <%= recipe.name %>
                 </h3>
                 <span class="Features">
-                  <p id="duration">Cook Time: <%= recipe.cookTime %>
+                  <p id="duration">Cook Time: <%= recipe.cookTime %> min
                   </p>
                   <button class="Fbtn" onclick="changeFavouriteC(1,'W1')">
                     <i id="icon1W1" class="fa-solid fa-heart fa-lg" style="color: #7c7e82;"></i>
@@ -140,7 +140,7 @@
               <% }); %>
 
                 <!-- ITEMS OF WEEK 2 -->
-                <% const week2Recipes=menuData.slice(1,2 ); %> <!-- Slice the  recipes for week 2 -->
+                <% const week2Recipes=menuData.slice(12,24 ); %> <!-- Slice the  recipes for week 2 -->
 
                   <% week2Recipes.forEach(function(recipe, index) { %>
                     <div class="items week2" id="item<%= index + 1 %>W2">
@@ -150,7 +150,7 @@
                         <%= recipe.name %>
                       </h3>
                       <span class="Features">
-                        <p id="duration">Cook Time: <%= recipe.cookTime %>
+                        <p id="duration">Cook Time: <%= recipe.cookTime %> min
                         </p>
                         <button class="Fbtn" onclick="changeFavouriteC(1,'W2')">
                           <i id="icon1W1" class="fa-solid fa-heart fa-lg" style="color: #7c7e82;"></i>
@@ -163,7 +163,7 @@
                     <% }); %>
 
                       <!-- ITEMS OF WEEK 3 -->
-                      <% const week3Recipes=menuData.slice(2,3 ); %> <!-- Slice the  recipes for week 3 -->
+                      <% const week3Recipes=menuData.slice(24,36 ); %> <!-- Slice the  recipes for week 3 -->
 
                         <% week3Recipes.forEach(function(recipe, index) { %>
                           <div class="items week3" id="item<%= index + 1 %>W2">
@@ -173,7 +173,7 @@
                               <%= recipe.name %>
                             </h3>
                             <span class="Features">
-                              <p id="duration">Cook Time: <%= recipe.cookTime %>
+                              <p id="duration">Cook Time: <%= recipe.cookTime %> min
                               </p>
                               <button class="Fbtn" onclick="changeFavouriteC(1,'W3')">
                                 <i id="icon1W1" class="fa-solid fa-heart fa-lg" style="color: #7c7e82;"></i>
@@ -187,7 +187,7 @@
 
 
                             <!-- ITEMS OF WEEK 4 -->
-                            <% const week4Recipes=menuData.slice(3,4 ); %> <!-- Slice the  recipes for week 4 -->
+                            <% const week4Recipes=menuData.slice(36,48 ); %> <!-- Slice the  recipes for week 4 -->
 
                               <% week4Recipes.forEach(function(recipe, index) { %>
                                 <div class="items week4" id="item<%= index + 1 %>W4">
@@ -197,7 +197,7 @@
                                     <%= recipe.name %>
                                   </h3>
                                   <span class="Features">
-                                    <p id="duration">Cook Time: <%= recipe.cookTime %>
+                                    <p id="duration">Cook Time: <%= recipe.cookTime %> min
                                     </p>
                                     <button class="Fbtn" onclick="changeFavouriteC(1,'W4')">
                                       <i id="icon1W1" class="fa-solid fa-heart fa-lg" style="color: #7c7e82;"></i>
@@ -215,7 +215,7 @@
 
       <!-- MODALS -->
       <!-- WEEK 1 MODALS -->
-      <% const week1Modals=menuData.slice(0, 1); %>
+      <% const week1Modals=menuData.slice(0, 12); %>
         <% week1Modals.forEach(function(recipe, index) { %>
           <div id="detailsModal<%= index %>week1" class="modal">
             <div class="modal-content">
@@ -378,7 +378,7 @@
 
 
             <!-- WEEK 2 MODALS -->
-            <% const week2Modals=menuData.slice(1,2); %>
+            <% const week2Modals=menuData.slice(12,24); %>
               <% week2Modals.forEach(function(recipe, index) { %>
                 <div id="detailsModal<%= index %>week2" class="modal">
                   <div class="modal-content">
@@ -539,7 +539,7 @@
                 <% }); %>
 
                   <!-- WEEK 3 MODALS -->
-                  <% const week3Modals=menuData.slice(1,2); %>
+                  <% const week3Modals=menuData.slice(24,36); %>
                     <% week3Modals.forEach(function(recipe, index) { %>
                       <div id="detailsModal<%= index %>week3" class="modal">
                         <div class="modal-content">
@@ -700,7 +700,7 @@
                       <% }); %>
 
                         <!-- WEEK 4 MODALS -->
-                        <% const week4Modals=menuData.slice(1,2); %>
+                        <% const week4Modals=menuData.slice(36,48); %>
                           <% week4Modals.forEach(function(recipe, index) { %>
                             <div id="detailsModal<%= index %>week4" class="modal">
                               <div class="modal-content">
