@@ -1,7 +1,8 @@
-const express = require('express');
+ const express = require('express');
 const mongoose = require('mongoose')
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+require("dotenv").config();
 
 
 const homePageRoute = require('./routes/index-route');
@@ -14,6 +15,7 @@ const sourcingRoute = require('./routes/sourcing-route');
 const loginSignupRoute = require('./routes/login-signup-route');
 const userRoute = require('./routes/user-route');
 const adminRoute = require('./routes/admin-route');
+const orderRoute = require("./routes/order-route");
 const ourMenuRoute = require('./routes/our-menu-route');
 
 const port = process.env.PORT || 8080;
@@ -45,7 +47,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
 app.use('/', homePageRoute);
 app.use('/about-us', aboutUsPageRoute);
 app.use('/how-it-works', hiwRoute);
@@ -57,6 +58,7 @@ app.use('/user', userRoute);
 app.use('/admin', adminRoute);
 app.use('/cookbook', cookbookRoute);
 app.use('/menu', ourMenuRoute);
+app.use("/order", orderRoute);
 
 
 mongoose

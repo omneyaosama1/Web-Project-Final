@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const {getAllUsers, getUserById, addUser, updateUser, deleteUser}=require('../controllers/userCtrl');
+
 const { checkUserAuth } = require("../middleware/userAuthenticator");
 const {
     renderUserPage,
@@ -21,17 +23,19 @@ router.get("/history", checkUserAuth, renderUserHistoryPage);
 // router.post("/login", (req, res) => {
 //     const { email, password } = req.body;
 
-//     // Example: Validate credentials and authenticate user
-//     // Assuming successful authentication:
-//     if (email === "sarah@gmail.com" && password === "1234") {
-//         req.session.user = { email: "sarah@gmail.com", role: "user" };
-//         res.redirect("/user"); // Redirect to user profile page or any other page
-//     } else {
-//         res.status(401).send("Invalid email or password");
-//     }
-// });
-
 // Logout route
 router.get("/logout", handleLogout);
+
+//get all users
+router.get('/allUsers', getAllUsers);
+//get one user by id
+router.get('/:id', getUserById);
+//add user
+router.post('/add', addUser);
+//update info
+router.put('/update/:id', updateUser);
+//delete user
+router.delete('/delete/:id', deleteUser);
+
 
 module.exports = router;
