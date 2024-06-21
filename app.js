@@ -20,6 +20,8 @@ const orderRoute = require("./routes/order-route");
 const ourMenuRoute = require('./routes/our-menu-route');
 const usersAdminRoute = require('./routes/usersAdmin-route');
 const productsRoute = require('./routes/products-route');
+const analyticsRoute = require('./routes/analytics-route');
+const profileRoute = require('./routes/profile-route');
 
 
 
@@ -72,6 +74,9 @@ app.use('/menu', ourMenuRoute);
 app.use("/order", orderRoute);
 app.use('/usersAdmin', usersAdminRoute);
 app.use('/products', productsRoute);
+app.use('/analytics',analyticsRoute);
+app.use('/profile',profileRoute);
+
 
 
 mongoose

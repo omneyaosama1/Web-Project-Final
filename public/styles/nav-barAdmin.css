@@ -44,7 +44,7 @@ orange:    #f19f13*/
 body{
     font-family: 'Poppins',sans-serif;
     width: 0vw;
-    height: 100vh;
+ 
     font-size: 0.88rem;
     user-select: none;
     overflow-x: hidden;
@@ -117,7 +117,7 @@ aside .top{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-top: 1.4rem;
+  
 }
 aside .logo{
     display: flex;
@@ -135,7 +135,7 @@ aside .sidebar{
     background-image: linear-gradient(to bottom, #167592, #78d1d1);
     display: flex;
     flex-direction: column;
-    height: 85vh;
+    height: 93vh;
     position: relative;
     top: 1rem;
 }

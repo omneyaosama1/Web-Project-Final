@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/dashboard.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <%- include("partial/nav-barAdmin.ejs") %>
+        </aside>
+        <section class="main">
+            <h2>My Profile</h2>
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-image">
+                        <img src="https://via.placeholder.com/150" alt="Profile Picture">
+                    </div>
+                    <div class="profile-info">
+                        <h2>Rafiqul Rahman</h2>
+                        <p>Team Manager</p>
+                        <p>Leeds, United Kingdom</p>
+                    </div>
+                    <div class="profile-edit">
+                        <button class="edit-button">Edit <i class="fas fa-edit"></i></button>
+                    </div>
+                </div>
+                <div class="profile-section">
+                    <h3>Personal Information</h3>
+                    <button class="edit-button">Edit <i class="fas fa-edit"></i></button>
+                    <div class="profile-details">
+                        <p><strong>First Name:</strong> Rafiqul</p>
+                        <p><strong>Last Name:</strong> Rahman</p>
+                        <p><strong>Email:</strong> rafiqulrahman5@gmail.com</p>
+                        <p><strong>Phone:</strong> +09 345 346 46</p>
+                        <p><strong>Bio:</strong> Team Manager</p>
+                    </div>
+                </div>
+                <div class="profile-section">
+                    <h3>Address</h3>
+                    <button class="edit-button">Edit <i class="fas fa-edit"></i></button>
+                    <div class="profile-details">
+                        <p><strong>Country:</strong> United Kingdom</p>
+                        <p><strong>City/State:</strong> Leeds, East London</p>
+                        <p><strong>Postal Code:</strong> ERT 2354</p>
+                        <p><strong>TAX ID:</strong> AS45645756</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="/scripts/dashboard.js"></script>
+</body>
+</html>
