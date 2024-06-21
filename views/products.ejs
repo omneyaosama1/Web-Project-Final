@@ -23,21 +23,28 @@
                     <thead>
                         <tr>
                             <th>Image</th>
-                            <th>ProductName</th>
+                            <th>Product Name</th>
                             <th>Description</th>
                             <th>Duration</th>
                             <th>Difficulty</th>
                         </tr>
                     </thead>
                     <tbody id="productTableBody">
-                        <tr>
-                            <td><img src="/images/hamburger.png" alt="Hamburger"></td>
-                            <td>Hamburger</td>
-                            <td>A delicious hamburger with fresh ingredients</td>
-                            <td>15 min</td>
-                            <td>Easy</td>
-                        </tr>
-                        <!-- Repeat for other rows -->
+                        <% if (meals && meals.length > 0) { %>
+                            <% meals.forEach(meal => { %>
+                                <tr>
+                                    <td><img src="<%= meal.image %>" alt="<%= meal.name %>"></td>
+                                    <td><%= meal.name %></td>
+                                    <td><%= meal.description %></td>
+                                    <td><%= meal.cookTime %> min</td>
+                                    <td><%= meal.difficulty %></td>
+                                </tr>
+                            <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="5">No meals found</td>
+                            </tr>
+                        <% } %>
                     </tbody>
                 </table>
             </div>
