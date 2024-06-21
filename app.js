@@ -34,7 +34,7 @@ app.use('/menu',menuRoute);
 
 
 // MongoDB Connection
- const dbURI = 'mongodb+srv://alaa:QWWVnacCTE3qCf2P@freshbites.wagcbow.mongodb.net/FreshBites?retryWrites=true&w=majority&appName=freshbites';
+ const dbURL = 'mongodb+srv://alaa:QWWVnacCTE3qCf2P@freshbites.wagcbow.mongodb.net/FreshBites?retryWrites=true&w=majority&appName=freshbites';
  mongoose
  .connect(dbURL)
  .then(() => {
