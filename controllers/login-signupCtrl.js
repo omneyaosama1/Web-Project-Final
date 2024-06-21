@@ -80,6 +80,7 @@ const handleLogin = async (req, res) => {
             //     name: existingUser.name,
             // });
 
+    
             req.session.user = existingUser;
 
             console.log(req.session.user);

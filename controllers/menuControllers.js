@@ -17,19 +17,12 @@ const userCtrl=require('../controllers/userCtrl');
 // Show all menu items according to user preferences
 const getMenu = async (req, res) => {
     try {
+        if (!req.session.user) {
+            req.session.user = await User.findById(req.session.userId);
+        }
+
+        const user = req.session.user;
         
-        const { userId } = req.body;
-
-        if (!userId) {
-            return res.status(400).json({ error: 'User ID is required' });
-        }
-
-        const userResponse = await userCtrl.getUserById(userId);
-        const user = userResponse && userResponse._doc;
-
-        if (!user) {
-            return res.status(404).json({ error: 'User not found' });
-        }
 
         const preferences = user.subPlan.preferences;
         console.log('User preferences:', preferences);

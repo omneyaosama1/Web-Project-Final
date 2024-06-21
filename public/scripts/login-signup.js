@@ -56,6 +56,7 @@ signUpForm.addEventListener('submit', (event) => {
 
 
 function signup(username, email, password, formattedDate) {
+    console.log("Sending:", selectedMealTypes, finalPrice);
     const formType = "Signup";
 
     $.ajax({

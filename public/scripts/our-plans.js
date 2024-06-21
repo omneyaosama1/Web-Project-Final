@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Function to update the checkout preview
     function updateCheckoutPreview() {
-        const mealTypes = ['Meat and Veggies', 'Veggies', 'Family & Friends', 'Fit & Wholesome', 'Under 20-minutes', 'Pescatarian'];
-        const mealPrices = [9.99, 8.49, 10.99, 11.29, 7.99, 12.99];
+        const mealTypes = ['meat', 'veggies', 'family', 'fit', 'speedy', 'fish'];
+        const mealPrices = 150;
         const planPrices = {
-            '2': 39.99,
-            '4': 69.99,
+            '2': 225,
+            '4': 300,
         };
 
         // Get the checked radio input for number of people
@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const mealTypeCheckboxes = document.querySelectorAll('input[name="meal-type"]:checked');
         mealTypeCheckboxes.forEach(checkbox => {
             const mealTypeIndex = parseInt(checkbox.value);
+            console.log(mealTypeIndex);
             selectedMealTypes.push(mealTypes[mealTypeIndex]);
         });
         const selectedMealType = selectedMealTypes.join(', '); // Join selected meal types with commas
@@ -40,18 +41,18 @@ document.addEventListener("DOMContentLoaded", function() {
             mealTypeElement.textContent = "Choose Meal Type";
             mealCountElement.textContent = "";
             mealTotalServingsElement.textContent = "";
-            boxPriceElement.textContent = "$0";
-            pricePerServingElement.textContent = "$0";
-            finalPriceElement.textContent = "$0";
+            boxPriceElement.textContent = "0 EGP";
+            pricePerServingElement.textContent = "0 EGP";
+            finalPriceElement.textContent = "0 EGP";
         } else {
             preferenceNoteElement.style.display = "none";
             mealTypeElement.textContent = selectedMealType;
             mealCountElement.textContent = numberOfMeals + " meals for " + numberOfPeople + " people";
             mealTotalServingsElement.textContent = totalServings + " total servings";
 
-            boxPriceElement.textContent = "$" + planPrices[numberOfPeople];
-            pricePerServingElement.textContent = "$" + mealPrices[Math.floor(Math.random() * mealPrices.length)];
-            finalPriceElement.textContent = "$" + (planPrices[numberOfPeople] * totalServings).toFixed(2);
+            boxPriceElement.textContent = planPrices[numberOfPeople] + "EGP";
+            pricePerServingElement.textContent =  mealPrices + "EGP";
+            finalPriceElement.textContent = (planPrices[numberOfPeople] + (totalServings * mealPrices)).toFixed(2) + "EGP";
         }
     }
 
@@ -84,7 +85,53 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        movePage(1);
+        const selectedMealTypes = [];
+        const mealTypes = ['meat', 'veggies', 'family', 'fit', 'speedy', 'fish'];
+        const finalPriceElement = document.querySelector(".final-price-span");
+
+        checkboxes.forEach(checkbox => {
+            const mealTypeIndex = parseInt(checkbox.value);
+            selectedMealTypes.push(mealTypes[mealTypeIndex]);
+        });
+
+        const finalPrice = parseInt(finalPriceElement.textContent);
+
+        const numberOfPeopleInput = document.querySelector('input[name="people-radio"]:checked');
+        const numberOfPeople = numberOfPeopleInput ? numberOfPeopleInput.value : '2'; // Default to '2' if no radio input is checked
+
+        // Get the checked radio input for number of meals
+        const numberOfMealsInput = document.querySelector('input[name="meals-radio"]:checked');
+        const numberOfMeals = numberOfMealsInput ? numberOfMealsInput.value : '1'; // Default to '1' if no radio input is checked
+
+        savePreferencesInSession(selectedMealTypes, finalPrice, numberOfPeople, numberOfMeals);
+
+    }
+    
+    function savePreferencesInSession(selectedMealTypes, finalPrice,  numberOfPeople, numberOfMeals) {
+        const formNumber = '1';
+        
+        $.ajax({
+            url: '/our-plans',
+            type: 'POST',
+            data: {
+                formNumber_inp: formNumber,
+                selectedMealTypes_inp: selectedMealTypes,
+                finalPrice_inp: finalPrice,
+                numberOfMeals_inp: numberOfMeals,
+                numberOfPeople_inp: numberOfPeople
+            },
+            success: function(response) {
+                if (response.success) {
+                    console.log("Data was stored in session");
+                    movePage(1);
+                } else {
+                    console.log("Failed to store data in session");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(error.body);
+            }
+        })
     }
 
     // Handle credentials form submission

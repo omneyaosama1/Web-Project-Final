@@ -46,6 +46,10 @@ a {
     font-family: Roboto;
 }
 
+.nav-bar ul {
+    margin-right: 50px;
+}
+
 .nav-bar ul li {
     list-style: none;
     display: inline-block;
