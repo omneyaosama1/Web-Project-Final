@@ -28,35 +28,31 @@
                         <input type="text" placeholder="Search...">
                     </div>
                     <div class="table-filters">
-                        <button class="filter-button">add-User</button>
-                        
+                        <button class="filter-button">Add User</button>
                     </div>
                 </div>
                 <table>
                     <thead>
                         <tr>
                             <th>Name</th>
-
                             <th>Role</th>
-                            
                             <th>Email</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Darlene Robertson</td>
-                          
-                            <td>Admin</td>
-                            <td>darlene@example.com</td>
-                        </tr>
-                        <tr>
-                            <td> Marvin McKinney</td>
-                            
-                            <td>User</td>
-                            
-                            <td>marvin@example.com</td>
-                        </tr>
-                        <!-- Repeat for other rows -->
+                        <% if (users && users.length > 0) { %>
+                            <% users.forEach(user => { %>
+                                <tr>
+                                    <td><%= user.name %></td>
+                                    <td><%= user.userType %></td>
+                                    <td><%= user.email %></td>
+                                </tr>
+                            <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="3">No users found</td>
+                            </tr>
+                        <% } %>
                     </tbody>
                 </table>
             </div>
