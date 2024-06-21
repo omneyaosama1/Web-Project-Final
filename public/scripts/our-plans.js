@@ -149,7 +149,44 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
-        movePage(2);
+        const formData = {
+            firstName: document.querySelector('.credentials-first-name-inp').value,
+            lastName: document.querySelector('.credentials-last-name-inp').value,
+            email: document.querySelector('.credentials-email-inp').value,
+            contactNumber: document.querySelector('.credentials-number-inp').value,
+            address: document.querySelector('.credentials-address-inp').value
+        };
+        saveCredentialsInSessions(formData)
+
+    }
+    
+    function saveCredentialsInSessions(formData) {
+        const formNumber = '2';
+
+        const {firstName, lastName, email, contactNumber, address} = formData;
+        $.ajax({
+            url: '/our-plans',
+            type: 'POST',
+            data: {
+                formNumber_inp: formNumber,
+                firstName_inp: firstName,
+                lastName_inp: lastName,
+                email_inp: email,
+                contactNumber_inp: contactNumber,
+                address_inp: address
+            },
+            success: function(response) {
+                if (response.success) {
+                    console.log("Data was stored in session");
+                    movePage(2);
+                } else {
+                    console.log("Failed to store data in session");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(error.body);
+            }
+        })
     }
 
     // Handle payment form submission
@@ -197,6 +234,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         if (isFormComplete && cvvNote.style.display !== "block" && expDateNote.style.display !== "block") {
+            savePaymentsInSessions();
             movePage(3);
         }
     }
