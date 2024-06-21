@@ -7,6 +7,7 @@ const ourPlansRoute = require('./routes/our-plans-route');
 const sustainabilityRoute = require('./routes/sustainability-route');
 const sourcingRoute = require('./routes/sourcing-route');
 const menuRoute=require('./routes/menu-route');
+const userRoute=require('./routes/user-route');
 const port = process.env.PORT ||3001;
 
 const app = express();
@@ -28,12 +29,12 @@ app.use('/how-it-works', hiwRoute);
 app.use('/our-plans', ourPlansRoute);
 app.use('/sustainability', sustainabilityRoute);
 app.use('/sourcing', sourcingRoute);
+app.use("/user",userRoute);
 app.use('/menu',menuRoute);
 
 
 // MongoDB Connection
  const dbURI = 'mongodb+srv://alaa:QWWVnacCTE3qCf2P@freshbites.wagcbow.mongodb.net/FreshBites?retryWrites=true&w=majority&appName=freshbites';
-//const dbURI ='mongodb+srv://alaawaledd:Aw827948@cluster0.vlovamp.mongodb.net/menu?retryWrites=true&w=majority&appName=cluster0';
 mongoose.connect(dbURI)
     .then(() => {
         console.log('Connected to MongoDB');
