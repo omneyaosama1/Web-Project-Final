@@ -108,7 +108,7 @@ function login(email, password) {
         success: function (response) {
             if (response.success) {
                 if (response.user.userType === "Admin"){
-                    window.location.href = '/admin';
+                    window.location.href = '/dashboard';
                 } else{
                     console.log(response.user.id);
                     window.location.href = '/'; 
