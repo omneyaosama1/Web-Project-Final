@@ -13,7 +13,9 @@ router.get('/', async (req, res) => {
 });
  // Adjust the path as needed
 
-router.get('/', userCtrl.getUsersAdmin);
-router.post('/add', userCtrl.addUserAdmin);
-
+ router.get('/', userCtrl.getUsersAdmin);
+ router.post('/add', userCtrl.addUserAdmin);
+ router.post('/edit', userCtrl.editUserAdmin);
+ router.post('/delete/:id', userCtrl.deleteUserAdmin);
+ router.get('/search', userCtrl.searchUsers);
 module.exports = router;

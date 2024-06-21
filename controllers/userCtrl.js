@@ -195,7 +195,70 @@ const getUsersAdmin = async (req, res) => {
       res.status(500).send("Server Error");
   }
 };
+const editUserAdmin = async (req, res) => {
+  const { id, name, email, userType, password, address, phoneNumber, birthdate } = req.body;
 
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      {
+        name,
+        email,
+        userType,
+        password,
+        address,
+        phoneNumber,
+        birthdate: moment(birthdate, "YYYY-MM-DD").toDate(),
+      },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).send('User not found');
+    }
+
+    res.redirect('/usersAdmin'); // Redirect to the users page
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Failed to update user');
+  }
+};
+
+const deleteUserAdmin = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedUser = await User.findByIdAndDelete(id);
+
+    if (!deletedUser) {
+      return res.status(404).send('User not found');
+    }
+
+    res.redirect('/usersAdmin'); // Redirect to the users page
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Failed to delete user');
+  }
+};
+const searchUsers = async (req, res) => {
+  const { q } = req.query;
+
+  try {
+    const users = await User.find({
+      name: { $regex: new RegExp(q, 'i') } // Case-insensitive search
+    });
+
+    const formattedUsers = users.map(user => ({
+      ...user.toObject(),
+      birthdate: moment(user.birthdate).format('YYYY-MM-DD')
+    }));
+
+    res.render('usersAdmin', { users: formattedUsers });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
+};
 module.exports = {
     renderUserPage,
     renderFavMealsPage,
@@ -207,5 +270,8 @@ module.exports = {
     updateUser,
     deleteUser,
     getUsersAdmin,
-    addUserAdmin
+    addUserAdmin,
+    editUserAdmin,
+    deleteUserAdmin,
+    searchUsers
 };
