@@ -11,7 +11,7 @@ router.post('/login', async (req, res) => {
       req.session.user = user;
       res.redirect('/profile');
   } else {
-      res.redirect('/login-signup');
+      res.redirect('/profile');
   }
 });
 
