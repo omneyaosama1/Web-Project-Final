@@ -12,7 +12,7 @@ const formSubmissionHandling = async (req, res) => {
         case "1":
             await handlePlanForm(req, res);
             break;
-        case '2':
+        case "2":
             await handleCredentialForm(req, res);
             break;
         case "3":
@@ -26,6 +26,8 @@ const formSubmissionHandling = async (req, res) => {
 };
 
 const handlePlanForm = async (req, res) => {
+    console.log("In credentials function");
+
     try {
         const {
             "selectedMealTypes_inp[]": selectedMealTypes,
@@ -40,7 +42,7 @@ const handlePlanForm = async (req, res) => {
                 preferences: selectedMealTypes,
                 numberOfPeople: numberOfPeople_inp, // Must be one of [2, 4]
                 numberOfMeals: numberOfMeals_inp,
-                totalamount: finalPrice_inp
+                totalamount: finalPrice_inp,
             };
 
             await loggedInUser.save();
@@ -49,12 +51,10 @@ const handlePlanForm = async (req, res) => {
             req.session.save((err) => {
                 if (err) {
                     console.error("Session save error:", err);
-                    return res
-                        .status(500)
-                        .send({
-                            success: false,
-                            message: "Failed to save session data",
-                        });
+                    return res.status(500).send({
+                        success: false,
+                        message: "Failed to save session data",
+                    });
                 }
 
                 res.send({
@@ -77,35 +77,38 @@ const handlePlanForm = async (req, res) => {
 const handleCredentialForm = async (req, res) => {
     console.log("In credentials function");
 
-    
-    const {firstName_inp, lastName_inp, email_inp, contactNumber_inp, address_inp} = req.body;
+    const {
+        firstName_inp,
+        lastName_inp,
+        email_inp,
+        contactNumber_inp,
+        address_inp,
+    } = req.body;
     try {
         const formData_inp = {
             firstName: firstName_inp,
             lName: lastName_inp,
             email: email_inp,
             contactNumber: contactNumber_inp,
-            address: address_inp
+            address: address_inp,
         };
         const loggedInUser = await User.findOne({ _id: req.session.user._id });
         console.log("Logged User: " + loggedInUser);
         console.log(formData_inp);
         if (loggedInUser) {
-            loggedInUser.address = formData_inp.address
+            loggedInUser.address = formData_inp.address;
             loggedInUser.phoneNumber = parseInt(formData_inp.contactNumber);
-                    
+
             await loggedInUser.save();
             req.session.user.subPlan = loggedInUser.subPlan;
 
             req.session.save((err) => {
                 if (err) {
                     console.error("Session save error:", err);
-                    return res
-                        .status(500)
-                        .send({
-                            success: false,
-                            message: "Failed to save session data",
-                        });
+                    return res.status(500).send({
+                        success: false,
+                        message: "Failed to save session data",
+                    });
                 }
 
                 res.send({
@@ -125,7 +128,51 @@ const handleCredentialForm = async (req, res) => {
     }
 };
 
-const handlePaymentForm = async (req, res) => {};
+const handlePaymentForm = async (req, res) => {
+    console.log("In payment function");
+
+    const { cardNumber_inp, cardExpDate_inp, cardCVV_inp } = req.body;
+    const loggedInUser = await User.findOne({ _id: req.session.user._id });
+    try {
+        if (loggedInUser) {
+            
+            if (!loggedInUser.visaInfo) {
+                loggedInUser.visaInfo = {};
+            }
+
+            loggedInUser.visaInfo.cardNum = cardNumber_inp;
+            loggedInUser.visaInfo.expDate = cardExpDate_inp;
+            loggedInUser.visaInfo.cvv = cardCVV_inp;
+            req.session.user.subPlan = loggedInUser.subPlan;
+            console.log(loggedInUser);
+            
+            await loggedInUser.save();
+            req.session.save((err) => {
+                if (err) {
+                    console.error("Session save error:", err);
+                    return res.status(500).send({
+                        success: false,
+                        message: "Failed to save session data",
+                    });
+                }
+
+                res.send({
+                    success: true,
+                    message: "Payment details updated successfully",
+                });
+            });
+        } else {
+            console.log("user not found");
+            res.status(404).send({ success: false, message: "User not found" });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            success: false,
+            message: "Server error during login",
+        });
+    }
+};
 
 module.exports = {
     renderPage,
