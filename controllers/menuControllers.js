@@ -18,7 +18,7 @@ const userCtrl=require('../controllers/userCtrl');
 const getMenu = async (req, res) => {
     try {
         
-        const { userId } = req.body;
+       // const { userId } = req.body;
 
         if (!userId) {
             return res.status(400).json({ error: 'User ID is required' });

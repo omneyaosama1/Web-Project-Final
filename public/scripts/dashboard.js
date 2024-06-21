@@ -141,3 +141,43 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     });
 });
+var addUserModal = document.getElementById("addUserModal");
+        var editUserModal = document.getElementById("editUserModal");
+
+        // Get the button that opens the add user modal
+        var addUserBtn = document.getElementById("addUserBtn");
+
+        // When the user clicks the button, open the add user modal
+        addUserBtn.onclick = function() {
+            addUserModal.style.display = "block";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == addUserModal) {
+                addUserModal.style.display = "none";
+            }
+            if (event.target == editUserModal) {
+                editUserModal.style.display = "none";
+            }
+        }
+
+        // Function to open the edit user modal and populate the form
+        function openEditModal(id, name, email, userType, password, address, phoneNumber, birthdate) {
+            document.getElementById("editUserId").value = id;
+            document.getElementById("editName").value = name;
+            document.getElementById("editEmail").value = email;
+            document.getElementById("editUserType").value = userType;
+            document.getElementById("editPassword").value = password;
+            document.getElementById("editAddress").value = address;
+            document.getElementById("editPhoneNumber").value = phoneNumber;
+            document.getElementById("editBirthdate").value = birthdate;
+
+            editUserModal.style.display = "block";
+        }
+
+        // Function to close the modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
