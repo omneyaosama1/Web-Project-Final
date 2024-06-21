@@ -1,8 +1,9 @@
- const express = require('express');
+require("dotenv").config();
+const express = require('express');
 const mongoose = require('mongoose')
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-require("dotenv").config();
+
 
 
 const homePageRoute = require('./routes/index-route');
@@ -14,9 +15,15 @@ const sustainabilityRoute = require('./routes/sustainability-route');
 const sourcingRoute = require('./routes/sourcing-route');
 const loginSignupRoute = require('./routes/login-signup-route');
 const userRoute = require('./routes/user-route');
-const adminRoute = require('./routes/admin-route');
+const dashboardRoute = require('./routes/dashboard-route');
 const orderRoute = require("./routes/order-route");
 const ourMenuRoute = require('./routes/our-menu-route');
+const usersAdminRoute = require('./routes/usersAdmin-route');
+const productsRoute = require('./routes/products-route');
+const analyticsRoute = require('./routes/analytics-route');
+const profileRoute = require('./routes/profile-route');
+
+
 
 const port = process.env.PORT || 8080;
 const dbUserName = process.env.dbUserName;
@@ -47,6 +54,12 @@ app.use((req, res, next) => {
   next();
 });
 
+
+
+
+// Routes
+//app.get('/dashboard', getDashboard);
+//app.get('/usersAdmin', getUsersAdmin);
 app.use('/', homePageRoute);
 app.use('/about-us', aboutUsPageRoute);
 app.use('/how-it-works', hiwRoute);
@@ -55,10 +68,15 @@ app.use('/sustainability', sustainabilityRoute);
 app.use('/sourcing', sourcingRoute);
 app.use('/login-signup', loginSignupRoute);
 app.use('/user', userRoute);
-app.use('/admin', adminRoute);
+app.use('/dashboard', dashboardRoute);
 app.use('/cookbook', cookbookRoute);
 app.use('/menu', ourMenuRoute);
 app.use("/order", orderRoute);
+app.use('/usersAdmin', usersAdminRoute);
+app.use('/products', productsRoute);
+app.use('/analytics',analyticsRoute);
+app.use('/profile',profileRoute);
+
 
 
 mongoose
