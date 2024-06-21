@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles/menu.css">
+  <script src="/scripts/menu.js"></script>
+  <title>MENU</title>
+</head>
+
+<body>
+  <header>
+    <%- include("./partial/nav-bar.ejs") %>
+
+      <section class="menu">
+        <!-- SEARCH -->
+        <form class="searchPart" onsubmit="return searchValidate(this)">
+          <div class="searchDiv">
+            <input type="text" id="SearchW" placeholder="Search...">
+            <button id="SearchB"><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #7acde3;"></i></button>
+          </div>
+          <div id="errorMsg" class="errorMsg"></div>
+        </form>
+
+        <!-- Rotating Plates -->
+        <div class="rotate-container1">
+          <img id="rotatingImg1" src="/images/Meals-images/2.jpeg">
+        </div>
+
+        <div class="rotate-container2">
+          <img id="rotatingImg2" src="/images/Meals-images/Pizza.jpeg">
+        </div>
+
+        <div class="rotate-container3">
+          <img id="rotatingImg3" src="/images/Meals-images/plate3.jpeg">
+        </div>
+
+        <div class="rotate-container4">
+          <img id="rotatingImg4" src="/images/Meals-images/plate 4.jpeg">
+        </div>
+
+        <h2 id="titleM">MENU</h2>
+        <div class="buttons">
+          <button id="B1" onclick="gettingDates(0); viewItemsByWeek('week1'); SelectB('B1'); searchItem('week1')">WEEK
+            1</button>
+          <button id="B2" onclick="gettingDates(7); viewItemsByWeek('week2'); SelectB('B2'); searchItem('week2')">WEEK
+            2</button>
+          <button id="B3" onclick="gettingDates(14); viewItemsByWeek('week3'); SelectB('B3'); searchItem('week3')">WEEK
+            3</button>
+          <button id="B4" onclick="gettingDates(21); viewItemsByWeek('week4'); SelectB('B4'); searchItem('week4')">WEEK
+            4</button>
+        </div>
+
+        <!-- Feedback -->
+        <div id="overlay"></div>
+        <div id="feedbackIcon" onclick="showBox()">
+          <img src="/images/Feedback.jpg" width="35" height="100" />
+        </div>
+        <div id="feedbackContent">
+          <button class="exit" onclick="exitFeedback()">x</button>
+          <h2>Rate our Website</h2>
+          <div class="button-row">
+            <button class="choice" onclick="showTextArea('Hate')"><span></span>Hate</button>
+            <button class="choice" onclick="showTextArea('Dislike')"><span></span>Dislike</button>
+            <button class="choice" onclick="showTextArea('Neutral')"><span></span>Neutral</button>
+          </div>
+          <div class="button-row">
+            <button class="choice" onclick="showTextArea('Like')"><span></span>Like</button>
+            <button class="choice" onclick="showTextArea('Love')"><span></span>Love</button>
+          </div>
+          <form name="feedbackForm" onsubmit="return feedbackInput(this)">
+            <div id="feedback">
+              <h4>Please share any suggestions for enhancements</h4>
+              <textarea id="textArea" name="review" placeholder="Enter your message here..."></textarea>
+              <div id="reviewErr" class="error"></div>
+              <button id="submit-btn" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- CART OVERLAY -->
+        <div class="overlayCart" id="overlayCart">
+          <div class="popWindow-cart">
+            <h1>Your Cart</h1>
+            <hr>
+            <h3>Order Summary</h3>
+            <br>
+            
+            <p id="cartContent">
+              <i class="fa-solid fa-cart-shopping fa-xl" style="color: #147186;"></i>
+              Your Cart Is Empty,<br> Please Add Items.
+
+              
+            </p>
+            <div id="headerC">
+              <h3><i>Items:</i></h3>
+              <br>
+            </div>
+            <div id="orderSumm"></div>
+           
+            <button id="CloseCart" onclick="closeWindow('overlayCart')">Finish</button>
+            <button class="closeB" onclick="closeWindow('overlayCart')">
+              <i class="fa-solid fa-xmark fa-xl" style="color: #2d523a;"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- ALERT MESSAGE -->
+        <div class="message">
+          <i class="fa-regular fa-circle-check check fa-lg" style="color: #386b55;"></i>
+          <span class="text">Added To Cart Successfully</span>
+        </div>
+
+        <div class="items-container">
+          <!-- ITEMS OF WEEK 1 -->
+
+          <% const week1Recipes=menuData.slice(0, 12); %> <!-- Slice the  recipes for week 1 -->
+
+            <% week1Recipes.forEach(function(recipe, index) { %>
+              <div class="items week1" id="item<%= index + 1 %>W1">
+                <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
+                <h3
+                  onclick="Details('detailsModal<%= index %>week1')">
+                  <%= recipe.name %>
+                </h3>
+                <span class="Features">
+                  <p id="duration">Cook Time: <%= recipe.cookTime %> min
+                    <br>
+                    <%=recipe.preferences%>
+                  </p>
+                  <button class="Fbtn" onclick="changeFavouriteC(1,'W1')">
+                    <i id="icon1W1" class="fa-solid fa-heart fa-lg" style="color: #7c7e82;"></i>
+                  </button>
+                  <button class="addBtn" onclick="addToCart('<%= index %>','week1')">
+                    <i id="plus1W1" class="fa-solid fa-plus fa-lg" style="color: #7c7e82;"></i>
+                  </button>
+                </span>
+              </div>
+              <% }); %>
+
+                <!-- ITEMS OF WEEK 2 -->
+                <% const week2Recipes=menuData.slice(12,24 ); %> <!-- Slice the  recipes for week 2 -->
+
+                  <% week2Recipes.forEach(function(recipe, index) { %>
+                    <div class="items week2" id="item<%= index + 1 %>W2">
+                      <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
+                      <h3
+                        onclick="Details('detailsModal<%= index %>week2')">
+                        <%= recipe.name %>
+                      </h3>
+                      <span class="Features">
+                        <p id="duration">Cook Time: <%= recipe.cookTime %> min
+                        </p>
+                        <button class="Fbtn" onclick="changeFavouriteC(1,'W2')">
+                          <i id="icon1W1" class="fa-solid fa-heart fa-lg" style="color: #7c7e82;"></i>
+                        </button>
+                        <button class="addBtn" onclick="addToCart('<%= index %>','week2')">
+                          <i id="plus1W1" class="fa-solid fa-plus fa-lg" style="color: #7c7e82;"></i>
+                        </button>
+                      </span>
+                    </div>
+                    <% }); %>
+
+                      <!-- ITEMS OF WEEK 3 -->
+                      <% const week3Recipes=menuData.slice(24,36 ); %> <!-- Slice the  recipes for week 3 -->
+
+                        <% week3Recipes.forEach(function(recipe, index) { %>
+                          <div class="items week3" id="item<%= index + 1 %>W2">
+                            <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
+                            <h3
+                              onclick="Details('detailsModal<%= index %>week3', '<%= recipe.name %>', '<%= recipe.description %>')">
+                              <%= recipe.name %>
+                            </h3>
+                            <span class="Features">
+                              <p id="duration">Cook Time: <%= recipe.cookTime %> min
+                              </p>
+                              <button class="Fbtn" onclick="changeFavouriteC(1,'W3')">
+                                <i id="icon1W1" class="fa-solid fa-heart fa-lg" style="color: #7c7e82;"></i>
+                              </button>
+                              <button class="addBtn" onclick="addToCart('<%= index %>','week3')">
+                                <i id="plus1W1" class="fa-solid fa-plus fa-lg" style="color: #7c7e82;"></i>
+                              </button>
+                            </span>
+                          </div>
+                          <% }); %>
+
+
+                            <!-- ITEMS OF WEEK 4 -->
+                            <% const week4Recipes=menuData.slice(36,48 ); %> <!-- Slice the  recipes for week 4 -->
+
+                              <% week4Recipes.forEach(function(recipe, index) { %>
+                                <div class="items week4" id="item<%= index + 1 %>W4">
+                                  <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
+                                  <h3
+                                    onclick="Details('detailsModal<%= index %>week4', '<%= recipe.name %>', '<%= recipe.description %>')">
+                                    <%= recipe.name %>
+                                  </h3>
+                                  <span class="Features">
+                                    <p id="duration">Cook Time: <%= recipe.cookTime %> min
+                                    </p>
+                                    <button class="Fbtn" onclick="changeFavouriteC(1,'W4')">
+                                      <i id="icon1W1" class="fa-solid fa-heart fa-lg" style="color: #7c7e82;"></i>
+                                    </button>
+                                    <button class="addBtn" onclick="addToCart('<%= index %>','week4')">
+                                      <i id="plus1W1" class="fa-solid fa-plus fa-lg" style="color: #7c7e82;"></i>
+                                    </button>
+                                  </span>
+                                </div>
+                                <% }); %>
+        </div>
+      </section>
+
+
+
+      <!-- MODALS -->
+      <!-- WEEK 1 MODALS -->
+      <% const week1Modals=menuData.slice(0, 12); %>
+        <% week1Modals.forEach(function(recipe, index) { %>
+          <div id="detailsModal<%= index %>week1" class="modal">
+            <div class="modal-content">
+              <span class="close" onclick="closeModal('detailsModal<%= index %>week1')">&times;</span>
+              <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
+              <h3 id="itemName">
+                <%= recipe.name %>
+              </h3>
+              <p id="itemDescription">  <%= recipe.description %></p>
+              <hr>
+              <div class="container">
+                <div class="card">
+                  <header class="card-header">
+                    <span>Ingredients</span>
+                  </header>
+                  <div class="card-content">
+                    <ul>
+                      <% recipe.ingredientsName.forEach(function(ingredient) { %>
+                        <li>
+                          <%= ingredient %>
+                        </li>
+                        <% }); %>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <header class="card-header">
+                    <span>Allergens</span>
+                  </header>
+                  <div class="card-content">
+                    <ul>
+                      <% recipe.allergens.forEach(function(allergen) { %>
+                        <li>
+                          <%= allergen %>
+                        </li>
+                        <% }); %>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <header class="card-header">
+                    <span>Utensils</span>
+                  </header>
+                  <div class="card-content">
+                    <ul>
+                      <% recipe.utensils.forEach(function(utensil) { %>
+                        <li>
+                          <%= utensil %>
+                        </li>
+                        <% }); %>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="accordion-content">
+                  <header class="accordion-header">Nutrition <i class="accordion-i fa-solid fa-plus fa-lg"
+                      style="color: #7c7e82;"></i></header>
+                  <div class="content-description">
+                    <table class="nutritionTable">
+                      <tbody>
+                        <tr>
+                          <td>Calories</td>
+                          <td id="caloriesAmount">
+                            <%= recipe.nutrition.calories %> kcal
+                          </td>
+                          <td>
+                            <div class="indicator-container">
+                              <div class="indicator" id="caloriesIndicator"></div>
+                              <span class="indicator-text" id="caloriesIndicatorText"></span>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Protein</td>
+                          <td id="proteinAmount">
+                            <%= recipe.nutrition.protein %> g
+                          </td>
+                          <td>
+                            <div class="indicator-container">
+                              <div class="indicator" id="proteinIndicator"></div>
+                              <span class="indicator-text" id="proteinIndicatorText"></span>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Fat</td>
+                          <td id="fatAmount">
+                            <%= recipe.nutrition.fat %> g
+                          </td>
+                          <td>
+                            <div class="indicator-container">
+                              <div class="indicator" id="fatIndicator"></div>
+                              <span class="indicator-text" id="fatIndicatorText"></span>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Carbohydrates</td>
+                          <td id="carbsAmount">
+                            <%= recipe.nutrition.carbohydrates %> g
+                          </td>
+                          <td>
+                            <div class="indicator-container">
+                              <div class="indicator" id="carbsIndicator"></div>
+                              <span class="indicator-text" id="carbsIndicatorText"></span>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Cholesterol</td>
+                          <td id="cholesterolAmount">
+                            <%= recipe.nutrition.cholesterol %> mg
+                          </td>
+                          <td>
+                            <div class="indicator-container">
+                              <div class="indicator" id="cholesterolIndicator"></div>
+                              <span class="indicator-text" id="cholesterolIndicatorText"></span>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Sodium</td>
+                          <td id="sodiumAmount">
+                            <%= recipe.nutrition.sodium %> mg
+                          </td>
+                          <td>
+                            <div class="indicator-container">
+                              <div class="indicator" id="sodiumIndicator"></div>
+                              <span class="indicator-text" id="sodiumIndicatorText"></span>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <header class="card-header">
+                    <span>Who Can Eat</span>
+                  </header>
+                  <div class="card-content">
+                    <ul>
+                      <% recipe.recommendations.forEach(function(recommendation) { %>
+                        <li>
+                          <%= recommendation %>
+                        </li>
+                        <% }); %>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <% }); %>
+
+
+
+            <!-- WEEK 2 MODALS -->
+            <% const week2Modals=menuData.slice(12,24); %>
+              <% week2Modals.forEach(function(recipe, index) { %>
+                <div id="detailsModal<%= index %>week2" class="modal">
+                  <div class="modal-content">
+                    <span class="close" onclick="closeModal('detailsModal<%= index %>week2')">&times;</span>
+                    <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
+                    <h3 id="itemName">
+                      <%= recipe.name %>
+                    </h3>
+                    <p id="itemDescription">  <%= recipe.description %></p>
+                    <hr>
+                    <div class="container">
+                      <div class="card">
+                        <header class="card-header">
+                          <span>Ingredients</span>
+                        </header>
+                        <div class="card-content">
+                          <ul>
+                            <% recipe.ingredientsName.forEach(function(ingredient) { %>
+                              <li>
+                                <%= ingredient %>
+                              </li>
+                              <% }); %>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div class="card">
+                        <header class="card-header">
+                          <span>Allergens</span>
+                        </header>
+                        <div class="card-content">
+                          <ul>
+                            <% recipe.allergens.forEach(function(allergen) { %>
+                              <li>
+                                <%= allergen %>
+                              </li>
+                              <% }); %>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div class="card">
+                        <header class="card-header">
+                          <span>Utensils</span>
+                        </header>
+                        <div class="card-content">
+                          <ul>
+                            <% recipe.utensils.forEach(function(utensil) { %>
+                              <li>
+                                <%= utensil %>
+                              </li>
+                              <% }); %>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div class="accordion-content">
+                        <header class="accordion-header">Nutrition <i class="accordion-i fa-solid fa-plus fa-lg"
+                            style="color: #7c7e82;"></i></header>
+                        <div class="content-description">
+                          <table class="nutritionTable">
+                            <tbody>
+                              <tr>
+                                <td>Calories</td>
+                                <td id="caloriesAmount">
+                                  <%= recipe.nutrition.calories %> kcal
+                                </td>
+                                <td>
+                                  <div class="indicator-container">
+                                    <div class="indicator" id="caloriesIndicator"></div>
+                                    <span class="indicator-text" id="caloriesIndicatorText"></span>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Protein</td>
+                                <td id="proteinAmount">
+                                  <%= recipe.nutrition.protein %> g
+                                </td>
+                                <td>
+                                  <div class="indicator-container">
+                                    <div class="indicator" id="proteinIndicator"></div>
+                                    <span class="indicator-text" id="proteinIndicatorText"></span>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Fat</td>
+                                <td id="fatAmount">
+                                  <%= recipe.nutrition.fat %> g
+                                </td>
+                                <td>
+                                  <div class="indicator-container">
+                                    <div class="indicator" id="fatIndicator"></div>
+                                    <span class="indicator-text" id="fatIndicatorText"></span>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Carbohydrates</td>
+                                <td id="carbsAmount">
+                                  <%= recipe.nutrition.carbohydrates %> g
+                                </td>
+                                <td>
+                                  <div class="indicator-container">
+                                    <div class="indicator" id="carbsIndicator"></div>
+                                    <span class="indicator-text" id="carbsIndicatorText"></span>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Cholesterol</td>
+                                <td id="cholesterolAmount">
+                                  <%= recipe.nutrition.cholesterol %> mg
+                                </td>
+                                <td>
+                                  <div class="indicator-container">
+                                    <div class="indicator" id="cholesterolIndicator"></div>
+                                    <span class="indicator-text" id="cholesterolIndicatorText"></span>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Sodium</td>
+                                <td id="sodiumAmount">
+                                  <%= recipe.nutrition.sodium %> mg
+                                </td>
+                                <td>
+                                  <div class="indicator-container">
+                                    <div class="indicator" id="sodiumIndicator"></div>
+                                    <span class="indicator-text" id="sodiumIndicatorText"></span>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                      <div class="card">
+                        <header class="card-header">
+                          <span>Who Can Eat</span>
+                        </header>
+                        <div class="card-content">
+                          <ul>
+                            <% recipe.recommendations.forEach(function(recommendation) { %>
+                              <li>
+                                <%= recommendation %>
+                              </li>
+                              <% }); %>
+                          </ul>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <% }); %>
+
+                  <!-- WEEK 3 MODALS -->
+                  <% const week3Modals=menuData.slice(24,36); %>
+                    <% week3Modals.forEach(function(recipe, index) { %>
+                      <div id="detailsModal<%= index %>week3" class="modal">
+                        <div class="modal-content">
+                          <span class="close" onclick="closeModal('detailsModal<%= index %>week3')">&times;</span>
+                          <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
+                          <h3 id="itemName">
+                            <%= recipe.name %>
+                          </h3>
+                          <p id="itemDescription"><%= recipe.description %></p>
+                          <hr>
+                          <div class="container">
+                            <div class="card">
+                              <header class="card-header">
+                                <span>Ingredients</span>
+                              </header>
+                              <div class="card-content">
+                                <ul>
+                                  <% recipe.ingredientsName.forEach(function(ingredient) { %>
+                                    <li>
+                                      <%= ingredient %>
+                                    </li>
+                                    <% }); %>
+                                </ul>
+                              </div>
+                            </div>
+
+                            <div class="card">
+                              <header class="card-header">
+                                <span>Allergens</span>
+                              </header>
+                              <div class="card-content">
+                                <ul>
+                                  <% recipe.allergens.forEach(function(allergen) { %>
+                                    <li>
+                                      <%= allergen %>
+                                    </li>
+                                    <% }); %>
+                                </ul>
+                              </div>
+                            </div>
+
+                            <div class="card">
+                              <header class="card-header">
+                                <span>Utensils</span>
+                              </header>
+                              <div class="card-content">
+                                <ul>
+                                  <% recipe.utensils.forEach(function(utensil) { %>
+                                    <li>
+                                      <%= utensil %>
+                                    </li>
+                                    <% }); %>
+                                </ul>
+                              </div>
+                            </div>
+
+                            <div class="accordion-content">
+                              <header class="accordion-header">Nutrition <i class="accordion-i fa-solid fa-plus fa-lg"
+                                  style="color: #7c7e82;"></i></header>
+                              <div class="content-description">
+                                <table class="nutritionTable">
+                                  <tbody>
+                                    <tr>
+                                      <td>Calories</td>
+                                      <td id="caloriesAmount">
+                                        <%= recipe.nutrition.calories %> kcal
+                                      </td>
+                                      <td>
+                                        <div class="indicator-container">
+                                          <div class="indicator" id="caloriesIndicator"></div>
+                                          <span class="indicator-text" id="caloriesIndicatorText"></span>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>Protein</td>
+                                      <td id="proteinAmount">
+                                        <%= recipe.nutrition.protein %> g
+                                      </td>
+                                      <td>
+                                        <div class="indicator-container">
+                                          <div class="indicator" id="proteinIndicator"></div>
+                                          <span class="indicator-text" id="proteinIndicatorText"></span>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>Fat</td>
+                                      <td id="fatAmount">
+                                        <%= recipe.nutrition.fat %> g
+                                      </td>
+                                      <td>
+                                        <div class="indicator-container">
+                                          <div class="indicator" id="fatIndicator"></div>
+                                          <span class="indicator-text" id="fatIndicatorText"></span>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>Carbohydrates</td>
+                                      <td id="carbsAmount">
+                                        <%= recipe.nutrition.carbohydrates %> g
+                                      </td>
+                                      <td>
+                                        <div class="indicator-container">
+                                          <div class="indicator" id="carbsIndicator"></div>
+                                          <span class="indicator-text" id="carbsIndicatorText"></span>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>Cholesterol</td>
+                                      <td id="cholesterolAmount">
+                                        <%= recipe.nutrition.cholesterol %> mg
+                                      </td>
+                                      <td>
+                                        <div class="indicator-container">
+                                          <div class="indicator" id="cholesterolIndicator"></div>
+                                          <span class="indicator-text" id="cholesterolIndicatorText"></span>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>Sodium</td>
+                                      <td id="sodiumAmount">
+                                        <%= recipe.nutrition.sodium %> mg
+                                      </td>
+                                      <td>
+                                        <div class="indicator-container">
+                                          <div class="indicator" id="sodiumIndicator"></div>
+                                          <span class="indicator-text" id="sodiumIndicatorText"></span>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+
+                            <div class="card">
+                              <header class="card-header">
+                                <span>Who Can Eat</span>
+                              </header>
+                              <div class="card-content">
+                                <ul>
+                                  <% recipe.recommendations.forEach(function(recommendation) { %>
+                                    <li>
+                                      <%= recommendation %>
+                                    </li>
+                                    <% }); %>
+                                </ul>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <% }); %>
+
+                        <!-- WEEK 4 MODALS -->
+                        <% const week4Modals=menuData.slice(36,48); %>
+                          <% week4Modals.forEach(function(recipe, index) { %>
+                            <div id="detailsModal<%= index %>week4" class="modal">
+                              <div class="modal-content">
+                                <span class="close" onclick="closeModal('detailsModal<%= index %>week4')">&times;</span>
+                                <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
+                                <h3 id="itemName">
+                                  <%= recipe.name %>
+                                </h3>
+                                <p id="itemDescription"><%= recipe.description %></p>
+                                <hr>
+                                <div class="container">
+                                  <div class="card">
+                                    <header class="card-header">
+                                      <span>Ingredients</span>
+                                    </header>
+                                    <div class="card-content">
+                                      <ul>
+                                        <% recipe.ingredientsName.forEach(function(ingredient) { %>
+                                          <li>
+                                            <%= ingredient %>
+                                          </li>
+                                          <% }); %>
+                                      </ul>
+                                    </div>
+                                  </div>
+
+                                  <div class="card">
+                                    <header class="card-header">
+                                      <span>Allergens</span>
+                                    </header>
+                                    <div class="card-content">
+                                      <ul>
+                                        <% recipe.allergens.forEach(function(allergen) { %>
+                                          <li>
+                                            <%= allergen %>
+                                          </li>
+                                          <% }); %>
+                                      </ul>
+                                    </div>
+                                  </div>
+
+                                  <div class="card">
+                                    <header class="card-header">
+                                      <span>Utensils</span>
+                                    </header>
+                                    <div class="card-content">
+                                      <ul>
+                                        <% recipe.utensils.forEach(function(utensil) { %>
+                                          <li>
+                                            <%= utensil %>
+                                          </li>
+                                          <% }); %>
+                                      </ul>
+                                    </div>
+                                  </div>
+
+                                  <div class="accordion-content">
+                                    <header class="accordion-header">Nutrition <i
+                                        class="accordion-i fa-solid fa-plus fa-lg" style="color: #7c7e82;"></i></header>
+                                    <div class="content-description">
+                                      <table class="nutritionTable">
+                                        <tbody>
+                                          <tr>
+                                            <td>Calories</td>
+                                            <td id="caloriesAmount">
+                                              <%= recipe.nutrition.calories %> kcal
+                                            </td>
+                                            <td>
+                                              <div class="indicator-container">
+                                                <div class="indicator" id="caloriesIndicator"></div>
+                                                <span class="indicator-text" id="caloriesIndicatorText"></span>
+                                              </div>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td>Protein</td>
+                                            <td id="proteinAmount">
+                                              <%= recipe.nutrition.protein %> g
+                                            </td>
+                                            <td>
+                                              <div class="indicator-container">
+                                                <div class="indicator" id="proteinIndicator"></div>
+                                                <span class="indicator-text" id="proteinIndicatorText"></span>
+                                              </div>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td>Fat</td>
+                                            <td id="fatAmount">
+                                              <%= recipe.nutrition.fat %> g
+                                            </td>
+                                            <td>
+                                              <div class="indicator-container">
+                                                <div class="indicator" id="fatIndicator"></div>
+                                                <span class="indicator-text" id="fatIndicatorText"></span>
+                                              </div>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td>Carbohydrates</td>
+                                            <td id="carbsAmount">
+                                              <%= recipe.nutrition.carbohydrates %> g
+                                            </td>
+                                            <td>
+                                              <div class="indicator-container">
+                                                <div class="indicator" id="carbsIndicator"></div>
+                                                <span class="indicator-text" id="carbsIndicatorText"></span>
+                                              </div>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td>Cholesterol</td>
+                                            <td id="cholesterolAmount">
+                                              <%= recipe.nutrition.cholesterol %> mg
+                                            </td>
+                                            <td>
+                                              <div class="indicator-container">
+                                                <div class="indicator" id="cholesterolIndicator"></div>
+                                                <span class="indicator-text" id="cholesterolIndicatorText"></span>
+                                              </div>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td>Sodium</td>
+                                            <td id="sodiumAmount">
+                                              <%= recipe.nutrition.sodium %> mg
+                                            </td>
+                                            <td>
+                                              <div class="indicator-container">
+                                                <div class="indicator" id="sodiumIndicator"></div>
+                                                <span class="indicator-text" id="sodiumIndicatorText"></span>
+                                              </div>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+
+                                  <div class="card">
+                                    <header class="card-header">
+                                      <span>Who Can Eat</span>
+                                    </header>
+                                    <div class="card-content">
+                                      <ul>
+                                        <% recipe.recommendations.forEach(function(recommendation) { %>
+                                          <li>
+                                            <%= recommendation %>
+                                          </li>
+                                          <% }); %>
+                                      </ul>
+                                    </div>
+                                  </div>
+
+                                </div>
+                              </div>
+                            </div>
+                            <% }); %>
+</body>
+
+</html>

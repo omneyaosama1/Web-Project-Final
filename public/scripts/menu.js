@@ -12,22 +12,30 @@ function printWarning(elementID, hintMSG) {
 }
 
 // print modal
-function Details(modalID, itemName, itemDescription) {
-
-    var itemModal = document.getElementById(modalID);
-    var name = itemModal.querySelector("#itemName");
-    var description = itemModal.querySelector("#itemDescription");
-
-    name.textContent = itemName;
-    description.textContent = itemDescription;
-    itemModal.style.display = "block";
-}
-
-function closeModal(modalID) {
-    var modal = document.getElementById(modalID);
-    modal.style.display = "none";
-}
-
+function Details(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.style.display = 'block';
+    }
+  }
+  
+  function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  }
+  
+  // Add event listener to close the modal when clicking outside of it
+  window.onclick = function(event) {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  };
+  
 
 
 function SelectB(buttonID) {
@@ -82,7 +90,7 @@ function changeFavouriteC(itemID, week) {
     var heart = document.getElementById('icon' + itemID + week);
     if (heart.style.color == "red") {
         heart.style.color = "grey";
-   
+
 
     }
     else {
@@ -97,20 +105,20 @@ function changeFavouriteC(itemID, week) {
 
 function searchValidate(form) {
     var searchInput = form.querySelector('#SearchW').value.trim();
-    var regex=/^[a-zA-Z\s]+$/;
+    var regex = /^[a-zA-Z\s]+$/;
     if (searchInput === "") {
         printWarning("errorMsg", "Please enter an item's name.");
         return false;
     }
-    else if(!regex.test(searchInput)){
-            printWarning("errorMsg", "Please enter a valid name.");
-            return false;
-        }
-       else{
-        printWarning("errorMsg","");
-        return true;
-       }
+    else if (!regex.test(searchInput)) {
+        printWarning("errorMsg", "Please enter a valid name.");
+        return false;
     }
+    else {
+        printWarning("errorMsg", "");
+        return true;
+    }
+}
 
 function searchItem() {
     var searchInput = document.getElementById('SearchW').value.toLowerCase().trim();
@@ -137,87 +145,6 @@ function searchItem() {
             }
         });
     }
-}
-
-
-// Cart
-function addToCart(itemID, week) {
-    var itemModal = document.getElementById('detailsModal' + itemID + week);
-    var allItems = document.querySelectorAll('.modal');
-    var cart = document.getElementById('cartContent');
-    var cList = document.getElementById('orderSumm');
-
-    if (cList.children.length === 0) {
-        cart.textContent = "";
-    }
-
-    allItems.forEach(item => {
-        if (item === itemModal) {
-            var itemName = item.querySelector('#itemName').textContent;
-            var itemImgSrc = item.querySelector('img').getAttribute('src');
-
-            var header = document.getElementById('headerC');
-            header.style.display = "flex";
-
-
-
-            var listItem = document.createElement('li');
-            listItem.style.display = "flex";
-
-
-            
-            var minusIcon=document.createElement('i');
-            minusIcon.className="fa-solid fa-minus fa-xl";
-            minusIcon.style.color="#646973";
-            minusIcon.style.marginTop="3%";
-            minusIcon.style.marginLeft="10%";
-            minusIcon.onclick=function()
-            {
-                removeFromCart(itemName);
-            }
-
-            var itemImg = document.createElement('img');
-            itemImg.src = itemImgSrc;
-
-            itemImg.style.width = "50px";
-            itemImg.style.height = "50px";
-            itemImg.style.marginRight = "40px";
-            itemImg.style.marginLeft = "40px";
-            listItem.appendChild(itemImg);
-
-
-
-
-            // Append the item name text content, not the element itself
-            listItem.appendChild(document.createTextNode(itemName));
-            listItem.appendChild(minusIcon);
-
-            cList.appendChild(listItem);
-        }
-    });
-    showMessage();
-}
-
-function removeFromCart(itemName)
-{
-   var cartList=document.querySelectorAll('#orderSumm li');
-
-   cartList.forEach(item=>{
-var name=item.querySelector('img').nextSibling.textContent;
-if(name===itemName)
-    {
-        item.remove();
-    }
-   });
-}
-
-function viewCart() {
-
-    var selectedItem = document.querySelectorAll('#itemName');
-    selectedItem.forEach(item => {
-        item.style.display = "block";
-    });
-
 }
 
 
@@ -289,18 +216,231 @@ function feedbackInput(form) {
 
 
 
-// cart/favourites window
+// cart window
 function openWindow(iconToOpen) {
     document.getElementById(iconToOpen).style.display = "flex";
     if (iconToOpen === 'overlayFav') {
-        viewFavs();
+        viewCart();
 
     }
-    else {
-        viewCart();
+}
+
+// Cart functions
+function addToCart(itemID, week) {
+    var itemModal = document.getElementById('detailsModal' + itemID + week);
+    var allItems = document.querySelectorAll('.modal');
+    var cart = document.getElementById('cartContent');
+    var cList = document.getElementById('orderSumm');
+
+    if (cList.children.length === 0) {
+        cart.textContent = "";
+    }
+
+    allItems.forEach(item => {
+        if (item === itemModal) {
+            var itemName = item.querySelector('#itemName').textContent;
+
+            var itemImgSrc = item.querySelector('img').getAttribute('src');
+
+            var header = document.getElementById('headerC');
+            header.style.display = "flex";
+
+
+
+            var listItem = document.createElement('div');
+            listItem.classList.add("list-of-items");
+
+
+
+            var removeIcon = document.createElement('i');
+            removeIcon.className = "fa-solid fa-circle-xmark fa-lg";
+            removeIcon.classList.add('remove-icon');
+            removeIcon.onclick = function () {
+                removeFromCart(itemName);
+            }
+
+            var itemImg = document.createElement('img');
+            itemImg.src = itemImgSrc;
+            itemImg.classList.add('cart-item-img');
+
+
+            var itemNameElement = document.createElement('span');
+            itemNameElement.textContent = itemName;
+            itemNameElement.classList.add('item-name');
+
+            var quantityDiv = document.createElement('div');
+            quantityDiv.classList.add('quantity-cart');
+
+            var plusButton = document.createElement('button');
+            plusButton.classList.add('cart-plusButton');
+            plusButton.innerHTML = '<i class="fa-solid fa-plus fa-lg"></i>';
+            plusButton.onclick = function () {
+                incrementQuantity(quantityInput);
+            }
+
+            var quantityInput = document.createElement('input');
+            quantityInput.classList.add('input');
+            quantityInput.type = 'text';
+            quantityInput.name = 'name';
+            quantityInput.value = '1';
+
+            var minusButton = document.createElement('button');
+            minusButton.classList.add('cart-minusButton');
+            minusButton.innerHTML = '<i class="fa-solid fa-minus fa-lg"></i>';
+            minusButton.onclick = function () {
+                decrementQuantity(quantityInput);
+            }
+
+
+            quantityDiv.appendChild(minusButton);
+            quantityDiv.appendChild(quantityInput);
+            quantityDiv.appendChild(plusButton);
+
+
+            listItem.appendChild(removeIcon);
+            listItem.appendChild(itemImg);
+
+
+            // Append the item name text content, not the element itself
+            listItem.appendChild(document.createTextNode(itemName));
+
+            listItem.appendChild(quantityDiv);
+
+            cList.appendChild(listItem);
+        }
+    });
+    showMessage();
+}
+
+function incrementQuantity(input) {
+    var currValue = parseInt(input.value);
+    input.value = currValue + 1;
+}
+
+function decrementQuantity(input) {
+    var currValue = parseInt(input.value);
+    if (currValue > 1) {
+        input.value = currValue - 1;
     }
 }
+
+function removeFromCart(itemName) {
+    var cartList = document.querySelectorAll('#orderSumm .list-of-items');
+
+    cartList.forEach(item => {
+        var name = item.querySelector('img').nextSibling.textContent;
+        if (name === itemName) {
+            item.remove();
+        }
+    });
+    var cList = document.getElementById('orderSumm');
+    if (cList.children.length === 0) {
+        var cart = document.getElementById('cartContent');
+        cart.innerHTML = '<i class="fa-solid fa-cart-shopping fa-xl" style="color: #147186;"></i> Your Cart Is Empty,<br> Please Add Items.';
+
+        var header = document.getElementById('headerC');
+        header.style.display = "none";
+    }
+}
+
+function viewCart() {
+
+    var selectedItem = document.querySelectorAll('#itemName');
+    selectedItem.forEach(item => {
+        item.style.display = "block";
+    });
+
+}
+
+
 
 function closeWindow(iconToClose) {
     document.getElementById(iconToClose).style.display = "none";
 }
+
+
+
+/*Nutrition accordion */
+document.addEventListener('DOMContentLoaded', function () {
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', function () {
+            const accordionContent = header.nextElementSibling;
+            const icon = header.querySelector("i");
+
+
+            header.classList.toggle('active');
+
+            if (header.classList.contains('active')) {
+                accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
+                icon.classList.replace("fa-plus", "fa-minus");
+            } else {
+                accordionContent.style.maxHeight = '0';
+                icon.classList.replace("fa-minus", "fa-plus");
+            }
+
+            accordionHeaders.forEach(otherHeader => {
+                if (otherHeader !== header) {
+                    otherHeader.classList.remove('active');
+                    otherHeader.nextElementSibling.style.maxHeight = '0';
+                    otherHeader.querySelector("i").classList.replace("fa-minus", "fa-plus");
+                }
+            });
+        });
+    });
+});
+
+//   Table indicator
+document.addEventListener('DOMContentLoaded', function () {
+    const nutritionTables = document.querySelectorAll('.nutritionTable'); // Changed to querySelectorAll with class
+
+    nutritionTables.forEach(nutritionTable => {
+        const rows = nutritionTable.querySelectorAll('tbody tr');
+
+        rows.forEach(row => {
+            const nutrient = row.querySelector('td:first-child').textContent.trim();
+            const amountString = row.querySelector('td:nth-child(2)').textContent.trim();
+
+            const amountMatch = amountString.match(/(\d+(?:\.\d+)?)\s*(?:-\s*(\d+(?:\.\d+)?))?/);
+            let amount = 0;
+            if (amountMatch) {
+                amount = parseFloat(amountMatch[1]);
+            }
+
+            const dailyIntake = {
+                'Calories': 2000,
+                'Protein': 50,
+                'Fat': 70,
+                'Carbohydrates': 310,
+                'Cholesterol': 300,
+                'Sodium': 2300
+            };
+
+            // Calculate percenatge
+            const dvPercentage = calculateDV(amount, dailyIntake[nutrient]);
+
+            const indicatorDiv = row.querySelector('td:nth-child(3) .indicator');
+            const indicatorText = row.querySelector('td:nth-child(3) .indicator-text');
+            setIndicator(indicatorDiv, indicatorText, dvPercentage);
+        });
+    });
+
+    function calculateDV(amount, dailyIntake) {
+        if (dailyIntake === 0) return 0;
+        return Math.round((amount / dailyIntake) * 100);
+    }
+
+    function setIndicator(indicator, indicatorText, percentage) {
+        if (percentage <= 25) {
+            indicator.style.backgroundColor = 'rgb(111, 213, 8)';
+            indicatorText.textContent = 'Low';
+        } else if (percentage <= 75) {
+            indicator.style.backgroundColor = 'orange';
+            indicatorText.textContent = 'Moderate';
+        } else {
+            indicator.style.backgroundColor = 'rgb(233, 45, 45)';
+            indicatorText.textContent = 'High';
+        }
+    }
+});

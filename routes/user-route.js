@@ -37,5 +37,4 @@ router.put('/update/:id', updateUser);
 //delete user
 router.delete('/delete/:id', deleteUser);
 
-
 module.exports = router;

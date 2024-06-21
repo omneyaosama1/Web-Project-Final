@@ -2,11 +2,8 @@ require("dotenv").config();
 const express = require('express');
 const mongoose = require('mongoose')
 const session = require('express-session');
-const MongoStore = require('connect-mongo');
 
-
-
-const homePageRoute = require('./routes/index-route');
+const homePageRoute = require("./routes/index-route");
 const aboutUsPageRoute = require('./routes/about-us-route');
 const cookbookRoute = require('./routes/cookbook-route');
 const hiwRoute = require('./routes/how-it-works-route');
@@ -22,6 +19,7 @@ const usersAdminRoute = require('./routes/usersAdmin-route');
 const productsRoute = require('./routes/products-route');
 const analyticsRoute = require('./routes/analytics-route');
 const profileRoute = require('./routes/profile-route');
+const menuRoute = require('./routes/menu-route');
 
 
 
@@ -36,6 +34,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
+
+
+
+
 
 app.set('view engine', 'ejs');
 
@@ -70,7 +72,8 @@ app.use('/login-signup', loginSignupRoute);
 app.use('/user', userRoute);
 app.use('/dashboard', dashboardRoute);
 app.use('/cookbook', cookbookRoute);
-app.use('/menu', ourMenuRoute);
+// app.use('/menu', ourMenuRoute);
+app.use('/menu',menuRoute);
 app.use("/order", orderRoute);
 app.use('/usersAdmin', usersAdminRoute);
 app.use('/products', productsRoute);

@@ -35,6 +35,8 @@ const mealSchema = new mongoose.Schema(
     preferences: {
       type: [String],
       required: [true, "Please enter from the 6 preferences"],
+      enum: ["meat", "veggies", "family", "fit", "speedy", "fish"],
+      ref:"User"
     },
     ingredientsName: {
       type: [String],
@@ -123,4 +125,5 @@ const mealSchema = new mongoose.Schema(
   { timestamps: true }
 );
 const Meal = mongoose.model("Dish", mealSchema);
+
 module.exports = Meal;

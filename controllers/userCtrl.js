@@ -34,7 +34,6 @@ const handleLogout = async (req, res) => {
     });
 };
 
-
 const addUser = async (req, res) => {
   const { userType, name, password, address, phoneNumber, email, visaInfo, birthdate, image, subscriptionStatus, subPlan, pastOrderIds, favoriteMeals } = req.body;
 
@@ -69,7 +68,6 @@ const addUser = async (req, res) => {
     res.status(500).send('Failed to add user');
   }
 };
-
 
 const getAllUsers = async (req, res) => {
   try {
@@ -110,7 +108,6 @@ const getUserById = async (req, res) => {
     res.status(500).send('Failed to get user');
   }
 };
-
 
 const updateUser = async (req, res) => {
   const { id } = req.params;
@@ -153,9 +150,6 @@ const updateUser = async (req, res) => {
   }
 };
 
-
-
-
 const deleteUser = async (req, res) => {
   const { id } = req.params;
 
@@ -170,7 +164,6 @@ const deleteUser = async (req, res) => {
     res.status(500).send('Failed to delete user');
   }
 };  
-
 
 module.exports = {
     renderUserPage,
