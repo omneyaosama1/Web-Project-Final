@@ -499,8 +499,7 @@ td {
   transform: translateY(0);
   opacity: 1;
 }
-
-/*pagingtaion styling*/
+/* Pagination styling */
 .pagination {
   margin: 20px auto; 
   display: flex; 
@@ -509,6 +508,7 @@ td {
 }
 .pagination a {
   background-color: #81d0e8;
+  font-weight: 500;
   margin: 0 5px;
   text-decoration: none;
   padding: 5px 10px;

@@ -160,3 +160,37 @@ function showNotification() {
     notification.classList.remove("show");
   }, 2000);
 }
+
+
+function loadMeals(page) {
+  fetch(`?page=${page}`)
+    .then((response) => response.text())
+    .then((html) => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, "text/html");
+
+      document.querySelector(".meals-container").innerHTML =
+        doc.querySelector(".meals-container").innerHTML;
+      document.querySelector("#pagination-links").innerHTML =
+        doc.querySelector("#pagination-links").innerHTML;
+
+      history.pushState({}, "", `?page=${page}`);
+      attachPaginationEventListeners(); 
+    })
+    .catch((error) => console.error("Error fetching meals:", error));
+}
+
+
+function attachPaginationEventListeners() {
+  const paginationLinks = document.querySelectorAll(".pagination a");
+  paginationLinks.forEach((link) => {
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      const page = this.getAttribute("href").split("=")[1];
+      loadMeals(page);
+    });
+  });
+}
+
+
+document.addEventListener("DOMContentLoaded", attachPaginationEventListeners);

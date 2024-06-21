@@ -138,14 +138,16 @@
       </h4>
       <div class="card-details">
         <div class="tags"><%= meal.tags %></div>
-        <button class="heart-button" onclick="addToFavorites(event, ' dish<%= index + 1 %>')">
+        <button class="heart-button" onclick="addToFavorites(event, 'dish<%= index + 1 %>')">
           <i class="fa-solid fa-heart"></i>
         </button>
       </div>
     </div>
   <% }); %>
 </div>
-  <div class="pagination">
+
+<div class="pagination">
+  <div id="pagination-links">
     <% if (currentPage > 1) { %>
       <a href="?page=<%= currentPage - 1 %>">Previous</a>
     <% } %>
@@ -158,6 +160,7 @@
       <a href="?page=<%= currentPage + 1 %>">Next</a>
     <% } %>
   </div>
+</div>
 
     <!-- Overlay descriptions for each meal -->
     <% meals.forEach((meal, index)=> { %>
