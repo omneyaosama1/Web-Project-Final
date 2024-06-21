@@ -10,9 +10,7 @@ router.get('/', async (req, res) => {
                 return res.status(404).send("Admin not found");
             }
             res.render('profile', { admin });
-        } else {
-            res.redirect('/login-signup'); // Redirect to login if not an admin
-        }
+        } 
     } catch (err) {
         console.error(err);
         res.status(500).send("Server Error");

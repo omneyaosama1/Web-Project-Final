@@ -10,9 +10,7 @@ router.post('/login', async (req, res) => {
   if (user) {
       req.session.user = user;
       res.redirect('/profile');
-  } else {
-      res.redirect('/profile');
-  }
+  } 
 });
 
 // User logout route
