@@ -28,6 +28,7 @@ const handleSignup = async (req, res) => {
                 message: "Email already in use",
             });
         }
+        
         const newUser = (req.session.user = new User({
             name: username_inp,
             password: pass_inp,
@@ -40,6 +41,7 @@ const handleSignup = async (req, res) => {
             .save()
             .then((user) => res.json({ 
                 success: true, 
+                statusType: "success",
                 user: newUser 
             }))
             .catch((error) => {
@@ -71,12 +73,14 @@ const handleLogin = async (req, res) => {
         }
 
         if (existingUser.password === pass_inp) {
-            const userResponse = (req.session.user = {
-                id: existingUser._id,
-                email: existingUser.email,
-                userType: existingUser.userType,
-                name: existingUser.name,
-            });
+            // const userResponse = (req.session.user = {
+            //     id: existingUser._id,
+            //     email: existingUser.email,
+            //     userType: existingUser.userType,
+            //     name: existingUser.name,
+            // });
+
+            req.session.user = existingUser;
 
             console.log(req.session.user);
 
