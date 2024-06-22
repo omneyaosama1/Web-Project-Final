@@ -21,3 +21,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+document.addEventListener("DOMContentLoaded", () => {
+    const feedbackLink = document.getElementById("feedback");
+
+    feedbackLink.addEventListener("click", (event) => {
+        event.preventDefault();
+        window.location.href = "/feedback";
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const feedbackLink = document.getElementById("profile");
+
+    feedbackLink.addEventListener("click", (event) => {
+        event.preventDefault();
+        window.location.href = "/profile";
+    });
+});
