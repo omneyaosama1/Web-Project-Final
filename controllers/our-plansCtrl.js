@@ -143,7 +143,9 @@ const handlePaymentForm = async (req, res) => {
             loggedInUser.visaInfo.cardNum = cardNumber_inp;
             loggedInUser.visaInfo.expDate = cardExpDate_inp;
             loggedInUser.visaInfo.cvv = cardCVV_inp;
+            loggedInUser.subscriptionStatus = "Activated";
             req.session.user.subPlan = loggedInUser.subPlan;
+            req.session.user.subscriptionStatus = "Activated";
             console.log(loggedInUser);
             
             await loggedInUser.save();

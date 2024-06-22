@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Recipe = require('../Schema/mealSchema');
 const User = require('../Schema/userSchema');
 const userCtrl=require('../controllers/userCtrl');
@@ -23,6 +24,10 @@ const getMenu = async (req, res) => {
 
         const user = req.session.user;
         
+        if (user.subscriptionStatus === "Deactivated") {
+            res.render('our-plans');
+            return;
+        }
 
         const preferences = user.subPlan.preferences;
         console.log('User preferences:', preferences);
@@ -106,10 +111,60 @@ const updateRecipe = async (req, res) => {
     }
 };
 
+const sessionHandler = async(req, res) => {
+    const {operation} = req.body;
+    if (operation === 'validate-cart') {
+        await validateCart(req, res);
+    }
+}
+
+const validateCart = async(req, res) => {
+    try {
+        const mealID = req.body.itemID;
+        if (!mongoose.Types.ObjectId.isValid(mealID)) {
+            return res.status(400).json({ message: 'Invalid meal ID.' });
+        }
+        // Assuming user is stored in session
+        const user = req.session.user;
+
+        if (!user) {
+            return res.status(400).json({ message: 'User not logged in.' });
+        }
+
+        // Ensure subPlan and dishes array exist
+        if (!user.subPlan) {
+            user.subPlan = { dishes: [] };
+        } else if (!Array.isArray(user.subPlan.dishes)) {
+            user.subPlan.dishes = [];
+        }
+
+        const limit = 4 * user.subPlan.numberOfMeals;
+
+        // Check if the current number of items in the cart has reached the limit
+        if (user.subPlan.dishes.length >= limit) {
+            return res.status(400).json({ message: 'You have reached the limit of items for your plan.' });
+        }
+
+        // Add mealID to the user's subPlan.dishes array (in session only)
+        user.subPlan.dishes.push(mealID);
+        
+        // Update session user
+        req.session.user = user;
+        console.log(req.session.user);
+
+        return res.status(200).json({ message: 'Item added to cart.' });
+    } catch (err) {
+        console.error('Error validating cart:', err);
+        return res.status(500).json({ message: 'Server error' });
+    }
+};
+
+
 
 module.exports = {
     getMenu,
     addRecipe,
     deleteRecipe,
-    updateRecipe
+    updateRecipe,
+    sessionHandler
 };

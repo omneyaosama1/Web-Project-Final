@@ -120,7 +120,11 @@ const userSchema = new mongoose.Schema(
       totalamount: {
           type: Number,
           required: [true, "Total amount is required"]
-      }
+      },
+      expectedOrders: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Order'
+      }]
       },
     },
     pastOrderIds: [
