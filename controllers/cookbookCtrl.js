@@ -62,7 +62,7 @@ const addMeal = async (req, res) => {
     res.status(201).json({ message: "Meal added successfully", meal: newMeal });
   } catch (error) {
     console.log(error);
-    res.status(500).send('Failed to add a meal');
+    res.status(500).send('Failed to add a meal',error);
   }
 };
 
@@ -141,9 +141,83 @@ const deleteMeal = async (req, res) => {
   }
 };
 
+
+const getMealsAdmin = async (req, res) => {
+  try {
+    const meals = await Meal.find();
+    res.render('adminProducts', { meals });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
+};
+
+const addMealAdmin = async (req, res) => {
+  const {
+    name,
+    image,
+    cookTime,
+    difficulty,
+    description,
+    tags,
+    preferences,
+    ingredientsName,
+    ingPer2,
+    ingPer4,
+    instructions,
+    allergens,
+    utensils,
+    nutrition,
+    recommendations,
+  } = req.body;
+
+  try {
+    if (isNaN(nutrition.energy) || isNaN(nutrition.calories) || isNaN(nutrition.fat) || isNaN(nutrition.satFat) || isNaN(nutrition.carbohydrates) || isNaN(nutrition.sugar) || isNaN(nutrition.fiber) || isNaN(nutrition.protein) || isNaN(nutrition.cholesterol) || isNaN(nutrition.sodium)) {
+      throw new Error('Invalid nutritional values');
+    }
+
+    const newMeal = new Meal({
+      name,
+      image,
+      cookTime,
+      difficulty,
+      description,
+      tags,
+      preferences: preferences.split(','),  // Split preferences by comma
+      ingredientsName: ingredientsName.split(','),  // Same for ingredientsName
+      ingPer2: ingPer2.split(','),  // Same for ingPer2
+      ingPer4: ingPer4.split(','),  // Same for ingPer4
+      instructions: instructions.split(','),  // Same for instructions
+      allergens: allergens.split(','),  // Same for allergens
+      utensils: utensils.split(','),  // Same for utensils
+      nutrition: {
+        energy: parseFloat(nutrition.energy),
+        calories: parseFloat(nutrition.calories),
+        fat: parseFloat(nutrition.fat),
+        satFat: parseFloat(nutrition.satFat),
+        carbohydrates: parseFloat(nutrition.carbohydrates),
+        sugar: parseFloat(nutrition.sugar),
+        fiber: parseFloat(nutrition.fiber),
+        protein: parseFloat(nutrition.protein),
+        cholesterol: parseFloat(nutrition.cholesterol),
+        sodium: parseFloat(nutrition.sodium),
+      },
+      recommendations: recommendations.split(','),  // Same for recommendations
+    });
+
+    await newMeal.save();
+    res.redirect('/products'); // Redirect to the products page
+  } catch (error) {
+    console.error('Error details:', error); // Log detailed error information
+    res.status(500).send('Failed to add a meal');
+  }
+};
+
 module.exports = {
   getMeals,
   addMeal,
   updateMeal,
   deleteMeal,
+  getMealsAdmin,
+  addMealAdmin
 };

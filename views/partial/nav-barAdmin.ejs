@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
     <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
     <link rel="stylesheet" href="/styles/nav-barAdmin.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -17,46 +20,47 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
 </head>
 <body>
-    <aside>
-        <div class="top">
-            <div class="logo">
-                <h2>A<span class="danger">DMIN</span></h2>
+    
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <h2>A<span class="danger">DMIN</span></h2>
+                </div>
             </div>
-        </div>
 
-        <div class="sidebar">
-            <a href="/dashboard" class="active" id="dashboard">
-                <span class="material-symbols-outlined"><i class="fas fa-chart-line"></i></span>
-                <h3>DashBoard</h3>
-            </a>
-            <a href="/usersAdmin" id="customer">
-                <span class="material-symbols-outlined"><i class="fas fa-users"></i></span>
-                <h3>Users</h3>
-            </a>
-            <a href="/analytics" id="analytics">
-                <span class="material-symbols-outlined"><i class="fas fa-chart-bar"></i></span>
-                <h3>Analytics</h3>
-            </a>
-            <a href="/products">
-                <span class="material-symbols-outlined"><i class="fas fa-shopping-bag"></i></span>
-                <h3>Products</h3>
-            </a>
-            <a href="/profile" id="profileLink">
-                <span class="material-symbols-outlined"><i class="fas fa-user-circle"></i></span>
-                <h3>Profile</h3>
-            </a>
-            <a href="#" id="feedback">
-                <span class="material-symbols-outlined"><i class="fas fa-comment-dots"></i></span>
-                <h3>Feedback</h3>
-            </a>
-            <a href="/login-signup"> <!-- Updated the href to logout link -->
-                <span class="material-symbols-outlined"><i class="fas fa-sign-out-alt"></i></span>
-                <h3>Logout</h3>
-            </a>
-            <div class="indicator"></div> <!-- Indicator div for highlighting active link -->
-        </div>
-    </aside>
-
+            <div class="sidebar">
+                <a href="/dashboard"  id="dashboard">
+                    <span class="material-symbols-outlined"><i class="fas fa-chart-line"></i></span>
+                    <h3>DashBoard</h3>
+                </a>
+                <a href="/usersAdmin" id="customer">
+                    <span class="material-symbols-outlined"><i class="fas fa-users"></i></span>
+                    <h3>Users</h3>
+                </a>
+                <a href="/analytics" id="analytics">
+                    <span class="material-symbols-outlined"><i class="fas fa-chart-bar"></i></span>
+                    <h3>Analytics</h3>
+                </a>
+                <a href="/products" id="products">
+                    <span class="material-symbols-outlined"><i class="fas fa-shopping-bag"></i></span>
+                    <h3>Products</h3>
+                </a>
+                <a href="/profile" id="profileLink">
+                    <span class="material-symbols-outlined"><i class="fas fa-user-circle"></i></span>
+                    <h3>Profile</h3>
+                </a>
+                <a href="#" id="feedback">
+                    <span class="material-symbols-outlined"><i class="fas fa-comment-dots"></i></span>
+                    <h3>feedback</h3>
+                </a>
+                <a href="/login-signup" id="logout">
+                    <span class="material-symbols-outlined"><i class="fas fa-sign-out-alt"></i></span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+  
+    
     <script src="/scripts/nav-barAdmin.js"></script>
 </body>
 </html>
