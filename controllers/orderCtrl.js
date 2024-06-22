@@ -140,11 +140,24 @@ const deleteOrder = async (req, res) => {
     res.status(500).send("Failed to delete order");
   }
 };
-
+const getOrderFeedback = async () => {
+  try {
+    const orders = await Order.find({}, 'rating user');
+    const feedback = orders.map(order => ({
+      user:order.user,
+      rating: order.rating
+    }));
+    return feedback;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to get feedback");
+  }
+};
 module.exports = {
   addOrder,
   getAllOrders,
   getOrderById,
   updateOrder,
   deleteOrder,
+  getOrderFeedback
 };

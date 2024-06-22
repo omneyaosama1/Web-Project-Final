@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
     <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
-    <link rel="stylesheet" href="/styles/dashboard.css" />
+    <link rel="stylesheet" href="/styles/feedback.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,10 +25,36 @@
         <aside>
             <%- include("partial/nav-barAdmin.ejs") %>
         </aside>
-    <section class="main">
-
-    </section>
-    <script src="/scripts/dashboard.js"></script>
+        <section class="main">
+            <div class="feedback">
+                <div class="average-rating">
+                    <span>1.3</span>
+                    <p>Average Rating</p>
+                </div>
+               
+            </div>
+            <div class="reviews">
+                <% feedback.forEach(review => { %>
+                <div class="review">
+                 
+                    <div class="content">
+                        <div class="name">Customer id:<%= review.user %></div>
+                        <div class="stars">
+                            <% for (let i = 0; i < review.rating; i++) { %>
+                            <i class="fas fa-star"></i>
+                            <% } %>
+                            <% for (let i = review.rating; i < 5; i++) { %>
+                            <i class="far fa-star"></i>
+                            <% } %>
+                        </div>
+                        
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </section>
+    </div>
+    <script src="/scripts/feedback.js"></script>
 </body>
 
 </html>
