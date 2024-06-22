@@ -89,9 +89,18 @@ function changeFavouriteC(itemID, week) {
 
 // Search
 
+document.addEventListener('DOMContentLoaded', function() {
+  
+    document.querySelector('.searchPart').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        searchValidate(this);
+    });
+});
+
 function searchValidate(form) {
     var searchInput = form.querySelector("#SearchW").value.trim();
     var regex = /^[a-zA-Z\s]+$/;
+    
     if (searchInput === "") {
         printWarning("errorMsg", "Please enter an item's name.");
         return false;
@@ -100,37 +109,27 @@ function searchValidate(form) {
         return false;
     } else {
         printWarning("errorMsg", "");
-        return true;
+        searchItem(searchInput);
+        return false; 
     }
 }
 
-function searchItem() {
-    var searchInput = document
-        .getElementById("SearchW")
-        .value.toLowerCase()
-        .trim();
-    var weeks = ["week1", "week2", "week3", "week4"];
-    var currWeek = null;
+function searchItem(searchInput) {
+    var weeks = ['week1', 'week2', 'week3', 'week4'];
 
-    document.querySelectorAll(".buttons button").forEach((button, index) => {
-        if (button.classList.contains("selectedB")) {
-            currWeek = weeks[index];
-        }
-    });
+    weeks.forEach(function(week) {
+        var items = document.querySelectorAll('.items.' + week);
 
-    if (currWeek) {
-        var Allitems = document.querySelectorAll(".items." + currWeek);
-
-        Allitems.forEach((item) => {
-            var itemName = item.textContent.toLowerCase().trim();
-            if (itemName.includes(searchInput) || searchInput === "") {
-                item.style.display = "block";
-                item.classList.remove("animation");
+        items.forEach(function(item) {
+            var itemName = item.querySelector('h3').textContent.toLowerCase();
+            
+            if (itemName.includes(searchInput.toLowerCase())) {
+                item.style.display = 'block';
             } else {
                 item.style.display = "none";
             }
         });
-    }
+    });
 }
 
 // after adding to cart message

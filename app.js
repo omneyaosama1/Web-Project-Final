@@ -23,7 +23,7 @@ const menuRoute = require('./routes/menu-route');
 const feedbackRoute = require('./routes/feedback-route');
 
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8000;
 const dbUserName = process.env.dbUserName;
 const dbPassword = process.env.dbPassword;
 
