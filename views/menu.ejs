@@ -4,6 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
   <link rel="stylesheet" href="/styles/menu.css">
@@ -129,12 +133,11 @@
                 <span class="Features">
                   <p id="duration">Cook Time: <%= recipe.cookTime %> min
                     <br>
-                    <%=recipe.preferences%>
                   </p>
                   <button class="Fbtn" onclick="changeFavouriteC(1,'W1')">
                     <i id="icon1W1" class="fa-solid fa-heart fa-lg" style="color: #7c7e82;"></i>
                   </button>
-                  <button class="addBtn" onclick="addToCart('<%= index %>','week1')">
+                  <button class="addBtn" data-id="<%= recipe._id %>" data-name="<%= recipe.name %>" onclick="addToCart(this)">
                     <i id="plus1W1" class="fa-solid fa-plus fa-lg" style="color: #7c7e82;"></i>
                   </button>
                 </span>

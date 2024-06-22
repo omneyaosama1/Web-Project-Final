@@ -7,6 +7,9 @@
         <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti. browser.js"></script>
         <link rel="icon" href="/images/logo1.png" type="image/x-icon" />
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
         <link rel="stylesheet" href="../styles/our-plans.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -306,7 +309,7 @@
 
                                     <div class="final-price">
                                         <span> Box Total </span>
-                                        <span> $0 </span>
+                                        <span class="final-price-span"> $0 </span>
                                     </div>
                                 </div>
                             </div>
@@ -331,8 +334,9 @@
                                 <div class="name-form-inputs">
                                     <label>
                                         <input
-                                            class="input"
+                                            class="input credentials-first-name-inp"
                                             type="text"
+                                            name="firstName"
                                             placeholder=""
                                             required
                                         />
@@ -341,8 +345,9 @@
 
                                     <label>
                                         <input
-                                            class="input"
+                                            class="input credentials-last-name-inp"
                                             type="text"
+                                            name="lastName"
                                             placeholder=""
                                             required
                                         />
@@ -352,8 +357,9 @@
 
                                 <label>
                                     <input
-                                        class="input"
+                                        class="input credentials-email-inp"
                                         type="email"
+                                        name="email"
                                         placeholder=""
                                         required
                                     />
@@ -362,18 +368,20 @@
 
                                 <label>
                                     <input
-                                        class="input"
+                                        class="input credentials-number-inp"
                                         placeholder=""
                                         type="number"
+                                        name="contactNumber"
                                         required
                                     />
                                     <span>Contact Number</span>
                                 </label>
                                 <label>
                                     <input
-                                        class="input"
+                                        class="input credentials-address-inp"
                                         placeholder=""
                                         rows="1"
+                                        name="address"
                                         required
                                     />
                                     <span>Address</span>
@@ -397,21 +405,8 @@
                                 <p>Enter your credit/debit card information</p>
                             </div>
                             <div>
-                                <div class="payment-form">
-                                    <label for="name" class="label">
-                                        <span class="title"
-                                            >Card holder full name</span
-                                        >
-                                        <input
-                                            class="input-field"
-                                            type="text"
-                                            name="input-name"
-                                            title="Input title"
-                                            placeholder="Enter your full name"
-                                            required
-                                        />
-                                    </label>
-
+                                <div class="payment-form">,
+                                    
                                     <label for="serialCardNumber" class="label">
                                         <span class="title">Card Number</span>
                                         <input

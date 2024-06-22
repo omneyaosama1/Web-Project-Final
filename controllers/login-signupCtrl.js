@@ -73,12 +73,6 @@ const handleLogin = async (req, res) => {
         }
 
         if (existingUser.password === pass_inp) {
-            // const userResponse = (req.session.user = {
-            //     id: existingUser._id,
-            //     email: existingUser.email,
-            //     userType: existingUser.userType,
-            //     name: existingUser.name,
-            // });
 
             req.session.user = existingUser;
 
@@ -95,12 +89,6 @@ const handleLogin = async (req, res) => {
                     user: req.session.user,
                 });
             });
-
-            // return res.json({
-            //     success: true,
-            //     statusType: "success",
-            //     user: userResponse,
-            // });
         } else {
             return res.json({
                 success: false,

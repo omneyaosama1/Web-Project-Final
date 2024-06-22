@@ -7,7 +7,7 @@ const renderUserPage = async (req, res) => {
     if (!req.session.user) {
         req.session.user = await User.findById(req.session.userId);
     }
-    res.render("user-profile", { user: req.session.user });
+    res.render("user-profile", { user: req.session.user});
 };
 
 const renderFavMealsPage = async (req, res) => {

@@ -56,6 +56,7 @@ signUpForm.addEventListener('submit', (event) => {
 
 
 function signup(username, email, password, formattedDate) {
+    
     const formType = "Signup";
 
     $.ajax({

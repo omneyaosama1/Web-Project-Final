@@ -102,17 +102,29 @@ const userSchema = new mongoose.Schema(
       type: {
         preferences: {
           type: [String],
-        },
-        numberOfPeople: {
+      },
+      numberOfPeople: {
           type: Number,
           enum: [2, 4],
-          message: "Number of people must be either 2 or 4",
-        },
-        numberOfMeals: {
+          required: [true, "Number of people must be either 2 or 4"],
+      },
+      numberOfMeals: {
           type: Number,
           enum: [1, 2, 3],
-          message: "Number of meals must be 1, 2, or 3",
-        },
+          required: [true, "Number of meals must be 1, 2, or 3"],
+      },
+      dishes: [{
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Meal'  // Ensure 'Meal' is the name of the model you are referencing
+      }],
+      totalamount: {
+          type: Number,
+          required: [true, "Total amount is required"]
+      },
+      expectedOrders: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Order'
+      }]
       },
     },
     pastOrderIds: [
