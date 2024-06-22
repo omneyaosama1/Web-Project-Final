@@ -464,7 +464,8 @@ td {
 }
 /*Tags on meal cards*/
 .tags {
-  background-color: red;
+  background-color:  #167592ad;
+  color: #f7f7f7;
   width: fit-content;
   padding: 5px;
   border-radius: 5px;

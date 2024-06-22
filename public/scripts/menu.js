@@ -89,53 +89,54 @@ function changeFavouriteC(itemID, week) {
 
 // Search
 
-document.addEventListener('DOMContentLoaded', function() {
+// document.addEventListener('DOMContentLoaded', function() {
   
-    document.querySelector('.searchPart').addEventListener('submit', function(event) {
-        event.preventDefault(); 
-        searchValidate(this);
-    });
-});
+//     document.querySelector('.searchPart').addEventListener('submit', function(event) {
+//         event.preventDefault(); 
+//         searchValidate(this);
+//     });
+// });
 
-function searchValidate(form) {
-    var searchInput = form.querySelector("#SearchW").value.trim();
-    var regex = /^[a-zA-Z\s]+$/;
+// function searchValidate(form) {
+//     var searchInput = form.querySelector("#SearchW").value.trim();
+//     var regex = /^[a-zA-Z\s]+$/;
     
-    if (searchInput === "") {
-        printWarning("errorMsg", "Please enter an item's name.");
-        return false;
-    } else if (!regex.test(searchInput)) {
-        printWarning("errorMsg", "Please enter a valid name.");
-        return false;
-    } else {
-        printWarning("errorMsg", "");
-        searchItem(searchInput);
-        return false; 
-    }
-}
+//     if (searchInput === "") {
+//         printWarning("errorMsg", "Please enter an item's name.");
+//         return false;
+//     } else if (!regex.test(searchInput)) {
+//         printWarning("errorMsg", "Please enter a valid name.");
+//         return false;
+//     } else {
+//         printWarning("errorMsg", "");
+//         searchItem(searchInput);
+//         return false; 
+//     }
+// }
 
-function searchItem(searchInput) {
-    var weeks = ['week1', 'week2', 'week3', 'week4'];
+// function searchItem(searchInput) {
+//     var weeks = ['week1', 'week2', 'week3', 'week4'];
 
-    weeks.forEach(function(week) {
-        var items = document.querySelectorAll('.items.' + week);
+//     weeks.forEach(function(week) {
+//         var items = document.querySelectorAll('.items.' + week);
 
-        items.forEach(function(item) {
-            var itemName = item.querySelector('h3').textContent.toLowerCase();
+//         items.forEach(function(item) {
+//             var itemName = item.querySelector('h3').textContent.toLowerCase();
             
-            if (itemName.includes(searchInput.toLowerCase())) {
-                item.style.display = 'block';
-            } else {
-                item.style.display = "none";
-            }
-        });
-    });
-}
+//             if (itemName.includes(searchInput.toLowerCase())) {
+//                 item.style.display = 'block';
+//             } else {
+//                 item.style.display = "none";
+//             }
+//         });
+//     });
+// }
 
 // after adding to cart message
-function showMessage() {
+function showMessage(message) {
     var msg = document.querySelectorAll(".message");
     msg.forEach((messg) => {
+        messg.textContent = message;
         messg.style.display = "block";
     });
     setTimeout(closeMessage, 6000);
@@ -360,10 +361,10 @@ function addToCart(button) {
                     cList.append(listItem);
                 }
             });
-            showMessage();
+            showMessage("Added to cart succesfully");
         },
         error: function(xhr) {
-            alert("Error: " + xhr.responseText);
+            showMessage("Error: " + xhr.responseText);
         }
     });
 }

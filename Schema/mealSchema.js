@@ -9,7 +9,7 @@ const mealSchema = new mongoose.Schema(
 
     image: {
       type: String,
-      required: [true, "Please enter a meal image"],
+      required: [false, "Please enter a meal image"],
     },
 
     cookTime: {

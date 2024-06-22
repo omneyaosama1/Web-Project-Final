@@ -37,32 +37,32 @@ dishesArrowIcons.forEach((icon) => {
   });
 });
 
-// Handling cuisine tabs
-const cuisineTabs = document.querySelectorAll(".cuisines .tab");
+// // Handling cuisine tabs
+// const cuisineTabs = document.querySelectorAll(".cuisines .tab");
 
-cuisineTabs.forEach((tab) => {
-  tab.addEventListener("click", () => {
-    const isActive = tab.classList.contains("active");
-    cuisineTabs.forEach((otherTab) => {
-      otherTab.classList.remove("active");
-    });
-    if (!isActive) {
-      tab.classList.add("active");
-    }
-  });
-});
+// cuisineTabs.forEach((tab) => {
+//   tab.addEventListener("click", () => {
+//     const isActive = tab.classList.contains("active");
+//     cuisineTabs.forEach((otherTab) => {
+//       otherTab.classList.remove("active");
+//     });
+//     if (!isActive) {
+//       tab.classList.add("active");
+//     }
+//   });
+// });
 
-// Handling dishes tabs
-const dishesTabs = document.querySelectorAll(".dishes .tab");
+// // Handling dishes tabs
+// const dishesTabs = document.querySelectorAll(".dishes .tab");
 
-dishesTabs.forEach((tab) => {
-  tab.addEventListener("click", () => {
-    const isActive = tab.classList.contains("active");
-    dishesTabs.forEach((otherTab) => {
-      otherTab.classList.remove("active");
-    });
-    if (!isActive) {
-      tab.classList.add("active");
-    }
-  });
-});
+// dishesTabs.forEach((tab) => {
+//   tab.addEventListener("click", () => {
+//     const isActive = tab.classList.contains("active");
+//     dishesTabs.forEach((otherTab) => {
+//       otherTab.classList.remove("active");
+//     });
+//     if (!isActive) {
+//       tab.classList.add("active");
+//     }
+//   });
+// });

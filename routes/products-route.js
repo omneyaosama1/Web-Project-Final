@@ -35,5 +35,5 @@ router.post('/delete/:id', async (req, res) => {
     }
 });
 router.get('/', mealCtrl.getMealsAdmin);
-router.post('/add', mealCtrl.addMealAdmin);
+router.post('/add', mealCtrl.addMeal);
 module.exports = router;

@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { getOrderFeedback } = require("../controllers/orderCtrl");
+const {checkAdminAuth} = require("../middleware/userAuthenticator");
 
-router.get("/", async (req, res) => {
+
+router.get("/", checkAdminAuth ,async (req, res) => {
     try {
         const feedback = await getOrderFeedback();
         res.render("feedback", { feedback });

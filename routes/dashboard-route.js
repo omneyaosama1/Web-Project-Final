@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../Schema/userSchema'); // Adjust the path as needed
+const {checkAdminAuth} = require("../middleware/userAuthenticator");
 
-router.get('/', async (req, res) => {
+
+router.get('/',checkAdminAuth ,async (req, res) => {
     try {
         const userCount = await User.countDocuments(); // Count the number of users
         const adminCount = await User.countDocuments({ userType: 'Admin' }); // Count the number of admins
