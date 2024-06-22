@@ -51,6 +51,10 @@ const orderSchema = new mongoose.Schema(
       max: 5,
       default: null,
     },
+    deliveryDate: {
+      type: Date,
+      required: true
+    }
   },
   { timestamps: true }
 );

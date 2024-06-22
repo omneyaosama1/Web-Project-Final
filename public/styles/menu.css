@@ -3,10 +3,7 @@
         margin: 0;
     }
 
-    .logo {
-        height: 3.5rem;
-        width: 3.5rem;
-    }
+
 
     /* Feedback Icon */
     #feedbackIcon {
@@ -195,15 +192,13 @@
     .errorMsg {
         color: red;
 
-        padding-top: 8%;
-        padding-right: 12%;
-
-        position: absolute;
+        padding-top:34%;
+     display: flex;
     }
 
     /*PAGE TITLE*/
     #titleM {
-        color: #68b4cb;
+        color: #4e9bb2;
         font-size: 2em;
         font-weight: 500;
         top: 33%;
@@ -320,17 +315,19 @@
         height: 100%;
         overflow: auto;
         background-color: rgba(0, 0, 0, 0.6);
+        
     }
 
     .modal-content {
         background-color: #f7f7f7;
         margin: auto;
-        margin-top: 3%;
+        margin-top: 11%;
         padding: 20px;
         border-radius: 50px;
         width: 80%;
         max-width: 600px;
         position: relative;
+        
     }
 
     /* CLOSING OF MODAL */
@@ -853,10 +850,59 @@
     
     }
 
+    .rotate-container2 {
+        width: 400px;
+        height: 500px;
+        position: absolute;
+        left: 95%;
+        overflow: hidden;
+        top: 100%;
+    }
+
+    #rotatingImg2 {
+        width: 400px;
+        height: 400px;
+        position: absolute;
+        justify-content: flex-start;
+        border-radius: 50%;
+        animation: rotate 15s linear infinite;
+        overflow: hidden;
+    }
+
+    .rotate-container3 {
+        width: 400px;
+        height: 500px;
+        position: absolute;
+        right: 70%;
+        overflow: hidden;
+        top: 180%;
+    }
+
+    #rotatingImg3 {
+        width: 400px;
+        height: 400px;
+        position: absolute;
+        justify-content: flex-end;
+        border-radius: 50%;
+        right: 0;
+        animation: rotate 15s linear infinite;
+        overflow: hidden;
+    }
+
+
+    #titleM{
+        font-size: 20px;
+        font-weight: 200;
+       position: absolute;
+       margin-left: 35%;
+       margin-top: 15%;
+       display: flex;
+    }
+
     #searchW{
         padding:10px;
 
-        width: 200px;
+        width: 500px;
     }
     .searchPart{
 padding: 10px;
@@ -864,11 +910,25 @@ padding: 10px;
     }
 
    .searchDiv{
-width: 200;
+width: 2000%;
+margin-top: 110%;
 }
 
     
-    #titleM {
-       padding-left: 50%;
+   
+    .items-container{
+        padding-top: 140%;
+        
+    }
+    .items{
+        width: 10em;
+        margin-left: 90%;
+        margin-top: 40%;
+       
+    }
+
+    .buttons{
+        margin-top: 10vh;
+        margin-left: 15%;
     }
 }

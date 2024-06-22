@@ -374,3 +374,32 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+
+
+function editFirstCard(name,email,phoneNumber,address){
+
+    const formType="Edit";
+    $.ajax({
+        url:"/user-profile",
+        type:"POST",
+        data:{
+            name_inp:name,
+            email_inp:email,
+            phone_number_inp:phoneNumber,
+            address_inp:address,
+            form_type_inp:formType
+        },
+        success: function(response){
+            if(response.success){
+                console.log("Saved Successfullyyy akheraaann :)");
+                window.location.href = "/user-profile";
+            }else{
+                console.log("Not successful :(");
+            }
+        },
+        error:function(xhr,status,error){
+            console.log("error details:",xhr.responseText);
+        }
+    });
+}

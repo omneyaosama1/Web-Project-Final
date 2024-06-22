@@ -2,40 +2,11 @@ const Recipe = require('../Schema/mealSchema');
 const User = require('../Schema/userSchema');
 const userCtrl=require('../controllers/userCtrl');
 
+
 //show all menu items
-// const getMenu = async (req, res) => {
-//     try {
-//         const menuData = await Recipe.find();
-//         res.render('menu', { menuData });
-//     } catch (err) {
-//         console.error('Error fetching recipes:', err);
-//         res.status(500).json({ error: 'Failed to fetch recipes' });
-//     }
-// };
-
-
-// Show all menu items according to user preferences
 const getMenu = async (req, res) => {
     try {
-        
-        const { userId } = req.body;
-
-        if (!userId) {
-            return res.status(400).json({ error: 'User ID is required' });
-        }
-
-        const userResponse = await userCtrl.getUserById(userId);
-        const user = userResponse && userResponse._doc;
-
-        if (!user) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-
-        const preferences = user.subPlan.preferences;
-        console.log('User preferences:', preferences);
-
-        const menuData = await Recipe.find({ preferences: { $in: preferences } });
-
+        const menuData = await Recipe.find();
         res.render('menu', { menuData });
     } catch (err) {
         console.error('Error fetching recipes:', err);
@@ -43,9 +14,31 @@ const getMenu = async (req, res) => {
     }
 };
 
+//show  menu items according to user preferences
+// const getMenu = async (req, res) => {
+//     try {
+//         if (!req.session.user) {
+//             req.session.user = await User.findById(req.session.userId);
+//         }
+
+//         const user = req.session.user;
+        
+
+//         const preferences = user.subPlan.preferences;
+//         console.log('User preferences:', preferences);
+
+//         const menuData = await Recipe.find({ preferences: { $in: preferences } });
+
+//         res.render('menu', { menuData });
+//     } catch (err) {
+//         console.error('Error fetching recipes:', err);
+//         res.status(500).json({ error: 'Failed to fetch recipes' });
+//     }
+// };
 
 //add new recipe
 const addRecipe = async (req, res) => {
+    
     try {
         const { name, image, cookTime, difficulty, tags, prefrences, description, ingredientsName, ingPer2, ingPer4, instructions, allergens, utensils, nutrition, recommendations } = req.body;
         const newRecipe = new Recipe({
@@ -76,10 +69,10 @@ const addRecipe = async (req, res) => {
 };
 
 const deleteRecipe = async (req, res) => {
-    const { id } = req.params;
+    const userID=req.session.userid;
     console.log(`Received ID: ${id}`);
     try {
-        const deletedRecipe = await Recipe.findByIdAndDelete(id);
+        const deletedRecipe = await Recipe.findByIdAndDelete(userID);
         if (!deletedRecipe) {
             return res.status(404).send("Recipe Not Found");
         }
@@ -91,12 +84,12 @@ const deleteRecipe = async (req, res) => {
 };
 
 const updateRecipe = async (req, res) => {
-    const { id } = req.params;
+    const userID=req.session.userid;
     const { name, description, imageUrl, cookTime, ingredients, allergens, utensils, nutrition, recommendations } = req.body;
     console.log(`Received ID: ${id}`);
     try {
         const updateRecipe = await Recipe.findByIdAndUpdate(
-            id,
+            userID,
             {
                 name, description, imageUrl, cookTime, ingredients, allergens, utensils, nutrition, recommendations
             },
@@ -106,6 +99,9 @@ const updateRecipe = async (req, res) => {
         if (!updateRecipe) {
             return res.status(404).send("Recipe Not Found");
         }
+
+         await updateRecipe.save();
+
         return res.status(200).send("Recipe Updated");
     } catch (err) {
         console.log(err);
