@@ -78,6 +78,7 @@ body {
   width: 35px;
   height: 100px;
   cursor: pointer;
+  z-index: 1000;
 }
 
 #overlay {
@@ -560,11 +561,13 @@ td {
 
   #feedbackIcon {
     top: 250px;
+    z-index: 1000;
   }
 
   #feedbackContent {
     padding: 60px 30px;
     width: 250px;
+    margin-top: 50px;
   }
 
   #textArea {
@@ -675,5 +678,22 @@ td {
   .meals-container {
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .pagination {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .pagination a {
+    flex: 1 1 30%;
+    margin: 5px 2px;
+    padding: 5px 5px;
+    text-align: center;
+  }
+  .notification{
+    z-index: 9999;
+    width: 50px;
+    font-size: small;
+    text-align: center;
   }
 }
