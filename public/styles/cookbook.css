@@ -78,6 +78,7 @@ body {
   width: 35px;
   height: 100px;
   cursor: pointer;
+  z-index: 1000;
 }
 
 #overlay {
@@ -299,11 +300,10 @@ body {
 .description {
   display: none;
   position: fixed;
-  z-index: 1000;
-  padding-left: 28%;
-  padding-top: 2%;
-  padding-bottom: 2%;
+  z-index: 9999; 
+  padding: 2% 28%;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
@@ -499,16 +499,16 @@ td {
   transform: translateY(0);
   opacity: 1;
 }
-
-/*pagingtaion styling*/
+/* Pagination styling */
 .pagination {
-  margin: 20px auto; 
-  display: flex; 
+  margin: 20px auto;
+  display: flex;
   justify-content: center;
   width: fit-content;
 }
 .pagination a {
   background-color: #81d0e8;
+  font-weight: 500;
   margin: 0 5px;
   text-decoration: none;
   padding: 5px 10px;
@@ -561,11 +561,13 @@ td {
 
   #feedbackIcon {
     top: 250px;
+    z-index: 1000;
   }
 
   #feedbackContent {
     padding: 60px 30px;
     width: 250px;
+    margin-top: 50px;
   }
 
   #textArea {
@@ -676,5 +678,22 @@ td {
   .meals-container {
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .pagination {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .pagination a {
+    flex: 1 1 30%;
+    margin: 5px 2px;
+    padding: 5px 5px;
+    text-align: center;
+  }
+  .notification{
+    z-index: 9999;
+    width: 50px;
+    font-size: small;
+    text-align: center;
   }
 }
