@@ -193,4 +193,4 @@ var addUserModal = document.getElementById("addUserModal");
                     row.style.display = 'none';
                 }
             });
-        });
+        }); 
