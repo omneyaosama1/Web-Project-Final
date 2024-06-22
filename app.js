@@ -20,7 +20,7 @@ const productsRoute = require('./routes/products-route');
 const analyticsRoute = require('./routes/analytics-route');
 const profileRoute = require('./routes/profile-route');
 const menuRoute = require('./routes/menu-route');
-
+const feedbackRoute = require('./routes/feedback-route');
 
 
 const port = process.env.PORT || 8080;
@@ -79,7 +79,7 @@ app.use('/usersAdmin', usersAdminRoute);
 app.use('/products', productsRoute);
 app.use('/analytics',analyticsRoute);
 app.use('/profile',profileRoute);
-
+app.use('/feedback',feedbackRoute);
 
 
 mongoose

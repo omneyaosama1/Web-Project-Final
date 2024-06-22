@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/styles/dashboard.css" />
+    <link rel="stylesheet" href="/styles/adminProducts.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -27,6 +27,7 @@
                             <th>Description</th>
                             <th>Duration</th>
                             <th>Difficulty</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody id="productTableBody">
@@ -38,11 +39,19 @@
                                     <td><%= meal.description %></td>
                                     <td><%= meal.cookTime %> min</td>
                                     <td><%= meal.difficulty %></td>
+                                    <td>
+                                        <button class="edit-button" onclick="openEditModal('<%= meal._id %>', '<%= meal.name %>', '<%= meal.description %>', '<%= meal.cookTime %>', '<%= meal.difficulty %>', '<%= meal.image %>')">
+                                            <i class="fas fa-pen"></i>
+                                        </button>
+                                        <form action="/products/delete/<%= meal._id %>" method="POST" style="display:inline;">
+                                            <button type="submit" class="delete-button"><i class="fas fa-trash"></i></button>
+                                        </form>
+                                    </td>
                                 </tr>
                             <% }) %>
                         <% } else { %>
                             <tr>
-                                <td colspan="5">No meals found</td>
+                                <td colspan="6">No meals found</td>
                             </tr>
                         <% } %>
                     </tbody>
@@ -54,29 +63,65 @@
     <!-- Modal for Adding Product -->
     <div id="addProductModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn">&times;</span>
+            <span class="close-btn" onclick="closeModal('addProductModal')">&times;</span>
             <h2>Add Product</h2>
-            <form id="addProductForm">
+            <form id="addProductForm" action="/products/add" method="POST">
                 <label for="productName">Product Name:</label>
-                <input type="text" id="productName" name="productName" required>
+                <input type="text" id="productName" name="name" required>
                 
                 <label for="productDescription">Description:</label>
-                <input type="text" id="productDescription" name="productDescription" required>
+                <input type="text" id="productDescription" name="description" required>
                 
                 <label for="productDuration">Duration:</label>
-                <input type="text" id="productDuration" name="productDuration" required>
+                <input type="number" id="productDuration" name="cookTime" required>
                 
                 <label for="productDifficulty">Difficulty:</label>
-                <input type="text" id="productDifficulty" name="productDifficulty" required>
+                <select id="productDifficulty" name="difficulty" required>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
                 
                 <label for="productImage">Image URL:</label>
-                <input type="text" id="productImage" name="productImage" required>
+                <input type="text" id="productImage" name="image" required>
                 
                 <button type="submit">Add Product</button>
             </form>
         </div>
     </div>
 
-    <script src="/scripts/dashboard.js"></script>
+    <!-- Modal for Editing Product -->
+    <div id="editProductModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('editProductModal')">&times;</span>
+            <h2>Edit Product</h2>
+            <form id="editProductForm" action="/products/edit" method="POST">
+                <input type="hidden" id="editProductId" name="id">
+                
+                <label for="editProductName">Product Name:</label>
+                <input type="text" id="editProductName" name="name" required>
+                
+                <label for="editProductDescription">Description:</label>
+                <input type="text" id="editProductDescription" name="description" required>
+                
+                <label for="editProductDuration">Duration:</label>
+                <input type="number" id="editProductDuration" name="cookTime" required>
+                
+                <label for="editProductDifficulty">Difficulty:</label>
+                <select id="editProductDifficulty" name="difficulty" required>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+                
+                <label for="editProductImage">Image URL:</label>
+                <input type="text" id="editProductImage" name="image" required>
+                
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/scripts/adminProducts.js"></script>
 </body>
 </html>

@@ -25,7 +25,7 @@
                             <option value="50">50 Entries</option>
                             <option value="100">100 Entries</option>
                         </select>
-                        <input type="text" placeholder="Search...">
+                        <input type="text" placeholder="Search..." id="searchInput">
                     </div>
                     <div class="table-filters">
                         <button class="filter-button" id="addUserBtn">Add User</button>
@@ -48,9 +48,13 @@
                                     <td><%= user.userType %></td>
                                     <td><%= user.email %></td>
                                     <td>
-                                        <button class="edit-button" onclick="openEditModal('<%= user._id %>', '<%= user.name %>', '<%= user.email %>', '<%= user.userType %>', '<%= user.password %>', '<%= user.address %>', '<%= user.phoneNumber %>', '<%= user.birthdate %>')">Edit</button>
+                                        <button class="edit-button" onclick="openEditModal('<%= user._id %>', '<%= user.name %>', '<%= user.email %>', '<%= user.userType %>', '<%= user.password %>', '<%= user.address %>', '<%= user.phoneNumber %>', '<%= user.birthdate %>')">
+                                            <i class="fas fa-pen"></i>
+                                        </button>
                                         <form action="/usersAdmin/delete/<%= user._id %>" method="POST" style="display:inline;">
-                                            <button type="submit" class="delete-button">Delete</button>
+                                            <button type="submit" class="delete-button">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>
@@ -135,7 +139,6 @@
             </form>
         </div>
     </div>
-
     <script src="/scripts/dashboard.js"></script>
 </body>
 </html>
