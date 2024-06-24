@@ -11,6 +11,7 @@ function checkUserAuth(req, res, next) {
             next();
         } else {
             // Session has expired
+            console.log("Current session has expired::user");
             res.clearCookie("session"); // Clear session cookie
             return res.redirect("/logout"); // Redirect to logout endpoint or handle logout logic
         }
@@ -34,6 +35,7 @@ function checkAdminAuth(req, res, next) {
                 next();
             } else {
                 // Session has expired
+                console.log("Current session has expired::admin");
                 res.clearCookie("session"); // Clear session cookie
                 return res.redirect("/logout"); // Redirect to logout endpoint or handle logout logic
             }
