@@ -1,7 +1,7 @@
-require("dotenv").config();
 const express = require('express');
 const mongoose = require('mongoose')
 const session = require('express-session');
+require("dotenv").config();
 
 const homePageRoute = require("./routes/index-route");
 const aboutUsPageRoute = require('./routes/about-us-route');
@@ -27,7 +27,7 @@ const port = process.env.PORT || 8000;
 const dbUserName = process.env.dbUserName;
 const dbPassword = process.env.dbPassword;
 
-const dbURL = `mongodb+srv://${dbUserName}:${dbPassword}@freshbites.wagcbow.mongodb.net/FreshBites?retryWrites=true&w=majority&appName=freshbites`;
+const dbURL = `mongodb+srv://${dbUserName}:${dbPassword}@freshbites.wagcbow.mongodb.net/FreshBites-Test?retryWrites=true&w=majority&appName=freshbites`;
 
 const app = express();
 
@@ -42,7 +42,7 @@ app.use(
     secret: 'your_secret_key',
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge:  60 * 1000 } // 3 hours
+    cookie: { maxAge: 3 * 60 * 60 * 1000 }
   })
 );
 
