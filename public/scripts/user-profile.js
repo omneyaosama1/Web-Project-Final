@@ -261,11 +261,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 function logout() {
     // Redirect to login page
-    window.location.href = "pages/login.html";
+    window.location.href = "/login-signup";
 }
 function UserAccount() {
     // Redirect to login page
-    window.location.href = "pages/user.html";
+    window.location.href = "/user";
 }
 document.addEventListener("DOMContentLoaded", function () {
     const cardNumberInput = document.getElementById("cardNumber");
@@ -375,31 +375,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
-
-function editFirstCard(name,email,phoneNumber,address){
-
-    const formType="Edit";
+function editFirstCard(name, email, phoneNumber, address) {
+    const formType = "Edit";
     $.ajax({
-        url:"/user-profile",
-        type:"POST",
-        data:{
-            name_inp:name,
-            email_inp:email,
-            phone_number_inp:phoneNumber,
-            address_inp:address,
-            form_type_inp:formType
+        url: "/user-profile",
+        type: "POST",
+        data: {
+            name_inp: name,
+            email_inp: email,
+            phone_number_inp: phoneNumber,
+            address_inp: address,
+            form_type_inp: formType,
         },
-        success: function(response){
-            if(response.success){
+        success: function (response) {
+            if (response.success) {
                 console.log("Saved Successfullyyy akheraaann :)");
                 window.location.href = "/user-profile";
-            }else{
+            } else {
                 console.log("Not successful :(");
             }
         },
-        error:function(xhr,status,error){
-            console.log("error details:",xhr.responseText);
-        }
+        error: function (xhr, status, error) {
+            console.log("error details:", xhr.responseText);
+        },
     });
 }
