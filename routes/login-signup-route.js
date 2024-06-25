@@ -19,7 +19,7 @@ router.get('/logout', (req, res) => {
     if (err) {
       return res.redirect('/admin');
     }
-    console.log('Session expired'); // Log session expired message
+    console.log('Session expired::redirect admin'); // Log session expired message
     res.clearCookie('connect.sid');
     res.redirect('/login-signup');
   });
@@ -31,7 +31,7 @@ router.get('/logout', (req, res) => {
     if (err) {
       return res.redirect('/user');
     }
-    console.log('Session expired'); // Log session expired message
+    console.log('Session expired::redirect user'); // Log session expired message
     res.clearCookie('connect.sid');
     res.redirect('/login-signup');
   });
