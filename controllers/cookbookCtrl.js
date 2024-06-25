@@ -12,7 +12,8 @@ const getMeals = async (req, res) => {
     res.render("cookbook", {
       meals: meals,
       currentPage: page,
-      totalPages: totalPages,
+      totalPages: totalPages, 
+      user: req.session.user 
     });
   } catch (error) {
     console.log(error);
