@@ -1,312 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>History</title>
-        <link rel="stylesheet" href="../styles/history.css" />
-        <link rel="stylesheet" href="/styles/User.css" />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>History</title>
+    <link rel="stylesheet" href="../styles/history.css" />
+    <link rel="stylesheet" href="/styles/User.css" />
 
-        <link
-            href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        />
+    <!-- Include your CSS and JavaScript files -->
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script src="/scripts/User.js" defer></script>
+    <script src="../scripts/history.js" defer></script>
+</head>
+<body>
+    <% include("./partial/nav-bar.ejs") %>
 
-        <script src="/scripts/User.js" defer></script>
-        <script src="../scripts/history.js" defer></script>
-    </head>
-    <body>
-        <%- include("./partial/nav-bar.ejs") %>
+    <div id="history-content">
+        <h1 id="history-head">Your History</h1>
+        <table>
+            <tr>
+                <th>Meal Image</th>
+                <th>Meal Name</th>
+                <th>Date</th>
+                <!-- Other headers as needed -->
+            </tr>
+        
+<% pastOrders.forEach(order => { %>
+    <h3>Order ID: <%= order._id %></h3>
+    <ul>
+      <% order.dishes.forEach(dish => { %>
+        <li>Meal Name: <%= dish.name %></li>
+        <li>Meal Image: <img src="<%= dish.image %>" alt="<%= dish.name %>"></li>
+        
+      <% }) %>
+    </ul>
+  <% }) %>
+  
+        </table>
+        
+    </div>
 
-
-        <div id="history-content">
-            <h1 id="history-head">Your History</h1>
-            <table>
-                <tr>
-                    <th>Meal Image</th>
-                    <th>Meal Name</th>
-                    <th>Date</th>
-                    <th>Re-Ordering</th>
-                    <th>Reviewing</th>
-                </tr>
-
-                <tr>
-                    <td>
-                        <img
-                            id="mealImg"
-                            src="/images/History/orderedDish1.jpg"
-                        />
-                    </td>
-                    <td>Tuna & Tomato Pasta Salad</td>
-                    <td>Thursday, 25-4-2024</td>
-                    <td><button class="reOrder">Re-Order</button></td>
-                    <td>
-                        <button class="review" onclick="displayReview()">
-                            Review
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <img
-                            id="mealImg"
-                            src="/images/History/orderedDish6.jpg"
-                        />
-                    </td>
-                    <td>Sweet & Chili Chicken</td>
-                    <td>Thursday, 4-4-2024</td>
-                    <td><button class="reOrder">Re-Order</button></td>
-                    <td>
-                        <button class="review" onclick="displayReview()">
-                            Review
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <img
-                            id="mealImg"
-                            src="/images/History/orderedDish2.jpg"
-                        />
-                    </td>
-                    <td>Cheeseburger Pizza</td>
-                    <td>Monday, 25-3-2024</td>
-                    <td><button class="reOrder">Re-Order</button></td>
-                    <td>
-                        <button class="review" onclick="displayReview()">
-                            Review
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <img
-                            id="mealImg"
-                            src="/images/History/orderedDish7.jpg"
-                        />
-                    </td>
-                    <td>Beef & Mushroom</td>
-                    <td>Friday, 15-3-2024</td>
-                    <td><button class="reOrder">Re-Order</button></td>
-                    <td>
-                        <button class="review" onclick="displayReview()">
-                            Review
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <img
-                            id="mealImg"
-                            src="/images/History/orderedDish5.jpg"
-                        />
-                        <br />
-                        <img
-                            id="mealImg"
-                            src="/images/History/orderedDish12.jpg"
-                        />
-                    </td>
-                    <td>
-                        Creamy Lemon Chicken<br /><br />
-                        Zucchini Boats
-                    </td>
-                    <td>Friday, 5-3-2024</td>
-                    <td><button class="reOrder">Re-Order</button></td>
-                    <td>
-                        <button class="review" onclick="displayReview()">
-                            Review
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <img
-                            id="mealImg"
-                            src="/images/History/orderedDish8.jpg"
-                        />
-                    </td>
-                    <td>Turkey Scallopini</td>
-                    <td>Thursday, 15-2-2024</td>
-                    <td><button class="reOrder">Re-Order</button></td>
-                    <td>
-                        <button class="review" onclick="displayReview()">
-                            Review
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <img
-                            id="mealImg"
-                            src="/images/History/orderedDish3.jpg"
-                        />
-                    </td>
-                    <td>Fajita Bowl</td>
-                    <td>Monday, 22-1-2024</td>
-                    <td><button class="reOrder">Re-Order</button></td>
-                    <td>
-                        <button class="review" onclick="displayReview()">
-                            Review
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <img
-                            id="mealImg"
-                            src="/images/History/orderedDish5.jpg"
-                        />
-                    </td>
-                    <td>Steak & Shrimp Kabobs</td>
-                    <td>Friday, 5-1-2024</td>
-                    <td><button class="reOrder">Re-Order</button></td>
-                    <td>
-                        <button class="review" onclick="displayReview()">
-                            Review
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <img
-                            id="mealImg"
-                            src="/images/History/orderedDish10.jpg"
-                        />
-                    </td>
-                    <td>Salmon With Spinach</td>
-                    <td>Sunday, 31-12-2023</td>
-                    <td><button class="reOrder">Re-Order</button></td>
-                    <td>
-                        <button class="review" onclick="displayReview()">
-                            Review
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <img
-                            id="mealImg"
-                            src="/images/History/orderedDish11.jpg"
-                        />
-                    </td>
-                    <td>Rigatoni With Sausage</td>
-                    <td>Thursday, 14-12-2023</td>
-                    <td><button class="reOrder">Re-Order</button></td>
-                    <td>
-                        <button class="review" onclick="displayReview()">
-                            Review
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <img
-                            id="mealImg"
-                            src="/images/History/orderedDish12.jpg"
-                        />
-                    </td>
-                    <td>Zucchini Boats</td>
-                    <td>Friday, 10-11-2023</td>
-                    <td><button class="reOrder">Re-order</button></td>
-                    <td>
-                        <button class="review" onclick="displayReview()">
-                            Review
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <img
-                            id="mealImg"
-                            src="/images/History/orderedDish13.jpg"
-                        />
-                        <br /><img
-                            id="mealImg"
-                            src="/images/History/orderedDish4.jpg"
-                        />
-                    </td>
-
-                    <td>
-                        Apricot Chicken<br /><br />
-                        Cheeseburger Pasta
-                    </td>
-
-                    <td>Thursday, 26-10-2023</td>
-                    <td><button class="reOrder">Re-Order</button></td>
-                    <td>
-                        <button class="review" onclick="displayReview()">
-                            Review
-                        </button>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <!-- Confirmation Popup -->
-        <div id="confirmationPopup" class="confirmation-popup">
-            <div class="confirmation-content">
-                <h2>Are you sure?</h2>
-                <p>Do you want to reorder this meal?</p>
-                <div class="confirmation-buttons">
-                    <button id="confirmReOrder">Yes, I'm sure</button>
-                    <button id="cancelReOrder">Cancel</button>
-                </div>
+    <!-- Confirmation Popup -->
+    <div id="confirmationPopup" class="confirmation-popup">
+        <div class="confirmation-content">
+            <h2>Are you sure?</h2>
+            <p>Do you want to reorder this meal?</p>
+            <div class="confirmation-buttons">
+                <button id="confirmReOrder">Yes, I'm sure</button>
+                <button id="cancelReOrder">Cancel</button>
             </div>
         </div>
+    </div>
 
-        <!-- Overlay Window -->
-        <div id="reviewOverlay"></div>
-        <div id="reviewOverlayContent">
-            <button class="exit" onclick="exitReview()">x</button>
-            <h2>How did you find our dish/s?</h2>
-            <div class="button-row">
-                <button class="choice" onclick="selected(event)">
-                    <span></span>Terrible
-                </button>
-                <button class="choice" onclick="selected(event)">
-                    <span></span>Poor
-                </button>
-                <button class="choice" onclick="selected(event)">
-                    <span></span>Average
-                </button>
-            </div>
-            <div class="button-row">
-                <button class="choice" onclick="selected(event)">
-                    <span></span>Good
-                </button>
-                <button class="choice" onclick="selected(event)">
-                    <span></span>Excellent
-                </button>
-            </div>
+    <!-- Overlay Window -->
+    <div id="reviewOverlay"></div>
+    <div id="reviewOverlayContent">
+        <button class="exit" onclick="exitReview()">x</button>
+        <h2>How did you find our dish/s?</h2>
+        <div class="button-row">
+            <button class="choice" onclick="selected(event)">
+                <span></span>Terrible
+            </button>
+            <button class="choice" onclick="selected(event)">
+                <span></span>Poor
+            </button>
+            <button class="choice" onclick="selected(event)">
+                <span></span>Average
+            </button>
         </div>
-        <!-- Thank You Modal -->
-        <div id="thankYouModal" class="thank-you-modal">
-            <div class="thank-you-content">
-                <p>Thank you for your rating!! Your opinion matters to us.</p>
-            </div>
+        <div class="button-row">
+            <button class="choice" onclick="selected(event)">
+                <span></span>Good
+            </button>
+            <button class="choice" onclick="selected(event)">
+                <span></span>Excellent
+            </button>
         </div>
-    </body>
+    </div>
+
+    <!-- Thank You Modal -->
+    <div id="thankYouModal" class="thank-you-modal">
+        <div class="thank-you-content">
+            <p>Thank you for your rating!! Your opinion matters to us.</p>
+        </div>
+    </div>
+
+    <!-- Script for formatting date -->
+    <script>
+        function formatDate(dateString) {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', options);
+        }
+    </script>
+</body>
 </html>

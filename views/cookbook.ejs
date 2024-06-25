@@ -27,7 +27,6 @@
     <%- include("./partial/nav-bar.ejs") %>
   </div>
   <div id="background">
-    <div id="notification" class="notification">Added to Favorites</div>
     <form name="searchForm" onsubmit="return checkInput(this)" method="post">
       <div id="search-div">
         <input type="text" name="search" id="search-bar" />
@@ -57,27 +56,6 @@
       </ul>
       <div class="icon">
         <i id="right-cuisine" class="fa-solid fa-angle-right"></i>
-      </div>
-    </div>
-    <h1 class="title">Dishes</h1>
-    <div class="dishes">
-      <div class="icon">
-        <i id="left-dishes" class="fa-solid fa-angle-left"></i>
-      </div>
-      <ul class="tabs-bar">
-        <li class="tab">Tacos Recipes</li>
-        <li class="tab">Burger Recipes</li>
-        <li class="tab">Pasta Recipes</li>
-        <li class="tab">Bowl Recipes</li>
-        <li class="tab">Noodle Recipes</li>
-        <li class="tab">Soup Recipes</li>
-        <li class="tab">Burrito Recipes</li>
-        <li class="tab">Sandwich Recipes</li>
-        <li class="tab">Casserole Recipes</li>
-        <li class="tab">Stir-Fry Recipes</li>
-      </ul>
-      <div class="icon">
-        <i id="right-dishes" class="fa-solid fa-angle-right"></i>
       </div>
     </div>
     <div id="overlay"></div>
@@ -138,14 +116,13 @@
       </h4>
       <div class="card-details">
         <div class="tags"><%= meal.tags %></div>
-        <button class="heart-button" onclick="addToFavorites(event, ' dish<%= index + 1 %>')">
-          <i class="fa-solid fa-heart"></i>
-        </button>
       </div>
     </div>
   <% }); %>
 </div>
-  <div class="pagination">
+
+<div class="pagination">
+  <div id="pagination-links">
     <% if (currentPage > 1) { %>
       <a href="?page=<%= currentPage - 1 %>">Previous</a>
     <% } %>
@@ -158,6 +135,7 @@
       <a href="?page=<%= currentPage + 1 %>">Next</a>
     <% } %>
   </div>
+</div>
 
     <!-- Overlay descriptions for each meal -->
     <% meals.forEach((meal, index)=> { %>

@@ -35,6 +35,8 @@ const handlePlanForm = async (req, res) => {
             numberOfMeals_inp,
             numberOfPeople_inp,
         } = req.body;
+
+        console.log(req.body);
         const loggedInUser = await User.findOne({ _id: req.session.user._id });
 
         if (loggedInUser) {

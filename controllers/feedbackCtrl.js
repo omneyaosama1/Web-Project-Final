@@ -20,20 +20,6 @@ const getMeals = async (req, res) => {
   }
 };
 
-const getById = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const getMeal = await Meal.findById(id);
-    if (!getMeal) {
-      return res.status(404).json({ message: 'Meal not found' });
-    }
-    return res.status(200).json(getMeal);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: 'Server error' });
-  }
-};
-
 const addMeal = async (req, res) => {
   const {
     name,
@@ -216,14 +202,14 @@ const addMealAdmin = async (req, res) => {
         cholesterol: parseFloat(nutrition.cholesterol),
         sodium: parseFloat(nutrition.sodium),
       },
-      recommendations: recommendations.split(','),  // Same for recommendations
+      recommendations: recommendations.split(','),  
     });
 
     await newMeal.save();
-    res.redirect('/products'); // Redirect to the products page
+    res.redirect('/products'); 
   } catch (error) {
-    console.error('Error details:', error); // Log detailed error information
-    res.status(500).send('Failed to add a meal');
+    console.error('Error details:', error); 
+    res.status(500).send('Failed to add a meal ::admin');
   }
 };
 
@@ -231,7 +217,6 @@ module.exports = {
   getMeals,
   addMeal,
   updateMeal,
-  getById,
   deleteMeal,
   getMealsAdmin,
   addMealAdmin

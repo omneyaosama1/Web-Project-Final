@@ -86,16 +86,16 @@
   transition: background-color 0.3s ease;
 }
 
-.tabs-bar .tab:hover {
+/* .tabs-bar .tab:hover {
   background-color: #167592;
   color: #f7f7f7;
-}
+} */
 
-.tabs-bar .tab.active {
+/* .tabs-bar .tab.active {
   color: #f7f7f7;
   background: #f19f13;
   border-color: transparent;
-}
+} */
 
 /* Title Styling */
 .title {

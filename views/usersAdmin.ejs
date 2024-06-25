@@ -25,42 +25,119 @@
                             <option value="50">50 Entries</option>
                             <option value="100">100 Entries</option>
                         </select>
-                        <input type="text" placeholder="Search...">
+                        <input type="text" placeholder="Search..." id="searchInput">
                     </div>
                     <div class="table-filters">
-                        <button class="filter-button">add-User</button>
-                        
+                        <button class="filter-button" id="addUserBtn">Add User</button>
                     </div>
                 </div>
                 <table>
                     <thead>
                         <tr>
                             <th>Name</th>
-
                             <th>Role</th>
-                            
                             <th>Email</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Darlene Robertson</td>
-                          
-                            <td>Admin</td>
-                            <td>darlene@example.com</td>
-                        </tr>
-                        <tr>
-                            <td> Marvin McKinney</td>
-                            
-                            <td>User</td>
-                            
-                            <td>marvin@example.com</td>
-                        </tr>
-                        <!-- Repeat for other rows -->
+                        <% if (users && users.length > 0) { %>
+                            <% users.forEach(user => { %>
+                                <tr>
+                                    <td><%= user.name %></td>
+                                    <td><%= user.userType %></td>
+                                    <td><%= user.email %></td>
+                                    <td>
+                                        <button class="edit-button" onclick="openEditModal('<%= user._id %>', '<%= user.name %>', '<%= user.email %>', '<%= user.userType %>', '<%= user.password %>', '<%= user.address %>', '<%= user.phoneNumber %>', '<%= user.birthdate %>')">
+                                            <i class="fas fa-pen"></i>
+                                        </button>
+                                        <form action="/usersAdmin/delete/<%= user._id %>" method="POST" style="display:inline;">
+                                            <button type="submit" class="delete-button">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="4">No users found</td>
+                            </tr>
+                        <% } %>
                     </tbody>
                 </table>
             </div>
         </section>
+    </div>
+
+    <!-- Add User Modal -->
+    <div id="addUserModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addUserModal')">&times;</span>
+            <form action="/usersAdmin/add" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="userType">User Type:</label>
+                <select id="userType" name="userType" required>
+                    <option value="User">User</option>
+                    <option value="Admin">Admin</option>
+                </select>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address">
+                
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" pattern="\d{11}">
+                
+                <label for="birthdate">Birthdate:</label>
+                <input type="date" id="birthdate" name="birthdate" required>
+                
+                <button type="submit">Add User</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div id="editUserModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('editUserModal')">&times;</span>
+            <form id="editUserForm" action="/usersAdmin/edit" method="POST">
+                <input type="hidden" id="editUserId" name="id">
+                
+                <label for="editName">Name:</label>
+                <input type="text" id="editName" name="name" required>
+                
+                <label for="editEmail">Email:</label>
+                <input type="email" id="editEmail" name="email" required>
+                
+                <label for="editUserType">User Type:</label>
+                <select id="editUserType" name="userType" required>
+                    <option value="User">User</option>
+                    <option value="Admin">Admin</option>
+                </select>
+                
+                <label for="editPassword">Password:</label>
+                <input type="password" id="editPassword" name="password" required>
+                
+                <label for="editAddress">Address:</label>
+                <input type="text" id="editAddress" name="address">
+                
+                <label for="editPhoneNumber">Phone Number:</label>
+                <input type="text" id="editPhoneNumber" name="phoneNumber" pattern="\d{11}">
+                
+                <label for="editBirthdate">Birthdate:</label>
+                <input type="date" id="editBirthdate" name="birthdate" required>
+                
+                <button type="submit">Update User</button>
+            </form>
+        </div>
     </div>
     <script src="/scripts/dashboard.js"></script>
 </body>

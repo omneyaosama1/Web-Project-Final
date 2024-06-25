@@ -89,54 +89,54 @@ function changeFavouriteC(itemID, week) {
 
 // Search
 
-function searchValidate(form) {
-    var searchInput = form.querySelector("#SearchW").value.trim();
-    var regex = /^[a-zA-Z\s]+$/;
-    if (searchInput === "") {
-        printWarning("errorMsg", "Please enter an item's name.");
-        return false;
-    } else if (!regex.test(searchInput)) {
-        printWarning("errorMsg", "Please enter a valid name.");
-        return false;
-    } else {
-        printWarning("errorMsg", "");
-        return true;
-    }
-}
+// document.addEventListener('DOMContentLoaded', function() {
+  
+//     document.querySelector('.searchPart').addEventListener('submit', function(event) {
+//         event.preventDefault(); 
+//         searchValidate(this);
+//     });
+// });
 
-function searchItem() {
-    var searchInput = document
-        .getElementById("SearchW")
-        .value.toLowerCase()
-        .trim();
-    var weeks = ["week1", "week2", "week3", "week4"];
-    var currWeek = null;
+// function searchValidate(form) {
+//     var searchInput = form.querySelector("#SearchW").value.trim();
+//     var regex = /^[a-zA-Z\s]+$/;
+    
+//     if (searchInput === "") {
+//         printWarning("errorMsg", "Please enter an item's name.");
+//         return false;
+//     } else if (!regex.test(searchInput)) {
+//         printWarning("errorMsg", "Please enter a valid name.");
+//         return false;
+//     } else {
+//         printWarning("errorMsg", "");
+//         searchItem(searchInput);
+//         return false; 
+//     }
+// }
 
-    document.querySelectorAll(".buttons button").forEach((button, index) => {
-        if (button.classList.contains("selectedB")) {
-            currWeek = weeks[index];
-        }
-    });
+// function searchItem(searchInput) {
+//     var weeks = ['week1', 'week2', 'week3', 'week4'];
 
-    if (currWeek) {
-        var Allitems = document.querySelectorAll(".items." + currWeek);
+//     weeks.forEach(function(week) {
+//         var items = document.querySelectorAll('.items.' + week);
 
-        Allitems.forEach((item) => {
-            var itemName = item.textContent.toLowerCase().trim();
-            if (itemName.includes(searchInput) || searchInput === "") {
-                item.style.display = "block";
-                item.classList.remove("animation");
-            } else {
-                item.style.display = "none";
-            }
-        });
-    }
-}
+//         items.forEach(function(item) {
+//             var itemName = item.querySelector('h3').textContent.toLowerCase();
+            
+//             if (itemName.includes(searchInput.toLowerCase())) {
+//                 item.style.display = 'block';
+//             } else {
+//                 item.style.display = "none";
+//             }
+//         });
+//     });
+// }
 
 // after adding to cart message
-function showMessage() {
+function showMessage(message) {
     var msg = document.querySelectorAll(".message");
     msg.forEach((messg) => {
+        messg.textContent = message;
         messg.style.display = "block";
     });
     setTimeout(closeMessage, 6000);
@@ -361,10 +361,10 @@ function addToCart(button) {
                     cList.append(listItem);
                 }
             });
-            showMessage();
+            showMessage("Added to cart succesfully");
         },
         error: function(xhr) {
-            alert("Error: " + xhr.responseText);
+            showMessage("Error: " + xhr.responseText);
         }
     });
 }

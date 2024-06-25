@@ -19,12 +19,12 @@
             <div class="profile-container">
                 <div class="profile-header">
                     <div class="profile-image">
-                        <img src="https://via.placeholder.com/150" alt="Profile Picture">
+                        <img src="<%= admin.image || 'https://via.placeholder.com/150' %>" alt="Profile Picture">
                     </div>
                     <div class="profile-info">
-                        <h2>Rafiqul Rahman</h2>
-                        <p>Team Manager</p>
-                        <p>Leeds, United Kingdom</p>
+                        <h2><%= admin.name %></h2>
+                        <p><%= admin.userType %></p>
+                        <p><%= admin.address %></p>
                     </div>
                     <div class="profile-edit">
                         <button class="edit-button">Edit <i class="fas fa-edit"></i></button>
@@ -34,21 +34,20 @@
                     <h3>Personal Information</h3>
                     <button class="edit-button">Edit <i class="fas fa-edit"></i></button>
                     <div class="profile-details">
-                        <p><strong>First Name:</strong> Rafiqul</p>
-                        <p><strong>Last Name:</strong> Rahman</p>
-                        <p><strong>Email:</strong> rafiqulrahman5@gmail.com</p>
-                        <p><strong>Phone:</strong> +09 345 346 46</p>
-                        <p><strong>Bio:</strong> Team Manager</p>
+                        <p><strong>Name:</strong> <%= admin.name %></p>
+                        <p><strong>Email:</strong> <%= admin.email %></p>
+                        <p><strong>Phone:</strong> <%= admin.phoneNumber %></p>
+                        <p><strong>Bio:</strong> <%= admin.userType %></p>
                     </div>
                 </div>
                 <div class="profile-section">
                     <h3>Address</h3>
                     <button class="edit-button">Edit <i class="fas fa-edit"></i></button>
                     <div class="profile-details">
-                        <p><strong>Country:</strong> United Kingdom</p>
-                        <p><strong>City/State:</strong> Leeds, East London</p>
-                        <p><strong>Postal Code:</strong> ERT 2354</p>
-                        <p><strong>TAX ID:</strong> AS45645756</p>
+                        <p><strong>Country:</strong> <%= admin.country || 'Not specified' %></p>
+                        <p><strong>City/State:</strong> <%= admin.city || 'Not specified' %></p>
+                        <p><strong>Postal Code:</strong> <%= admin.postalCode || 'Not specified' %></p>
+                        <p><strong>TAX ID:</strong> <%= admin.taxId || 'Not specified' %></p>
                     </div>
                 </div>
             </div>

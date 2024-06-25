@@ -32,16 +32,6 @@ const orderSchema = new mongoose.Schema(
       },
       expDate: {
         type: String,
-        // match: [
-        //   /^(0[1-9]|1[0-2])\/\d{4}$/,
-        //   "Please enter a valid expiration date (MM/YYYY)",
-        // ],
-        validate: {
-          validator: function (date) {
-            return moment(date).isAfter(moment());
-          },
-          message: "Expiration date must be in the future",
-        },
         required: true,
       },
     },

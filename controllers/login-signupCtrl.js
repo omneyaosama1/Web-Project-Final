@@ -40,8 +40,8 @@ const handleSignup = async (req, res) => {
         newUser
             .save()
             .then((user) => res.json({ 
-                success: true, 
-                statusType: "success",
+                success: true,
+                statusType: "success", 
                 user: newUser 
             }))
             .catch((error) => {
