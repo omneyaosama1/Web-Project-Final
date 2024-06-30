@@ -1,13 +1,12 @@
-const moment = require('moment');
-const User = require('../Schema/userSchema');
-const Order=require('../Schema/orderSchema');
+const moment = require("moment");
+const User = require("../Schema/userSchema");
+const Order = require("../Schema/orderSchema");
 
 const renderUserPage = async (req, res) => {
-   
-    if (!req.session.user) {
-        req.session.user = await User.findById(req.session.userId);
-    }
-    res.render("user-profile", { user: req.session.user});
+  if (!req.session.user) {
+    req.session.user = await User.findById(req.session.userId);
+  }
+  res.render("user-profile", { user: req.session.user });
 };
 
 const renderFavMealsPage = async (req, res) => {
@@ -18,29 +17,30 @@ const renderFavMealsPage = async (req, res) => {
   res.render("fav-meals", { user: req.session.user });
 };
 
-
 const renderUserHistoryPage = async (req, res) => {
   try {
-    
     if (!req.session.user) {
-
-      const user = await User.findById(req.session.userId).populate('pastOrderIds');
+      const user = await User.findById(req.session.userId).populate(
+        "pastOrderIds"
+      );
       if (!user) {
-        return res.status(404).send('User not found');
+        return res.status(404).send("User not found");
       }
       req.session.user = user;
     }
 
     const pastOrderIds = req.session.user.pastOrderIds || [];
 
-    const populatedOrders = await Order.find({ _id: { $in: pastOrderIds } }).populate('dishes');
+    const populatedOrders = await Order.find({
+      _id: { $in: pastOrderIds },
+    }).populate("dishes");
 
-    res.render('user-history', { pastOrders: populatedOrders });
+    res.render("user-history", { pastOrders: populatedOrders });
   } catch (err) {
-    console.error('Error fetching user or past orders:', err);
-    res.status(500).send('Internal Server Error');
+    console.error("Error fetching user or past orders:", err);
+    res.status(500).send("Internal Server Error");
   }
-}
+};
 
 const handleLogout = async (req, res) => {
   req.session.destroy((err) => {
@@ -52,11 +52,27 @@ const handleLogout = async (req, res) => {
 };
 
 const addUser = async (req, res) => {
-  const { userType, name, password, address, phoneNumber, email, visaInfo, birthdate, image, subscriptionStatus, subPlan, pastOrderIds, favoriteMeals } = req.body;
+  const {
+    userType,
+    name,
+    password,
+    address,
+    phoneNumber,
+    email,
+    visaInfo,
+    birthdate,
+    image,
+    subscriptionStatus,
+    subPlan,
+    pastOrderIds,
+    favoriteMeals,
+  } = req.body;
 
   try {
-    const formattedBirthdate = moment(birthdate, 'DD/MM/YYYY').toDate();
-    const formattedExpDate = visaInfo?.expDate ? moment(visaInfo.expDate, 'MM/YYYY').toDate() : null;
+    const formattedBirthdate = moment(birthdate, "DD/MM/YYYY").toDate();
+    const formattedExpDate = visaInfo?.expDate
+      ? moment(visaInfo.expDate, "MM/YYYY").toDate()
+      : null;
 
     const newUser = new User({
       userType,
@@ -65,11 +81,13 @@ const addUser = async (req, res) => {
       address,
       phoneNumber,
       email,
-      visaInfo: visaInfo ? {
-        cardNum: visaInfo.cardNum,
-        cvv: visaInfo.cvv,
-        expDate: formattedExpDate,
-      } : undefined,
+      visaInfo: visaInfo
+        ? {
+            cardNum: visaInfo.cardNum,
+            cvv: visaInfo.cvv,
+            expDate: formattedExpDate,
+          }
+        : undefined,
       birthdate: formattedBirthdate,
       image,
       subscriptionStatus,
@@ -88,51 +106,53 @@ const addUser = async (req, res) => {
       // Add other relevant user data to session as needed
     };
 
-    res.status(201).send('User added successfully');
+    res.status(201).send("User added successfully");
   } catch (error) {
     console.log(error);
-    res.status(500).send('Failed to add user');
+    res.status(500).send("Failed to add user");
   }
 };
-
 
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
-    const formattedUsers = users.map(user => ({
+    const formattedUsers = users.map((user) => ({
       ...user.toObject(),
-      visaInfo: user.visaInfo ? {
-        ...user.visaInfo,
-        expDate: moment(user.visaInfo.expDate).format('MM/YYYY'),
-      } : undefined,
+      visaInfo: user.visaInfo
+        ? {
+            ...user.visaInfo,
+            expDate: moment(user.visaInfo.expDate).format("MM/YYYY"),
+          }
+        : undefined,
     }));
     res.status(200).json(formattedUsers);
   } catch (error) {
     console.log(error);
-    res.status(500).send('Failed to get users');
+    res.status(500).send("Failed to get users");
   }
 };
-
 
 const getUserById = async (req, res) => {
   const { id } = req.params;
   try {
     const userById = await User.findById(id);
     if (!userById) {
-      return res.status(404).send('User not found');
+      return res.status(404).send("User not found");
     }
     const formattedUser = {
       ...userById.toObject(),
-      birthdate: moment(userById.birthdate).format('DD/MM/YYYY'),
-      visaInfo: userById.visaInfo ? {
-        ...userById.visaInfo,
-        expDate: moment(userById.visaInfo.expDate).format('MM/YYYY'),
-      } : undefined,
+      birthdate: moment(userById.birthdate).format("DD/MM/YYYY"),
+      visaInfo: userById.visaInfo
+        ? {
+            ...userById.visaInfo,
+            expDate: moment(userById.visaInfo.expDate).format("MM/YYYY"),
+          }
+        : undefined,
     };
     res.status(200).json(formattedUser);
   } catch (error) {
     console.log(error);
-    res.status(500).send('Failed to get user');
+    res.status(500).send("Failed to get user");
   }
 };
 
@@ -141,44 +161,59 @@ const updateUser = async (req, res) => {
   const { name, email, phoneNumber, address } = req.body;
 
   try {
-    const formattedBirthdate = moment(birthdate, 'DD/MM/YYYY').toDate();
-    const formattedExpDate = visaInfo?.expDate ? moment(visaInfo.expDate, 'MM/YYYY').toDate() : null;
-
     const updatedUser = await User.findByIdAndUpdate(
       userID,
       {
-
         name,
         email,
         phoneNumber,
         address,
-
-
-        visaInfo: visaInfo ? {
-          cardNum: visaInfo.cardNum,
-          cvv: visaInfo.cvv,
-          expDate: formattedExpDate,
-        } : undefined,
-        birthdate: formattedBirthdate,
-        image,
-        subscriptionStatus,
-        subPlan,
-        pastOrderIds,
-        favoriteMeals,
       },
       { new: true }
     );
+
     if (!updatedUser) {
-      return res.status(404).send('User not found');
+      return res.status(404).send("User not found");
     }
 
-    await updatedUser.save();
-    res.status(200).send('User updated successfully');
+    // Update session user info
+    req.session.user = updatedUser;
+    res.status(200).send("User updated successfully");
   } catch (error) {
-    console.log(error);
-    res.status(500).send('Failed to update user');
+    console.error(error);
+    res.status(500).send("Failed to update user");
   }
 };
+
+const updatePassword = async (req, res) => {
+  const { currentPassword, newPassword, confirmPassword } = req.body;
+  const userID = req.session.user._id;
+
+  try {
+    const user = await User.findById(userID);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    // Check if the current password matches
+    if (user.password !== currentPassword) {
+      return res.status(400).send("Current password is incorrect");
+    }
+    if (newPassword !== confirmPassword) {
+      return res.status(400).send("Passwods do not match");
+    }
+    user.password = newPassword;
+    await user.save();
+    req.session.user.password = newPassword;
+
+    res.status(200).send("Password updated successfully");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Failed to update password");
+  }
+};
+
+module.exports = { updatePassword };
 
 const deleteUser = async (req, res) => {
   const userID = req.session.user._id;
@@ -186,18 +221,19 @@ const deleteUser = async (req, res) => {
   try {
     const deletedUser = await User.findByIdAndDelete(userID);
     if (!deletedUser) {
-      return res.status(404).send('User not found');
+      return res.status(404).send("User not found");
     }
-    res.status(200).send('User deleted successfully');
+    res.status(200).send("User deleted successfully");
   } catch (error) {
     console.log(error);
-    res.status(500).send('Failed to delete user');
+    res.status(500).send("Failed to delete user");
   }
-}; 
- 
+};
+
 const addUserAdmin = async (req, res) => {
   try {
-    const { name, email, userType, password, address, phoneNumber, birthdate } = req.body;
+    const { name, email, userType, password, address, phoneNumber, birthdate } =
+      req.body;
     const newUser = new User({
       name,
       email,
@@ -209,7 +245,7 @@ const addUserAdmin = async (req, res) => {
     });
 
     await newUser.save();
-    res.redirect('/usersAdmin'); // Redirect to the users page
+    res.redirect("/usersAdmin"); // Redirect to the users page
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");
@@ -218,15 +254,24 @@ const addUserAdmin = async (req, res) => {
 
 const getUsersAdmin = async (req, res) => {
   try {
-      const users = await User.find(); // Fetch all users from the database
-      res.render('usersAdmin', { users }); // Pass users to the template
+    const users = await User.find(); // Fetch all users from the database
+    res.render("usersAdmin", { users }); // Pass users to the template
   } catch (err) {
-      console.error(err);
-      res.status(500).send("Server Error");
+    console.error(err);
+    res.status(500).send("Server Error");
   }
 };
 const editUserAdmin = async (req, res) => {
-  const { id, name, email, userType, password, address, phoneNumber, birthdate } = req.body;
+  const {
+    id,
+    name,
+    email,
+    userType,
+    password,
+    address,
+    phoneNumber,
+    birthdate,
+  } = req.body;
 
   try {
     const updatedUser = await User.findByIdAndUpdate(
@@ -244,13 +289,13 @@ const editUserAdmin = async (req, res) => {
     );
 
     if (!updatedUser) {
-      return res.status(404).send('User not found');
+      return res.status(404).send("User not found");
     }
 
-    res.redirect('/usersAdmin'); // Redirect to the users page
+    res.redirect("/usersAdmin"); // Redirect to the users page
   } catch (err) {
     console.error(err);
-    res.status(500).send('Failed to update user');
+    res.status(500).send("Failed to update user");
   }
 };
 
@@ -261,13 +306,13 @@ const deleteUserAdmin = async (req, res) => {
     const deletedUser = await User.findByIdAndDelete(id);
 
     if (!deletedUser) {
-      return res.status(404).send('User not found');
+      return res.status(404).send("User not found");
     }
 
-    res.redirect('/usersAdmin'); // Redirect to the users page
+    res.redirect("/usersAdmin"); // Redirect to the users page
   } catch (err) {
     console.error(err);
-    res.status(500).send('Failed to delete user');
+    res.status(500).send("Failed to delete user");
   }
 };
 const searchUsers = async (req, res) => {
@@ -275,33 +320,34 @@ const searchUsers = async (req, res) => {
 
   try {
     const users = await User.find({
-      name: { $regex: new RegExp(q, 'i') } // Case-insensitive search
+      name: { $regex: new RegExp(q, "i") }, // Case-insensitive search
     });
 
-    const formattedUsers = users.map(user => ({
+    const formattedUsers = users.map((user) => ({
       ...user.toObject(),
-      birthdate: moment(user.birthdate).format('YYYY-MM-DD')
+      birthdate: moment(user.birthdate).format("YYYY-MM-DD"),
     }));
 
-    res.render('usersAdmin', { users: formattedUsers });
+    res.render("usersAdmin", { users: formattedUsers });
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");
   }
 };
 module.exports = {
-    renderUserPage,
-    renderFavMealsPage,
-    renderUserHistoryPage,
-    handleLogout, 
-    addUser,
-    getAllUsers,
-    getUserById,
-    updateUser,
-    deleteUser,
-    getUsersAdmin,
-    addUserAdmin,
-    editUserAdmin,
-    deleteUserAdmin,
-    searchUsers
+  renderUserPage,
+  renderFavMealsPage,
+  renderUserHistoryPage,
+  handleLogout,
+  addUser,
+  getAllUsers,
+  getUserById,
+  updateUser,
+  deleteUser,
+  getUsersAdmin,
+  addUserAdmin,
+  editUserAdmin,
+  deleteUserAdmin,
+  searchUsers,
+  updatePassword,
 };
