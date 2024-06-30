@@ -14,7 +14,6 @@ const loginSignupRoute = require('./routes/login-signup-route');
 const userRoute = require('./routes/user-route');
 const dashboardRoute = require('./routes/dashboard-route');
 const orderRoute = require("./routes/order-route");
-const ourMenuRoute = require('./routes/our-menu-route');
 const usersAdminRoute = require('./routes/usersAdmin-route');
 const productsRoute = require('./routes/products-route');
 const analyticsRoute = require('./routes/analytics-route');
@@ -52,8 +51,6 @@ app.use((req, res, next) => {
 });
 
 // Routes
-//app.get('/dashboard', getDashboard);
-//app.get('/usersAdmin', getUsersAdmin);
 app.use('/', homePageRoute);
 app.use('/about-us', aboutUsPageRoute);
 app.use('/how-it-works', hiwRoute);
@@ -64,7 +61,6 @@ app.use('/login-signup', loginSignupRoute);
 app.use('/user', userRoute);
 app.use('/dashboard', dashboardRoute);
 app.use('/cookbook', cookbookRoute);
-// app.use('/menu', ourMenuRoute);
 app.use('/menu',menuRoute);
 app.use("/order", orderRoute);
 app.use('/usersAdmin', usersAdminRoute);
@@ -72,8 +68,6 @@ app.use('/products', productsRoute);
 app.use('/analytics',analyticsRoute);
 app.use('/profile',profileRoute);
 app.use('/feedback',feedbackRoute);
-
-
 
 mongoose
     .connect(dbURL)
