@@ -9,11 +9,12 @@ body {
   font-family: Roboto;
   display: flex;
   justify-content: center;
-  overflow-x: hidden; /* Prevent horizontal scrollbar */
+  overflow-x: hidden;
+  height: 10000px;
 }
 
 .fas.fa-user-circle {
-  font-size: 2.5rem; /* Adjust the font-size to your desired size */
+  font-size: 2.5rem;
 }
 
 .banner {
@@ -39,7 +40,7 @@ body {
 
 .nav-bar.scrolled {
   backdrop-filter: blur(5px);
-  background-color: #81d0e888; /* Change background color to a darker shade */
+  background-color: #81d0e888;
 }
 
 .left-section {
@@ -98,17 +99,20 @@ a {
 .dropdown-content li {
   padding: 10px;
 }
+
 .dropdown-user-dropdown li {
   padding: 10px;
 }
+
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
 .dropdown:hover .dropdown-user-dropdown {
   display: block;
 }
-/* Account info header */
-.header1 {
+
+.header {
   position: absolute;
   top: 15%;
   left: 500px;
@@ -116,21 +120,28 @@ a {
   text-align: left;
 }
 
-.header1 h1 {
+.header h1 {
   font-size: 1.25rem;
   font-weight: bold;
-  color: red;
-  margin: 0;
+  margin-bottom: 0;
+  margin-top: 30px;
 }
 
 #user-icon {
   width: 170px;
   height: 170px;
   position: absolute;
-  z-index: 1;
-  background-color: blue;
 }
-/* Card container */
+
+.photo-container {
+  position: absolute;
+  top: 0px;
+  left: -220px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 #personalInfo-container {
   position: absolute;
   top: 20%;
@@ -142,15 +153,16 @@ a {
 }
 
 .card {
-  background-color: #ffffff;
   width: 700px;
   height: 300px;
   margin: 10px 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   padding: 20px;
-  border-radius: 0;
+  border-radius: 10px;
   border: 1px solid #ccc;
 }
+
 .card h2 {
   font-size: 1.25rem;
   font-weight: bold;
@@ -158,20 +170,9 @@ a {
   margin-bottom: 10px;
 }
 
-/* Transparent buttons */
-.photo-container {
-  position: absolute;
-  top: 9%;
-  left: -220px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-/* personal info Transparent edit button*/
 .buttons-container {
   position: absolute;
-  top: 3%;
+  top: 5%;
   left: 580px;
   display: flex;
   flex-direction: column;
@@ -183,24 +184,19 @@ a {
   border: none;
   color: #f19f13;
   font-family: Roboto;
+  font-weight: bold;
   font-size: 16px;
   cursor: pointer;
-  margin-bottom: 5cap;
+  margin-bottom: 5px;
   width: 120px;
   height: 40px;
 }
-
-.transparentt-button:hover {
+.transparent-button:hover {
   text-decoration: underline;
 }
 
-/*Personal Info content */
-.personal-info {
-  font-size: 16px;
-  margin-top: 20px;
-}
-.personal-info p {
-  margin-bottom: 30px;
+.content {
+  margin: 30px 0;
 }
 
 .modal {
@@ -216,6 +212,7 @@ a {
   justify-content: center;
   align-items: center;
 }
+
 .modal-content {
   background-color: #fefefe;
   margin: 15% auto;
@@ -226,6 +223,7 @@ a {
   border-radius: 10px;
   position: relative;
 }
+
 .close {
   color: #aaa;
   float: right;
@@ -236,7 +234,7 @@ a {
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: red;
   text-decoration: none;
   cursor: pointer;
 }
@@ -263,6 +261,7 @@ a {
   border-radius: 4px;
   box-sizing: border-box;
   width: 100%;
+  color: black;
 }
 
 .modal-content form button {
@@ -275,26 +274,284 @@ a {
   margin-top: 10px;
 }
 
-.modal-content form button:hover {
-  background-color: #45a049;
-}
-/*Password card styling*/
-#password-container{
+#password-container {
   position: absolute;
-  top: 70%;
+  top: 65%;
   left: 500px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: calc(100% - 200px);
 }
-#password-container .card{
-  background-color: #ffffff;
-  width: 700px;
+
+#password-container .card {
   height: 150px;
-  margin: 10px 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.passwordBtn {
+  background-color: transparent;
+  color: #f19f13;
+  margin-left: 50px;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  border-radius: 20px;
+  padding: 2px 16px;
+  cursor: pointer;
+  border: 2px solid #f19f13;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.passwordBtn::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: #f19f13;
+  transition: all 0.4s ease-in-out;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 0;
+}
+
+.passwordBtn:hover {
+  color: #fff;
+  background-color: #f19f13;
+  border-color: #f19f13;
+}
+
+#subPlan-container {
+  position: absolute;
+  top: 90%;
+  left: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: calc(100% - 200px);
+}
+
+.overlay {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: none;
+  pointer-events: none;
+  z-index: 998;
+  transition: opacity 0.3s ease;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 380px;
+  width: 100%;
+  padding: 30px 20px;
+  border-radius: 24px;
+  background-color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+  transition: opacity 0.3s ease;
+}
+section.active .popup {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+section.active .overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+.popup i {
+  font-size: 70px;
+  color: red;
+}
+
+.popup h2 {
+  margin-top: 20px;
+  font-size: 25px;
+  font-weight: 500;
+  color: black;
+}
+
+.popup h3 {
+  font-size: 16px;
+  font-weight: 400;
+  color: black;
+  text-align: center;
+}
+
+.popup .buttons {
+  margin-top: 25px;
+}
+
+.popup button {
+  font-size: 14px;
+  padding: 5px 20px;
+  margin: 0 10px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+#cardPayment {
+  position: absolute;
   padding: 20px;
-  border-radius: 0;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  top: 138%;
+  left: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 10px;
+  width: 700px;
+}
+#cardPayment h2 {
+  color: #167592;
+}
+
+.container {
+  margin-left: 60px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  max-width: 34rem;
+  width: 90%;
+}
+
+input {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font: inherit;
+  width: auto;
+}
+
+input::placeholder {
+  color: #ffffff;
+}
+
+label {
+  display: block;
+}
+
+.cardVisa {
+  background-color: #171a1c;
+  border-radius: 14px;
+  color: #bebebe;
+  padding: 32px;
+}
+
+.headerVisa {
+  margin-bottom: 7rem;
+}
+
+.title {
+  color: #fff;
+  float: left;
+  font-size: 1.5rem;
+}
+
+.logoVisa {
+  float: right;
+}
+
+.row {
+  margin-bottom: 1.5rem;
+}
+
+.visaContent {
+  margin-bottom: 5rem;
+}
+
+.visaContent input {
+  outline: none;
+}
+
+.card-number {
+  font-size: 32px;
+}
+
+.card-expire {
+  float: left;
+}
+
+.card-expire input {
+  font-size: 0.9rem;
+}
+
+.card-expire-month {
+  width: 22%;
+}
+
+.card-expire-month,
+.card-expire-year {
+  float: left;
+}
+.card-cvv {
+  float: right;
+}
+
+.card-cvv input {
+  width: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.subscription-status-dropdown {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
   border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: white;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23222"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.subscription-status-dropdown:hover,
+.subscription-status-dropdown:focus {
+  border-color: #aaa;
+}
+
+.subscription-status-dropdown:disabled {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}
+
+.subscription-status-dropdown option {
+  padding: 10px;
+}
+
+#cardMonth {
+  background-color: #171a1c;
+  color: white;
+  width: 100px;
+  padding: px;
+  border: none;
+  border-radius: 4px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+#cardMonth option {
+  background-color: #171a1c;
+  color: white;
+}
+
+#cardMonth:focus {
+  outline: none;
+  border-color: #555;
 }

@@ -6,7 +6,8 @@ const {
   getUserById,
   addUser,
   deleteUser,
-  handleUserUpdate
+  handleUserUpdate,
+  cancelSubscription,
 } = require("../controllers/userCtrl");
 
 const { checkUserAuth } = require("../middleware/userAuthenticator");
@@ -40,11 +41,13 @@ router.get("/:id", getUserById);
 router.post("/add", addUser);
 
 //update info
-// router.post("/updateAccInfo", checkUserAuth, updateUser);
-router.post('/', handleUserUpdate)
+router.post("/", handleUserUpdate);
 router.post("/", handleUserUpdate);
 
 //delete user
 router.delete("/delete/:id", deleteUser);
+
+router.post("/cancel-subscription", cancelSubscription);
+
 
 module.exports = router;
