@@ -331,6 +331,14 @@ a {
   width: calc(100% - 200px);
 }
 
+#subPlan-container a {
+  background-color: #f19f13;
+  color: #f7f7f7;
+  padding: 10px;
+  border-radius: 10px;
+  margin-left: 38%;
+}
+
 .overlay {
   position: fixed;
   height: 100%;
@@ -400,10 +408,10 @@ section.active .overlay {
   cursor: pointer;
 }
 
-#cardPayment-container{
+#cardPayment-container {
   position: absolute;
   padding: 0px;
-  background-color:white;
+  background-color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   top: 138%;
   left: 500px;

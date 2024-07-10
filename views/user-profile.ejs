@@ -1,186 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fresh Bites</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fresh Bites</title>
 
-    <link rel="icon" href="/images/logo1.png" type="image/x-icon" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-    />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
-    <link rel="stylesheet" href="../styles/user-profile.css" />
-    <script src="../scripts/user-profile.js" defer></script>
-  </head>
+  <link rel="icon" href="/images/logo1.png" type="image/x-icon" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
-  <body>
-    <!-- <div class="banner"><%- include("./partial/nav-bar.ejs") %></div> -->
+  <link rel="stylesheet" href="../styles/user-profile.css" />
+  <script src="../scripts/user-profile.js" defer></script>
+</head>
 
-    <div class="header">
-      <h1><b>Account Information:</b></h1>
+<body>
+  <div class="banner"><%- include("./partial/nav-bar.ejs") %></div>
+
+  <div class="header">
+    <h1><b>Account Information:</b></h1>
+  </div>
+
+  <div id="personalInfo-container">
+    <div class="photo-container">
+      <img src="/images/user-profile-images/user_5323382.png" id="user-icon" alt="User Icon" />
     </div>
-
-    <div id="personalInfo-container">
-      <div class="photo-container">
-        <img
-          src="/images/user-profile-images/user_5323382.png"
-          id="user-icon"
-          alt="User Icon"
-        />
+    <div class="card">
+      <h2>Personal Information:</h2>
+      <div class="personal-info">
+        <p class="content">
+          <strong>Name:</strong>
+          <%= user.name %>
+        </p>
+        <p class="content">
+          <strong>Email:</strong>
+          <%= user.email %>
+        </p>
+        <p class="content">
+          <strong>Phone Number:</strong>
+          <%= user.phoneNumber || 'Not Provided' %>
+        </p>
+        <p class="content">
+          <strong>Address:</strong>
+          <%= user.address || 'Not Provided' %>
+        </p>
       </div>
-      <div class="card">
-        <h2>Personal Information:</h2>
-        <div class="personal-info">
-          <p class="content">
-            <strong>Name:</strong>
-            <%= user.name %>
-          </p>
-          <p class="content">
-            <strong>Email:</strong>
-            <%= user.email %>
-          </p>
-          <p class="content">
-            <strong>Phone Number:</strong>
-            <%= user.phoneNumber || 'Not Provided' %>
-          </p>
-          <p class="content">
-            <strong>Address:</strong>
-            <%= user.address || 'Not Provided' %>
-          </p>
+      <div class="buttons-container">
+        <button class="transparent-button editButton" data-modal="editPersonalModal">
+          Edit
+        </button>
+      </div>
+
+      <div id="editPersonalModal" class="modal">
+        <div class="modal-content">
+          <span class="close" data-modal="editPersonalModal">&times;</span>
+          <h2>Edit Personal Information</h2>
+          <form id="editForm" method="POST" action="/user/updateAccInfo">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="<%= user.name %>" />
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="<%= user.email %>" />
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phoneNumber" value="<%= user.phoneNumber %>" />
+            <label for="address">Address:</label>
+            <textarea id="address" name="address">
+<%= user.address %></textarea>
+            <button type="submit">Save</button>
+          </form>
         </div>
-        <div class="buttons-container">
-          <button
-            class="transparent-button editButton"
-            data-modal="editPersonalModal"
-          >
-            Edit
+      </div>
+    </div>
+  </div>
+
+  <div id="password-container">
+    <div class="card">
+      <h2>Password:</h2>
+      <div class="password-info">
+        <p class="content">
+          <strong>Password:</strong>
+          <span id="passwordDisplay">
+            <%= "•" .repeat(user.password.length) %>
+          </span>
+          <button class="passwordBtn" id="toggleButton" onclick="togglePassword()">
+            Show
           </button>
-        </div>
-
-        <div id="editPersonalModal" class="modal">
-          <div class="modal-content">
-            <span class="close" data-modal="editPersonalModal">&times;</span>
-            <h2>Edit Personal Information</h2>
-            <form id="editForm" method="POST" action="/user/updateAccInfo">
-              <label for="name">Name:</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value="<%= user.name %>"
-              />
-              <label for="email">Email:</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value="<%= user.email %>"
-              />
-              <label for="phone">Phone Number:</label>
-              <input
-                type="text"
-                id="phone"
-                name="phoneNumber"
-                value="<%= user.phoneNumber %>"
-              />
-              <label for="address">Address:</label>
-              <textarea id="address" name="address">
-<%= user.address %></textarea
-              >
-              <button type="submit">Save</button>
-            </form>
-          </div>
-        </div>
+        </p>
+      </div>
+      <div class="buttons-container">
+        <button class="transparent-button editButton" data-modal="editPasswordModal">
+          Edit
+        </button>
       </div>
     </div>
+  </div>
 
-    <div id="password-container">
-      <div class="card">
-        <h2>Password:</h2>
-        <div class="password-info">
-          <p class="content">
-            <strong>Password:</strong>
-            <span id="passwordDisplay">
-              <%= "•" .repeat(user.password.length) %>
-            </span>
-            <button
-              class="passwordBtn"
-              id="toggleButton"
-              onclick="togglePassword()"
-            >
-              Show
-            </button>
-          </p>
-        </div>
-        <div class="buttons-container">
-          <button
-            class="transparent-button editButton"
-            data-modal="editPasswordModal"
-          >
-            Edit
-          </button>
-        </div>
-      </div>
+  <div id="editPasswordModal" class="modal">
+    <div class="modal-content">
+      <span class="close" data-modal="editPasswordModal">&times;</span>
+      <h2>Edit Password</h2>
+      <form id="editPasswordForm" method="POST" action="/user/updatePassword">
+        <label for="currentPassword">Current Password:</label>
+        <input type="password" id="currentPassword" name="currentPassword" required />
+
+        <label for="newPassword">New Password:</label>
+        <input type="password" id="newPassword" name="newPassword" required />
+
+        <label for="confirmPassword">Confirm New Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required />
+
+        <button type="submit">Save</button>
+      </form>
     </div>
+  </div>
 
-    <div id="editPasswordModal" class="modal">
-      <div class="modal-content">
-        <span class="close" data-modal="editPasswordModal">&times;</span>
-        <h2>Edit Password</h2>
-        <form id="editPasswordForm" method="POST" action="/user/updatePassword">
-          <label for="currentPassword">Current Password:</label>
-          <input
-            type="password"
-            id="currentPassword"
-            name="currentPassword"
-            required
-          />
-
-          <label for="newPassword">New Password:</label>
-          <input type="password" id="newPassword" name="newPassword" required />
-
-          <label for="confirmPassword">Confirm New Password:</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            required
-          />
-
-          <button type="submit">Save</button>
-        </form>
-      </div>
-    </div>
-
-    <div id="subPlan-container">
-      <div class="card">
-        <h2>Subscription Information:</h2>
-        <div class="subscription-info">
-          <% if (user.subscriptionStatus==='Activated' ) { %>
+  <div id="subPlan-container">
+    <div class="card">
+      <h2>Subscription Information:</h2>
+      <div class="subscription-info">
+        <% if (user.subscriptionStatus==='Activated' ) { %>
           <p class="content">
             <strong>Subscription Status:</strong>
             <%= user.subscriptionStatus %>
           </p>
           <p class="content">
-            <strong>Meal Preferences:</strong> <%=
-            user.subPlan.preferences.join(', ') %>
+            <strong>Meal Preferences:</strong>
+            <%= user.subPlan.preferences.join(', ') %>
           </p>
           <p class="content">
             <strong>Number of People:</strong> <%= user.subPlan.numberOfPeople
@@ -202,7 +155,7 @@
             <strong>Subscription Status:</strong> Not Activated
           </p>
           <p class="content">Get started with a plan that suits you!</p>
-          <a href="/our-plans">Get Started</a>
+          <a href="/our-plans">Get Started &raquo;</a>
           <% } %>
         </div>
       </div>
@@ -210,69 +163,65 @@
 
     <div id="cardPayment-container">
       <div class="card">
-        <h2>Card Payment Visa Info:</h2>
+        <h2>Visa Card Information:</h2>
         <div class="card-info">
           <p class="content">
             <strong>Card Number:</strong>
-            <%= user.visaInfo.cardNum ? '**** **** **** ' +
-            user.visaInfo.cardNum.toString().slice(-4) : 'Not Provided' %>
+            <%= user.visaInfo.cardNum ? ' **** **** **** ' +
+            user.visaInfo.cardNum.toString().slice(-4) : ' Not Provided' %>
           </p>
           <p class="content">
             <strong>Expiration Date:</strong>
-            <% if (typeof moment === 'function' && user.visaInfo &&
-            user.visaInfo.expDate) { %> <%=
-            moment(user.visaInfo.expDate).utc().format('MM/YYYY') %> <% } else
-            if (user.visaInfo && user.visaInfo.expDate) { %> <%=
-            user.visaInfo.expDate.slice(5, 7) + '/' +
-            user.visaInfo.expDate.slice(0, 4) %> <% } else { %> Not Provided <%
-            } %>
+            <% if (typeof moment==='function' && user.visaInfo && user.visaInfo.expDate) { %>
+              <%= moment(user.visaInfo.expDate).utc().format('MM/YYYY') %>
+                <% } else if (user.visaInfo && user.visaInfo.expDate) { %>
+                  <%= user.visaInfo.expDate.slice(5, 7) + '/' + user.visaInfo.expDate.slice(0, 4) %>
+                    <% } else { %> Not Provided <% } %>
           </p>
           <p class="content">
             <strong>CVV:</strong>
             <%= user.visaInfo.cvv || 'Not Provided' %>
           </p>
-        </div>
-        <div class="buttons-container">
-          <button
-            class="transparent-button editButton"
-            data-modal="editCardPaymentModal"
-          >
-            Edit
-          </button>
-        </div>
+      </div>
+      <div class="buttons-container">
+        <button class="transparent-button editButton" data-modal="editCardPaymentModal">
+          Edit
+        </button>
+      </div>
 
+    </div>
+  </div>
+
+  <div id="editCardPaymentModal" class="modal">
+    <div class="modal-content">
+      <span class="close" data-modal="editCardPaymentModal">&times;</span>
+      <form id="updateCardPaymentForm">
+        <label for="cardNum">Card Number:</label>
+        <input type="text" id="cardNum" name="cardNum" required />
+        <label for="expDate">Expiration Date (MM/YYYY):</label>
+        <input type="text" id="expDate" name="expDate" required/>
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" name="cvv"required />
+        <button type="submit">Save</button>
+      </form>
+    </div>
+  </div>
+  <span class="overlay"></span>
+  <section>
+    <div id="warningPopup" class="popup">
+      <i class="fas fa-exclamation-circle"></i>
+      <h2>Warning</h2>
+      <h3>Are you sure you want to cancel your subscription?</h3>
+      <div class="buttons">
+        <button id="confirmCancel">Yes</button>
+        <button id="cancelPopup">No</button>
       </div>
     </div>
+  </section>
 
-    <div id="editCardPaymentModal" class="modal">
-      <div class="modal-content">
-        <span class="close" data-modal="editCardPaymentModal">&times;</span>
-        <form id="updateCardPaymentForm">
-          <label for="cardNum">Card Number:</label>
-          <input type="text" id="cardNum" name="cardNum" required />
-          <label for="expDate">Expiration Date (MM/YYYY):</label>
-          <input type="text" id="expDate" name="expDate" required />
-          <label for="cvv">CVV:</label>
-          <input type="text" id="cvv" name="cvv" required />
-          <button type="submit">Save</button>
-        </form>
-      </div>
-    </div>
-    <span class="overlay"></span>
-    <section>
-      <div id="warningPopup" class="popup">
-        <i class="fas fa-exclamation-circle"></i>
-        <h2>Warning</h2>
-        <h3>Are you sure you want to cancel your subscription?</h3>
-        <div class="buttons">
-          <button id="confirmCancel">Yes</button>
-          <button id="cancelPopup">No</button>
-        </div>
-      </div>
-    </section>
+  <script>
+    const actualPassword = "<%= user.password %>";
+  </script>
+</body>
 
-    <script>
-      const actualPassword = "<%= user.password %>";
-    </script>
-  </body>
 </html>
