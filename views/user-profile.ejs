@@ -25,12 +25,13 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
     />
+
     <link rel="stylesheet" href="../styles/user-profile.css" />
     <script src="../scripts/user-profile.js" defer></script>
   </head>
 
   <body>
-    <div class="banner"><%- include("./partial/nav-bar.ejs") %></div>
+    <!-- <div class="banner"><%- include("./partial/nav-bar.ejs") %></div> -->
 
     <div class="header">
       <h1><b>Account Information:</b></h1>
@@ -72,7 +73,7 @@
             Edit
           </button>
         </div>
-        <!-- Modal for editing personal information -->
+
         <div id="editPersonalModal" class="modal">
           <div class="modal-content">
             <span class="close" data-modal="editPersonalModal">&times;</span>
@@ -139,7 +140,6 @@
       </div>
     </div>
 
-    <!-- Modal for editing password -->
     <div id="editPasswordModal" class="modal">
       <div class="modal-content">
         <span class="close" data-modal="editPasswordModal">&times;</span>
@@ -168,6 +168,7 @@
         </form>
       </div>
     </div>
+
     <div id="subPlan-container">
       <div class="card">
         <h2>Subscription Information:</h2>
@@ -178,8 +179,8 @@
             <%= user.subscriptionStatus %>
           </p>
           <p class="content">
-            <strong>Meal Preferences:</strong>
-            <%= user.subPlan.preferences.join(', ') %>
+            <strong>Meal Preferences:</strong> <%=
+            user.subPlan.preferences.join(', ') %>
           </p>
           <p class="content">
             <strong>Number of People:</strong> <%= user.subPlan.numberOfPeople
@@ -206,7 +207,57 @@
         </div>
       </div>
     </div>
-    <!--Warning popup-->
+
+    <div id="cardPayment-container">
+      <div class="card">
+        <h2>Card Payment Visa Info:</h2>
+        <div class="card-info">
+          <p class="content">
+            <strong>Card Number:</strong>
+            <%= user.visaInfo.cardNum ? '**** **** **** ' +
+            user.visaInfo.cardNum.toString().slice(-4) : 'Not Provided' %>
+          </p>
+          <p class="content">
+            <strong>Expiration Date:</strong>
+            <% if (typeof moment === 'function' && user.visaInfo &&
+            user.visaInfo.expDate) { %> <%=
+            moment(user.visaInfo.expDate).utc().format('MM/YYYY') %> <% } else
+            if (user.visaInfo && user.visaInfo.expDate) { %> <%=
+            user.visaInfo.expDate.slice(5, 7) + '/' +
+            user.visaInfo.expDate.slice(0, 4) %> <% } else { %> Not Provided <%
+            } %>
+          </p>
+          <p class="content">
+            <strong>CVV:</strong>
+            <%= user.visaInfo.cvv || 'Not Provided' %>
+          </p>
+        </div>
+        <div class="buttons-container">
+          <button
+            class="transparent-button editButton"
+            data-modal="editCardPaymentModal"
+          >
+            Edit
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="editCardPaymentModal" class="modal">
+      <div class="modal-content">
+        <span class="close" data-modal="editCardPaymentModal">&times;</span>
+        <form id="updateCardPaymentForm">
+          <label for="cardNum">Card Number:</label>
+          <input type="text" id="cardNum" name="cardNum" required />
+          <label for="expDate">Expiration Date (MM/YYYY):</label>
+          <input type="text" id="expDate" name="expDate" required />
+          <label for="cvv">CVV:</label>
+          <input type="text" id="cvv" name="cvv" required />
+          <button type="submit">Save</button>
+        </form>
+      </div>
+    </div>
     <span class="overlay"></span>
     <section>
       <div id="warningPopup" class="popup">
@@ -219,96 +270,6 @@
         </div>
       </div>
     </section>
-
-    <div id="cardPayment">
-      <h2>Payment Details:</h2>
-      <div class="container">
-        <div class="cardVisa">
-          <div class="headerVisa">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="logoVisa"
-              width="140"
-              height="43"
-              viewBox="0 0 175.7 53.9"
-            >
-              <style>
-                .visa {
-                  fill: #fff;
-                }
-              </style>
-              <path
-                class="visa"
-                d="M61.9 53.1l8.9-52.2h14.2l-8.9 52.2zm65.8-50.9c-2.8-1.1-7.2-2.2-12.7-2.2-14.1 0-24 7.1-24 17.2-.1 7.5 7.1 11.7 12.5 14.2 5.5 2.6 7.4 4.2 7.4 6.5 0 3.5-4.4 5.1-8.5 5.1-5.7 0-8.7-.8-13.4-2.7l-2-.9-2 11.7c3.3 1.5 9.5 2.7 15.9 2.8 15 0 24.7-7 24.8-17.8.1-5.9-3.7-10.5-11.9-14.2-5-2.4-8-4-8-6.5 0-2.2 2.6-4.5 8.1-4.5 4.7-.1 8 .9 10.6 2l1.3.6 1.9-11.3M164.2 1h-11c-3.4 0-6 .9-7.5 4.3l-21.1 47.8h14.9s2.4-6.4 3-7.8h18.2c.4 1.8 1.7 7.8 1.7 7.8h13.2l-11.4-52.1m-17.5 33.6c1.2-3 5.7-14.6 5.7-14.6-.1.1 1.2-3 1.9-5l1 4.5s2.7 12.5 3.3 15.1h-11.9zm-96.7-33.7l-14 35.6-1.5-7.2c-2.5-8.3-10.6-17.4-19.6-21.9l12.7 45.7h15.1l22.4-52.2h-15.1"
-              />
-              <path
-                fill="#F7A600"
-                d="M23.1.9h-22.9l-.2 1.1c17.9 4.3 29.7 14.8 34.6 27.3l-5-24c-.9-3.3-3.4-4.3-6.5-4.4"
-              />
-            </svg>
-          </div>
-
-          <div class="visaContent">
-            <div class="row">
-              <label>Card Number</label>
-              <input
-                type="text"
-                class="card-number"
-                id="cardNumber"
-                placeholder="<%= user.visaInfo ? (user.visaInfo.cardNum || ' 0000 0000 0000 0000')
-              : '0000 0000 0000 0000' %>"
-                maxlength="16"
-              />
-            </div>
-
-            <div class="row card-expire">
-              <div class="row card-expire-month">
-                <label>Month</label>
-                <select id="cardMonth">
-                  <% const expDate=user.visaInfo && user.visaInfo.expDate ? new
-                  Date(user.visaInfo.expDate) : null; const expMonth=expDate ?
-                  String(expDate.getMonth() + 1).padStart(2, '0' ) : 'MM' ;
-                  const expYear=expDate ? expDate.getFullYear() : 'YYYY' ; %>
-                  <option value="<%= expMonth %>" selected>
-                    <%= expMonth %>
-                  </option>
-                  <option value="01">01</option>
-                  <option value="02">02</option>
-                  <option value="03">03</option>
-                  <option value="04">04</option>
-                  <option value="05">05</option>
-                  <option value="06">06</option>
-                  <option value="07">07</option>
-                  <option value="08">08</option>
-                  <option value="09">09</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
-                </select>
-              </div>
-              <div class="row card-expire-year">
-                <label>Year</label>
-                <input type="text" id="cardYear" placeholder="<%= expYear %>" />
-              </div>
-            </div>
-
-            <div class="card-cvv">
-              <label>CVV</label>
-              <input
-                type="text"
-                placeholder="<%= user.visaInfo && user.visaInfo.cvv ? user.visaInfo.cvv : 'CVV' %>"
-                id="cvv"
-                maxlength="3"
-                inputmode="numeric"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="buttons-container">
-        <button class="transparent-button">Save</button>
-      </div>
-    </div>
 
     <script>
       const actualPassword = "<%= user.password %>";

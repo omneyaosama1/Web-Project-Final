@@ -1,3 +1,4 @@
+
 const moment = require("moment");
 const User = require("../Schema/userSchema");
 const Order = require("../Schema/orderSchema");
@@ -155,6 +156,7 @@ const getUserById = async (req, res) => {
     res.status(500).send("Failed to get user");
   }
 };
+
 const handleUserUpdate = async (req, res) => {
   const { updateType } = req.body;
 
@@ -200,6 +202,7 @@ const updateUser = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "User updated successfully",
+      user: updatedUser,
     });
   } catch (error) {
     console.error(error);
@@ -408,7 +411,37 @@ const cancelSubscription = async (req, res) => {
   }
 };
 
+const updateCardPaymentInfo = async (req, res) => {
+  try {
+    const { cardNum, expDate, cvv } = req.body;
+    const userId = req.session.user._id;
 
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    user.visaInfo = {
+      cardNum,
+      expDate: expDate ? moment(expDate, "MM/YYYY").toDate() : null,
+      cvv
+    };
+
+    await user.save();
+
+    req.session.user = user;
+
+    res.status(200).json({
+      success: true,
+      message: "Card payment info updated successfully",
+      user: req.session.user
+    });
+  } catch (err) {
+    console.error('Error updating card payment info:', err);
+    res.status(500).json({ success: false, message: "Error updating card payment info" });
+  }
+};
 module.exports = {
   renderUserPage,
   renderFavMealsPage,
@@ -425,4 +458,5 @@ module.exports = {
   searchUsers,
   handleUserUpdate,
   cancelSubscription,
+  updateCardPaymentInfo
 };
