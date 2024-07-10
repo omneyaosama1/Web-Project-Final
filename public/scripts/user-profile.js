@@ -34,7 +34,6 @@ function togglePassword() {
 
   passwordVisible = !passwordVisible;
 }
-
 const editUserForm = document.getElementById("editForm");
 
 editUserForm.addEventListener("submit", (event) => {
@@ -115,7 +114,6 @@ function editUserPassword(currentPassword, newPassword, confirmPassword) {
   });
 }
 
-
 //Cancel subscription
 document
   .getElementById("cancelSubscriptionButton")
@@ -150,3 +148,42 @@ document.getElementById("confirmCancel").addEventListener("click", () => {
     },
   });
 });
+
+const editCardPaymentForm = document.getElementById("updateCardPaymentForm");
+
+editCardPaymentForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const cardNum = document.getElementById("cardNum").value;
+  const expDate = document.getElementById("expDate").value;
+  const cvv = document.getElementById("cvv").value;
+
+  if (cardNum === "" || expDate === "" || cvv === "") {
+    alert("Card payment update form isn't complete");
+  } else {
+    updateCardPayment(cardNum, expDate, cvv);
+  }
+});
+
+function updateCardPayment(cardNum, expDate, cvv) {
+  $.ajax({
+    url: "/user/updateCardPaymentInfo",
+    type: "POST",
+    data: {
+      cardNum: cardNum,
+      expDate: expDate,
+      cvv: cvv,
+    },
+    success: function (response) {
+      if (response.success) {
+        document.getElementById("editCardPaymentModal").style.display = "none";
+        window.location.href = "/user";
+      } else {
+        alert("Failed to update card payment info");
+      }
+    },
+    error: function (xhr, status, error) {
+      alert("Error: " + error);
+    },
+  });
+}

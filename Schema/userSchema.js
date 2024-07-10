@@ -38,16 +38,15 @@ const userSchema = new mongoose.Schema(
     visaInfo: {
       type: {
         cardNum: {
-          type: Number,
+          type: String,
           match: [/^\d{16}$/, "Make sure that the card number is 16-digits."],
         },
         cvv: {
-          type: Number,
+          type: String,
           match: [/^\d{3}$/, "Make sure the CVV is 3-digits"],
         },
         expDate: {
           type: Date,
-          required: false,
           set: function (v) {
             return v ? moment(v, "MM/YYYY").toDate() : null;
           },

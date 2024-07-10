@@ -331,6 +331,14 @@ a {
   width: calc(100% - 200px);
 }
 
+#subPlan-container a {
+  background-color: #f19f13;
+  color: #f7f7f7;
+  padding: 10px;
+  border-radius: 10px;
+  margin-left: 38%;
+}
+
 .overlay {
   position: fixed;
   height: 100%;
@@ -400,9 +408,9 @@ section.active .overlay {
   cursor: pointer;
 }
 
-#cardPayment {
+#cardPayment-container {
   position: absolute;
-  padding: 20px;
+  padding: 0px;
   background-color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   top: 138%;
@@ -412,146 +420,12 @@ section.active .overlay {
   align-items: flex-start;
   border-radius: 10px;
   width: 700px;
+  height: 230px;
 }
-#cardPayment h2 {
-  color: #167592;
-}
-
-.container {
-  margin-left: 60px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  max-width: 34rem;
-  width: 90%;
-}
-
-input {
+#cardPayment-container .card {
+  margin-top: 1%;
   background-color: transparent;
   border: none;
-  color: #fff;
-  font: inherit;
-  width: auto;
-}
-
-input::placeholder {
-  color: #ffffff;
-}
-
-label {
-  display: block;
-}
-
-.cardVisa {
-  background-color: #171a1c;
-  border-radius: 14px;
-  color: #bebebe;
-  padding: 32px;
-}
-
-.headerVisa {
-  margin-bottom: 7rem;
-}
-
-.title {
-  color: #fff;
-  float: left;
-  font-size: 1.5rem;
-}
-
-.logoVisa {
-  float: right;
-}
-
-.row {
-  margin-bottom: 1.5rem;
-}
-
-.visaContent {
-  margin-bottom: 5rem;
-}
-
-.visaContent input {
-  outline: none;
-}
-
-.card-number {
-  font-size: 32px;
-}
-
-.card-expire {
-  float: left;
-}
-
-.card-expire input {
-  font-size: 0.9rem;
-}
-
-.card-expire-month {
-  width: 22%;
-}
-
-.card-expire-month,
-.card-expire-year {
-  float: left;
-}
-.card-cvv {
-  float: right;
-}
-
-.card-cvv input {
-  width: 2rem;
-  text-align: center;
-  font-size: 0.9rem;
-}
-
-.subscription-status-dropdown {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-color: white;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23222"><path d="M7 10l5 5 5-5z"/></svg>');
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-}
-
-.subscription-status-dropdown:hover,
-.subscription-status-dropdown:focus {
-  border-color: #aaa;
-}
-
-.subscription-status-dropdown:disabled {
-  background-color: #f0f0f0;
-  cursor: not-allowed;
-}
-
-.subscription-status-dropdown option {
-  padding: 10px;
-}
-
-#cardMonth {
-  background-color: #171a1c;
-  color: white;
-  width: 100px;
-  padding: px;
-  border: none;
-  border-radius: 4px;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-#cardMonth option {
-  background-color: #171a1c;
-  color: white;
-}
-
-#cardMonth:focus {
-  outline: none;
-  border-color: #555;
+  box-shadow: none;
+  margin: 0px;
 }

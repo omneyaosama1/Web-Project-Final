@@ -8,6 +8,7 @@ const {
   deleteUser,
   handleUserUpdate,
   cancelSubscription,
+  updateCardPaymentInfo
 } = require("../controllers/userCtrl");
 
 const { checkUserAuth } = require("../middleware/userAuthenticator");
@@ -42,12 +43,11 @@ router.post("/add", addUser);
 
 //update info
 router.post("/", handleUserUpdate);
-router.post("/", handleUserUpdate);
 
 //delete user
 router.delete("/delete/:id", deleteUser);
 
 router.post("/cancel-subscription", cancelSubscription);
-
+router.post("/updateCardPaymentInfo", checkUserAuth, updateCardPaymentInfo);
 
 module.exports = router;
