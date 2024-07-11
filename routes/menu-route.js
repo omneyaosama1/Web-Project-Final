@@ -5,6 +5,7 @@ const { getMenu, addRecipe, deleteRecipe, updateRecipe, sessionHandler } = requi
 
 router.get('/', checkUserAuth, getMenu);
 router.post('/validate-cart', sessionHandler);
+router.post('/toggle-favorite', sessionHandler);
 router.post('/add', addRecipe);
 router.delete('/delete/:id', deleteRecipe);
 router.put('/update/:id', updateRecipe);

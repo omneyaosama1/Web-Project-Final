@@ -120,101 +120,86 @@
 
         <div class="items-container">
           <!-- ITEMS OF WEEK 1 -->
-
-          <% const week1Recipes=menuData.slice(0, 12); %> <!-- Slice the  recipes for week 1 -->
-
-            <% week1Recipes.forEach(function(recipe, index) { %>
+          <% const week1Recipes = menuData.slice(0, 12); %> <!-- Slice the recipes for week 1 -->
+          <% week1Recipes.forEach(function(recipe, index) { %>
               <div class="items week1" id="item<%= index + 1 %>W1">
-                <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
-                <h3
-                  onclick="Details('detailsModal<%= index %>week1')">
-                  <%= recipe.name %>
-                </h3>
-                <span class="Features">
-                  <p id="duration">Cook Time: <%= recipe.cookTime %> min
-                    <br>
-                    
-                  </p>
-                  <button class="Fbtn" onclick="changeFavouriteC(1,'W1')">
-                    <i id="icon1W1" class="fa-solid fa-heart fa-lg" style="color: #7c7e82;"></i>
-                  </button>
-                  <button class="addBtn" data-id="<%= recipe._id %>" data-name="<%= recipe.name %>" onclick="addToCart(this)">
-                    <i id="plus1W1" class="fa-solid fa-plus fa-lg" style="color: #7c7e82;"></i>
-                  </button>
-                </span>
+                  <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
+                  <h3 onclick="Details('detailsModal<%= index %>week1')">
+                      <%= recipe.name %>
+                  </h3>
+                  <span class="Features">
+                      <p id="duration">Cook Time: <%= recipe.cookTime %> min</p>
+                      <button class="Fbtn" data-id="<%= recipe._id %>" data-name="<%= recipe.name %>" onclick="toggleFavorite(this)">
+                          <i id="icon<%= recipe._id %>" class="fa-solid fa-heart fa-lg <%= favoriteMeals.includes(recipe._id.toString()) ? 'heart-favorite' : 'heart-default' %>"></i>
+                      </button>
+                      <button class="addBtn" data-id="<%= recipe._id %>" data-name="<%= recipe.name %>" onclick="addToCart(this)">
+                          <i id="plus<%= index + 1 %>W1" class="fa-solid fa-plus fa-lg heart-default"></i>
+                      </button>
+                  </span>
               </div>
-              <% }); %>
-
-                <!-- ITEMS OF WEEK 2 -->
-                <% const week2Recipes=menuData.slice(12,24 ); %> <!-- Slice the  recipes for week 2 -->
-
-                  <% week2Recipes.forEach(function(recipe, index) { %>
-                    <div class="items week2" id="item<%= index + 1 %>W2">
-                      <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
-                      <h3
-                        onclick="Details('detailsModal<%= index %>week2')">
-                        <%= recipe.name %>
-                      </h3>
-                      <span class="Features">
-                        <p id="duration">Cook Time: <%= recipe.cookTime %> min
-                        </p>
-                        <button class="Fbtn" onclick="changeFavouriteC(1,'W2')">
-                          <i id="icon1W1" class="fa-solid fa-heart fa-lg" style="color: #7c7e82;"></i>
-                        </button>
-                        <button class="addBtn" data-id="<%= recipe._id %>" data-name="<%= recipe.name %>" onclick="addToCart(this)">
-                          <i id="plus1W1" class="fa-solid fa-plus fa-lg" style="color: #7c7e82;"></i>
-                        </button>
-                      </span>
-                    </div>
-                    <% }); %>
-
-                      <!-- ITEMS OF WEEK 3 -->
-                      <% const week3Recipes=menuData.slice(24,36 ); %> <!-- Slice the  recipes for week 3 -->
-
-                        <% week3Recipes.forEach(function(recipe, index) { %>
-                          <div class="items week3" id="item<%= index + 1 %>W3">
-                            <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
-                            <h3
-                              onclick="Details('detailsModal<%= index %>week3', '<%= recipe.name %>', '<%= recipe.description %>')">
-                              <%= recipe.name %>
-                            </h3>
-                            <span class="Features">
-                              <p id="duration">Cook Time: <%= recipe.cookTime %> min
-                              </p>
-                              <button class="Fbtn" onclick="changeFavouriteC(1,'W3')">
-                                <i id="icon1W1" class="fa-solid fa-heart fa-lg" style="color: #7c7e82;"></i>
-                              </button>
-                              <button class="addBtn" data-id="<%= recipe._id %>" data-name="<%= recipe.name %>" onclick="addToCart(this)">
-                                <i id="plus1W1" class="fa-solid fa-plus fa-lg" style="color: #7c7e82;"></i>
-                              </button>
-                            </span>
-                          </div>
-                          <% }); %>
-
-
-                            <!-- ITEMS OF WEEK 4 -->
-                            <% const week4Recipes=menuData.slice(36,48 ); %> <!-- Slice the  recipes for week 4 -->
-
-                              <% week4Recipes.forEach(function(recipe, index) { %>
-                                <div class="items week4" id="item<%= index + 1 %>W4">
-                                  <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
-                                  <h3
-                                    onclick="Details('detailsModal<%= index %>week4', '<%= recipe.name %>', '<%= recipe.description %>')">
-                                    <%= recipe.name %>
-                                  </h3>
-                                  <span class="Features">
-                                    <p id="duration">Cook Time: <%= recipe.cookTime %> min
-                                    </p>
-                                    <button class="Fbtn" onclick="changeFavouriteC(1,'W4')">
-                                      <i id="icon1W1" class="fa-solid fa-heart fa-lg" style="color: #7c7e82;"></i>
-                                    </button>
-                                    <button class="addBtn" data-id="<%= recipe._id %>" data-name="<%= recipe.name %>" onclick="addToCart(this)">
-                                      <i id="plus1W1" class="fa-solid fa-plus fa-lg" style="color: #7c7e82;"></i>
-                                    </button>
-                                  </span>
-                                </div>
-                                <% }); %>
-        </div>
+          <% }); %>
+      
+          <!-- ITEMS OF WEEK 2 -->
+          <% const week2Recipes = menuData.slice(12, 24); %> <!-- Slice the recipes for week 2 -->
+          <% week2Recipes.forEach(function(recipe, index) { %>
+              <div class="items week2" id="item<%= index + 1 %>W2">
+                  <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
+                  <h3 onclick="Details('detailsModal<%= index %>week2')">
+                      <%= recipe.name %>
+                  </h3>
+                  <span class="Features">
+                      <p id="duration">Cook Time: <%= recipe.cookTime %> min</p>
+                      <button class="Fbtn" data-id="<%= recipe._id %>" data-name="<%= recipe.name %>" onclick="toggleFavorite(this)">
+                          <i id="icon<%= recipe._id %>" class="fa-solid fa-heart fa-lg <%= favoriteMeals.includes(recipe._id.toString()) ? 'heart-favorite' : 'heart-default' %>"></i>
+                      </button>
+                      <button class="addBtn" data-id="<%= recipe._id %>" data-name="<%= recipe.name %>" onclick="addToCart(this)">
+                          <i id="plus<%= index + 1 %>W2" class="fa-solid fa-plus fa-lg heart-default"></i>
+                      </button>
+                  </span>
+              </div>
+          <% }); %>
+      
+          <!-- ITEMS OF WEEK 3 -->
+          <% const week3Recipes = menuData.slice(24, 36); %> <!-- Slice the recipes for week 3 -->
+          <% week3Recipes.forEach(function(recipe, index) { %>
+              <div class="items week3" id="item<%= index + 1 %>W3">
+                  <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
+                  <h3 onclick="Details('detailsModal<%= index %>week3', '<%= recipe.name %>', '<%= recipe.description %>')">
+                      <%= recipe.name %>
+                  </h3>
+                  <span class="Features">
+                      <p id="duration">Cook Time: <%= recipe.cookTime %> min</p>
+                      <button class="Fbtn" data-id="<%= recipe._id %>" data-name="<%= recipe.name %>" onclick="toggleFavorite(this)">
+                          <i id="icon<%= recipe._id %>" class="fa-solid fa-heart fa-lg <%= favoriteMeals.includes(recipe._id.toString()) ? 'heart-favorite' : 'heart-default' %>"></i>
+                      </button>
+                      <button class="addBtn" data-id="<%= recipe._id %>" data-name="<%= recipe.name %>" onclick="addToCart(this)">
+                          <i id="plus<%= index + 1 %>W3" class="fa-solid fa-plus fa-lg heart-default"></i>
+                      </button>
+                  </span>
+              </div>
+          <% }); %>
+      
+          <!-- ITEMS OF WEEK 4 -->
+          <% const week4Recipes = menuData.slice(36, 48); %> <!-- Slice the recipes for week 4 -->
+          <% week4Recipes.forEach(function(recipe, index) { %>
+              <div class="items week4" id="item<%= index + 1 %>W4">
+                  <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
+                  <h3 onclick="Details('detailsModal<%= index %>week4', '<%= recipe.name %>', '<%= recipe.description %>')">
+                      <%= recipe.name %>
+                  </h3>
+                  <span class="Features">
+                      <p id="duration">Cook Time: <%= recipe.cookTime %> min</p>
+                      <button class="Fbtn" data-id="<%= recipe._id %>" data-name="<%= recipe.name %>" onclick="toggleFavorite(this)">
+                          <i id="icon<%= recipe._id %>" class="fa-solid fa-heart fa-lg <%= favoriteMeals.includes(recipe._id.toString()) ? 'heart-favorite' : 'heart-default' %>"></i>
+                      </button>
+                      <button class="addBtn" data-id="<%= recipe._id %>" data-name="<%= recipe.name %>" onclick="addToCart(this)">
+                          <i id="plus<%= index + 1 %>W4" class="fa-solid fa-plus fa-lg heart-default"></i>
+                      </button>
+                  </span>
+              </div>
+          <% }); %>
+      </div>
+      
       </section>
 
 
