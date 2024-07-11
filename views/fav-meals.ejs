@@ -1,76 +1,59 @@
 <!DOCTYPE html>
-
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
         <link
-          href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-          rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+            rel="stylesheet"
         />
-    <link rel="stylesheet" href="../styles/fav-meals.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../styles/fav-meals.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
         <title>Fresh Bites</title>
-
     </head>
-
-
     <body>
         <%- include("./partial/nav-bar.ejs") %>
-        
+
         <h1>Favourite Meals</h1>
         <div class="main-content">
             <h1>My Favourites</h1>
 
+            <% if (favoriteMeals.length > 0) { %> <%
+            favoriteMeals.forEach(function(meal) { %>
             <div class="meal-item">
-                <img src="/images/fav-meals-images/0853dfccad9c8295325099abf7e880b8.jpg" alt="Creamy Pasta With Egg & Spinach">
+                <img src="<%= meal.image %>" alt="<%= meal.name %>" />
                 <div class="meal-details">
-                    <h3>Creamy Pasta With Egg & Spinach</h3>
-                    <p>Cooking Healthy For Radiant Health</p>
+                    <h3><%= meal.name %></h3>
+                    <p><%= meal.description %></p>
                     <div class="info">
-                        <span><i class="fas fa-users"></i>For 2 People</span>
-                        <span><i class="fas fa-fire"></i>794 Calories</span>
+                        <span
+                            ><i class="fas fa-users"></i> For <%=
+                            meal.ingredientsName.length %> People</span
+                        >
+                        <span
+                            ><i class="fas fa-fire"></i> <%=
+                            meal.nutrition.calories %> Calories</span
+                        >
                     </div>
                 </div>
-                <button class="delete-button"><i class="fas fa-trash"></i></button>
+                <button
+                    class="delete-button"
+                    data-id="<%= meal._id %>"
+                    onclick="confirmDeletion(this)"
+                >
+                    <i class="fas fa-trash"></i>
+                </button>
             </div>
-            <div class="meal-item">
-                <img src="/images/fav-meals-images/southern-corn-salad-3.jpg" alt="Steamed Corn Salad">
-                <div class="meal-details">
-                    <h3>Steamed Corn Salad</h3>
-                    <p>Cooking Healthy For Radiant Health</p>
-                    <div class="info">
-                        <span><i class="fas fa-users"></i>For 2 People</span>
-                        <span><i class="fas fa-fire"></i>794 Calories</span>
-                    </div>
-                </div>
-                <button class="delete-button"><i class="fas fa-trash"></i></button>
-            </div>
-            <div class="meal-item">
-                <img src="/images/fav-meals-images/Spicy-Peanut-Rice-Poached-Egg-sq-1024x1024.jpg" alt="Peanut Rice With Egg & Cheese">
-                <div class="meal-details">
-                    <h3>Peanut Rice With Egg & Cheese</h3>
-                    <p>Cooking Healthy For Radiant Health</p>
-                    <div class="info">
-                        <span><i class="fas fa-users"></i>For 2 People</span>
-                        <span><i class="fas fa-fire"></i>794 Calories</span>
-                    </div>
-                </div>
-                <button class="delete-button"><i class="fas fa-trash"></i></button>
-            </div>
-            <div class="meal-item">
-                <img src="/images/fav-meals-images/pepper-rice-clos.png" alt="Chinese Pepper Rice">
-                <div class="meal-details">
-                    <h3>Chinese Pepper Rice</h3>
-                    <p>Cooking Healthy For Radiant Health</p>
-                    <div class="info">
-                        <span><i class="fas fa-users"></i>For 2 People</span>
-                        <span><i class="fas fa-fire"></i>794 Calories</span>
-                    </div>
-                </div>
-                <button class="delete-button"><i class="fas fa-trash"></i></button>
-            </div>
+            <% }); %> <% } else { %>
+            <p>No favorite meals found.</p>
+            <% } %>
         </div>
 
         <div id="myModal" class="modal">
@@ -78,12 +61,14 @@
                 <div class="modal-header">
                     <h2>Confirm Deletion</h2>
                 </div>
-                <p>Are you sure you want to delete this meal?</p>
+                <p>Do you want to remove this meal from your favorite meals?</p>
                 <div class="modal-footer">
                     <button class="confirm">Yes</button>
                     <button class="cancel">No</button>
                 </div>
             </div>
         </div>
-    <script src="../scripts/fav-meals.js"></script>
+
+        <script src="../scripts/fav-meals.js"></script>
+    </body>
 </html>
