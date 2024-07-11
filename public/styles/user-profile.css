@@ -10,7 +10,7 @@ body {
   display: flex;
   justify-content: center;
   overflow-x: hidden;
-  height: 10000px;
+  height: auto;
 }
 
 .fas.fa-user-circle {

@@ -24,12 +24,16 @@ const getMenu = async (req, res) => {
         const menuData = await Recipe.find({
             preferences: { $in: preferences },
         });
-        res.render("menu", { menuData });
+
+        const favoriteMeals = user.favoriteMeals || [];
+
+        res.render("menu", { menuData, favoriteMeals });
     } catch (err) {
         console.error("Error fetching recipes:", err);
         res.status(500).json({ error: "Failed to fetch recipes" });
     }
 };
+
 
 //show  menu items according to user preferences
 // const getMenu = async (req, res) => {
@@ -161,6 +165,8 @@ const sessionHandler = async (req, res) => {
     const { operation } = req.body;
     if (operation === "validate-cart") {
         await validateCart(req, res);
+    } else if (operation === "toggle-favorite") {
+        await toggleFavorite(req, res);
     }
 };
 
@@ -239,6 +245,47 @@ const validateCart = async (req, res) => {
         return res.status(200).json({ message: "Item added to cart." });
     } catch (err) {
         console.error("Error validating cart:", err);
+        return res.status(500).json({ message: "Server error" });
+    }
+};
+
+const toggleFavorite = async (req, res) => {
+    try {
+        const mealID = req.body.itemID;
+        if (!mongoose.Types.ObjectId.isValid(mealID)) {
+            return res.status(400).json({ message: "Invalid meal ID." });
+        }
+
+        let user = req.session.user;
+        if (!user) {
+            return res.status(400).json({ message: "User not logged in." });
+        }
+
+        if (!user.favoriteMeals) {
+            user.favoriteMeals = [];
+        }
+
+        const favoriteIndex = user.favoriteMeals.indexOf(mealID);
+        if (favoriteIndex === -1) {
+            user.favoriteMeals.push(mealID);
+        } else {
+            user.favoriteMeals.splice(favoriteIndex, 1);
+        }
+
+        await User.findByIdAndUpdate(user._id, {
+            favoriteMeals: user.favoriteMeals,
+        });
+        req.session.user = await User.findById(user._id);
+
+        const isFavorite = favoriteIndex === -1;
+        return res.status(200).json({
+            message: isFavorite
+                ? "Added to favorites."
+                : "Removed from favorites.",
+            isFavorite: isFavorite,
+        });
+    } catch (error) {
+        console.error("Error toggling favorite:", err);
         return res.status(500).json({ message: "Server error" });
     }
 };
