@@ -125,9 +125,15 @@
         <div class="get-a-taste-container">
             <div class="get-a-taste-content">
                 <h1>GET A TASTE</h1>
+                <% if (!user) { %>
                 <button onclick="window.location.href = '/signup'">
                     SIGN UP TODAY
                 </button>
+                <% } else  { %>
+                    <button onclick="window.location.href = '/our-plans'">
+                        START YOUR PLAN
+                    </button>
+                <% } %>
             </div>
 
             <div class="get-a-taste-image">
