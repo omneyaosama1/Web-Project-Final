@@ -1,17 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { getOrderFeedback } = require("../controllers/orderCtrl");
-const {checkAdminAuth} = require("../middleware/userAuthenticator");
+const feedback = require("../controllers/feedbackCtrl");
 
+const { checkUserAuth } = require("../middleware/userAuthenticator");
 
-router.get("/", checkAdminAuth ,async (req, res) => {
-    try {
-        const feedback = await getOrderFeedback();
-        res.render("feedback", { feedback });
-    } catch (error) {
-        console.log(error);
-        res.status(500).send("Failed to load feedback page");
-    }
-});
+router.post("/add", feedback.addFeedback);
+router.get("/get", feedback.getFeedbacks);
+router.get("/display", checkUserAuth, feedback.displayFeedback);
 
 module.exports = router;

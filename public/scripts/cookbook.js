@@ -4,7 +4,7 @@ function printWarning(elementID, message) {
 
 function checkInput(form) {
   var searchQuery = form.search.value;
-  if (searchQuery.trim() === "") {
+  if (searchQuery.trim() === "") {  
     printWarning("searchErr", "Please enter a search query");
     return false;
   } else {
@@ -37,13 +37,6 @@ function showTextArea(event) {
   });
   event.target.classList.add("selected");
 }
-
-function showFeedbackForm() {
-  const feedbackForm = document.getElementById("feedback");
-  feedbackForm.style.display =
-    feedbackForm.style.display === "none" ? "block" : "none";
-}
-
 function exitFeedback() {
   const feedbackContent = document.getElementById("feedbackContent");
   feedbackContent.style.display = "none";
@@ -51,6 +44,13 @@ function exitFeedback() {
   const overlay = document.getElementById("overlay");
   overlay.style.display = "none";
 }
+function showFeedbackForm() {
+  const feedbackForm = document.getElementById("feedback");
+  feedbackForm.style.display =
+    feedbackForm.style.display === "none" ? "block" : "none";
+}
+
+
 
 function feedbackInput(form) {
   var review = form.review.value.trim();
@@ -60,7 +60,7 @@ function feedbackInput(form) {
     printWarning("reviewErr", "Please enter your opinion before submitting");
     return false;
   } else {
-    var regEx = /^[a-zA-Z0-9\s]+$/;
+    var regEx = /^[a-zA-Z0-9\s\-_,.!?()'"$@]+$/;
     if (!regEx.test(review)) {
       printWarning(
         "reviewErr",
@@ -69,10 +69,33 @@ function feedbackInput(form) {
       return false;
     } else {
       printWarning("reviewErr", "");
-      return true;
+
+      fetch('/feedback/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ feedback: review })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.message) {
+          printWarning("reviewErr", data.message);
+        } else {
+          alert("Feedback submitted successfully!");
+          form.review.value = "";
+          exitFeedback();
+        }
+      })
+      .catch(error => {
+        printWarning("reviewErr", "An error occurred while submitting your feedback.");
+      });
+
+      return false;
     }
   }
 }
+
 
 // Meal description functions
 document.addEventListener("DOMContentLoaded", function () {

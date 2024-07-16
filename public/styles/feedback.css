@@ -1,62 +1,64 @@
-.feedback {
-    padding: 20px;
-    border-bottom: 1px solid #eee;
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  margin: 0;
+  padding: 0;
 }
-.feedback .average-rating {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+
+.container {
+  display: flex;
+  min-height: 100vh;
 }
-.feedback .average-rating span {
-    font-size: 48px;
-    color: #f1c40f;
-    margin-right: 10px;
+
+aside {
+  width: 250px;
 }
-.feedback .average-rating p {
-    margin: 0;
-    font-size: 24px;
-    color: #333;
+
+.main {
+  flex-grow: 1;
+  padding: 20px;
+  width: 30cm;
+  background-color: #fff;
 }
-.feedback .stars {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+
+#heading {
+  margin-bottom: 20px;
+  padding: 10px;
+  text-align: left;
+  background-color: transparent;
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+  border-radius: 5px;
 }
-.feedback .stars div {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-}
-.feedback .stars .bar {
-    height: 10px;
-    background-color: #f1c40f;
-    margin-left: 5px;
-    border-radius: 5px;
-    flex-grow: 1;
-}
+
 .reviews {
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
 .reviews .review {
-    display: flex;
-    margin-bottom: 20px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #ecf0f1;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.reviews .review img {
-    border-radius: 50%;
-    margin-right: 10px;
+
+.reviews .review .name {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #2980b9;
 }
-.reviews .review .content {
-    flex: 1;
-}
-.reviews .review .content .name {
-    font-weight: 700;
-    margin-bottom: 5px;
-}
-.reviews .review .content .stars {
-    color: #f1c40f;
-    margin-bottom: 5px;
-}
-.reviews .review .content p {
-    margin: 0;
-    color: #555;
+
+.reviews .review p {
+  margin: 0;
+  color: #333;
+  font-style: italic;
+  text-align: center;
 }
