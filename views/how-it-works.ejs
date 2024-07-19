@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>How It Works | Fresh Bites</title>
         <link rel="stylesheet" href="../styles/how-it-works.css" />
+       
         <link rel="icon" href="/images/logo1.png" type="image/x-icon" />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,10 +26,47 @@
             href="https://fonts.googleapis.com/css2?family=Pacifico&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap"
             rel="stylesheet"
         />
+        <script src="../scripts/feedback.js" defer></script>
     </head>
     <body>
         <%- include("./partial/nav-bar.ejs") %>
 
+        <div id="overlay"></div>
+        <div id="feedbackIcon" onclick="showBox()">
+          <img src="/images/Feedback.jpg" width="35" height="100" />
+        </div>
+        <div id="feedbackContent">
+          <button class="exit" onclick="exitFeedback()">x</button>
+          <h2>Rate our Website</h2>
+          <div class="button-row">
+            <button class="choice" onclick="showTextArea(event)">
+              <span></span>Hate
+            </button>
+            <button class="choice" onclick="showTextArea(event)">
+              <span></span>Dislike
+            </button>
+            <button class="choice" onclick="showTextArea(event)">
+              <span></span>Neutral
+            </button>
+          </div>
+          <div class="button-row">
+            <button class="choice" onclick="showTextArea(event)">
+              <span></span>Like
+            </button>
+            <button class="choice" onclick="showTextArea(event)">
+              <span></span>Love
+            </button>
+          </div>
+          <form name="feedbackForm" onsubmit="return feedbackInput(this)">
+            <div id="feedback">
+              <h4>Please share any suggestions for enhancements</h4>
+              <textarea id="textArea" name="review" placeholder="Enter your message here..."></textarea>
+              <div id="reviewErr" class="error"></div>
+              <button id="submit-btn" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+        
         <div class="header">How Fresh Bites Works</div>
 
         <div class="steps-container">

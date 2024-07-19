@@ -12,11 +12,47 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+  <script src="../scripts/feedback.js" defer></script>
 </head>
 <body>
     <%- include("./partial/nav-bar.ejs") %>
 
+    <div id="overlay"></div>
+    <div id="feedbackIcon" onclick="showBox()">
+      <img src="/images/Feedback.jpg" width="35" height="100" />
+    </div>
+    <div id="feedbackContent">
+      <button class="exit" onclick="exitFeedback()">x</button>
+      <h2>Rate our Website</h2>
+      <div class="button-row">
+        <button class="choice" onclick="showTextArea(event)">
+          <span></span>Hate
+        </button>
+        <button class="choice" onclick="showTextArea(event)">
+          <span></span>Dislike
+        </button>
+        <button class="choice" onclick="showTextArea(event)">
+          <span></span>Neutral
+        </button>
+      </div>
+      <div class="button-row">
+        <button class="choice" onclick="showTextArea(event)">
+          <span></span>Like
+        </button>
+        <button class="choice" onclick="showTextArea(event)">
+          <span></span>Love
+        </button>
+      </div>
+      <form name="feedbackForm" onsubmit="return feedbackInput(this)">
+        <div id="feedback">
+          <h4>Please share any suggestions for enhancements</h4>
+          <textarea id="textArea" name="review" placeholder="Enter your message here..."></textarea>
+          <div id="reviewErr" class="error"></div>
+          <button id="submit-btn" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+    
   <section id="hero" class="hero">
     <div class="hero-content">
       <h2 class="hero-title">Sustainability</h2>

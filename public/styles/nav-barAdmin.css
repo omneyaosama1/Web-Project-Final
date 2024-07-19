@@ -146,7 +146,7 @@ aside h3{
 }
 
 aside .sidebar a{
-    display: flex;
+    display: flex !important;
     color: var(--clr-info-dark);
     margin-left: 2rem;
     gap: 1rem;
@@ -155,8 +155,6 @@ aside .sidebar a{
     transition: all .1s ease-in;
 
 }
-
-
 aside .sidebar a span{
     font-size: 1.6rem;
     transition:all .1s ease-in;

@@ -27,15 +27,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   feedbackLink.addEventListener("click", (event) => {
     event.preventDefault();
-    window.location.href = "/feedback/display"; // Ensure it matches your route
+    window.location.href = "/feedback/display";
   });
 });
 
-
 document.addEventListener("DOMContentLoaded", () => {
-  const feedbackLink = document.getElementById("profileLink");
+  const profileLink = document.getElementById("profileLink");
 
-  feedbackLink.addEventListener("click", (event) => {
+  profileLink.addEventListener("click", (event) => {
     event.preventDefault();
     window.location.href = "/profile";
   });
