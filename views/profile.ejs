@@ -1,58 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/styles/dashboard.css" />
+    <link rel="stylesheet" href="/styles/admin.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap"
+        rel="stylesheet" />
+    <script src="/scripts/admin.js" defer></script>
 </head>
+
 <body>
     <div class="container">
-        <aside>
-            <%- include("partial/nav-barAdmin.ejs") %>
-        </aside>
+        <aside><%- include("partial/nav-barAdmin.ejs") %></aside>
         <section class="main">
             <h2>My Profile</h2>
             <div class="profile-container">
                 <div class="profile-header">
                     <div class="profile-image">
-                        <img src="<%= admin.image || 'https://via.placeholder.com/150' %>" alt="Profile Picture">
+                        <img src="../images/admin-images/avatar.png" alt="Profile Picture" />
                     </div>
                     <div class="profile-info">
-                        <h2><%= admin.name %></h2>
-                        <p><%= admin.userType %></p>
-                        <p><%= admin.address %></p>
-                    </div>
-                    <div class="profile-edit">
-                        <button class="edit-button">Edit <i class="fas fa-edit"></i></button>
+                        <h2>
+                            <%= admin.name %>
+                        </h2>
                     </div>
                 </div>
                 <div class="profile-section">
-                    <h3>Personal Information</h3>
-                    <button class="edit-button">Edit <i class="fas fa-edit"></i></button>
+                    <h3>Personal Information:</h3>
+                    <button class="edit-button" data-modal="editPersonalModal">
+                        Edit <i class="fas fa-edit"></i>
+                    </button>
                     <div class="profile-details">
-                        <p><strong>Name:</strong> <%= admin.name %></p>
-                        <p><strong>Email:</strong> <%= admin.email %></p>
-                        <p><strong>Phone:</strong> <%= admin.phoneNumber %></p>
-                        <p><strong>Bio:</strong> <%= admin.userType %></p>
+                        <p>
+                            <strong>Name:</strong>
+                            <%= admin.name %>
+                        </p>
+                        <p>
+                            <strong>Email:</strong>
+                            <%= admin.email %>
+                        </p>
+                        <p>
+                            <strong>Phone:</strong>
+                            <%= admin.phoneNumber || 'Not provided' %>
+                        </p>
+                        <p>
+                            <strong>Address:</strong>
+                            <%= admin.address || 'Not provided' %>
+                        </p>
+                    </div>
+                </div>
+                <div id="editPersonalModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" data-modal="editPersonalModal">&times;</span>
+                        <h2>Edit Personal Information</h2>
+                        <form id="editForm" method="POST">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" value="<%= admin.name %>" />
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" value="<%= admin.email %>" />
+                            <label for="phone">Phone Number:</label>
+                            <input type="text" id="phone" name="phoneNumber" value="<%= admin.phoneNumber %>" />
+                            <label for="address">Address:</label>
+                            <input type="text" id="address" name="address" value="<%= admin.address %>" />
+                            <button type="submit" class="save-button">Save</button>
+                        </form>
                     </div>
                 </div>
                 <div class="profile-section">
-                    <h3>Address</h3>
-                    <button class="edit-button">Edit <i class="fas fa-edit"></i></button>
+                    <h3>Password:</h3>
+                    <button class="edit-button" data-modal="editPasswordModal">
+                        Edit <i class="fas fa-edit"></i>
+                    </button>
                     <div class="profile-details">
-                        <p><strong>Country:</strong> <%= admin.country || 'Not specified' %></p>
-                        <p><strong>City/State:</strong> <%= admin.city || 'Not specified' %></p>
-                        <p><strong>Postal Code:</strong> <%= admin.postalCode || 'Not specified' %></p>
-                        <p><strong>TAX ID:</strong> <%= admin.taxId || 'Not specified' %></p>
+                        <p>
+                            <strong>Password:</strong>
+                            <span id="passwordDisplay">
+                                <%= "•" .repeat(admin.password.length) %>
+                            </span>
+                            <button class="passwordBtn" id="toggleButton" onclick="togglePassword()">
+                                Show
+                            </button>
+                        </p>
+                    </div>
+                </div>
+                <div id="editPasswordModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" data-modal="editPasswordModal">&times;</span>
+                        <h2>Change Password</h2>
+                        <form id="passwordForm" method="POST">
+                            <label for="currentPassword">Current Password:</label>
+                            <input type="password" id="currentPassword" name="currentPassword" required />
+                            <label for="newPassword">New Password:</label>
+                            <input type="password" id="newPassword" name="newPassword" required />
+                            <label for="confirmPassword">Confirm New Password:</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required />
+                            <button type="submit" class="save-button">
+                                Change Password
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
         </section>
     </div>
-    <script src="/scripts/dashboard.js"></script>
+    <script>
+        const actualPassword = "<%= admin.password %>";
+    </script>
 </body>
+
 </html>
