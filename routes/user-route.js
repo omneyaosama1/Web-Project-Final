@@ -1,53 +1,21 @@
 const express = require("express");
 const router = express.Router();
-
-const {
-  getAllUsers,
-  getUserById,
-  addUser,
-  deleteUser,
-  handleUserUpdate,
-  cancelSubscription,
-  updateCardPaymentInfo
-} = require("../controllers/userCtrl");
+const user=require("../controllers/userCtrl");
 
 const { checkUserAuth } = require("../middleware/userAuthenticator");
 
-const {
-  renderUserPage,
-  renderFavMealsPage,
-  renderUserHistoryPage,
-  handleLogout,
-} = require("../controllers/userCtrl");
+router.get("/", checkUserAuth, user.renderUserPage);
 
-// User profile route
-router.get("/", checkUserAuth, renderUserPage);
+router.get("/favoriteMeals", checkUserAuth, user.renderFavMealsPage);
 
-// Favorite meals route
-router.get("/favoriteMeals", checkUserAuth, renderFavMealsPage);
+router.get("/history", checkUserAuth, user.renderUserHistoryPage);
 
-// User history route
-router.get("/history", checkUserAuth, renderUserHistoryPage);
+router.get("/logout", user.handleLogout);
 
-// Logout route
-router.get("/logout", handleLogout);
+router.post("/", user.handleUserUpdate);
 
-//get all users
-router.get("/allUsers", getAllUsers);
+router.post("/cancel-subscription", user.cancelSubscription);
 
-//get one user by id
-router.get("/:id", getUserById);
-
-//add user
-router.post("/add", addUser);
-
-//update info
-router.post("/", handleUserUpdate);
-
-//delete user
-router.delete("/delete/:id", deleteUser);
-
-router.post("/cancel-subscription", cancelSubscription);
-router.post("/updateCardPaymentInfo", checkUserAuth, updateCardPaymentInfo);
+router.post("/updateCardPaymentInfo", checkUserAuth, user.updateCardPaymentInfo);
 
 module.exports = router;

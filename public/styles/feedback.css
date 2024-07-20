@@ -1,62 +1,212 @@
-.feedback {
-    padding: 20px;
-    border-bottom: 1px solid #eee;
+/* Feedback Icon */
+#feedbackIcon {
+  position: fixed;
+  top: 300px;
+  right: 0px;
+  width: 35px;
+  height: 100px;
+  cursor: pointer;
+  z-index: 1000;
 }
-.feedback .average-rating {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 999;
 }
-.feedback .average-rating span {
-    font-size: 48px;
-    color: #f1c40f;
-    margin-right: 10px;
+
+/* Feedback Content */
+#feedbackContent {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 80px 60px 60px 60px;
+  width: 300px;
+  max-width: 90%;
+  text-align: center;
 }
-.feedback .average-rating p {
-    margin: 0;
-    font-size: 24px;
-    color: #333;
+#feedbackContent h2 {
+  font-family: "Poppins", sans-serif;
 }
-.feedback .stars {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+#textArea {
+  height: 80px;
+  width: 100%;
+  max-width: 100%;
+  resize: none;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-top: 10px;
 }
-.feedback .stars div {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
+
+#feedback {
+  display: none;
+  margin-top: 20px;
 }
-.feedback .stars .bar {
-    height: 10px;
-    background-color: #f1c40f;
-    margin-left: 5px;
-    border-radius: 5px;
-    flex-grow: 1;
+#feedback h4 {
+  font-family: "poppins", sans-serif;
 }
+/* Exit Button */
+.exit {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 50%;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  font-weight: bold;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.exit:hover {
+  color: red;
+  font-weight: bold;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.choice {
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #000000;
+  text-decoration: none;
+  padding: 10px 20px;
+  background: transparent;
+  border: 2px solid #f19f13;
+  border-radius: 30px;
+  margin: 10px;
+  cursor: pointer;
+  transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+}
+
+.choice:hover {
+  color: #ffffff;
+  background-color: #f1a013a9;
+  border-color: #f19f13;
+}
+
+.choice span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  border-radius: 30px;
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.choice:hover span {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.choice.selected {
+  background-color: #f1a013a9;
+  border-color: #f19f13;
+  color: #ffffff;
+}
+
+#submit-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #71a1d1;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#submit-btn:hover {
+  background-color: #31d42b;
+}
+.error {
+  color: red;
+  font-size: 90%;
+  max-width: 800px;
+  text-align: center;
+}
+
+/*Feedback styling "admin"*/
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+aside {
+  width: 250px;
+  color: #fff;
+}
+
+.main {
+  flex-grow: 1;
+  padding: 20px;
+  width: 30cm;
+  background-color: #fff;
+}
+
+#heading {
+  margin-bottom: 20px;
+  padding: 10px;
+  text-align: left;
+  background-color: transparent;
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+  border-radius: 5px;
+}
+
 .reviews {
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
 .reviews .review {
-    display: flex;
-    margin-bottom: 20px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #ecf0f1;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.reviews .review img {
-    border-radius: 50%;
-    margin-right: 10px;
+
+.reviews .review .name {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #2980b9;
 }
-.reviews .review .content {
-    flex: 1;
-}
-.reviews .review .content .name {
-    font-weight: 700;
-    margin-bottom: 5px;
-}
-.reviews .review .content .stars {
-    color: #f1c40f;
-    margin-bottom: 5px;
-}
-.reviews .review .content p {
-    margin: 0;
-    color: #555;
+
+.reviews .review p {
+  margin: 0;
+  color: #333;
+  font-style: italic;
+  text-align: center;
 }
