@@ -147,60 +147,6 @@ function closeMessage() {
     message.style.display = "none";
 }
 
-// feedback
-function showBox() {
-    const overlay = document.getElementById("overlay");
-    overlay.style.display = "block";
-
-    const feedbackContent = document.getElementById("feedbackContent");
-    feedbackContent.style.display = "block";
-    feedbackContent.style.zIndex = "1000";
-}
-
-function showTextArea() {
-    const feedbackForm = document.getElementById("feedback");
-    feedbackForm.style.display = "block";
-}
-
-function showFeedbackForm() {
-    const feedbackForm = document.getElementById("feedback");
-    feedbackForm.style.display =
-        feedbackForm.style.display === "none" ? "block" : "none";
-}
-
-function exitFeedback() {
-    const feedbackContent = document.getElementById("feedbackContent");
-    feedbackContent.style.display = "none";
-
-    const overlay = document.getElementById("overlay");
-    overlay.style.display = "none";
-}
-
-function feedbackInput(form) {
-    let review = form.review.value.trim();
-    let reviewErr = document.getElementById("reviewErr");
-
-    if (review === "") {
-        printWarning(
-            "reviewErr",
-            "Please enter your opinion before submitting"
-        );
-        return false;
-    } else {
-        let regEx = /^[a-zA-Z0-9\s]+$/;
-        if (!regEx.test(review)) {
-            printWarning(
-                "reviewErr",
-                "Please enter a valid review (letters, numbers, and spaces only)"
-            );
-            return false;
-        } else {
-            printWarning("reviewErr", "");
-            return true;
-        }
-    }
-}
-
 // cart window
 function openWindow(iconToOpen) {
     document.getElementById(iconToOpen).style.display = "flex";
