@@ -9,7 +9,7 @@ window.addEventListener("scroll", function () {
 
 document.querySelectorAll(".delete-button").forEach((button) => {
     button.addEventListener("click", function () {
-        const mealId = this.getAttribute('data-id');
+        const mealId = this.getAttribute("data-id");
         const mealItem = this.closest(".meal-item");
         const modal = document.getElementById("myModal");
         modal.style.display = "block";
@@ -19,27 +19,27 @@ document.querySelectorAll(".delete-button").forEach((button) => {
 
         confirmButton.onclick = function () {
             $.ajax({
-                url: `/favoriteMeals`,
-                type: 'DELETE',
+                url: `/user/favoriteMeals`,
+                type: "DELETE",
                 data: JSON.stringify({ mealID: mealId }),
-                contentType: 'application/json',
-                success: function(response) {
+                contentType: "application/json",
+                success: function (response) {
                     mealItem.remove();
-                    modal.style.display = 'none';
+                    modal.style.display = "none";
                 },
-                error: function(xhr) {
-                    alert('Failed to delete meal: ' + xhr.responseText);
-                }
+                error: function (xhr) {
+                    alert("Failed to delete meal: " + xhr.responseText);
+                },
             });
         };
 
         cancelButton.onclick = function () {
-            modal.style.display = 'none';
+            modal.style.display = "none";
         };
 
         window.onclick = function (event) {
             if (event.target == modal) {
-                modal.style.display = 'none';
+                modal.style.display = "none";
             }
         };
     });

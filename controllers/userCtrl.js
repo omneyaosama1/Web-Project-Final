@@ -12,27 +12,44 @@ const renderUserPage = async (req, res) => {
 
 const renderFavMealsPage = async (req, res) => {
     try {
-      if (!req.session.user) {
-        req.session.user = await User.findById(req.session.userId);
-      }
-      
-      const user = req.session.user;
-  
-      if (user && user.favoriteMeals && user.favoriteMeals.length > 0) {
-        // Fetch the favorite meals details from the Meal collection
-        const favoriteMeals = await Meal.find({
-          _id: { $in: user.favoriteMeals }
-        });
-  
-        res.render("fav-meals", { favoriteMeals });
-      } else {
-        res.render("fav-meals", { favoriteMeals: [] });
-      }
+        if (!req.session.user) {
+            req.session.user = await User.findById(req.session.userId);
+        }
+
+        const user = req.session.user;
+
+        if (user && user.favoriteMeals && user.favoriteMeals.length > 0) {
+            // Fetch the favorite meals details from the Meal collection
+            const favoriteMeals = await Meal.find({
+                _id: { $in: user.favoriteMeals },
+            });
+
+            res.render("fav-meals", { favoriteMeals });
+        } else {
+            res.render("fav-meals", { favoriteMeals: [] });
+        }
     } catch (err) {
-      console.error("Error rendering favorite meals page:", err);
-      res.status(500).send("Server error");
+        console.error("Error rendering favorite meals page:", err);
+        res.status(500).send("Server error");
     }
-  };
+};
+
+const deleteFavMeal = async (req, res) => {
+    try {
+        const userId = req.session.user._id; // Assuming user is stored in session
+        const mealId = req.body.mealID;
+        console.log(`Deleting meal with id ${mealId}`);
+
+        // Find the user and update their favorite meals array
+        await User.findByIdAndUpdate(userId, { 
+            $pull: { favoriteMeals: mealId }
+        });
+
+        res.status(200).send({ message: "Meal removed from favorites" });
+    } catch (error) {
+        res.status(500).send({ message: "Failed to remove meal from favorites" });
+    }
+}
 
 const renderUserHistoryPage = async (req, res) => {
     try {
@@ -360,9 +377,11 @@ const updateCardPaymentInfo = async (req, res) => {
         });
     }
 };
+
 module.exports = {
     renderUserPage,
     renderFavMealsPage,
+    deleteFavMeal,
     renderUserHistoryPage,
     handleLogout,
     addUser,
