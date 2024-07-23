@@ -7,40 +7,55 @@ window.addEventListener("scroll", function () {
     }
 });
 
-document.querySelectorAll(".delete-button").forEach((button) => {
-    button.addEventListener("click", function () {
-        const mealId = this.getAttribute("data-id");
-        const mealItem = this.closest(".meal-item");
-        const modal = document.getElementById("myModal");
-        modal.style.display = "block";
+// Function to confirm deletion of a meal
+function confirmDeletion(button) {
+    const mealId = button.getAttribute("data-id");
+    const mealItem = button.closest(".meal-item");
+    const modal = document.getElementById("myModal");
+    modal.style.display = "block";
 
-        const confirmButton = modal.querySelector(".confirm");
-        const cancelButton = modal.querySelector(".cancel");
+    const confirmButton = modal.querySelector(".confirm");
+    const cancelButton = modal.querySelector(".cancel");
 
-        confirmButton.onclick = function () {
-            $.ajax({
-                url: `/user/favoriteMeals`,
-                type: "DELETE",
-                data: JSON.stringify({ mealID: mealId }),
-                contentType: "application/json",
-                success: function (response) {
-                    mealItem.remove();
-                    modal.style.display = "none";
-                },
-                error: function (xhr) {
-                    alert("Failed to delete meal: " + xhr.responseText);
-                },
-            });
-        };
+    // Clear previous event listeners
+    confirmButton.onclick = null;
+    cancelButton.onclick = null;
 
-        cancelButton.onclick = function () {
-            modal.style.display = "none";
-        };
-
-        window.onclick = function (event) {
-            if (event.target == modal) {
+    confirmButton.onclick = function () {
+        $.ajax({
+            url: `/user/favoriteMeals`,  // Adjust the URL to match your backend route
+            type: "DELETE",
+            data: JSON.stringify({ mealID: mealId }),
+            contentType: "application/json",
+            success: function (response) {
+                mealItem.remove();
                 modal.style.display = "none";
-            }
-        };
+            },
+            error: function (xhr) {
+                const errorResponse = JSON.parse(xhr.responseText);
+                alert(`Failed to delete meal: ${errorResponse.message}`);
+                modal.style.display = "none";
+            },
+        });
+    };
+
+    cancelButton.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+}
+
+// Ensure that the event listener is properly added to all delete buttons when the DOM content is fully loaded
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".delete-button").forEach((button) => {
+        button.addEventListener("click", function () {
+            confirmDeletion(this);
+        });
     });
 });
+

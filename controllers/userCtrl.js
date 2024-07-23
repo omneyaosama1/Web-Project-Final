@@ -38,18 +38,36 @@ const deleteFavMeal = async (req, res) => {
     try {
         const userId = req.session.user._id; // Assuming user is stored in session
         const mealId = req.body.mealID;
-        console.log(`Deleting meal with id ${mealId}`);
 
-        // Find the user and update their favorite meals array
+        if (!mealId) {
+            return res.status(400).send({ message: "Meal ID is required" });
+        }
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).send({ message: "User not found" });
+        }
+
+        // Check if the meal ID exists in the user's favorite meals
+        if (!user.favoriteMeals.includes(mealId)) {
+            return res.status(404).send({ message: "Meal not found in favorites" });
+        }
+
+        // Remove the meal from the user's favorite meals array
         await User.findByIdAndUpdate(userId, { 
             $pull: { favoriteMeals: mealId }
         });
 
+        // Refresh the session user data
+        req.session.user = await User.findById(userId);
+
         res.status(200).send({ message: "Meal removed from favorites" });
     } catch (error) {
+        console.error(`Failed to remove meal from favorites: ${error.message}`);
         res.status(500).send({ message: "Failed to remove meal from favorites" });
     }
-}
+};
+
 
 const renderUserHistoryPage = async (req, res) => {
     try {
