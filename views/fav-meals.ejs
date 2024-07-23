@@ -1,112 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap"
-            rel="stylesheet"
-        />
-        <link rel="stylesheet" href="../styles/fav-meals.css" />
-        <link rel="stylesheet" href="../styles/feedback.css"/>
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        />
-        <script src="../scripts/fav-meals.js"defer></script>
-        <script src="../scripts/feedback.js" defer></script>
-        <title>Fresh Bites</title>
-    </head>
-    <body>
-        <%- include("./partial/nav-bar.ejs") %>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/fav-meals.css" />
+    <link rel="stylesheet" href="../styles/feedback.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script src="../scripts/fav-meals.js" defer></script>
+    <script src="../scripts/feedback.js" defer></script>
+    <title>Fresh Bites</title>
+</head>
+<body>
+    <%- include("./partial/nav-bar.ejs") %>
 
-
-        <div class="main-content">
-            <div id="overlay"></div>
-            <div id="feedbackIcon" onclick="showBox()">
-              <img src="/images/Feedback.jpg" width="35" height="100" />
+    <div class="main-content">
+        <div id="overlay"></div>
+        <div id="feedbackIcon" onclick="showBox()">
+            <img src="/images/Feedback.jpg" width="35" height="100" />
+        </div>
+        <div id="feedbackContent">
+            <button class="exit" onclick="exitFeedback()">x</button>
+            <h2>Rate our Website</h2>
+            <div class="button-row">
+                <button class="choice" onclick="showTextArea(event)">
+                    <span></span>Hate
+                </button>
+                <button class="choice" onclick="showTextArea(event)">
+                    <span></span>Dislike
+                </button>
+                <button class="choice" onclick="showTextArea(event)">
+                    <span></span>Neutral
+                </button>
             </div>
-            <div id="feedbackContent">
-              <button class="exit" onclick="exitFeedback()">x</button>
-              <h2>Rate our Website</h2>
-              <div class="button-row">
+            <div class="button-row">
                 <button class="choice" onclick="showTextArea(event)">
-                  <span></span>Hate
+                    <span></span>Like
                 </button>
                 <button class="choice" onclick="showTextArea(event)">
-                  <span></span>Dislike
+                    <span></span>Love
                 </button>
-                <button class="choice" onclick="showTextArea(event)">
-                  <span></span>Neutral
-                </button>
-              </div>
-              <div class="button-row">
-                <button class="choice" onclick="showTextArea(event)">
-                  <span></span>Like
-                </button>
-                <button class="choice" onclick="showTextArea(event)">
-                  <span></span>Love
-                </button>
-              </div>
-              <form name="feedbackForm" onsubmit="return feedbackInput(this)">
+            </div>
+            <form name="feedbackForm" onsubmit="return feedbackInput(this)">
                 <div id="feedback">
-                  <h4>Please share any suggestions for enhancements</h4>
-                  <textarea id="textArea" name="review" placeholder="Enter your message here..."></textarea>
-                  <div id="reviewErr" class="error"></div>
-                  <button id="submit-btn" type="submit">Submit</button>
+                    <h4>Please share any suggestions for enhancements</h4>
+                    <textarea id="textArea" name="review" placeholder="Enter your message here..."></textarea>
+                    <div id="reviewErr" class="error"></div>
+                    <button id="submit-btn" type="submit">Submit</button>
                 </div>
-              </form>
-            </div>
-            
-            <h1>My Favourites</h1>
-            <% if (favoriteMeals.length > 0) { %> <%
-            favoriteMeals.forEach(function(meal) { %>
-            <div class="meal-item">
-                <img src="<%= meal.image %>" alt="<%= meal.name %>" />
-                <div class="meal-details">
-                    <h3><%= meal.name %></h3>
-                    <p><%= meal.description %></p>
-                    <div class="info">
-                        <span
-                            ><i class="fas fa-users"></i> For <%=
-                            meal.ingredientsName.length %> People</span
-                        >
-                        <span
-                            ><i class="fas fa-fire"></i> <%=
-                            meal.nutrition.calories %> Calories</span
-                        >
+            </form>
+        </div>
+        
+        <h1>My Favourites</h1>
+        <% if (favoriteMeals.length > 0) { %> 
+            <% favoriteMeals.forEach(function(meal) { %>
+                <div class="meal-item">
+                    <img src="<%= meal.image %>" alt="<%= meal.name %>" />
+                    <div class="meal-details">
+                        <h3><%= meal.name %></h3>
+                        <p><%= meal.description %></p>
+                        <div class="info">
+                            <span><i class="fas fa-users"></i> For <%= meal.ingredientsName.length %> People</span>
+                            <span><i class="fas fa-fire"></i> <%= meal.nutrition.calories %> Calories</span>
+                        </div>
                     </div>
+                    <button class="delete-button" data-id="<%= meal._id %>" onclick="confirmDeletion(this)">
+                        <i class="fas fa-trash"></i>
+                    </button>
                 </div>
-                <button
-                    class="delete-button"
-                    data-id="<%= meal._id %>"
-                    onclick="confirmDeletion(this)"
-                >
-                    <i class="fas fa-trash"></i>
-                </button>
-            </div>
-            <% }); %> <% } else { %>
+            <% }); %> 
+        <% } else { %>
             <p>No favorite meals found.</p>
-            <% } %>
-        </div>
+        <% } %>
+    </div>
 
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Confirm Deletion</h2>
-                </div>
-                <p>Do you want to remove this meal from your favorite meals?</p>
-                <div class="modal-footer">
-                    <button class="confirm">Yes</button>
-                    <button class="cancel">No</button>
-                </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Confirm Deletion</h2>
+            </div>
+            <p>Do you want to remove this meal from your favorite meals?</p>
+            <div class="modal-footer">
+                <button class="confirm">Yes</button>
+                <button class="cancel">No</button>
             </div>
         </div>
-
-   
-    </body>
+    </div>
+</body>
 </html>
