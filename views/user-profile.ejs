@@ -165,7 +165,7 @@
       <div class="card">
         <h2>Visa Card Information:</h2>
         <div class="card-info">
-          <% if (user.visaInfo) { %> <!-- Check if visaInfo exists -->
+          <% if (user.visaInfo) { %> 
           <p class="content">
             <strong>Card Number:</strong>
             <%= user.visaInfo.cardNum ? ' **** **** **** ' +
@@ -196,7 +196,7 @@
           <% } %>
         </div>
 
-        <!-- Display the edit button only if the card information is available -->
+        
         <% if (user.visaInfo && user.visaInfo.cardNum && user.visaInfo.expDate && user.visaInfo.cvv) { %>
         <div class="buttons-container">
           <button class="transparent-button editButton" data-modal="editCardPaymentModal">
