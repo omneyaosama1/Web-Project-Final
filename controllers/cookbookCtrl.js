@@ -54,6 +54,13 @@ const addMeal = async (req, res) => {
     recommendations,
   } = req.body;
 
+  const splitStringToArray = (input) => {
+    if (typeof input === 'string') {
+      return input.split(',').map(item => item.trim());
+    }
+    return input;
+  };
+
   try {
     const newMeal = new Meal({
       name,
@@ -62,24 +69,25 @@ const addMeal = async (req, res) => {
       difficulty,
       description,
       tags,
-      preferences, 
-      ingredientsName,
-      ingPer2,
-      ingPer4,
-      instructions,
-      allergens,
-      utensils,
+      preferences: splitStringToArray(preferences),
+      ingredientsName: splitStringToArray(ingredientsName),
+      ingPer2: splitStringToArray(ingPer2),
+      ingPer4: splitStringToArray(ingPer4),
+      instructions: splitStringToArray(instructions),
+      allergens: splitStringToArray(allergens),
+      utensils: splitStringToArray(utensils),
       nutrition,
-      recommendations,
+      recommendations: splitStringToArray(recommendations),
     });
 
     await newMeal.save();
     res.status(201).json({ message: "Meal added successfully", meal: newMeal });
   } catch (error) {
     console.log(error);
-    res.status(500).send('Failed to add a meal',error);
+    res.status(500).send('Failed to add a meal');
   }
 };
+
 
 const updateMeal = async (req, res) => {
   const { id } = req.params;
