@@ -310,21 +310,26 @@ const updatePassword = async (req, res) => {
     }
 };
 
-const deleteUser = async (req, res) => {
-    const userID = req.session.user._id;
-
-    try {
-        const deletedUser = await User.findByIdAndDelete(userID);
-        if (!deletedUser) {
-            return res.status(404).send("User not found");
+const deleteUser=async(req,res)=>{
+    const userID=req.session.user._id;
+    try{
+        const deleteUser=await User.findByIdAndDelete(userID);
+        if(!deleteUser){
+            return res.status(404).send("User not found!");
         }
-        res.status(200).send("User deleted successfully");
-    } catch (error) {
+        req.session.destroy((err)=>{
+            if(err){
+                console.log("Error destroying session:",err);
+                return res.status(500).send("Failed to delete user");
+            }
+            res.redirect("/");
+        });
+
+    }catch(error){
         console.log(error);
-        res.status(500).send("Failed to delete user");
+        res.status(500).send("Server error: Failed to delete user");
     }
 };
-
 const cancelSubscription = async (req, res) => {
     const userID = req.session.user._id;
 

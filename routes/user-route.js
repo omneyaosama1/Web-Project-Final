@@ -18,10 +18,8 @@ router.post("/", user.handleUserUpdate);
 
 router.post("/cancel-subscription", user.cancelSubscription);
 
-router.post(
-    "/updateCardPaymentInfo",
-    checkUserAuth,
-    user.updateCardPaymentInfo
-);
+router.post("/updateCardPaymentInfo",checkUserAuth,user.updateCardPaymentInfo);
+
+router.post("/delete",user.deleteUser);
 
 module.exports = router;

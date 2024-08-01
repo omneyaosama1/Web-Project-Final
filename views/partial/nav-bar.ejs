@@ -1,66 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/styles/nav-bar.css" />
-  </head>
-  <body>
-    <div class="nav-bar">
-      <div class="left-section">
-        <a href="/">
-          <img src="/images/logo1.png" alt="Your Logo" class="logo" />
-        </a>
-        <span class="name" onclick="window.location.href = '/'"
-          >Fresh Bites</span
-        >
-      </div>
-      <ul>
-        <li class="dropdown">
-          <a href="/about-us">About Us</a>
-          <ul class="dropdown-content">
-            <li><a href="/about-us">About Us</a></li>
-            <li><a href="/how-it-works">How it Works</a></li>
-          </ul>
-        </li>
-        <% if (user) { %>
-        <li><a href="/our-plans">Our Plans</a></li>
-        <%}%> <% if (user) { %>
-        <li class="dropdown">
-          <a href="/menu">Our Menu</a>
-          <ul class="dropdown-content">
-            <li><a href="/menu">Our Menu</a></li>
-            <li><a href="/cookbook">Cook Book</a></li>
-          </ul>
-        </li>
-        <%} else { %>
-        <li><a href="/cookbook">Cook Book</a></li>
-        <%}%>
 
-        <li class="dropdown">
-          <a href="/sustainability">Sustainability</a>
-          <ul class="dropdown-content">
-            <li><a href="/sustainability">Sustainability</a></li>
-            <li><a href="/sourcing">Sourcing</a></li>
-          </ul>
-        </li>
-        <% if (user) { %>
-        <li class="dropdown user-dropdown">
-          <a href="/user"><i class="fas fa-user-circle"></i></a>
-          <ul class="dropdown-content">
-            <li><a href="/user">Account Info</a></li>
-            <li>
-              <a href="/user/favoriteMeals">Favorite Meals</a>
-            </li>
-            <li><a href="/user/history">Orders History</a></li>
-            <li><a href="#">Delete Account</a></li>
-            <li>
-              <a href="/login-signup/logout" id="logoutButton">Logout</a>
-            </li>
-          </ul>
-        </li>
-        <% } %>
-      </ul>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/styles/nav-bar.css" />
+  <script src="/scripts/nav-barAdmin.js" defer></script>
+</head>
+
+<body>
+  <div class="nav-bar">
+    <div class="left-section">
+      <a href="/">
+        <img src="/images/logo1.png" alt="Your Logo" class="logo" />
+      </a>
+      <span class="name" onclick="window.location.href = '/'">Fresh Bites</span>
     </div>
-  </body>
+    <ul>
+      <li class="dropdown">
+        <a href="/about-us">About Us</a>
+        <ul class="dropdown-content">
+          <li><a href="/about-us">About Us</a></li>
+          <li><a href="/how-it-works">How it Works</a></li>
+        </ul>
+      </li>
+      <% if (user) { %>
+        <li><a href="/our-plans">Our Plans</a></li>
+        <%}%>
+          <% if (user) { %>
+            <li class="dropdown">
+              <a href="/menu">Our Menu</a>
+              <ul class="dropdown-content">
+                <li><a href="/menu">Our Menu</a></li>
+                <li><a href="/cookbook">Cook Book</a></li>
+              </ul>
+            </li>
+            <%} else { %>
+              <li><a href="/cookbook">Cook Book</a></li>
+              <%}%>
+                <li class="dropdown">
+                  <a href="/sustainability">Sustainability</a>
+                  <ul class="dropdown-content">
+                    <li><a href="/sustainability">Sustainability</a></li>
+                    <li><a href="/sourcing">Sourcing</a></li>
+                  </ul>
+                </li>
+                <% if (user) { %>
+                  <li class="dropdown user-dropdown">
+                    <a href="/user"><i class="fas fa-user-circle"></i></a>
+                    <ul class="dropdown-content">
+                      <li><a href="/user">Account Info</a></li>
+                      <li><a href="/user/favoriteMeals">Favorite Meals</a></li>
+                      <li><a href="/user/history">Orders History</a></li>
+                      <li><a id="deleteAccountButton" class="delete-btn">Delete Account</a></li>
+                      <li><a href="/login-signup/logout" id="logoutButton">Logout</a></li>
+                    </ul>
+                  </li>
+                  <% } %>
+    </ul>
+  </div>
+
+  <div id="deleteAccountModal" class="popup">
+    <div class="popup-content">
+      <span class="close">&times;</span>
+      <h2>Confirm Account Deletion</h2>
+      <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+      <form id="deleteAccountForm" action="/user/delete" method="post">
+        <button type="submit" class="confirm-btn">Yes, Delete</button>
+        <button type="button" class="cancel-btn">Cancel</button>
+      </form>
+    </div>
+  </div>
+</body>
+
 </html>
