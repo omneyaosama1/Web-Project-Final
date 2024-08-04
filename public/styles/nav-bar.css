@@ -39,11 +39,16 @@
 .name:hover {
     cursor: pointer;
 }
+.fas.fa-user-circle {
+    font-size: 1.75rem;
+    margin-right: 70px;
+}
 
 a {
     text-decoration: none;
     color: #167592;
     font-family: Roboto;
+    cursor: pointer;
 }
 
 .nav-bar ul li {
@@ -51,14 +56,12 @@ a {
     display: inline-block;
     margin: 0 20px;
     position: relative;
-    
 }
 
 .nav-bar ul li a {
     text-decoration: none;
     color: #167592;
     text-transform: uppercase;
-    cursor: pointer;
 }
 
 .nav-bar ul li::after {
@@ -101,47 +104,48 @@ a {
     display: block;
 }
 
-.popup{
-    display: none; 
-    position: fixed; 
-    z-index: 999; 
+
+
+.deletionModal {
+    display: none;
+    position: fixed;
+    z-index: 999;
     left: 0;
     top: 0;
-    width: 100%; 
+    width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
-
-.popup-content{
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  #deleteAccountModal .deletionModal-content {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; 
-    max-width: 400px; 
+    width: 80%;
+    max-width: 400px;
     border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    text-align: center; 
-}
-
-.popup h2{
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+  
+  .deletionModal h2 {
     font-family: Roboto;
-    margin:5px;
-
-}
-
-.popup p{
+    margin: 5px;
+  }
+  
+  .deletionModal p {
     margin: 20px;
     font-family: Roboto;
     font-weight: bold;
-}
-.close {
+  }
+  .close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-    cursor: pointer; 
+    cursor: pointer;
   }
   
   .close:hover,
@@ -151,8 +155,7 @@ a {
     cursor: pointer;
   }
   
-  
-  .confirm-btn {
+  .deletionModal .confirm-btn {
     background-color: #ff4c4c;
     color: white;
     padding: 10px 20px;
@@ -162,12 +165,12 @@ a {
     margin: 20px;
   }
   
-  .confirm-btn:hover {
+  .deletionModal .confirm-btn:hover {
     background-color: #ff1c1c;
   }
   
-  .cancel-btn {
-    background-color: #a0a0a0; 
+  .deletionModal .cancel-btn {
+    background-color: #a0a0a0;
     color: black;
     padding: 10px 20px;
     border: none;
@@ -176,74 +179,7 @@ a {
     margin: 20px;
   }
   
-  .cancel-btn:hover {
-    background-color: #939292; 
+  .deletionModal .cancel-btn:hover {
+    background-color: #939292;
   }
-
-/* Responsive Adjustments */
-
-
-.dropdown {
-    position: relative;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #81d0e8;
-    min-width: 120px;
-    z-index: 1000;
-    list-style: none;
-    padding: 0;
-    
-}
-.dropdown-user-dropdown{
-    display: none;
-    position: absolute;
-    background-color: #81d0e8;
-    min-width: 120px;
-    z-index: 1000;
-    list-style: none;
-    padding-right: 20px;
-    left: -100%; /* Position dropdown to the left of the parent li */
-    top: 100%; /* Align dropdown below the parent li */
-}
-
-
-
-/* Adjust only for user icon dropdown */
-.dropdown.user-dropdown .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #81d0e8;
-    min-width: 120px;
-    z-index: 1000;
-    list-style: none;
-    padding: 0;
-    left: -100%; /* Position dropdown to the left of the parent li */
-    top: 100%; /* Align dropdown below the parent li */
-}
-
-.dropdown.user-dropdown:hover .dropdown-content {
-    display: block;
-}
-.dropdown-content li {
-    padding: 10px;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown-content li button {
-    background-color: transparent;
-    border-style: none;
-    font-size: 16px;
-    font-family: Roboto;
-    color: #167592;
-}
-
-.fas.fa-user-circle {
-    font-size: 1.5rem;
-    margin-right: 30px;
-}
+  

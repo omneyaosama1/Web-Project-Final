@@ -39,24 +39,3 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "/profile";
   });
 });
-
-
-//Delete account (Script for the USER navbar)
-const modal = document.getElementById("deleteAccountModal");
-const btn = document.getElementById("deleteAccountButton");
-const span = document.getElementsByClassName("close")[0];
-const cancelBtn = document.querySelector(".cancel-btn");
-btn.onclick = function () {
-  modal.style.display = "block";
-};
-span.onclick = function () {
-  modal.style.display = "none";
-};
-cancelBtn.onclick = function () {
-  modal.style.display = "none";
-};
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-};
