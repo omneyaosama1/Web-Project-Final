@@ -12,12 +12,12 @@ const getMeals = async (req, res) => {
     res.render("cookbook", {
       meals: meals,
       currentPage: page,
-      totalPages: totalPages, 
-      user: req.session.user 
+      totalPages: totalPages,
+      user: req.session.user,
     });
   } catch (error) {
     console.log(error);
-    res.status(500).send('Failed to display meals');
+    res.status(500).send("Failed to display meals");
   }
 };
 
@@ -26,12 +26,12 @@ const getById = async (req, res) => {
   try {
     const getMeal = await Meal.findById(id);
     if (!getMeal) {
-      return res.status(404).json({ message: 'Meal not found' });
+      return res.status(404).json({ message: "Meal not found" });
     }
     return res.status(200).json(getMeal);
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'Server error' });
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -55,8 +55,8 @@ const addMeal = async (req, res) => {
   } = req.body;
 
   const splitStringToArray = (input) => {
-    if (typeof input === 'string') {
-      return input.split(',').map(item => item.trim());
+    if (typeof input === "string") {
+      return input.split(",").map((item) => item.trim());
     }
     return input;
   };
@@ -84,14 +84,13 @@ const addMeal = async (req, res) => {
     res.status(201).json({ message: "Meal added successfully", meal: newMeal });
   } catch (error) {
     console.log(error);
-    res.status(500).send('Failed to add a meal');
+    res.status(500).send("Failed to add a meal");
   }
 };
 
-
-const updateMeal = async (req, res) => {
-  const { id } = req.params;
+const editMeal = async (req, res) => {
   const {
+    id,
     name,
     image,
     cookTime,
@@ -108,33 +107,33 @@ const updateMeal = async (req, res) => {
     nutrition,
     recommendations,
   } = req.body;
-
   try {
-    const updatedMeal = await Meal.findByIdAndUpdate(
-      id,
-      {
-        name,
-        image,
-        cookTime,
-        difficulty,
-        description,
-        tags,
-        preferences, 
-        ingredientsName,
-        ingPer2,
-        ingPer4,
-        instructions,
-        allergens,
-        utensils,
-        nutrition,
-        recommendations,
-      },
-      { new: true }
-    );
-    res.redirect('/products');
-  } catch (error) {
-    console.log(error);
-    res.status(500).send('Failed to update a meal');
+    const meal = await Meal.findById(id);
+    if (!meal) {
+      return res.status(404).json({ message: "Meal not found" });
+    }
+
+    meal.name = name;
+    meal.image = image;
+    meal.cookTime = cookTime;
+    meal.difficulty = difficulty;
+    meal.description = description;
+    meal.tags = tags;
+    meal.preferences = preferences;
+    meal.ingredients.name = ingredientsName;
+    meal.ingredients.ingPer2 = ingPer2;
+    meal.ingredients.ingPer4 = ingPer4;
+    meal.instructions = instructions;
+    meal.allergens = allergens;
+    meal.utensils = utensils;
+    meal.nutrition = nutrition;
+    meal.recommendations = recommendations;
+
+    const updatedMeal = await meal.save();
+    res.json(updatedMeal);
+  } catch (err) {
+    console.error("Error editing product:", err);
+    res.status(500).json({ message: "Error editing product" });
   }
 };
 
@@ -143,17 +142,17 @@ const deleteMeal = async (req, res) => {
 
   try {
     const deletedMeal = await Meal.findByIdAndDelete(id);
-    res.redirect('/products');
+    res.redirect("/products");
   } catch (error) {
     console.log(error);
-    res.status(500).send('Failed to delete a meal');
+    res.status(500).send("Failed to delete a meal");
   }
 };
 
 const getMealsAdmin = async (req, res) => {
   try {
     const meals = await Meal.find();
-    res.render('products', { meals });
+    res.render("products", { meals });
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");
@@ -163,7 +162,7 @@ const getMealsAdmin = async (req, res) => {
 module.exports = {
   getMeals,
   addMeal,
-  updateMeal,
+  editMeal,
   getById,
   deleteMeal,
   getMealsAdmin,
