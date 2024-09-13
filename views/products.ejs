@@ -48,36 +48,26 @@
                 <td>
                   <button
                     class="edit-button"
-                    onclick="openEditModal(
-                  '<%= meal._id %>', 
-                  '<%= meal.name %>', 
-                  '<%= meal.image %>', 
-                  '<%= meal.cookTime %>', 
-                  '<%= meal.difficulty %>', 
-                  '<%= meal.description %>', 
-                  '<%= meal.tags %>', 
-                  '<%= meal.preferences %>', 
-                  '<%= meal.ingredientsName %>', 
-                  '<%= meal.ingPer2 %>', 
-                  '<%= meal.ingPer4 %>', 
-                  '<%= meal.instructions %>', 
-                  '<%= meal.allergens %>', 
-                  '<%= meal.utensils %>', 
-                  '<%= meal.nutrition.energy %>', 
-                  '<%= meal.nutrition.calories %>', 
-                  '<%= meal.nutrition.fat %>', 
-                  '<%= meal.nutrition.satFat %>', 
-                  '<%= meal.nutrition.carbohydrates %>', 
-                  '<%= meal.nutrition.sugar %>', 
-                  '<%= meal.nutrition.fiber %>', 
-                  '<%= meal.nutrition.protein %>', 
-                  '<%= meal.nutrition.cholesterol %>', 
-                  '<%= meal.nutrition.sodium %>', 
-                  '<%= meal.recommendations %>'
-                )"
+                    data-id="<%= meal._id %>"
+                    data-name="<%= meal.name %>"
+                    data-image="<%= meal.image %>"
+                    data-cooktime="<%= meal.cookTime %>"
+                    data-difficulty="<%= meal.difficulty %>"
+                    data-description="<%= meal.description %>"
+                    data-tags="<%= meal.tags %>"
+                    data-preferences="<%= meal.preferences.join(',') %>"
+                    data-ingredientsname="<%= meal.ingredientsName.join(',') %>"
+                    data-ingper2="<%= meal.ingPer2.join(',') %>"
+                    data-ingper4="<%= meal.ingPer4.join(',') %>"
+                    data-instructions="<%= meal.instructions.join(',') %>"
+                    data-allergens="<%= meal.allergens.join(',') %>"
+                    data-utensils="<%= meal.utensils.join(',') %>"
+                    data-nutrition='{"energy": <%= meal.nutrition.energy %>, "calories": <%= meal.nutrition.calories %>, "fat": <%= meal.nutrition.fat %>, "satFat": <%= meal.nutrition.satFat %>, "carbohydrates": <%= meal.nutrition.carbohydrates %>, "sugar": <%= meal.nutrition.sugar %>, "fiber": <%= meal.nutrition.fiber %>, "protein": <%= meal.nutrition.protein %>, "cholesterol": <%= meal.nutrition.cholesterol %>, "sodium": <%= meal.nutrition.sodium %> }'
+                    data-recommendations="<%= meal.recommendations.join(',') %>"
                   >
                     <i class="fas fa-pen"></i>
                   </button>
+
                   <form
                     action="/products/delete/<%= meal._id %>"
                     method="POST"
@@ -249,160 +239,166 @@
       </div>
     </div>
 
-    <!-- Edit Product Modal -->
-
+    <!-- Modal for Editing Product -->
     <div id="editProductModal" class="modal">
       <div class="modal-content">
         <span class="close-btn" onclick="closeModal('editProductModal')"
           >&times;</span
         >
-        <h2>Edit Meal</h2>
-        <form id="editProductForm" method="POST" action="/products/edit">
-          <input type="hidden" name="_id" id="edit-id" />
-          <input
-            type="text"
-            name="name"
-            id="edit-name"
-            placeholder="Meal Name"
-            required
-          />
-          <input
-            type="text"
-            name="image"
-            id="edit-image"
-            placeholder="Image URL"
-            required
-          />
-          <input
-            type="number"
-            name="cookTime"
-            id="edit-cookTime"
-            placeholder="Cook Time (min)"
-            required
-          />
-          <input
-            type="text"
-            name="difficulty"
-            id="edit-difficulty"
-            placeholder="Difficulty"
-            required
-          />
+        <h2>Edit Product</h2>
+        <form id="editProductForm">
+          <input type="hidden" id="edit_mealId" name="mealId" />
+
+          <label for="edit_name">Name:</label>
+          <input type="text" id="edit_name" name="name" required />
+
+          <label for="edit_image">Image URL:</label>
+          <input type="text" id="edit_image" name="image" required />
+
+          <label for="edit_cookTime">Cook Time (in minutes):</label>
+          <input type="number" id="edit_cookTime" name="cookTime" required />
+
+          <label for="edit_difficulty">Difficulty:</label>
+          <select id="edit_difficulty" name="difficulty" required>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
+
+          <label for="edit_description">Description:</label>
           <textarea
+            id="edit_description"
             name="description"
-            id="edit-description"
-            placeholder="Description"
             required
           ></textarea>
-          <input type="text" name="tags" id="edit-tags" placeholder="Tags" />
+
+          <label for="edit_tags">Tags:</label>
+          <input type="text" id="edit_tags" name="tags" required />
+
+          <label for="edit_preferences">Preferences:</label>
           <input
             type="text"
+            id="edit_preferences"
             name="preferences"
-            id="edit-preferences"
-            placeholder="Preferences"
-          />
-          <input
-            type="text"
-            name="ingredientsName"
-            id="edit-ingredientsName"
-            placeholder="Ingredients Name"
-          />
-          <input
-            type="text"
-            name="ingPer2"
-            id="edit-ingPer2"
-            placeholder="Ingredients per 2"
-          />
-          <input
-            type="text"
-            name="ingPer4"
-            id="edit-ingPer4"
-            placeholder="Ingredients per 4"
-          />
-          <textarea
-            name="instructions"
-            id="edit-instructions"
-            placeholder="Instructions"
             required
-          ></textarea>
-          <input
-            type="text"
-            name="allergens"
-            id="edit-allergens"
-            placeholder="Allergens"
-          />
-          <input
-            type="text"
-            name="utensils"
-            id="edit-utensils"
-            placeholder="Utensils"
-          />
-          <input
-            type="number"
-            name="nutrition[energy]"
-            id="edit-nutrition-energy"
-            placeholder="Energy (kcal)"
-          />
-          <input
-            type="number"
-            name="nutrition[calories]"
-            id="edit-nutrition-calories"
-            placeholder="Calories (kcal)"
-          />
-          <input
-            type="number"
-            name="nutrition[fat]"
-            id="edit-nutrition-fat"
-            placeholder="Fat (g)"
-          />
-          <input
-            type="number"
-            name="nutrition[satFat]"
-            id="edit-nutrition-satFat"
-            placeholder="Saturated Fat (g)"
-          />
-          <input
-            type="number"
-            name="nutrition[carbohydrates]"
-            id="edit-nutrition-carbohydrates"
-            placeholder="Carbohydrates (g)"
-          />
-          <input
-            type="number"
-            name="nutrition[sugar]"
-            id="edit-nutrition-sugar"
-            placeholder="Sugar (g)"
-          />
-          <input
-            type="number"
-            name="nutrition[fiber]"
-            id="edit-nutrition-fiber"
-            placeholder="Fiber (g)"
-          />
-          <input
-            type="number"
-            name="nutrition[protein]"
-            id="edit-nutrition-protein"
-            placeholder="Protein (g)"
-          />
-          <input
-            type="number"
-            name="nutrition[cholesterol]"
-            id="edit-nutrition-cholesterol"
-            placeholder="Cholesterol (mg)"
-          />
-          <input
-            type="number"
-            name="nutrition[sodium]"
-            id="edit-nutrition-sodium"
-            placeholder="Sodium (mg)"
           />
 
+          <label for="edit_ingredientsName">Ingredients Name:</label>
           <input
             type="text"
-            name="recommendations"
-            id="edit-recommendations"
-            placeholder="Recommendations"
+            id="edit_ingredientsName"
+            name="ingredientsName"
+            required
           />
+
+          <label for="edit_ingPer2">Ingredients Per 2 Servings:</label>
+          <input type="text" id="edit_ingPer2" name="ingPer2" required />
+
+          <label for="edit_ingPer4">Ingredients Per 4 Servings:</label>
+          <input type="text" id="edit_ingPer4" name="ingPer4" required />
+
+          <label for="edit_instructions">Instructions:</label>
+          <input
+            type="text"
+            id="edit_instructions"
+            name="instructions"
+            required
+          />
+
+          <label for="edit_allergens">Allergens:</label>
+          <input type="text" id="edit_allergens" name="allergens" required />
+
+          <label for="edit_utensils">Utensils:</label>
+          <input type="text" id="edit_utensils" name="utensils" required />
+
+          <label for="edit_nutrition_energy">Energy:</label>
+          <input
+            type="number"
+            id="edit_nutrition_energy"
+            name="nutrition[energy]"
+            required
+          />
+
+          <label for="edit_nutrition_calories">Calories:</label>
+          <input
+            type="number"
+            id="edit_nutrition_calories"
+            name="nutrition[calories]"
+            required
+          />
+
+          <label for="edit_nutrition_fat">Fat:</label>
+          <input
+            type="number"
+            id="edit_nutrition_fat"
+            name="nutrition[fat]"
+            required
+          />
+
+          <label for="edit_nutrition_satFat">Saturated Fat:</label>
+          <input
+            type="number"
+            id="edit_nutrition_satFat"
+            name="nutrition[satFat]"
+            required
+          />
+
+          <label for="edit_nutrition_carbohydrates">Carbohydrates:</label>
+          <input
+            type="number"
+            id="edit_nutrition_carbohydrates"
+            name="nutrition[carbohydrates]"
+            required
+          />
+
+          <label for="edit_nutrition_sugar">Sugar:</label>
+          <input
+            type="number"
+            id="edit_nutrition_sugar"
+            name="nutrition[sugar]"
+            required
+          />
+
+          <label for="edit_nutrition_fiber">Fiber:</label>
+          <input
+            type="number"
+            id="edit_nutrition_fiber"
+            name="nutrition[fiber]"
+            required
+          />
+
+          <label for="edit_nutrition_protein">Protein:</label>
+          <input
+            type="number"
+            id="edit_nutrition_protein"
+            name="nutrition[protein]"
+            required
+          />
+
+          <label for="edit_nutrition_cholesterol">Cholesterol:</label>
+          <input
+            type="number"
+            id="edit_nutrition_cholesterol"
+            name="nutrition[cholesterol]"
+            required
+          />
+
+          <label for="edit_nutrition_sodium">Sodium:</label>
+          <input
+            type="number"
+            id="edit_nutrition_sodium"
+            name="nutrition[sodium]"
+            required
+          />
+
+          <label for="edit_recommendations">Recommendations:</label>
+          <input
+            type="text"
+            id="edit_recommendations"
+            name="recommendations"
+            required
+          />
+
           <button type="submit">Update Meal</button>
         </form>
       </div>

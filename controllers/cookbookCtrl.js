@@ -88,54 +88,25 @@ const addMeal = async (req, res) => {
   }
 };
 
-const editMeal = async (req, res) => {
-  const {
-    id,
-    name,
-    image,
-    cookTime,
-    difficulty,
-    description,
-    tags,
-    preferences,
-    ingredientsName,
-    ingPer2,
-    ingPer4,
-    instructions,
-    allergens,
-    utensils,
-    nutrition,
-    recommendations,
-  } = req.body;
+
+const updateMeal = async (req, res) => {
   try {
-    const meal = await Meal.findById(id);
-    if (!meal) {
-      return res.status(404).json({ message: "Meal not found" });
+    const mealId = req.params.id;
+    const updatedMealData = req.body;
+
+    const updatedMeal = await Meal.findByIdAndUpdate(mealId, updatedMealData, { new: true });
+    
+    if (!updatedMeal) {
+      return res.status(404).json({ message: 'Meal not found' });
     }
 
-    meal.name = name;
-    meal.image = image;
-    meal.cookTime = cookTime;
-    meal.difficulty = difficulty;
-    meal.description = description;
-    meal.tags = tags;
-    meal.preferences = preferences;
-    meal.ingredients.name = ingredientsName;
-    meal.ingredients.ingPer2 = ingPer2;
-    meal.ingredients.ingPer4 = ingPer4;
-    meal.instructions = instructions;
-    meal.allergens = allergens;
-    meal.utensils = utensils;
-    meal.nutrition = nutrition;
-    meal.recommendations = recommendations;
-
-    const updatedMeal = await meal.save();
-    res.json(updatedMeal);
-  } catch (err) {
-    console.error("Error editing product:", err);
-    res.status(500).json({ message: "Error editing product" });
+    res.json({ message: 'Meal updated successfully', meal: updatedMeal });
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating meal', error });
   }
 };
+
+
 
 const deleteMeal = async (req, res) => {
   const { id } = req.params;
@@ -162,7 +133,7 @@ const getMealsAdmin = async (req, res) => {
 module.exports = {
   getMeals,
   addMeal,
-  editMeal,
+  updateMeal,
   getById,
   deleteMeal,
   getMealsAdmin,

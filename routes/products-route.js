@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
-
 const mealCtrl = require('../controllers/cookbookCtrl');
 
 
 router.get('/',mealCtrl.getMealsAdmin);
 
-router.post('/edit',mealCtrl.editMeal);
+router.put('/update/:id', mealCtrl.updateMeal);
 
 router.post('/add', mealCtrl.addMeal);
 
