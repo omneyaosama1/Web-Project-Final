@@ -53,6 +53,10 @@
           <strong>Address:</strong>
           <%= user.address || 'Not Provided' %>
         </p>
+        <p class="content">
+          <strong>Birthdate:</strong>
+          <%= user.birthdateFormatted || 'Not Provided' %>
+        </p>
       </div>
       <div class="buttons-container">
         <button class="transparent-button editButton" data-modal="editPersonalModal">
@@ -72,8 +76,9 @@
             <label for="phone">Phone Number:</label>
             <input type="text" id="phone" name="phoneNumber" value="<%= user.phoneNumber %>" />
             <label for="address">Address:</label>
-            <textarea id="address" name="address">
-<%= user.address %></textarea>
+            <input type="text" id="address" name="address" value="<%= user.address %>"/>
+            <label for="birthdate">Birthdate:</label>
+            <input type="text" id="birthdate" name="birthdate" value="<%= user.birthdateFormatted %>"/>
             <button type="submit">Save</button>
           </form>
         </div>

@@ -42,20 +42,22 @@ editUserForm.addEventListener("submit", (event) => {
     const email = document.getElementById("email").value;
     const phoneNumber = document.getElementById("phone").value;
     const address = document.getElementById("address").value;
+    const birthdate=document.getElementById("birthdate").value;
 
     if (
         userName === "" ||
         email === "" ||
         phoneNumber === "" ||
-        address === ""
+        address === ""||
+        birthdate===""
     ) {
         alert("Editing form isn't complete");
     } else {
-        editUser(userName, email, phoneNumber, address);
+        editUser(userName, email, phoneNumber, address,birthdate);
     }
 });
 
-function editUser(userName, email, phoneNumber, address) {
+function editUser(userName, email, phoneNumber, address, birthdate) {
     $.ajax({
         url: "/user",
         type: "POST",
@@ -65,6 +67,7 @@ function editUser(userName, email, phoneNumber, address) {
             email_inp: email,
             phoneNumber_inp: phoneNumber,
             address_inp: address,
+            birthdate_inp: birthdate,
         },
         success: function (response) {
             if (response.success) {

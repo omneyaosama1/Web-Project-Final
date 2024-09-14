@@ -7,6 +7,10 @@ const renderUserPage = async (req, res) => {
     if (!req.session.user) {
         req.session.user = await User.findById(req.session.userId);
     }
+    if (req.session.user.birthdate) {
+        req.session.user.birthdateFormatted = moment(req.session.user.birthdate).format('DD/MM/YYYY');
+    }
+
     res.render("user-profile", { user: req.session.user });
 };
 
@@ -228,9 +232,11 @@ const handleUserUpdate = async (req, res) => {
 
 const updateUser = async (req, res) => {
     const userID = req.session.user._id;
-    const { userName_inp, email_inp, phoneNumber_inp, address_inp } = req.body;
+    const { userName_inp, email_inp, phoneNumber_inp, address_inp, birthdate_inp } = req.body;
 
     try {
+        const formattedBirthdate = birthdate_inp ? moment(birthdate_inp, 'DD/MM/YYYY').toDate() : null;
+
         const updatedUser = await User.findByIdAndUpdate(
             userID,
             {
@@ -238,6 +244,7 @@ const updateUser = async (req, res) => {
                 email: email_inp,
                 phoneNumber: phoneNumber_inp,
                 address: address_inp,
+                birthdate: formattedBirthdate,
             },
             { new: true }
         );
