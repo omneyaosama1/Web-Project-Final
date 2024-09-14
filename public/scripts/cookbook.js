@@ -83,25 +83,6 @@ window.closeWindow = function (ID) {
   window.style.display = "none";
 };
 
-//Handling the favorite button
-function addToFavorites(event, itemName) {
-  const target = event.target;
-  if (target.classList.contains("favorited")) {
-    target.classList.remove("favorited");
-  } else {
-    showNotification();
-    target.classList.add("favorited");
-  }
-}
-function showNotification() {
-  var notification = document.getElementById("notification");
-  notification.classList.add("show");
-  setTimeout(function () {
-    notification.classList.remove("show");
-  }, 2000);
-}
-
-
 function loadMeals(page) {
   fetch(`?page=${page}`)
     .then((response) => response.text())

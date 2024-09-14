@@ -22,10 +22,10 @@
 
       <section class="menu">
         <!-- SEARCH -->
-        <form class="searchPart" onsubmit="return searchValidate(this)">
-          <div class="searchDiv">
-            <input type="text" id="SearchW" placeholder="Search...">
-            <button id="SearchB"><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #7acde3;"></i></button>
+        <form name="searchForm" onsubmit="return searchValidate(this)">
+          <div id="search-div">
+            <input type="text" name="search" id="search-bar"/>
+            <button type="submit" id="search-btn"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
           </div>
           <div id="errorMsg" class="errorMsg"></div>
         </form>
