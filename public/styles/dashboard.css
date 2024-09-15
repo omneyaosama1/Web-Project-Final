@@ -331,7 +331,10 @@ button {
 
 .delete-button {
   background: transparent;
-  color: red;
+  padding: 5px;
+  color: rgb(199, 5, 5);
+  margin-left: 16px;
+  font-size: larger;
 }
 
 .edit-button:hover {
@@ -340,6 +343,7 @@ button {
 
 .delete-button:hover {
   background: transparent;
+  color: red;
 }
 
 /*Deletion popup*/

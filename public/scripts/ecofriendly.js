@@ -51,334 +51,334 @@ document.addEventListener("DOMContentLoaded", function() {
   
     const states = [
       {
-        title: "S",
+        title: "E",
         subtitle: "T",
         missionTitle: "O",
         missionDesc: "U"
       },
       {
-        title: "Su",
+        title: "Ec",
         subtitle: "To",
         missionTitle: "Our",
         missionDesc: "At"
       },
       {
-        title: "Sus",
+        title: "Eco",
         subtitle: "Tog",
         missionTitle: "Our M",
         missionDesc: "At F"
       },
       {
-        title: "Sust",
+        title: "Eco-",
         subtitle: "Toge",
         missionTitle: "Our Mi",
         missionDesc: "At Fr"
       },
       {
-        title: "Susta",
+        title: "Eco-f",
         subtitle: "Toget",
         missionTitle: "Our Mis",
         missionDesc: "At Fre"
       },
       {
-        title: "Sustai",
+        title: "Eco-fr",
         subtitle: "Together",
         missionTitle: "Our Miss",
         missionDesc: "At Fres"
       },
       {
-        title: "Sustain",
+        title: "Eco-fri",
         subtitle: "Together,",
         missionTitle: "Our Missi",
         missionDesc: "At Fresh"
       },
       {
-        title: "Sustaina",
+        title: "Eco-frie",
         subtitle: "Together, ",
         missionTitle: "Our Missio",
         missionDesc: "At FreshB"
       },
       {
-        title: "Sustainab",
+        title: "Eco-frien",
         subtitle: "Together, l",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBi"
       },
       {
-        title: "Sustainabi",
+        title: "Eco-friend",
         subtitle: "Together, le",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBit"
       },
       {
-        title: "Sustainabil",
+        title: "Eco-friendl",
         subtitle: "Together, let",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBite"
       },
       {
-        title: "Sustainabili",
+        title: "Eco-friendly",
         subtitle: "Together, let'",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites,"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's ",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, "
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's c",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, w"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's cr",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's cre",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we'"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's crea",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we'r"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's creat",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're "
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create ",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're c"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're co"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a ",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're com"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a g",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're comm"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a gr",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're commi"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a gre",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committ"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a gree",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committ"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a green",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committe"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greene",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed "
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener ",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed t"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener w",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener wo",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to "
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener wor",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to p"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener worl",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to pi"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener world",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to pio"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener world.",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to pione"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener world.",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to pionee"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener world.",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to pioneer"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener world.",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to pioneeri"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener world.",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to pioneerin"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener world.",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to pioneering "
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener world.",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to pioneering s"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener world.",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to pioneering su"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener world.",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to pioneering sus"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener world.",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to pioneering sust"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener world.",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to pioneering susta"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener world.",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to pioneering sustai"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener world.",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to pioneering sustain"
       },
       {
-        title: "Sustainability",
-        subtitle: "Together, let's create a greener world.",
-        missionTitle: "Our Mission",
-        missionDesc: "At FreshBites, we're committed to pioneering sustai"
-      },
-      {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener world.",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to pioneering sustaina"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener world.",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to pioneering sustainab"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener world.",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to pioneering sustainabi"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener world.",
         missionTitle: "Our Mission",
         missionDesc: "At FreshBites, we're committed to pioneering sustainabil"
       },
       {
-        title: "Sustainability",
+        title: "Eco-friendly",
         subtitle: "Together, let's create a greener world.",
         missionTitle: "Our Mission",
-        missionDesc: "At FreshBites, we're committed to pioneering sustainability"
+        missionDesc: "At FreshBites, we're committed to pioneering sustainabilt"
+      },
+      {
+        title: "Eco-friendly",
+        subtitle: "Together, let's create a greener world.",
+        missionTitle: "Our Mission",
+        missionDesc: "At FreshBites, we're committed to pioneering sustainabilty"
       },
     ];
   

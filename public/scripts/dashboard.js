@@ -159,6 +159,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     },
   });
 });
+
 var addUserModal = document.getElementById("addUserModal");
 var editUserModal = document.getElementById("editUserModal");
 
@@ -179,6 +180,49 @@ window.onclick = function (event) {
     editUserModal.style.display = "none";
   }
 };
+
+var addUserForm = document.querySelector("#addUserForm");
+var errorMessageDiv = document.createElement("div");
+errorMessageDiv.id = "error-message";
+addUserForm.prepend(errorMessageDiv);
+
+addUserForm.addEventListener("submit", async function (e) {
+  e.preventDefault();
+  const formData = new FormData(addUserForm);
+  const formDataObj = Object.fromEntries(formData.entries());
+  errorMessageDiv.textContent = "";
+
+  try {
+    const response = await fetch("/usersAdmin/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formDataObj),
+    });
+    const contentType = response.headers.get("content-type");
+    let result;
+    if (contentType && contentType.includes("application/json")) {
+      result = await response.json();
+    } else {
+      throw new Error("Server returned an unexpected response.");
+    }
+
+    if (!response.ok) {
+      throw new Error(result.message || "Error adding user");
+    }
+
+    errorMessageDiv.textContent = "";
+    closeModal("addUserModal");
+    setTimeout(() => {
+      location.reload();
+    }, 300);
+  } catch (error) {
+    errorMessageDiv.textContent = error.message;
+    errorMessageDiv.style.color = "red";
+    errorMessageDiv.style.padding="0px 400px";
+  }
+});
 
 // Function to open the edit user modal and populate the form
 function openEditModal(
