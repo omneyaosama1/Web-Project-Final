@@ -220,7 +220,9 @@ form button {
   font-weight: 400;
   transition: background-color 0.3s ease; 
 }
-
+#editUserForm button{
+  margin-top: 30px;
+}
 form button:hover {
   background-color: #218838;
 }
@@ -338,4 +340,53 @@ button {
 
 .delete-button:hover {
   background: transparent;
+}
+
+/*Deletion popup*/
+.delete {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.5); 
+}
+.deletion-content {
+  background-color: white;
+  margin: 15% auto; 
+  padding: 20px;
+  width: 30%;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.confirm-delete-button {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+.confirm-delete-button:hover{
+  cursor: pointer;
+  background-color: rgb(173, 8, 8);
+}
+.cancel-button {
+  background-color: gray;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+.cancel-button:hover{
+  cursor: pointer;
+  background-color: rgb(109, 109, 109);
+}
+#confirmDeleteForm {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px; 
 }

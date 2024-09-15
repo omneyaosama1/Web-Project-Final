@@ -104,62 +104,100 @@ function closeModal(modalId) {
   document.getElementById(modalId).style.display = "none";
 }
 
-   document.querySelectorAll('.edit-button').forEach(button => {
-    button.addEventListener('click', function() {
-      const mealId = this.getAttribute('data-id');
-      const nutrition = JSON.parse(this.getAttribute('data-nutrition'));
-      document.getElementById('edit_mealId').value = mealId;
-      document.getElementById('edit_name').value = this.getAttribute('data-name');
-      document.getElementById('edit_image').value = this.getAttribute('data-image');
-      document.getElementById('edit_cookTime').value = this.getAttribute('data-cooktime');
-      document.getElementById('edit_difficulty').value = this.getAttribute('data-difficulty');
-      document.getElementById('edit_description').value = this.getAttribute('data-description');
-      document.getElementById('edit_tags').value = this.getAttribute('data-tags');
-      document.getElementById('edit_preferences').value = this.getAttribute('data-preferences');
-      document.getElementById('edit_ingredientsName').value = this.getAttribute('data-ingredientsname');
-      document.getElementById('edit_ingPer2').value = this.getAttribute('data-ingper2');
-      document.getElementById('edit_ingPer4').value = this.getAttribute('data-ingper4');
-      document.getElementById('edit_instructions').value = this.getAttribute('data-instructions');
-      document.getElementById('edit_allergens').value = this.getAttribute('data-allergens');
-      document.getElementById('edit_utensils').value = this.getAttribute('data-utensils');
-      document.getElementById('edit_nutrition_energy').value = nutrition.energy;
-      document.getElementById('edit_nutrition_calories').value = nutrition.calories;
-      document.getElementById('edit_nutrition_fat').value = nutrition.fat;
-      document.getElementById('edit_nutrition_satFat').value = nutrition.satFat;
-      document.getElementById('edit_nutrition_carbohydrates').value = nutrition.carbohydrates;
-      document.getElementById('edit_nutrition_sugar').value = nutrition.sugar;
-      document.getElementById('edit_nutrition_fiber').value = nutrition.fiber;
-      document.getElementById('edit_nutrition_protein').value = nutrition.protein;
-      document.getElementById('edit_nutrition_cholesterol').value = nutrition.cholesterol;
-      document.getElementById('edit_nutrition_sodium').value = nutrition.sodium;
-      document.getElementById('edit_recommendations').value = this.getAttribute('data-recommendations');
-      document.getElementById('editProductModal').style.display = 'block';
-    });
+document.querySelectorAll(".edit-button").forEach((button) => {
+  button.addEventListener("click", function () {
+    const mealId = this.getAttribute("data-id");
+    const nutrition = JSON.parse(this.getAttribute("data-nutrition"));
+    document.getElementById("edit_mealId").value = mealId;
+    document.getElementById("edit_name").value = this.getAttribute("data-name");
+    document.getElementById("edit_image").value =
+      this.getAttribute("data-image");
+    document.getElementById("edit_cookTime").value =
+      this.getAttribute("data-cooktime");
+    document.getElementById("edit_difficulty").value =
+      this.getAttribute("data-difficulty");
+    document.getElementById("edit_description").value =
+      this.getAttribute("data-description");
+    document.getElementById("edit_tags").value = this.getAttribute("data-tags");
+    document.getElementById("edit_preferences").value =
+      this.getAttribute("data-preferences");
+    document.getElementById("edit_ingredientsName").value = this.getAttribute(
+      "data-ingredientsname"
+    );
+    document.getElementById("edit_ingPer2").value =
+      this.getAttribute("data-ingper2");
+    document.getElementById("edit_ingPer4").value =
+      this.getAttribute("data-ingper4");
+    document.getElementById("edit_instructions").value =
+      this.getAttribute("data-instructions");
+    document.getElementById("edit_allergens").value =
+      this.getAttribute("data-allergens");
+    document.getElementById("edit_utensils").value =
+      this.getAttribute("data-utensils");
+    document.getElementById("edit_nutrition_energy").value = nutrition.energy;
+    document.getElementById("edit_nutrition_calories").value =
+      nutrition.calories;
+    document.getElementById("edit_nutrition_fat").value = nutrition.fat;
+    document.getElementById("edit_nutrition_satFat").value = nutrition.satFat;
+    document.getElementById("edit_nutrition_carbohydrates").value =
+      nutrition.carbohydrates;
+    document.getElementById("edit_nutrition_sugar").value = nutrition.sugar;
+    document.getElementById("edit_nutrition_fiber").value = nutrition.fiber;
+    document.getElementById("edit_nutrition_protein").value = nutrition.protein;
+    document.getElementById("edit_nutrition_cholesterol").value =
+      nutrition.cholesterol;
+    document.getElementById("edit_nutrition_sodium").value = nutrition.sodium;
+    document.getElementById("edit_recommendations").value = this.getAttribute(
+      "data-recommendations"
+    );
+    document.getElementById("editProductModal").style.display = "block";
+  });
+});
+
+document
+  .getElementById("editProductForm")
+  .addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const mealId = document.getElementById("edit_mealId").value;
+    const formData = new FormData(this);
+
+    fetch(`/products/update/${mealId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(Object.fromEntries(formData)),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to update meal");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.message) {
+          location.reload();
+        }
+      })
+      .catch(() => console.error("Error occurred during update"));
   });
 
-document.getElementById('editProductForm').addEventListener('submit', function(e) {
+function closeModal(modalId) {
+  document.getElementById(modalId).style.display = "none";
+}
+
+//Meal deletion confirmation
+let deleteMealId = "";
+let deleteFormAction = "";
+function openDeleteModal(mealID, mealName) {
+  deleteMealId = mealID;
+  deleteFormAction = `/products/delete/${mealID}`;
+  document.getElementById("userNameToDelete").innerText = mealName;
+  document.getElementById("deleteModal").style.display = "block";
+}
+document.getElementById("confirmDeleteForm").onsubmit = function (e) {
   e.preventDefault();
-
-  const mealId = document.getElementById('edit_mealId').value;
-  const formData = new FormData(this);
-
-  fetch(`/products/update/${mealId}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(Object.fromEntries(formData)),
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Failed to update meal');
-    }
-    return response.json();
-  })
-  .then(data => {
-    if (data.message) {
-      location.reload();
-    }
-  })
-  .catch(() => console.error('Error occurred during update'));
-});
+  this.action = deleteFormAction;
+  this.submit();
+};

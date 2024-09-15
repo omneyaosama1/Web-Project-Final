@@ -22,7 +22,6 @@ const handleSignup = async (req, res) => {
     const { username_inp, email_inp, pass_inp, birthdate_inp } = req.body;
   
     try {
-      // Check if the email is already in use
       const existingUser = await User.findOne({ email: email_inp });
       if (existingUser) {
         return res.json({
@@ -31,7 +30,6 @@ const handleSignup = async (req, res) => {
         });
       }
   
-      // Validate and convert birthdate (DD/MM/YYYY) to Date
       const [day, month, year] = birthdate_inp.split("/");
       const birthdate = new Date(`${year}-${month}-${day}`);
   
@@ -42,7 +40,7 @@ const handleSignup = async (req, res) => {
         });
       }
   
-      // Calculate age based on birthdate
+
       const today = new Date();
       let age = today.getFullYear() - birthdate.getFullYear();
       const monthDiff = today.getMonth() - birthdate.getMonth();
@@ -51,7 +49,6 @@ const handleSignup = async (req, res) => {
         age--;
       }
   
-      // Ensure the user is at least 18 years old
       if (age < 18) {
         return res.status(400).json({
           success: false,
@@ -59,18 +56,16 @@ const handleSignup = async (req, res) => {
         });
       }
   
-      // Create new user and store birthdate as a Date object
       const newUser = new User({
         name: username_inp,
         password: pass_inp,
         email: email_inp,
-        birthdate: birthdate, // Save as Date object
+        birthdate: birthdate,
       });
   
       req.session.user = newUser;
       req.session.save();
   
-      // Save new user to the database
       newUser
         .save()
         .then((user) =>

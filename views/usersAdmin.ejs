@@ -55,19 +55,17 @@
                 <td>
                   <button
                     class="edit-button"
-                    onclick="openEditModal('<%= user._id %>', '<%= user.name %>', '<%= user.email %>', '<%= user.userType %>', '<%= user.password %>', '<%= user.address %>', '<%= user.phoneNumber %>', '<%= user.birthdate %>')"
+                    onclick="openEditModal('<%= user._id %>', '<%= user.name %>', '<%= user.email %>', '<%= user.userType %>')"
                   >
                     <i class="fas fa-pen"></i>
                   </button>
-                  <form
-                    action="/usersAdmin/delete/<%= user._id %>"
-                    method="POST"
-                    style="display: inline"
+                  <button
+                    type="button"
+                    class="delete-button"
+                    onclick="openDeleteModal('<%= user._id %>', '<%= user.name %>')"
                   >
-                    <button type="submit" class="delete-button">
-                      <i class="fas fa-trash"></i>
-                    </button>
-                  </form>
+                    <i class="fas fa-trash"></i>
+                  </button>
                 </td>
               </tr>
               <% }) %> <% } else { %>
@@ -115,7 +113,7 @@
           />
 
           <label for="birthdate">Birthdate:</label>
-          <input type="date" id="birthdate" name="birthdate" required />
+          <input type="text" placeholder="dd/mm/yyyy" id="birthdate" name="birthdate" required />
 
           <button type="submit">Add User</button>
         </form>
@@ -142,7 +140,7 @@
             <option value="User">User</option>
             <option value="Admin">Admin</option>
           </select>
-
+          <!-- 
           <label for="editPassword">Password:</label>
           <input type="password" id="editPassword" name="password" required />
 
@@ -158,9 +156,28 @@
           />
 
           <label for="editBirthdate">Birthdate:</label>
-          <input type="date" id="editBirthdate" name="birthdate" required />
+          <input type="date" id="editBirthdate" name="birthdate" required /> -->
 
           <button type="submit">Update User</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="delete">
+      <div class="deletion-content">
+        <h2>Confirm Deletion</h2>
+        <p style="color: rgb(38, 38, 38); padding: 10px">
+          Are you sure you want to delete the user
+          <span id="userNameToDelete"></span>?
+        </p>
+        <form id="confirmDeleteForm" method="POST">
+          <button type="submit" class="confirm-delete-button">
+            Yes, Delete
+          </button>
+          <button type="button" class="cancel-button" onclick="closeModal('deleteModal')">
+            Cancel
+          </button>
         </form>
       </div>
     </div>

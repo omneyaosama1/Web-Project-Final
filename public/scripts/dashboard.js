@@ -185,20 +185,20 @@ function openEditModal(
   id,
   name,
   email,
-  userType,
-  password,
-  address,
-  phoneNumber,
-  birthdate
+  userType
+  // password,
+  // address,
+  // phoneNumber,
+  // birthdate
 ) {
   document.getElementById("editUserId").value = id;
   document.getElementById("editName").value = name;
   document.getElementById("editEmail").value = email;
   document.getElementById("editUserType").value = userType;
-  document.getElementById("editPassword").value = password;
-  document.getElementById("editAddress").value = address;
-  document.getElementById("editPhoneNumber").value = phoneNumber;
-  document.getElementById("editBirthdate").value = birthdate;
+  // document.getElementById("editPassword").value = password;
+  // document.getElementById("editAddress").value = address;
+  // document.getElementById("editPhoneNumber").value = phoneNumber;
+  // document.getElementById("editBirthdate").value = birthdate;
 
   editUserModal.style.display = "block";
 }
@@ -227,3 +227,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+//User deletion confirmation
+let deleteUserId = "";
+let deleteFormAction = "";
+function openDeleteModal(userId, userName) {
+  deleteUserId = userId;
+  deleteFormAction = `/usersAdmin/delete/${userId}`;
+  document.getElementById("userNameToDelete").innerText = userName;
+  document.getElementById("deleteModal").style.display = "block";
+}
+document.getElementById("confirmDeleteForm").onsubmit = function (e) {
+  e.preventDefault();
+  this.action = deleteFormAction;
+  this.submit();
+};

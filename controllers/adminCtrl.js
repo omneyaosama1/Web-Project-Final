@@ -66,10 +66,10 @@ const editUserAdmin = async (req, res) => {
     name,
     email,
     userType,
-    password,
-    address,
-    phoneNumber,
-    birthdate,
+    // password,
+    // address,
+    // phoneNumber,
+    // birthdate,
   } = req.body;
 
   try {
@@ -79,10 +79,10 @@ const editUserAdmin = async (req, res) => {
         name,
         email,
         userType,
-        password,
-        address,
-        phoneNumber,
-        birthdate: moment(birthdate, "YYYY-MM-DD").toDate(),
+        // password,
+        // address,
+        // phoneNumber,
+        // birthdate: moment(birthdate, "YYYY-MM-DD").toDate(),
       },
       { new: true }
     );
