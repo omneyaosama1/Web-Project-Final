@@ -22,4 +22,6 @@ router.post("/updateCardPaymentInfo",checkUserAuth,user.updateCardPaymentInfo);
 
 router.post("/delete",user.deleteUser);
 
+router.get("/history", user.renderUserHistoryPage);
+
 module.exports = router;

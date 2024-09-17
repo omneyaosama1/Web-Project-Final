@@ -1,100 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>History</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../styles/history.css" />
-    <link rel="stylesheet" href="/styles/User.css" />
+    <title>History</title>
+  </head>
+  <body>
+    <%- include("./partial/nav-bar.ejs") %>
+    <div class="container">
+      <h1>Your Orders</h1>
 
-    <!-- Include your CSS and JavaScript files -->
-    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <script src="/scripts/User.js" defer></script>
-    <script src="../scripts/history.js" defer></script>
-</head>
-<body>
-    <% include("./partial/nav-bar.ejs") %>
-
-    <div id="history-content">
-        <h1 id="history-head">Your History</h1>
-        <table>
-            <tr>
-                <th>Meal Image</th>
-                <th>Meal Name</th>
-                <th>Date</th>
-                <!-- Other headers as needed -->
-            </tr>
-        
-<% pastOrders.forEach(order => { %>
-    <h3>Order ID: <%= order._id %></h3>
-    <ul>
-      <% order.dishes.forEach(dish => { %>
-        <li>Meal Name: <%= dish.name %></li>
-        <li>Meal Image: <img src="<%= dish.image %>" alt="<%= dish.name %>"></li>
-        
-      <% }) %>
-    </ul>
-  <% }) %>
-  
-        </table>
-        
-    </div>
-
-    <!-- Confirmation Popup -->
-    <div id="confirmationPopup" class="confirmation-popup">
-        <div class="confirmation-content">
-            <h2>Are you sure?</h2>
-            <p>Do you want to reorder this meal?</p>
-            <div class="confirmation-buttons">
-                <button id="confirmReOrder">Yes, I'm sure</button>
-                <button id="cancelReOrder">Cancel</button>
+      <section>
+        <!-- Future Orders (To Be Delivered) -->
+        <% if (futureOrders.length > 0) { %>
+        <ul class="orders-list">
+          <% futureOrders.forEach(order => { %>
+          <li>
+            <div class="order-header">
+              <h3>Order ID: #<%= order._id %></h3>
+              <div class="tags">Upcoming</div>
             </div>
-        </div>
-    </div>
+            <p>
+              <strong>Delivery Date:</strong> <%=
+              moment(order.deliveryDate).format('DD/MM/YYYY') %>
+            </p>
+            <p><strong>Dishes:</strong></p>
+            <ul class="dish-list">
+              <% order.dishes.forEach(dish => { %>
+              <li>
+                <img
+                  src="<%= dish.image %>"
+                  alt="<%= dish.name %>"
+                  class="dish-image"
+                />
+                <strong><%= dish.name %></strong>
+              </li>
+              <% }) %>
+            </ul>
+            <hr class="total-divider" />
+            <p><strong>Total Amount:</strong> <%= order.totalAmount %> EGP</p>
+          </li>
+          <% }) %>
+        </ul>
+        <% } else { %>
+        <p class="noOrders">No future orders.</p>
+        <% } %>
+      </section>
 
-    <!-- Overlay Window -->
-    <div id="reviewOverlay"></div>
-    <div id="reviewOverlayContent">
-        <button class="exit" onclick="exitReview()">x</button>
-        <h2>How did you find our dish/s?</h2>
-        <div class="button-row">
-            <button class="choice" onclick="selected(event)">
-                <span></span>Terrible
-            </button>
-            <button class="choice" onclick="selected(event)">
-                <span></span>Poor
-            </button>
-            <button class="choice" onclick="selected(event)">
-                <span></span>Average
-            </button>
-        </div>
-        <div class="button-row">
-            <button class="choice" onclick="selected(event)">
-                <span></span>Good
-            </button>
-            <button class="choice" onclick="selected(event)">
-                <span></span>Excellent
-            </button>
-        </div>
+      <section>
+        <!-- Past Orders (Delivered) -->
+        <% if (pastOrders.length > 0) { %>
+        <ul class="orders-list">
+          <% pastOrders.forEach(order => { %>
+          <li>
+            <div class="order-header">
+              <h3>Order ID: #<%= order._id %></h3>
+              <div class="tags">Delivered</div>
+            </div>
+            <p>
+              <strong>Delivery Date:</strong> <%=
+              moment(order.deliveryDate).format('DD/MM/YYYY') %>
+            </p>
+            <p><strong>Dishes:</strong></p>
+            <ul class="dish-list">
+              <% order.dishes.forEach(dish => { %>
+              <li>
+                <img
+                  src="<%= dish.image %>"
+                  alt="<%= dish.name %>"
+                  class="dish-image"
+                />
+                <strong><%= dish.name %></strong>
+              </li>
+              <% }) %>
+            </ul>
+            <hr class="total-divider" />
+            <div class="order-footer">
+              <p><strong>Total Amount:</strong><%= order.totalAmount %> EGP</p>
+              <button class="rate">
+                <i></i>Rate your Order <i class="fas fa-star"></i>
+              </button>
+            </div>
+          </li>
+          <% }) %>
+        </ul>
+        <% } else { %>
+        <p class="noOrders">No past orders.</p>
+        <% } %>
+      </section>
     </div>
-
-    <!-- Thank You Modal -->
-    <div id="thankYouModal" class="thank-you-modal">
-        <div class="thank-you-content">
-            <p>Thank you for your rating!! Your opinion matters to us.</p>
-        </div>
-    </div>
-
-    <!-- Script for formatting date -->
-    <script>
-        function formatDate(dateString) {
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const date = new Date(dateString);
-            return date.toLocaleDateString('en-US', options);
-        }
-    </script>
-</body>
+  </body>
 </html>

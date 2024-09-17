@@ -74,29 +74,24 @@ const deleteFavMeal = async (req, res) => {
 
 
 const renderUserHistoryPage = async (req, res) => {
+    const userId = req.session.user._id;
+  
     try {
-        if (!req.session.user) {
-            const user = await User.findById(req.session.userId).populate(
-                "pastOrderIds"
-            );
-            if (!user) {
-                return res.status(404).send("User not found");
-            }
-            req.session.user = user;
-        }
-
-        const pastOrderIds = req.session.user.pastOrderIds || [];
-
-        const populatedOrders = await Order.find({
-            _id: { $in: pastOrderIds },
-        }).populate("dishes");
-
-        res.render("user-history", { pastOrders: populatedOrders });
-    } catch (err) {
-        console.error("Error fetching user or past orders:", err);
-        res.status(500).send("Internal Server Error");
+      const orders = await Order.find({ user: userId })
+        .populate("dishes", "name image")
+        .lean();
+  
+      const currentDate = moment();
+  
+      const pastOrders = orders.filter(order => moment(order.deliveryDate).isBefore(currentDate));
+      const futureOrders = orders.filter(order => moment(order.deliveryDate).isAfter(currentDate));
+  
+       res.render('user-history', { pastOrders, futureOrders, moment });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Failed to load order history");
     }
-};
+  };
 
 const handleLogout = async (req, res) => {
     req.session.destroy((err) => {
