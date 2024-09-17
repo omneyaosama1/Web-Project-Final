@@ -32,6 +32,20 @@ const addUserAdmin = async (req, res) => {
   try {
     const { name, email, userType, password, address, phoneNumber, birthdate } =
       req.body;
+
+      const usedEmail = await User.findOne({ email });
+      if (usedEmail) {
+        return res.status(400).json({message:"Email is already in use."});
+      }
+
+      if (!moment(birthdate, "DD/MM/YYYY", true).isValid()){
+        return res.status(400).json({ message: "Invalid birthdate format. Please use dd/mm/yyyy." });
+      }
+      const formattedBirhdate=moment(birthdate,"DD/MM/YYYY").toDate();
+      const age=moment().diff(formattedBirhdate,'years');
+      if(age<18){
+        return res.status(400).json({ message: "User must be at least 18 years old." });
+      }
     const newUser = new User({
       name,
       email,
@@ -39,14 +53,14 @@ const addUserAdmin = async (req, res) => {
       password,
       address,
       phoneNumber,
-      birthdate: moment(birthdate, "YYYY-MM-DD").toDate(),
+      birthdate: formattedBirhdate,
     });
 
     await newUser.save();
-    res.redirect("/usersAdmin"); // Redirect to the users page
+    res.status(200).json({ message: "User added successfully." });
   } catch (err) {
     console.error(err);
-    res.status(500).send("Server Error");
+    res.status(500).json({message:"Server Error"});
   }
 };
 
@@ -66,10 +80,10 @@ const editUserAdmin = async (req, res) => {
     name,
     email,
     userType,
-    password,
-    address,
-    phoneNumber,
-    birthdate,
+    // password,
+    // address,
+    // phoneNumber,
+    // birthdate,
   } = req.body;
 
   try {
@@ -79,10 +93,10 @@ const editUserAdmin = async (req, res) => {
         name,
         email,
         userType,
-        password,
-        address,
-        phoneNumber,
-        birthdate: moment(birthdate, "YYYY-MM-DD").toDate(),
+        // password,
+        // address,
+        // phoneNumber,
+        // birthdate: moment(birthdate, "YYYY-MM-DD").toDate(),
       },
       { new: true }
     );

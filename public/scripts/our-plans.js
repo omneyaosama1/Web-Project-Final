@@ -207,11 +207,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         const formData = {
-            firstName: document.querySelector(".credentials-first-name-inp")
-                .value,
-            lastName: document.querySelector(".credentials-last-name-inp")
-                .value,
-            email: document.querySelector(".credentials-email-inp").value,
+            // firstName: document.querySelector(".credentials-first-name-inp")
+            //     .value,
+            // lastName: document.querySelector(".credentials-last-name-inp")
+            //     .value,
+            // email: document.querySelector(".credentials-email-inp").value,
             contactNumber: document.querySelector(".credentials-number-inp")
                 .value,
             address: document.querySelector(".credentials-address-inp").value,
@@ -221,16 +221,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function saveCredentialsInSessions(formData) {
         const formNumber = "2";
-
-        const { firstName, lastName, email, contactNumber, address } = formData;
+        // const { firstName, lastName, email, contactNumber, address } = formData;
+        const { contactNumber, address } = formData;
         $.ajax({
             url: "/our-plans",
             type: "POST",
             data: {
                 formNumber_inp: formNumber,
-                firstName_inp: firstName,
-                lastName_inp: lastName,
-                email_inp: email,
+                // firstName_inp: firstName,
+                // lastName_inp: lastName,
+                // email_inp: email,
                 contactNumber_inp: contactNumber,
                 address_inp: address,
             },

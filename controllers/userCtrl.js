@@ -7,6 +7,10 @@ const renderUserPage = async (req, res) => {
     if (!req.session.user) {
         req.session.user = await User.findById(req.session.userId);
     }
+    if (req.session.user.birthdate) {
+        req.session.user.birthdateFormatted = moment(req.session.user.birthdate).format('DD/MM/YYYY');
+    }
+
     res.render("user-profile", { user: req.session.user });
 };
 
@@ -70,29 +74,24 @@ const deleteFavMeal = async (req, res) => {
 
 
 const renderUserHistoryPage = async (req, res) => {
+    const userId = req.session.user._id;
+  
     try {
-        if (!req.session.user) {
-            const user = await User.findById(req.session.userId).populate(
-                "pastOrderIds"
-            );
-            if (!user) {
-                return res.status(404).send("User not found");
-            }
-            req.session.user = user;
-        }
-
-        const pastOrderIds = req.session.user.pastOrderIds || [];
-
-        const populatedOrders = await Order.find({
-            _id: { $in: pastOrderIds },
-        }).populate("dishes");
-
-        res.render("user-history", { pastOrders: populatedOrders });
-    } catch (err) {
-        console.error("Error fetching user or past orders:", err);
-        res.status(500).send("Internal Server Error");
+      const orders = await Order.find({ user: userId })
+        .populate("dishes", "name image")
+        .lean();
+  
+      const currentDate = moment();
+  
+      const pastOrders = orders.filter(order => moment(order.deliveryDate).isBefore(currentDate));
+      const futureOrders = orders.filter(order => moment(order.deliveryDate).isAfter(currentDate));
+  
+       res.render('user-history', { pastOrders, futureOrders, moment });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Failed to load order history");
     }
-};
+  };
 
 const handleLogout = async (req, res) => {
     req.session.destroy((err) => {
@@ -228,9 +227,11 @@ const handleUserUpdate = async (req, res) => {
 
 const updateUser = async (req, res) => {
     const userID = req.session.user._id;
-    const { userName_inp, email_inp, phoneNumber_inp, address_inp } = req.body;
+    const { userName_inp, email_inp, phoneNumber_inp, address_inp, birthdate_inp } = req.body;
 
     try {
+        const formattedBirthdate = birthdate_inp ? moment(birthdate_inp, 'DD/MM/YYYY').toDate() : null;
+
         const updatedUser = await User.findByIdAndUpdate(
             userID,
             {
@@ -238,6 +239,7 @@ const updateUser = async (req, res) => {
                 email: email_inp,
                 phoneNumber: phoneNumber_inp,
                 address: address_inp,
+                birthdate: formattedBirthdate,
             },
             { new: true }
         );
@@ -310,21 +312,26 @@ const updatePassword = async (req, res) => {
     }
 };
 
-const deleteUser = async (req, res) => {
-    const userID = req.session.user._id;
-
-    try {
-        const deletedUser = await User.findByIdAndDelete(userID);
-        if (!deletedUser) {
-            return res.status(404).send("User not found");
+const deleteUser=async(req,res)=>{
+    const userID=req.session.user._id;
+    try{
+        const deleteUser=await User.findByIdAndDelete(userID);
+        if(!deleteUser){
+            return res.status(404).send("User not found!");
         }
-        res.status(200).send("User deleted successfully");
-    } catch (error) {
+        req.session.destroy((err)=>{
+            if(err){
+                console.log("Error destroying session:",err);
+                return res.status(500).send("Failed to delete user");
+            }
+            res.redirect("/");
+        });
+
+    }catch(error){
         console.log(error);
-        res.status(500).send("Failed to delete user");
+        res.status(500).send("Server error: Failed to delete user");
     }
 };
-
 const cancelSubscription = async (req, res) => {
     const userID = req.session.user._id;
 

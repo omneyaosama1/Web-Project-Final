@@ -80,17 +80,17 @@ const handleCredentialForm = async (req, res) => {
     console.log("In credentials function");
 
     const {
-        firstName_inp,
-        lastName_inp,
-        email_inp,
+        // firstName_inp,
+        // lastName_inp,
+        // email_inp,
         contactNumber_inp,
         address_inp,
     } = req.body;
     try {
         const formData_inp = {
-            firstName: firstName_inp,
-            lName: lastName_inp,
-            email: email_inp,
+            // firstName: firstName_inp,
+            // lName: lastName_inp,
+            // email: email_inp,
             contactNumber: contactNumber_inp,
             address: address_inp,
         };

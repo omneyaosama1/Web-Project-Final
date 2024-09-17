@@ -53,6 +53,10 @@
           <strong>Address:</strong>
           <%= user.address || 'Not Provided' %>
         </p>
+        <p class="content">
+          <strong>Birthdate:</strong>
+          <%= user.birthdateFormatted || 'Not Provided' %>
+        </p>
       </div>
       <div class="buttons-container">
         <button class="transparent-button editButton" data-modal="editPersonalModal">
@@ -72,8 +76,9 @@
             <label for="phone">Phone Number:</label>
             <input type="text" id="phone" name="phoneNumber" value="<%= user.phoneNumber %>" />
             <label for="address">Address:</label>
-            <textarea id="address" name="address">
-<%= user.address %></textarea>
+            <input type="text" id="address" name="address" value="<%= user.address %>"/>
+            <label for="birthdate">Birthdate:</label>
+            <input type="text" id="birthdate" name="birthdate" value="<%= user.birthdateFormatted %>"/>
             <button type="submit">Save</button>
           </form>
         </div>
@@ -140,7 +145,7 @@
             %>
           </p>
           <p class="content">
-            <strong>Number of Meals:</strong> <%= user.subPlan.numberOfMeals %>
+            <strong>Number of Meals:</strong> <%= user.subPlan.dishes.length %>
           </p>
           <div class="buttons-container">
             <button
@@ -165,6 +170,7 @@
       <div class="card">
         <h2>Visa Card Information:</h2>
         <div class="card-info">
+          <% if (user.visaInfo) { %> 
           <p class="content">
             <strong>Card Number:</strong>
             <%= user.visaInfo.cardNum ? ' **** **** **** ' +
@@ -182,13 +188,29 @@
             <strong>CVV:</strong>
             <%= user.visaInfo.cvv || 'Not Provided' %>
           </p>
-      </div>
-      <div class="buttons-container">
-        <button class="transparent-button editButton" data-modal="editCardPaymentModal">
-          Edit
-        </button>
-      </div>
+          <% } else { %>
+          <p class="content">
+            <strong>Card Number:</strong> Not Provided
+          </p>
+          <p class="content">
+            <strong>Expiration Date:</strong> Not Provided
+          </p>
+          <p class="content">
+            <strong>CVV:</strong> Not Provided
+          </p>
+          <% } %>
+        </div>
 
+        
+        <% if (user.visaInfo && user.visaInfo.cardNum && user.visaInfo.expDate && user.visaInfo.cvv) { %>
+        <div class="buttons-container">
+          <button class="transparent-button editButton" data-modal="editCardPaymentModal">
+            Edit
+          </button>
+        </div>
+        <% } %>
+
+      </div>
     </div>
   </div>
 
@@ -196,12 +218,12 @@
     <div class="modal-content">
       <span class="close" data-modal="editCardPaymentModal">&times;</span>
       <form id="updateCardPaymentForm">
-        <label for="cardNum">Card Number:</label>
+        <label for="cardNum">Card Number:</label>  
         <input type="text" id="cardNum" name="cardNum" required />
         <label for="expDate">Expiration Date (MM/YYYY):</label>
-        <input type="text" id="expDate" name="expDate" required/>
+        <input type="text" id="expDate" name="expDate" required />
         <label for="cvv">CVV:</label>
-        <input type="text" id="cvv" name="cvv"required />
+        <input type="text" id="cvv" name="cvv" required />
         <button type="submit">Save</button>
       </form>
     </div>

@@ -5,7 +5,7 @@ const { getMeals, addMeal, updateMeal, deleteMeal, getById } = require('../contr
 router.get('/', getMeals);
 router.get('/:id',getById);
 router.post('/add', addMeal);
-router.put('/update/:id', updateMeal);
+// router.put('/update/:id', updateMeal);
 router.delete('/delete/:id', deleteMeal);
 
 module.exports = router;
