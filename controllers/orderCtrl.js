@@ -128,29 +128,57 @@ const deleteOrder = async (req, res) => {
   const { id } = req.params;
 
   try {
+    const order = await Order.findById(id);
+
+    if (!order) {
+      console.log("Order not found, cannot delete");
+      return res
+        .status(404)
+        .json({ success: false, message: "Order not found" });
+    }
+
     const deletedOrder = await Order.findByIdAndDelete(id);
 
     if (!deletedOrder) {
-      return res.status(404).send("Order not found");
+      return res
+        .status(500)
+        .json({ success: false, message: "Failed to delete order" });
     }
 
-    res.status(200).send("Order deleted successfully");
+    return res
+      .status(200)
+      .json({ success: true, message: "Order deleted successfully" });
   } catch (error) {
-    console.log(error);
-    res.status(500).send("Failed to delete order");
+    console.error("Error deleting order:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to delete order due to server error",
+    });
   }
 };
 const getOrderFeedback = async () => {
   try {
-    const orders = await Order.find({}, 'rating user');
-    const feedback = orders.map(order => ({
-      user:order.user,
-      rating: order.rating
+    const orders = await Order.find({}, "rating user");
+    const feedback = orders.map((order) => ({
+      user: order.user,
+      rating: order.rating,
     }));
     return feedback;
   } catch (error) {
     console.log(error);
     throw new Error("Failed to get feedback");
+  }
+};
+
+const rateOrder = async (req, res) => {
+  try {
+    const { orderId, rating } = req.body;
+    await Order.findByIdAndUpdate(orderId, { rating });
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.json({ success: false });
   }
 };
 module.exports = {
@@ -159,5 +187,6 @@ module.exports = {
   getOrderById,
   updateOrder,
   deleteOrder,
-  getOrderFeedback
+  getOrderFeedback,
+  rateOrder,
 };

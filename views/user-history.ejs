@@ -12,6 +12,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../styles/history.css" />
+    <script src="../scripts/history.js" defer></script>
     <title>History</title>
   </head>
   <body>
@@ -23,7 +24,7 @@
         <!-- Future Orders (To Be Delivered) -->
         <% if (futureOrders.length > 0) { %>
         <ul class="orders-list">
-          <% futureOrders.forEach(order => { %>
+          <% futureOrders.forEach( order => { %>
           <li>
             <div class="order-header">
               <h3>Order ID: #<%= order._id %></h3>
@@ -47,7 +48,12 @@
               <% }) %>
             </ul>
             <hr class="total-divider" />
-            <p><strong>Total Amount:</strong> <%= order.totalAmount %> EGP</p>
+            <div class="order-footer">
+              <p><strong>Total Amount:</strong><%= order.totalAmount %> EGP</p>
+              <button class="cancelOrder" data-order-id="<%= order._id %>">
+                Cancel your Order <i class="fas fa-times"></i>
+              </button>
+            </div>
           </li>
           <% }) %>
         </ul>
@@ -89,6 +95,16 @@
               <button class="rate">
                 <i></i>Rate your Order <i class="fas fa-star"></i>
               </button>
+              <p>
+                <strong>Rating:</strong>
+                <span class="stars">
+                  <% for (let i = 1; i <= 5; i++) { %>
+                  <i
+                    class="fas fa-star <%= order.rating && i <= order.rating ? 'filled' : '' %>"
+                  ></i>
+                  <% } %>
+                </span>
+              </p>
             </div>
           </li>
           <% }) %>
@@ -97,6 +113,40 @@
         <p class="noOrders">No past orders.</p>
         <% } %>
       </section>
+    </div>
+
+    <div id="ratingModal" class="rating-modal">
+      <div class="modal-content">
+        <h2>Rate Your Order</h2>
+        <form id="ratingForm" class="ratingForm">
+          <label for="rating">Your Rating (1-5):</label>
+          <input
+            type="number"
+            id="rating"
+            name="rating"
+            min="1"
+            max="5"
+            required
+          />
+          <input type="hidden" id="orderId" name="orderId" />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="cancelModal" class="cancel-modal">
+      <div class="content">
+        <i class="fas fa-exclamation-circle"></i>
+        <h2>Warning</h2>
+        <label id="text" for="cancel"
+          >Are you sure you want to cancel this order?<br />This action can't be
+          undone.</label
+        >
+        <div class="btns">
+          <button id="confirmDelete" class="confirm">Confirm</button>
+          <button type="button" class="cancel">Cancel</button>
+        </div>
+      </div>
     </div>
   </body>
 </html>
