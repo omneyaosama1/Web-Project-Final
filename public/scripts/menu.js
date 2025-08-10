@@ -34,6 +34,39 @@ window.onclick = function (event) {
     });
 };
 
+
+function toggleAdd(button) {
+    const icon = button.querySelector("i");
+    const itemId = button.getAttribute("data-id");
+
+    // If currently plus → add to cart
+    if (icon.classList.contains("fa-plus")) {
+        addToCart(button); // your existing function for adding
+        icon.classList.remove("fa-plus");
+        icon.classList.add("fa-minus");
+    } 
+    // If currently minus → remove from cart
+    else {
+        removeFromCart(itemId); // you'll need a remove function
+        icon.classList.remove("fa-minus");
+        icon.classList.add("fa-plus");
+    }
+}
+
+// Example removeFromCart
+function removeFromCart(itemId) {
+    // Send request to backend to remove from cart
+    fetch('/cart/remove', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ itemID: itemId })
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.error(err));
+}
+
+
 function SelectB(buttonID) {
     let Allbuttons = document.querySelectorAll(".buttons button");
     Allbuttons.forEach((button) => {
@@ -86,52 +119,6 @@ function changeFavouriteC(itemID, week) {
         heart.style.color = "red";
     }
 }
-
-// Search
-
-// document.addEventListener('DOMContentLoaded', function() {
-
-//     document.querySelector('.searchPart').addEventListener('submit', function(event) {
-//         event.preventDefault();
-//         searchValidate(this);
-//     });
-// });
-
-// function searchValidate(form) {
-//     let searchInput = form.querySelector("#SearchW").value.trim();
-//     let regex = /^[a-zA-Z\s]+$/;
-
-//     if (searchInput === "") {
-//         printWarning("errorMsg", "Please enter an item's name.");
-//         return false;
-//     } else if (!regex.test(searchInput)) {
-//         printWarning("errorMsg", "Please enter a valid name.");
-//         return false;
-//     } else {
-//         printWarning("errorMsg", "");
-//         searchItem(searchInput);
-//         return false;
-//     }
-// }
-
-// function searchItem(searchInput) {
-//     let weeks = ['week1', 'week2', 'week3', 'week4'];
-
-//     weeks.forEach(function(week) {
-//         let items = document.querySelectorAll('.items.' + week);
-
-//         items.forEach(function(item) {
-//             let itemName = item.querySelector('h3').textContent.toLowerCase();
-
-//             if (itemName.includes(searchInput.toLowerCase())) {
-//                 item.style.display = 'block';
-//             } else {
-//                 item.style.display = "none";
-//             }
-//         });
-//     });
-// }
-
 // after adding to cart message
 function showMessage(message) {
     let msg = document.querySelectorAll(".message");
@@ -154,85 +141,6 @@ function openWindow(iconToOpen) {
         viewCart();
     }
 }
-
-// Cart functions
-// function addToCart(itemID, week) {
-//     let itemModal = document.getElementById("detailsModal" + itemID + week);
-//     let allItems = document.querySelectorAll(".modal");
-//     let cart = document.getElementById("cartContent");
-//     let cList = document.getElementById("orderSumm");
-
-//     if (cList.children.length === 0) {
-//         cart.textContent = "";
-//     }
-
-//     allItems.forEach((item) => {
-//         if (item === itemModal) {
-//             let itemName = item.querySelector("#itemName").textContent;
-
-//             let itemImgSrc = item.querySelector("img").getAttribute("src");
-
-//             let header = document.getElementById("headerC");
-//             header.style.display = "flex";
-
-//             let listItem = document.createElement("div");
-//             listItem.classList.add("list-of-items");
-
-//             let removeIcon = document.createElement("i");
-//             removeIcon.className = "fa-solid fa-circle-xmark fa-lg";
-//             removeIcon.classList.add("remove-icon");
-//             removeIcon.onclick = function () {
-//                 removeFromCart(itemName);
-//             };
-
-//             let itemImg = document.createElement("img");
-//             itemImg.src = itemImgSrc;
-//             itemImg.classList.add("cart-item-img");
-
-//             let itemNameElement = document.createElement("span");
-//             itemNameElement.textContent = itemName;
-//             itemNameElement.classList.add("item-name");
-
-//             let quantityDiv = document.createElement("div");
-//             quantityDiv.classList.add("quantity-cart");
-
-//             let plusButton = document.createElement("button");
-//             plusButton.classList.add("cart-plusButton");
-//             plusButton.innerHTML = '<i class="fa-solid fa-plus fa-lg"></i>';
-//             plusButton.onclick = function () {
-//                 incrementQuantity(quantityInput);
-//             };
-
-//             let quantityInput = document.createElement("input");
-//             quantityInput.classList.add("input");
-//             quantityInput.type = "text";
-//             quantityInput.name = "name";
-//             quantityInput.value = "1";
-
-//             let minusButton = document.createElement("button");
-//             minusButton.classList.add("cart-minusButton");
-//             minusButton.innerHTML = '<i class="fa-solid fa-minus fa-lg"></i>';
-//             minusButton.onclick = function () {
-//                 decrementQuantity(quantityInput);
-//             };
-
-//             quantityDiv.appendChild(minusButton);
-//             quantityDiv.appendChild(quantityInput);
-//             quantityDiv.appendChild(plusButton);
-
-//             listItem.appendChild(removeIcon);
-//             listItem.appendChild(itemImg);
-
-//             // Append the item name text content, not the element itself
-//             listItem.appendChild(document.createTextNode(itemName));
-
-//             listItem.appendChild(quantityDiv);
-
-//             cList.appendChild(listItem);
-//         }
-//     });
-//     showMessage();
-// }
 
 function addToCart(button) {
     let mealID = button.getAttribute("data-id");
@@ -314,7 +222,7 @@ function addToCart(button) {
             showMessage("Added to cart succesfully");
         },
         error: function (xhr) {
-            showMessage("Error: " + xhr.responseText);
+            showMessage("You have reached the limit of items for your plan. Orders have been created.");
         },
     });
 }

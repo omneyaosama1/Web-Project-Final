@@ -165,6 +165,8 @@ const sessionHandler = async (req, res) => {
     const { operation } = req.body;
     if (operation === "validate-cart") {
         await validateCart(req, res);
+    } else if (operation === "remove-cart-item") {
+        await removeCartItem(req, res);
     } else if (operation === "toggle-favorite") {
         await toggleFavorite(req, res);
     }
@@ -290,10 +292,38 @@ const toggleFavorite = async (req, res) => {
     }
 };
 
+
+const removeCartItem = async (req, res) => {
+    try {
+        const mealID = req.body.itemID;
+        if (!mongoose.Types.ObjectId.isValid(mealID)) {
+            return res.status(400).json({ message: "Invalid meal ID." });
+        }
+
+        let user = req.session.user;
+        if (!user) {
+            return res.status(400).json({ message: "User not logged in." });
+        }
+
+        // Remove from dishes array
+        user.subPlan.dishes = user.subPlan.dishes.filter(id => id.toString() !== mealID.toString());
+
+        await User.findByIdAndUpdate(user._id, { subPlan: user.subPlan });
+        req.session.user = await User.findById(user._id);
+
+        return res.status(200).json({ message: "Item removed from cart." });
+    } catch (err) {
+        console.error("Error removing item:", err);
+        return res.status(500).json({ message: "Server error" });
+    }
+};
+
+
 module.exports = {
     getMenu,
     addRecipe,
     deleteRecipe,
     updateRecipe,
     sessionHandler,
+    removeCartItem,
 };

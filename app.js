@@ -25,7 +25,7 @@ const port = process.env.PORT || 8000;
 const dbUserName = process.env.dbUserName;
 const dbPassword = process.env.dbPassword;
 
-const dbURL = `mongodb+srv://${dbUserName}:${dbPassword}@freshbites.wagcbow.mongodb.net/FreshBites-Test?retryWrites=true&w=majority&appName=freshbites`;
+const dbURL = `mongodb+srv://${dbUserName}:${dbPassword}@freshbites.wagcbow.mongodb.net/FreshBites?retryWrites=true&w=majority&appName=freshbites`;
 
 const app = express();
 
@@ -71,7 +71,7 @@ app.use("/feedback", feedbackRoute);
 mongoose
     .connect(dbURL)
     .then(() => {
-        console.log("Connected to database successfully!");
+        console.log("Connected to FreshBites database successfully!");
         app.listen(port, () =>
             console.log(`Server is running on port ${port}`)
         );
